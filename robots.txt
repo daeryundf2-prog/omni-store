@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://daeryundf2-prog.github.io/omni-store/sitemap.xml
