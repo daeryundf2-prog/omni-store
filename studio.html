@@ -4,9 +4,25 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>OmniLegal 문서 스튜디오 — 고소장·내용증명·Demand Letter 자동 작성</title>
-  <meta name="description" content="사이버 명예훼손 고소장, 내용증명, Demand Letter, Cease & Desist를 폼 입력만으로 자동 생성. 한국어·영어·일본어·중국어 출력 지원. 입력 정보는 브라우저 밖으로 전송되지 않습니다." />
+  <meta name="description" content="고소장·내용증명·경고장·차용증·용역계약서·합의서를 폼 입력만으로 자동 생성. 한국어·영어·일본어·중국어 출력, 전자서명 박제, 입력 정보는 브라우저 밖으로 전송되지 않습니다." />
   <meta property="og:title" content="OmniLegal 문서 스튜디오 — 다국어 법률 문서 자동 작성" />
-  <meta property="og:description" content="폼을 채우면 표준 법률 문서가 완성됩니다. 미리보기 무료, 원본 다운로드 유료. KO/EN/JA/ZH 출력." />
+  <meta property="og:description" content="폼을 채우면 표준 법률 문서가 완성됩니다. 화면 미리보기 무료, 원본 출력 유료. KO/EN/JA/ZH 출력 + 브라우저 전자서명." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://daeryundf2-prog.github.io/omni-store/studio.html" />
+  <link rel="canonical" href="https://daeryundf2-prog.github.io/omni-store/studio.html" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "OmniLegal 문서 스튜디오",
+    "url": "https://daeryundf2-prog.github.io/omni-store/studio.html",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "inLanguage": ["ko", "en", "ja", "zh"],
+    "description": "고소장·내용증명·경고장·차용증·용역계약서·합의서를 폼 입력으로 자동 생성하는 다국어 문서 작성 도구. 입력 정보는 브라우저 안에서만 처리됩니다.",
+    "offers": { "@type": "Offer", "price": "9900", "priceCurrency": "KRW" }
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Serif+JP:wght@400;700&family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
@@ -219,6 +235,8 @@
     .catalog-card h3 { font-size: 1rem; font-weight: 700; }
     .catalog-card p { font-size: 0.84rem; color: var(--text-secondary); line-height: 1.65; flex: 1; }
     .catalog-card .btn { align-self: flex-start; font-size: 0.84rem; padding: 7px 14px; }
+    .cat-price { font-size: 0.8rem; font-weight: 700; color: var(--accent-cyan); }
+    .cat-price .free { color: var(--text-tertiary); font-weight: 500; }
     /* 전자서명 패널 */
     .sig-panel {
       margin-top: 12px; background: var(--card-bg); border: 1px solid var(--border);
@@ -258,6 +276,9 @@
       .studio-grid { grid-template-columns: 1fr; }
       .form-panel { position: static; max-height: none; }
       .paper { padding: 40px 24px; font-size: 14px; }
+      .paper table.parties td.lbl { width: 64px; font-size: 12px; padding: 6px 4px; }
+      .paper .doc-title { font-size: 22px; }
+      .catalog-grid { grid-template-columns: 1fr; }
     }
 
     @media print {
@@ -340,31 +361,37 @@
       <article class="catalog-card" id="cat-defamation-complaint">
         <h3>사이버 명예훼손·모욕 고소장</h3>
         <p>온라인 커뮤니티·SNS·메신저에서의 명예훼손(정보통신망법 제70조) 및 모욕(형법 제311조) 피해에 대한 수사기관 제출용 고소장. 피해 경위·증거 목록·처벌 의사 표시를 표준 양식으로 정리합니다.</p>
+        <div class="cat-price" data-doc="defamation-complaint"></div>
         <button class="btn btn-ghost" onclick="selectDoc('defamation-complaint');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
       <article class="catalog-card" id="cat-demand-notice">
         <h3>내용증명 · Demand Letter · 通知書 · 催告函</h3>
         <p>금전 지급·계약 이행·손해배상 요구 등을 상대방에게 공식 통보하는 문서. 한국어·영어·일본어·중국어 4개 언어로 작성되어 해외 거래처에도 발송할 수 있습니다. 기한 설정과 법적 조치 예고 문구를 포함합니다.</p>
+        <div class="cat-price" data-doc="demand-notice"></div>
         <button class="btn btn-ghost" onclick="selectDoc('demand-notice');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
       <article class="catalog-card" id="cat-cease-desist">
         <h3>경고장 · Cease &amp; Desist · 警告書 · 警告函</h3>
         <p>저작권 침해·상표 도용·영업방해 등 위법 행위의 즉시 중단을 요구하는 경고 문서. 4개 언어 지원으로 해외 플랫폼·판매자 대응에 활용할 수 있습니다.</p>
+        <div class="cat-price" data-doc="cease-desist"></div>
         <button class="btn btn-ghost" onclick="selectDoc('cease-desist');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
       <article class="catalog-card" id="cat-loan-agreement">
         <h3>차용증 · Loan Agreement</h3>
         <p>개인 간 금전 대여의 금액·이자·변제일·변제 방법을 명확히 기록하는 차용증. 분쟁 예방과 소송 시 증거력 확보를 위한 필수 항목을 표준 구조로 정리합니다. 한국어·영어·일본어·중국어 4개 언어 지원.</p>
+        <div class="cat-price" data-doc="loan-agreement"></div>
         <button class="btn btn-ghost" onclick="selectDoc('loan-agreement');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
       <article class="catalog-card" id="cat-freelance-contract">
         <h3>프리랜서 용역계약서 · Services Agreement</h3>
         <p>외주 개발·디자인·콘텐츠 작업의 용역 범위·대금·납기·수정 횟수·지식재산권 귀속을 규정하는 계약서. 무상 수정 범위 한정과 대금 완납 시 IP 양도 조항 등 실무 분쟁 방지 장치를 포함합니다. 한국어·영어·일본어·중국어 4개 언어 지원.</p>
+        <div class="cat-price" data-doc="freelance-contract"></div>
         <button class="btn btn-ghost" onclick="selectDoc('freelance-contract');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
       <article class="catalog-card" id="cat-settlement">
         <h3>합의서 · Settlement Agreement</h3>
         <p>분쟁 당사자 간 합의 내용·합의금·상호 면책·비밀유지 의무를 문서화하는 합의서. 형사·민사 분쟁 종결 시 재분쟁을 막는 상호 완전 해결 조항을 포함합니다. 한국어·영어·일본어·중국어 4개 언어 지원.</p>
+        <div class="cat-price" data-doc="settlement"></div>
         <button class="btn btn-ghost" onclick="selectDoc('settlement');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
     </div>
@@ -1635,7 +1662,8 @@ function openOrderModal() {
   if (s.paypal && s.paypal.receiverEmail) {
     channels.push({ name: "PayPal", detail: s.paypal.receiverEmail + " (USD " + Math.ceil(docPrice(activeDoc) / 1300) + ")", note: "메모란에 주문번호를 기재해 주세요." });
   }
-  channels.push({ name: "이메일 주문", detail: STUDIO.contactEmail || "", note: "주문번호와 결제 수단을 메일로 보내주시면 입금 안내 후 코드를 발급해 드립니다." });
+  const mailto = `mailto:${STUDIO.contactEmail || ""}?subject=${encodeURIComponent(`[주문] ${currentOrderId} — ${activeDoc.name}`)}&body=${encodeURIComponent(`주문번호: ${currentOrderId}\n상품: ${activeDoc.name} (${LANG_NAME[curLang]})\n금액: ${krw(docPrice(activeDoc))}\n\n결제 수단을 알려주시면 입금 안내 후 해제 코드를 발급해 드립니다.`)}`;
+  channels.push({ name: "이메일 주문", detail: STUDIO.contactEmail || "", url: mailto, note: "클릭하면 주문번호가 자동 기재된 메일이 열립니다." });
 
   document.getElementById("pay-channels").innerHTML = channels.map(c =>
     `<div class="pay-channel"><div class="ch-name">${esc(c.name)}</div><div class="ch-detail">${c.url ? `<a href="${esc(c.url)}" target="_blank" rel="noopener" style="color:var(--accent-cyan);">${esc(c.detail)}</a>` : esc(c.detail)}</div><div class="ch-note">${esc(c.note)}</div></div>`
@@ -1691,11 +1719,35 @@ function showToast(msg) {
  *   OmniStudio.mintCode("주문번호-이메일")  → {code, digest}
  * digest를 settlement_config.js의 studio.unlockDigests에 추가·배포 후
  * code를 고객에게 발급한다. 임의 코드의 digest는 OmniStudio.digestFor(code). */
-window.OmniStudio = { mintCode, digestFor };
+function checkConfig() {
+  const issues = [];
+  if (!STUDIO.salesEnabled) issues.push("salesEnabled: false — 판매 비활성");
+  if (!STUDIO.gumroadProductId || !STUDIO.gumroadUrl) issues.push("Gumroad 미연결 — 수동 코드 채널만 동작");
+  if (!STUDIO.contactEmail) issues.push("contactEmail 없음");
+  if (!STUDIO.unlockDigests.length) issues.push("unlockDigests 비어 있음 — 수동 코드 검증 불가");
+  console.table ? console.table({
+    자동결제: STUDIO.gumroadProductId ? "✅ Gumroad 연결됨" : "❌ 미연결",
+    수동코드: STUDIO.unlockDigests.length + "개 등록",
+    기본가격: STUDIO.priceKrw + "원",
+    무제한패스: STUDIO.passPriceKrw + "원",
+    문서수: DOC_TYPES.length + "종",
+    상태: issues.length ? "⚠️ " + issues.join(" / ") : "✅ 판매 준비 완료"
+  }) : console.log(issues);
+  return issues;
+}
+window.OmniStudio = { mintCode, digestFor, checkConfig };
+
+function renderCatalogPrices() {
+  document.querySelectorAll(".cat-price").forEach(elm => {
+    const d = DOC_TYPES.find(x => x.id === elm.dataset.doc);
+    if (d) elm.innerHTML = `원본 ${krw(docPrice(d))} <span class="free">· 미리보기 무료</span>`;
+  });
+}
 
 /* ---------- 초기화 ---------- */
 buildWatermark();
 renderMyDocs();
+renderCatalogPrices();
 selectDoc(activeDoc.id);
 </script>
 </body>
