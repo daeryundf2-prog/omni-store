@@ -1169,7 +1169,10 @@ async function stampDocHash() {
     ja: "この写しの内容確認用の識別表示（法的効力を保証するものではありません）",
     zh: "用于确认本件内容的识别标记（不构成法律效力保证）"
   };
-  stamp.textContent = `${LBL[curLang] || LBL.ko}: ${hex.slice(0, 16)}…${hex.slice(-8)} — ${NOTE[curLang] || NOTE.ko}`;
+  const live = document.getElementById("doc-hash"); // 재렌더로 스탬프가 교체됐을 수 있음
+  const target = (live === stamp) ? stamp : live;
+  if (!target) return;
+  target.textContent = `${LBL[curLang] || LBL.ko}: ${hex.slice(0, 16)}…${hex.slice(-8)} — ${NOTE[curLang] || NOTE.ko}`;
 }
 
 /* ---------- 전자서명 패널 ---------- */
