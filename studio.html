@@ -1,0 +1,1456 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OmniLegal 문서 스튜디오 — 고소장·내용증명·Demand Letter 자동 작성</title>
+  <meta name="description" content="사이버 명예훼손 고소장, 내용증명, Demand Letter, Cease & Desist를 폼 입력만으로 자동 생성. 한국어·영어·일본어·중국어 출력 지원. 입력 정보는 브라우저 밖으로 전송되지 않습니다." />
+  <meta property="og:title" content="OmniLegal 문서 스튜디오 — 다국어 법률 문서 자동 작성" />
+  <meta property="og:description" content="폼을 채우면 표준 법률 문서가 완성됩니다. 미리보기 무료, 원본 다운로드 유료. KO/EN/JA/ZH 출력." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Serif+JP:wght@400;700&family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-base: #0B0F19;
+      --bg-surface: #151D30;
+      --bg-elevated: #1E2942;
+      --border-subtle: #1E293B;
+      --border-hover: #334155;
+      --accent-crimson: #9F2F2D;
+      --accent-crimson-light: #DC2626;
+      --accent-gold: #F59E0B;
+      --accent-cyan: #38BDF8;
+      --text-primary: #F8FAFC;
+      --text-secondary: #94A3B8;
+      --text-tertiary: #64748B;
+      --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-serif: 'Nanum Myeongjo', 'Noto Serif JP', 'Noto Serif SC', 'Songti SC', 'MS Mincho', serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg-base);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+
+    header {
+      border-bottom: 1px solid var(--border-subtle);
+      background: rgba(11, 15, 25, 0.85);
+      backdrop-filter: blur(12px);
+      position: sticky; top: 0; z-index: 100;
+    }
+    .nav-inner { display: flex; justify-content: space-between; align-items: center; height: 64px; }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-primary); font-weight: 800; font-size: 1.1rem; }
+    .logo-seal { width: 30px; height: 30px; border: 2px solid var(--accent-crimson); color: var(--accent-crimson); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 900; }
+    .nav-links { display: flex; gap: 20px; align-items: center; }
+    .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+    .nav-links a:hover { color: var(--text-primary); }
+    .privacy-chip {
+      font-size: 0.78rem; color: #34D399; border: 1px solid rgba(52, 211, 153, 0.4);
+      background: rgba(52, 211, 153, 0.08); padding: 5px 12px; border-radius: 9999px; font-weight: 600;
+    }
+
+    .studio-head { padding: 44px 0 24px; text-align: center; }
+    .studio-head h1 { font-size: 2.1rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 10px; }
+    .studio-head p { color: var(--text-secondary); max-width: 680px; margin: 0 auto; font-size: 1rem; }
+
+    .doc-tabs { display: flex; gap: 10px; justify-content: center; margin-bottom: 14px; flex-wrap: wrap; }
+    .doc-tab {
+      background: var(--bg-surface); border: 1px solid var(--border-subtle); color: var(--text-secondary);
+      padding: 10px 20px; border-radius: 10px; font-weight: 600; font-size: 0.95rem; cursor: pointer;
+      transition: all 0.15s; font-family: var(--font-sans);
+    }
+    .doc-tab:hover { border-color: var(--border-hover); color: var(--text-primary); }
+    .doc-tab.active { background: rgba(159, 47, 45, 0.18); border-color: var(--accent-crimson); color: #fff; }
+    .doc-tab .langs { font-size: 0.72rem; color: var(--text-tertiary); display: block; margin-top: 3px; font-weight: 500; letter-spacing: 0.04em; }
+    .doc-tab.active .langs { color: #FCA5A5; }
+
+    .lang-row { display: flex; gap: 8px; justify-content: center; align-items: center; margin-bottom: 32px; }
+    .lang-row .lbl { font-size: 0.82rem; color: var(--text-tertiary); margin-right: 4px; }
+    .lang-chip {
+      background: var(--bg-base); border: 1px solid var(--border-subtle); color: var(--text-secondary);
+      padding: 6px 14px; border-radius: 9999px; font-size: 0.85rem; font-weight: 600; cursor: pointer;
+      transition: all 0.15s; font-family: var(--font-sans);
+    }
+    .lang-chip:hover:not(:disabled) { border-color: var(--accent-cyan); color: var(--text-primary); }
+    .lang-chip.active { background: rgba(56, 189, 248, 0.15); border-color: var(--accent-cyan); color: var(--accent-cyan); }
+    .lang-chip:disabled { opacity: 0.35; cursor: not-allowed; }
+
+    .studio-grid { display: grid; grid-template-columns: 420px 1fr; gap: 28px; align-items: start; margin-bottom: 64px; }
+
+    .form-panel {
+      background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 16px;
+      padding: 26px; position: sticky; top: 88px; max-height: calc(100vh - 110px); overflow-y: auto;
+    }
+    .form-section-title {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.06em; color: var(--accent-gold);
+      margin: 22px 0 12px; text-transform: uppercase;
+    }
+    .form-section-title:first-child { margin-top: 0; }
+    .field { margin-bottom: 14px; }
+    .field label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px; color: var(--text-secondary); }
+    .field input[type="text"], .field input[type="date"], .field input[type="email"], .field select, .field textarea {
+      width: 100%; background: var(--bg-base); border: 1px solid var(--border-hover); color: #fff;
+      padding: 10px 12px; border-radius: 8px; font-size: 0.92rem; font-family: var(--font-sans); outline: none;
+    }
+    .field textarea { min-height: 88px; resize: vertical; line-height: 1.55; }
+    .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--accent-crimson); }
+    .field .hint { font-size: 0.75rem; color: var(--text-tertiary); margin-top: 4px; }
+    .check-row { display: flex; align-items: center; gap: 9px; padding: 8px 0; font-size: 0.9rem; color: var(--text-secondary); cursor: pointer; }
+    .check-row input { accent-color: var(--accent-crimson); width: 16px; height: 16px; }
+
+    .preview-panel { min-width: 0; }
+    .preview-toolbar {
+      display: flex; justify-content: space-between; align-items: center; gap: 12px;
+      margin-bottom: 14px; flex-wrap: wrap;
+    }
+    .preview-status { font-size: 0.85rem; color: var(--text-tertiary); display: flex; align-items: center; gap: 8px; }
+    .lock-badge { color: var(--accent-gold); font-weight: 700; }
+    .unlock-badge { color: #34D399; font-weight: 700; }
+    .preview-actions { display: flex; gap: 8px; }
+    .btn {
+      padding: 9px 16px; border-radius: 8px; font-weight: 700; font-size: 0.88rem; cursor: pointer;
+      border: none; font-family: var(--font-sans); text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+      transition: all 0.15s;
+    }
+    .btn-ghost { background: var(--bg-elevated); color: var(--text-primary); border: 1px solid var(--border-hover); }
+    .btn-ghost:hover { border-color: var(--accent-cyan); }
+    .btn-pay { background: var(--accent-crimson); color: #fff; box-shadow: 0 4px 16px rgba(159,47,45,0.35); }
+    .btn-pay:hover { background: var(--accent-crimson-light); }
+    .btn-pay.unlocked { background: #065F46; box-shadow: none; }
+
+    .paper-wrap {
+      position: relative; background: #fff; border-radius: 10px; overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.55);
+    }
+    .paper {
+      padding: 64px 56px; color: #111; font-family: var(--font-serif);
+      font-size: 15px; line-height: 2.0; min-height: 900px;
+    }
+    .paper[lang="en"] { font-family: Georgia, 'Times New Roman', serif; font-size: 14.5px; line-height: 1.9; }
+    .paper[lang="ja"] { font-family: 'Noto Serif JP', 'MS Mincho', serif; }
+    .paper[lang="zh-CN"] { font-family: 'Noto Serif SC', 'Songti SC', serif; }
+    .paper h1.doc-title { text-align: center; font-size: 26px; font-weight: 800; letter-spacing: 0.35em; margin-bottom: 6px; }
+    .paper[lang="en"] h1.doc-title { letter-spacing: 0.18em; font-size: 22px; }
+    .paper .doc-subtitle { text-align: center; font-size: 14px; color: #555; margin-bottom: 40px; letter-spacing: 0.1em; }
+    .paper table.parties { width: 100%; border-collapse: collapse; margin-bottom: 36px; }
+    .paper table.parties td { padding: 7px 10px; border: 1px solid #999; vertical-align: top; font-size: 14px; }
+    .paper table.parties td.lbl { width: 110px; background: #f5f5f5; font-weight: 700; text-align: center; }
+    .paper h2 { font-size: 17px; font-weight: 800; margin: 30px 0 10px; }
+    .paper[lang="en"] h2 { font-size: 15px; letter-spacing: 0.03em; }
+    .paper p.body { text-indent: 1em; margin-bottom: 10px; white-space: pre-wrap; word-break: keep-all; }
+    .paper[lang="en"] p.body { text-indent: 0; word-break: normal; }
+    .paper ol.evidence { margin: 8px 0 10px 28px; }
+    .paper ol.evidence li { margin-bottom: 4px; }
+    .paper .doc-foot { margin-top: 56px; text-align: center; }
+    .paper .doc-foot .date { margin-bottom: 14px; }
+    .paper .doc-foot .signer { font-size: 16px; font-weight: 700; margin-bottom: 26px; }
+    .paper .doc-foot .recipient { font-size: 18px; font-weight: 800; }
+    .paper .blank { color: #b91c1c; font-family: var(--font-mono); font-size: 13px; }
+
+    .watermark-layer {
+      position: absolute; inset: 0; pointer-events: none; overflow: hidden; display: none;
+    }
+    .watermark-layer.on { display: block; }
+    .watermark-layer span {
+      position: absolute; font-family: var(--font-mono); font-weight: 700; font-size: 30px;
+      color: rgba(159, 47, 45, 0.13); transform: rotate(-32deg); white-space: nowrap;
+      letter-spacing: 0.15em;
+    }
+
+    .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.75); backdrop-filter: blur(8px); z-index: 10000; align-items: center; justify-content: center; }
+    .modal.open { display: flex; }
+    .modal-card {
+      background: var(--bg-surface); border: 1px solid var(--border-hover); border-radius: 16px;
+      max-width: 560px; width: 92%; padding: 30px; position: relative; max-height: 88vh; overflow-y: auto;
+    }
+    .modal-close { position: absolute; top: 16px; right: 22px; font-size: 1.5rem; cursor: pointer; color: var(--text-secondary); }
+    .order-box { background: var(--bg-base); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 16px; font-family: var(--font-mono); font-size: 0.9rem; margin: 16px 0; }
+    .order-box .row { display: flex; justify-content: space-between; padding: 4px 0; }
+    .order-box .row .k { color: var(--text-secondary); }
+    .order-box .row .v { color: var(--accent-cyan); font-weight: 700; }
+    .pay-channel { background: var(--bg-base); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 14px 16px; margin-bottom: 10px; font-size: 0.9rem; }
+    .pay-channel .ch-name { font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+    .pay-channel .ch-detail { color: var(--text-secondary); font-family: var(--font-mono); font-size: 0.85rem; word-break: break-all; }
+    .pay-channel .ch-note { color: var(--text-tertiary); font-size: 0.78rem; margin-top: 4px; }
+    .unlock-row { display: flex; gap: 8px; margin-top: 16px; }
+    .unlock-row input {
+      flex: 1; background: var(--bg-base); border: 1px solid var(--border-hover); color: #fff;
+      padding: 11px 14px; border-radius: 8px; font-family: var(--font-mono); font-size: 0.95rem;
+      letter-spacing: 0.08em; outline: none; text-transform: uppercase;
+    }
+    .unlock-row input:focus { border-color: var(--accent-gold); }
+
+    .notice-strip {
+      border: 1px solid rgba(245, 158, 11, 0.35); background: rgba(245, 158, 11, 0.07);
+      border-radius: 12px; padding: 16px 20px; color: var(--text-secondary); font-size: 0.85rem;
+      margin-bottom: 48px; line-height: 1.7;
+    }
+    .notice-strip strong { color: var(--accent-gold); }
+    .doc-catalog { max-width: 1000px; margin: 0 auto; }
+    .catalog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+    .catalog-card {
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: 12px; padding: 18px; display: flex; flex-direction: column; gap: 10px;
+    }
+    .catalog-card h3 { font-size: 1rem; font-weight: 700; }
+    .catalog-card p { font-size: 0.84rem; color: var(--text-secondary); line-height: 1.65; flex: 1; }
+    .catalog-card .btn { align-self: flex-start; font-size: 0.84rem; padding: 7px 14px; }
+    /* 전자서명 패널 */
+    .sig-panel {
+      margin-top: 12px; background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: 12px; padding: 14px;
+    }
+    .sig-panel .sig-title { font-size: 0.85rem; font-weight: 700; margin-bottom: 8px; }
+    .sig-panel .sig-hint { font-size: 0.75rem; color: var(--text-tertiary); margin-bottom: 10px; line-height: 1.5; }
+    .sig-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+    .sig-box label { display: block; font-size: 0.78rem; color: var(--text-secondary); margin-bottom: 4px; }
+    .sig-box canvas {
+      width: 100%; height: 90px; background: #fdfcf8; border: 1px dashed #999;
+      border-radius: 6px; cursor: crosshair; touch-action: none;
+    }
+    .sig-box .sig-clear { font-size: 0.72rem; margin-top: 4px; background: none; border: none; color: var(--text-tertiary); cursor: pointer; padding: 2px 0; }
+    .sig-box .sig-clear:hover { color: var(--accent-red, #e74c3c); }
+    .sig-img { max-height: 42px; max-width: 140px; vertical-align: middle; }
+    /* 내문서함 */
+    .mydocs { margin-top: 12px; }
+    .mydocs .md-title { font-size: 0.85rem; font-weight: 700; margin-bottom: 6px; }
+    .mydocs-item {
+      display: flex; align-items: center; gap: 8px; padding: 8px 10px;
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px;
+      font-size: 0.8rem; margin-bottom: 6px;
+    }
+    .mydocs-item .lbl { flex: 1; color: var(--text-secondary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .mydocs-item button { font-size: 0.74rem; padding: 4px 8px; }
+    /* 문서 해시 표시 */
+    .doc-hash {
+      margin-top: 28px; padding-top: 10px; border-top: 1px solid #ccc;
+      font-size: 9pt; color: #888; word-break: break-all; font-family: monospace;
+    }
+    @media print { .doc-hash { color: #999; } }
+
+    footer { border-top: 1px solid var(--border-subtle); padding: 36px 0; color: var(--text-tertiary); font-size: 0.85rem; text-align: center; }
+
+    @media (max-width: 980px) {
+      .studio-grid { grid-template-columns: 1fr; }
+      .form-panel { position: static; max-height: none; }
+      .paper { padding: 40px 24px; font-size: 14px; }
+    }
+
+    @media print {
+      body * { visibility: hidden; }
+      .paper-wrap, .paper-wrap * { visibility: visible; }
+      .paper-wrap { position: absolute; inset: 0; box-shadow: none; border-radius: 0; }
+      .paper { min-height: auto; padding: 24mm 18mm; }
+      @page { margin: 0; size: A4; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container nav-inner">
+    <a href="./" class="logo">
+      <div class="logo-seal">印</div>
+      <span>OmniLegal 문서 스튜디오</span>
+    </a>
+    <div class="nav-links">
+      <a href="./">스토어 홈</a>
+      <span class="privacy-chip">🔒 입력 정보는 서버로 전송되지 않습니다</span>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <div class="studio-head">
+    <h1>다국어 법률 문서 자동 작성기</h1>
+    <p>폼을 채우면 표준 법률 문서가 즉시 완성됩니다. 한국어·영어·일본어·중국어 출력 지원. 미리보기는 무료이며, 워터마크 없는 원본 출력·다운로드는 건별 결제 후 해제됩니다.</p>
+  </div>
+
+  <div class="doc-tabs" id="doc-tabs"></div>
+  <div class="lang-row" id="lang-row"></div>
+
+  <div class="studio-grid">
+    <div>
+      <form class="form-panel" id="doc-form" autocomplete="off" onsubmit="return false;"></form>
+      <div class="sig-panel" id="sig-panel" style="display:none;"></div>
+      <div class="mydocs" id="mydocs"></div>
+    </div>
+
+    <div class="preview-panel">
+      <div class="preview-toolbar">
+        <div class="preview-status" id="preview-status"></div>
+        <div class="preview-actions">
+          <button class="btn btn-ghost" onclick="fillSample()" title="예시 데이터로 즉시 채워보기">✨ 예시 채우기</button>
+          <button class="btn btn-ghost" onclick="saveMyDoc()" title="작성 중인 문서를 내문서함에 저장 (이 브라우저에만 보관)">💾 저장</button>
+          <button class="btn btn-ghost" onclick="printPreview()" title="워터마크가 포함된 무료 미리보기">🖨 미리보기 인쇄</button>
+          <button class="btn btn-pay" id="btn-original" onclick="onOriginalClick()"></button>
+        </div>
+      </div>
+      <div class="paper-wrap">
+        <div class="watermark-layer" id="watermark"></div>
+        <div class="paper" id="paper"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="notice-strip">
+    <strong>이용 안내 및 면책</strong><br/>
+    본 도구가 생성하는 문서는 표준 서식 기반의 자동 작성 결과물이며, 개별 사안에 대한 법률 자문이나 변호사의 작성 대행이 아닙니다.
+    외국어 문서는 해당 국가의 법적 요건·관습에 맞게 전문가 검토를 거친 후 사용하시기 바랍니다.
+    입력하신 정보는 모두 이용자의 브라우저 안에서만 처리되며 서버로 전송·저장되지 않습니다.
+  </div>
+
+  <!-- 문서 카탈로그: 검색 유입용 정적 섹션 -->
+  <section class="doc-catalog" id="catalog">
+    <h2 style="font-size:1.15rem; font-weight:800; margin:36px 0 6px;">작성 가능한 문서</h2>
+    <p style="color:var(--text-secondary); font-size:0.86rem; margin-bottom:16px;">모든 문서는 무료로 미리보기할 수 있으며, 원본 다운로드·인쇄만 유료입니다.</p>
+    <div class="catalog-grid">
+      <article class="catalog-card" id="cat-defamation-complaint">
+        <h3>사이버 명예훼손·모욕 고소장</h3>
+        <p>온라인 커뮤니티·SNS·메신저에서의 명예훼손(정보통신망법 제70조) 및 모욕(형법 제311조) 피해에 대한 수사기관 제출용 고소장. 피해 경위·증거 목록·처벌 의사 표시를 표준 양식으로 정리합니다.</p>
+        <button class="btn btn-ghost" onclick="selectDoc('defamation-complaint');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-demand-notice">
+        <h3>내용증명 · Demand Letter · 通知書 · 催告函</h3>
+        <p>금전 지급·계약 이행·손해배상 요구 등을 상대방에게 공식 통보하는 문서. 한국어·영어·일본어·중국어 4개 언어로 작성되어 해외 거래처에도 발송할 수 있습니다. 기한 설정과 법적 조치 예고 문구를 포함합니다.</p>
+        <button class="btn btn-ghost" onclick="selectDoc('demand-notice');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-cease-desist">
+        <h3>경고장 · Cease &amp; Desist · 警告書 · 警告函</h3>
+        <p>저작권 침해·상표 도용·영업방해 등 위법 행위의 즉시 중단을 요구하는 경고 문서. 4개 언어 지원으로 해외 플랫폼·판매자 대응에 활용할 수 있습니다.</p>
+        <button class="btn btn-ghost" onclick="selectDoc('cease-desist');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-loan-agreement">
+        <h3>차용증 · Loan Agreement</h3>
+        <p>개인 간 금전 대여의 금액·이자·변제일·변제 방법을 명확히 기록하는 차용증. 분쟁 예방과 소송 시 증거력 확보를 위한 필수 항목을 표준 구조로 정리합니다.</p>
+        <button class="btn btn-ghost" onclick="selectDoc('loan-agreement');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-freelance-contract">
+        <h3>프리랜서 용역계약서 · Services Agreement</h3>
+        <p>외주 개발·디자인·콘텐츠 작업의 용역 범위·대금·납기·수정 횟수·지식재산권 귀속을 규정하는 계약서. 무상 수정 범위 한정과 대금 완납 시 IP 양도 조항 등 실무 분쟁 방지 장치를 포함합니다.</p>
+        <button class="btn btn-ghost" onclick="selectDoc('freelance-contract');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-settlement">
+        <h3>합의서 · Settlement Agreement</h3>
+        <p>분쟁 당사자 간 합의 내용·합의금·상호 면책·비밀유지 의무를 문서화하는 합의서. 형사·민사 분쟁 종결 시 재분쟁을 막는 상호 완전 해결 조항을 포함합니다.</p>
+        <button class="btn btn-ghost" onclick="selectDoc('settlement');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+    </div>
+  </section>
+</main>
+
+<!-- Order / unlock modal -->
+<div class="modal" id="order-modal" onclick="if(event.target===this)closeOrderModal()">
+  <div class="modal-card">
+    <span class="modal-close" onclick="closeOrderModal()">&times;</span>
+    <h3 style="font-size:1.2rem; font-weight:800; margin-bottom:4px;">원본 문서 잠금 해제</h3>
+    <p style="color:var(--text-secondary); font-size:0.88rem;">결제 확인 후 발급되는 해제 코드를 입력하면 워터마크 없는 원본을 인쇄·다운로드할 수 있습니다.</p>
+
+    <div class="order-box">
+      <div class="row"><span class="k">상품</span><span class="v" id="order-doc-name"></span></div>
+      <div class="row"><span class="k">가격</span><span class="v" id="order-price"></span></div>
+      <div class="row"><span class="k">주문번호</span><span class="v" id="order-id"></span></div>
+    </div>
+
+    <div id="pay-channels"></div>
+
+    <p style="font-size:0.8rem; color:var(--text-secondary); margin-top:8px; line-height:1.6; padding:8px 10px; background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:8px;" id="pass-offer"></p>
+
+    <p style="font-size:0.8rem; color:var(--text-tertiary); margin-top:6px; line-height:1.6;" id="pay-instructions"></p>
+
+    <div class="unlock-row">
+      <input type="text" id="unlock-code" placeholder="해제 코드 또는 라이선스 키 입력" maxlength="48" />
+      <button class="btn btn-pay" onclick="tryUnlock()">해제</button>
+    </div>
+    <p style="font-size:0.78rem; color:var(--text-tertiary); margin-top:8px;">
+      입금 확인 후 코드는 주문 시 기재한 이메일로 발송됩니다. 문의: <span id="contact-email" style="color:var(--accent-cyan);"></span>
+    </p>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <p>© 2026 OmniLegal Forensic Cloud · 문서 스튜디오</p>
+    <p style="margin-top:6px;">본 서비스는 법률 정보 제공 및 문서 자동 작성 도구이며, 법률 자문·소송 대리를 제공하지 않습니다.</p>
+    <p style="margin-top:8px;"><a href="./legal.html" style="color: var(--text-tertiary);">이용약관 · 개인정보처리방침 · 환불정책 · 사업자정보</a></p>
+  </div>
+</footer>
+
+<script src="./settlement_config.js"></script>
+<script>
+/* ============================================================
+ * OmniLegal 문서 스튜디오
+ * - 폼 입력 → 표준 법률 문서 자동 생성 (완전 클라이언트 사이드)
+ * - 출력 언어: 한국어 / English / 日本語 / 中文
+ * - 무료: 워터마크 미리보기 인쇄 / 유료: 해제 코드로 원본 출력
+ *   ※ 코드 검증은 정적 사이트 한계상 '소프트 게이트'입니다.
+ * ============================================================ */
+
+const STUDIO_DEFAULTS = {
+  salesEnabled: true,
+  priceKrw: 9900,
+  passPriceKrw: 29900,
+  contactEmail: "daeryundf2@gmail.com",
+  unlockSalt: "omnistudio-v1",
+  unlockDigests: [],
+  gumroadProductId: "",
+  gumroadUrl: "",
+  prices: {}
+};
+const STUDIO = Object.assign({}, STUDIO_DEFAULTS,
+  (window.OMNI_SETTLEMENT && window.OMNI_SETTLEMENT.studio) || {});
+// 문서별 가격은 STUDIO.prices[docId] > doc.price > 기본가 순으로 결정
+function docPrice(doc) {
+  return (STUDIO.prices && STUDIO.prices[doc.id]) || doc.price || STUDIO.priceKrw;
+}
+
+const LANGUAGES = [
+  { id: "ko", name: "한국어", paperLang: "ko" },
+  { id: "en", name: "English", paperLang: "en" },
+  { id: "ja", name: "日本語", paperLang: "ja" },
+  { id: "zh", name: "中文", paperLang: "zh-CN" }
+];
+const LANG_NAME = { ko: "한국어", en: "English", ja: "日本語", zh: "中文" };
+
+const CURRENCIES = ["KRW", "USD", "JPY", "CNY", "EUR"].map(c => ({ v: c, label: { ko: c } }));
+
+/* ---------- 문서 타입 정의 ---------- */
+const DOC_TYPES = [
+  {
+    id: "defamation-complaint",
+    name: "사이버 명예훼손·모욕 고소장",
+    langs: ["ko"],
+    price: STUDIO.priceKrw,
+    fields: [
+      { section: "고소인 (피해자)" },
+      { key: "c_name", label: "성명", type: "text", required: true },
+      { key: "c_phone", label: "연락처", type: "text" },
+      { key: "c_addr", label: "주소", type: "text" },
+      { key: "c_email", label: "이메일", type: "email" },
+      { section: "피고소인 (알려진 범위만)" },
+      { key: "d_name", label: "성명 또는 닉네임/ID", type: "text", hint: "성명 미상 시 닉네임·계정 ID 기재" },
+      { key: "d_info", label: "기타 특정 정보", type: "text", hint: "전화번호·계정 URL 등 알고 있는 정보" },
+      { section: "사건 개요" },
+      { key: "platform", label: "게시 플랫폼", type: "select",
+        options: [
+          { v: "naver", label: { ko: "네이버 카페/블로그" } },
+          { v: "dcinside", label: { ko: "디시인사이드" } },
+          { v: "fmkorea", label: { ko: "에펨코리아" } },
+          { v: "instagram", label: { ko: "인스타그램" } },
+          { v: "youtube", label: { ko: "유튜브" } },
+          { v: "x", label: { ko: "X(트위터)" } },
+          { v: "telegram", label: { ko: "텔레그램" } },
+          { v: "openchat", label: { ko: "카카오톡 오픈채팅" } },
+          { v: "other", label: { ko: "기타 온라인 커뮤니티" } }
+        ]},
+      { key: "post_url", label: "게시물 URL", type: "text" },
+      { key: "post_date", label: "게시 일시", type: "date" },
+      { key: "post_content", label: "게시 내용 요약", type: "textarea", hint: "문제가 되는 표현을 가능한 원문 그대로 기재" },
+      { key: "harm", label: "피해 및 경위", type: "textarea", hint: "언제 어떻게 발견했는지, 어떤 피해가 발생했는지" },
+      { key: "charges", label: "적용 법조항", type: "checks", options: [
+        { v: "itm70", label: { ko: "정보통신망법 제70조 (사이버 명예훼손)" } },
+        { v: "crim311", label: { ko: "형법 제311조 (모욕죄)" } },
+        { v: "crim307", label: { ko: "형법 제307조 (명예훼손)" } },
+        { v: "crim283", label: { ko: "형법 제283조 (협박)" } }
+      ]},
+      { section: "증거 및 관할" },
+      { key: "evidence", label: "증거자료 목록", type: "textarea", hint: "한 줄에 하나씩 (예: 게시물 캡처본 1부, URL 출력물 1부)" },
+      { key: "police", label: "관할 경찰서", type: "text", hint: "예: 서울○○경찰서 / ○○지방경찰청 사이버수사대" },
+      { key: "doc_date", label: "작성 일자", type: "date" }
+    ],
+    render: { ko: renderComplaintKo }
+  },
+  {
+    id: "demand-notice",
+    name: "내용증명 · Demand Letter",
+    langs: ["ko", "en", "ja", "zh"],
+    price: STUDIO.priceKrw,
+    fields: [
+      { section: "발신인 / Sender" },
+      { key: "s_name", label: "성명", type: "text", required: true, hint: "문서 언어로 입력 (영어 문서면 로마자 표기)" },
+      { key: "s_addr", label: "주소", type: "text", hint: "문서 언어로 입력" },
+      { key: "s_phone", label: "연락처", type: "text" },
+      { key: "s_email", label: "이메일", type: "email" },
+      { section: "수신인 / Recipient" },
+      { key: "r_name", label: "성명·상호", type: "text", required: true },
+      { key: "r_addr", label: "주소", type: "text" },
+      { section: "내용" },
+      { key: "purpose", label: "발송 목적", type: "select", options: [
+        { v: "takedown", label: { ko: "게시물 삭제 및 재발 방지 요구", en: "removal of unlawful content", ja: "違法コンテンツの削除", zh: "删除违法内容" } },
+        { v: "payment", label: { ko: "대금 지급 청구", en: "payment of outstanding amount", ja: "未払金の支払", zh: "未付款项的支付" } },
+        { v: "damages", label: { ko: "손해배상 청구 예고", en: "claim for damages", ja: "損害賠償の請求", zh: "损害赔偿请求" } },
+        { v: "contract", label: { ko: "계약 이행 촉구", en: "performance of contractual obligations", ja: "契約上の義務の履行", zh: "合同义务的履行" } },
+        { v: "other", label: { ko: "기타 경고·통보", en: "the matter described below", ja: "下記の事案", zh: "下述事项" } }
+      ]},
+      { key: "title", label: "문서 제목", type: "text", hint: "비워 두면 발송 목적이 제목이 됩니다" },
+      { key: "facts", label: "사실 관계", type: "textarea", hint: "문서 언어로 입력 — 경위를 시간 순서로 간결히" },
+      { key: "demands", label: "요구 사항", type: "textarea", hint: "문서 언어로, 한 줄에 하나씩" },
+      { key: "deadline", label: "이행 기한", type: "text", hint: "예: 본 문서 수령 후 7일 이내 / within 7 days of receipt" },
+      { key: "doc_date", label: "작성 일자", type: "date" }
+    ],
+    render: { ko: renderDemandKo, en: renderDemandEn, ja: renderDemandJa, zh: renderDemandZh }
+  },
+  {
+    id: "cease-desist",
+    name: "경고장 · Cease & Desist",
+    langs: ["ko", "en", "ja", "zh"],
+    price: STUDIO.priceKrw,
+    fields: [
+      { section: "발신인 / Sender" },
+      { key: "s_name", label: "성명", type: "text", required: true },
+      { key: "s_addr", label: "주소", type: "text" },
+      { key: "s_email", label: "이메일", type: "email" },
+      { section: "수신인 / Recipient" },
+      { key: "r_name", label: "성명·상호·계정", type: "text", required: true },
+      { key: "r_addr", label: "주소 또는 온라인 식별자", type: "text" },
+      { section: "위반 내용" },
+      { key: "subject", label: "문서 제목", type: "text", hint: "예: Cease and Desist — Defamatory Content" },
+      { key: "violation", label: "위반 행위 설명", type: "textarea", hint: "문서 언어로 — 어떤 행위가 언제부터 문제인지" },
+      { key: "platform_url", label: "관련 URL·게시물 위치", type: "text" },
+      { key: "demands", label: "중단 요구 사항", type: "textarea", hint: "문서 언어로, 한 줄에 하나씩 (예: 게시물 즉시 삭제 / 재발 금지)" },
+      { key: "deadline", label: "이행 기한", type: "text", hint: "예: within 7 days of receipt" },
+      { key: "doc_date", label: "작성 일자", type: "date" }
+    ],
+    render: { ko: renderCndKo, en: renderCndEn, ja: renderCndJa, zh: renderCndZh }
+  },
+  {
+    id: "loan-agreement",
+    name: "차용증 · Loan Agreement",
+    langs: ["ko", "en"],
+    price: STUDIO.priceKrw,
+    fields: [
+      { section: "채권자 (돈을 빌려준 사람) / Lender" },
+      { key: "l_name", label: "성명", type: "text", required: true },
+      { key: "l_addr", label: "주소", type: "text" },
+      { section: "채무자 (돈을 빌린 사람) / Borrower" },
+      { key: "b_name", label: "성명", type: "text", required: true },
+      { key: "b_addr", label: "주소", type: "text" },
+      { key: "b_id", label: "생년월일·식별정보", type: "text" },
+      { section: "대여 조건" },
+      { key: "amount", label: "대여 금액 (숫자)", type: "text", required: true, hint: "예: 5,000,000" },
+      { key: "amount_words", label: "금액 대문 표기", type: "text", hint: "예: 금오백만원정 — 비우면 숫자만 표기" },
+      { key: "currency", label: "통화", type: "select", options: CURRENCIES },
+      { key: "loan_date", label: "대여일", type: "date" },
+      { key: "repay_date", label: "변제 기일", type: "date" },
+      { key: "interest", label: "이자율 (연 %)", type: "text", hint: "무이자면 0" },
+      { key: "repay_method", label: "변제 방법", type: "select", options: [
+        { v: "lump", label: { ko: "만기 일시 변제", en: "lump-sum repayment at maturity" } },
+        { v: "installment", label: { ko: "분할 변제", en: "installment repayment" } }
+      ]},
+      { key: "repay_account", label: "변제 계좌", type: "text" },
+      { key: "special", label: "특약 사항", type: "textarea", hint: "연체이자·분할 일정 등, 없으면 비움" },
+      { key: "doc_date", label: "작성 일자", type: "date" }
+    ],
+    signers: [
+      { key: "sig_l", label: "채권자 서명", enLabel: "Lender signature" },
+      { key: "sig_b", label: "채무자 서명", enLabel: "Borrower signature" }
+    ],
+    render: { ko: renderLoanKo, en: renderLoanEn }
+  },
+  {
+    id: "freelance-contract",
+    name: "프리랜서 용역계약서 · Services Agreement",
+    langs: ["ko", "en"],
+    price: 14900,
+    fields: [
+      { section: "갑 (도급인·클라이언트) / Client" },
+      { key: "a_name", label: "성명·상호", type: "text", required: true },
+      { key: "a_addr", label: "주소", type: "text" },
+      { key: "a_contact", label: "연락처·이메일", type: "text" },
+      { section: "을 (수급인·프리랜서) / Contractor" },
+      { key: "b_name", label: "성명·상호", type: "text", required: true },
+      { key: "b_addr", label: "주소", type: "text" },
+      { key: "b_contact", label: "연락처·이메일", type: "text" },
+      { section: "계약 내용" },
+      { key: "scope", label: "용역 내용", type: "textarea", required: true, hint: "수행 범위·산출물을 구체적으로" },
+      { key: "fee", label: "용역 대금 (숫자)", type: "text", required: true },
+      { key: "currency", label: "통화", type: "select", options: CURRENCIES },
+      { key: "pay_terms", label: "대금 지급 방법", type: "select", options: [
+        { v: "completion", label: { ko: "완료·검수 후 일시불", en: "lump sum upon completion and acceptance" } },
+        { v: "milestone", label: { ko: "착수금 50% + 완료 후 잔금", en: "50% upfront, balance upon completion" } },
+        { v: "monthly", label: { ko: "월정액", en: "monthly retainer" } }
+      ]},
+      { key: "start_date", label: "착수일", type: "date" },
+      { key: "end_date", label: "완료(납품) 기일", type: "date" },
+      { key: "revisions", label: "무상 수정 횟수", type: "text", hint: "예: 2 — 무제한 수정 요구 차단용" },
+      { key: "ip_clause", label: "지식재산권 귀속", type: "select", options: [
+        { v: "on_payment", label: { ko: "대금 완납 시 갑에게 양도", en: "transfers to the Client upon full payment" } },
+        { v: "on_sign", label: { ko: "계약 체결 시 갑에게 양도", en: "assigned to the Client upon execution" } },
+        { v: "license", label: { ko: "을이 보유, 갑에게 사용 허락", en: "retained by the Contractor; license granted to the Client" } }
+      ]},
+      { key: "notice_days", label: "해지 통보 기간 (일)", type: "text", hint: "예: 14" },
+      { key: "doc_date", label: "작성 일자", type: "date" }
+    ],
+    signers: [
+      { key: "sig_a", label: "갑 서명", enLabel: "Client signature" },
+      { key: "sig_b", label: "을 서명", enLabel: "Contractor signature" }
+    ],
+    render: { ko: renderContractKo, en: renderContractEn }
+  },
+  {
+    id: "settlement",
+    name: "합의서 · Settlement Agreement",
+    langs: ["ko", "en"],
+    price: 12900,
+    fields: [
+      { section: "갑 / Party A" },
+      { key: "a_name", label: "성명·상호", type: "text", required: true },
+      { key: "a_addr", label: "주소", type: "text" },
+      { section: "을 / Party B" },
+      { key: "b_name", label: "성명·상호", type: "text", required: true },
+      { key: "b_addr", label: "주소", type: "text" },
+      { section: "합의 내용" },
+      { key: "incident", label: "사건 경위", type: "textarea", required: true, hint: "분쟁이 생긴 경위를 간결히" },
+      { key: "amount", label: "합의금 (숫자)", type: "text", hint: "금전 없는 합의면 비움" },
+      { key: "currency", label: "통화", type: "select", options: CURRENCIES },
+      { key: "pay_deadline", label: "지급 기한", type: "text", hint: "예: 2026년 10월 1일까지" },
+      { key: "terms", label: "추가 합의 조항", type: "textarea", hint: "한 줄에 하나씩 (재발 방지, 게시물 삭제 등)" },
+      { key: "confidential", label: "비밀유지 조항 포함", type: "checks", options: [
+        { v: "yes", label: { ko: "합의 내용을 제3자에게 공개하지 않는다" } }
+      ]},
+      { key: "doc_date", label: "작성 일자", type: "date" }
+    ],
+    signers: [
+      { key: "sig_a", label: "갑 서명", enLabel: "Party A signature" },
+      { key: "sig_b", label: "을 서명", enLabel: "Party B signature" }
+    ],
+    render: { ko: renderSettlementKo, en: renderSettlementEn }
+  }
+];
+
+const BLANK = '<span class="blank">＿＿＿＿</span>';
+let activeDoc = DOC_TYPES[0];
+let curLang = "ko";
+let unlocked = localStorage.getItem("omni_studio_unlocked") === "1";
+let currentOrderId = "";
+const formState = {};
+
+/* ---------- 유틸 ---------- */
+function esc(s) {
+  return String(s || "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+function val(key) { const el = document.getElementById("f_" + key); return el ? el.value.trim() : (formState[key] || ""); }
+function valOr(key) { const v = val(key); return v ? esc(v) : BLANK; }
+function krw(n) { return "₩" + Number(n).toLocaleString("ko-KR"); }
+
+const MONTHS_EN = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+function fmtDate(d, lang) {
+  if (!d) return lang === "ko" ? "20    .    .    ." : "＿＿＿＿";
+  const [y, m, dd] = d.split("-").map(Number);
+  if (lang === "ko") return `${y}. ${m}. ${dd}.`;
+  if (lang === "en") return `${MONTHS_EN[m - 1]} ${dd}, ${y}`;
+  return `${y}年${m}月${dd}日`; // ja, zh
+}
+function fieldDef(key) { return activeDoc.fields.find(f => f.key === key); }
+function optText(key, lang) {
+  const f = fieldDef(key);
+  if (!f || !f.options) return "";
+  const opt = f.options.find(o => o.v === val(key)) || f.options[0];
+  return opt ? (opt.label[lang] || opt.label.ko || "") : "";
+}
+function checkedLabels(key, lang) {
+  return [...document.querySelectorAll(`[data-key="${key}"]`)]
+    .filter(el => el.type === "checkbox" && el.checked)
+    .map(el => { const o = fieldDef(key).options.find(x => x.v === el.dataset.opt); return o ? (o.label[lang] || o.label.ko) : ""; });
+}
+function lines(key) { return val(key).split("\n").map(s => s.trim()).filter(Boolean); }
+function sig(key, fallback) {
+  const d = formState[key];
+  if (d && /^data:image\//.test(d)) return `<img class="sig-img" src="${d}" alt=""/>`;
+  return esc(fallback || "(인)");
+}
+
+/* ---------- 해제 코드 (djb2 소프트 게이트) ---------- */
+function djb2(str) {
+  let h = 5381;
+  for (let i = 0; i < str.length; i++) h = ((h << 5) + h + str.charCodeAt(i)) >>> 0;
+  return h;
+}
+/* 운영자용 신규 코드 발급: 씨앗(주문번호 등) → {code, digest}.
+ * code를 고객에게 보내기 전에 digest를 settlement_config.js의
+ * studio.unlockDigests에 추가하고 배포해야 검증이 통과한다.
+ * (unlockDigests에 없는 digest의 코드는 모두 거부된다) */
+function mintCode(seed) {
+  const code = "OMNI-" + djb2(String(seed) + (STUDIO.unlockSalt || "")).toString(36).toUpperCase();
+  return { code, digest: djb2(code).toString(36) };
+}
+/* 임의 코드 문자열의 digest — 코드 수기 발급 후 등록용. */
+function digestFor(code) {
+  return djb2(String(code).trim().toUpperCase()).toString(36);
+}
+function verifyCode(code) {
+  const normalized = code.trim().toUpperCase();
+  if (!/^OMNI-[0-9A-Z]{4,8}$/.test(normalized)) return false;
+  return (STUDIO.unlockDigests || []).includes(djb2(normalized).toString(36));
+}
+
+/* Gumroad 라이선스 자동 검증 — studio.gumroadProductId가 설정되면
+ * 구매 즉시 발급되는 라이선스 키로 무인 잠금해제가 된다.
+ * (Gumroad의 licenses/verify 엔드포인트는 CORS 허용) */
+async function verifyGumroadLicense(key) {
+  if (!STUDIO.gumroadProductId) return false;
+  const res = await fetch("https://api.gumroad.com/v2/licenses/verify", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({
+      product_id: STUDIO.gumroadProductId,
+      license_key: key.trim(),
+      increment_uses_count: "false"
+    })
+  });
+  const data = await res.json().catch(() => ({}));
+  return data.success === true;
+}
+
+/* ---------- 폼 ---------- */
+function buildForm(doc) {
+  const form = document.getElementById("doc-form");
+  let html = "";
+  for (const f of doc.fields) {
+    if (f.section) { html += `<div class="form-section-title">${esc(f.section)}</div>`; continue; }
+    const id = "f_" + f.key;
+    const saved = formState[f.key];
+    html += `<div class="field"><label for="${id}">${esc(f.label)}${f.required ? ' <span style="color:var(--accent-crimson-light)">*</span>' : ""}</label>`;
+    if (f.type === "textarea") {
+      html += `<textarea id="${id}" data-key="${f.key}">${esc(saved || "")}</textarea>`;
+    } else if (f.type === "select") {
+      html += `<select id="${id}" data-key="${f.key}">` + f.options.map(o =>
+        `<option value="${esc(o.v)}" ${saved === o.v ? "selected" : ""}>${esc(o.label.ko)}</option>`).join("") + `</select>`;
+    } else if (f.type === "checks") {
+      html += f.options.map((o, i) => {
+        const on = saved ? (saved.includes(o.v)) : i < 2;
+        return `<label class="check-row"><input type="checkbox" id="${id}_${i}" data-key="${f.key}" data-opt="${esc(o.v)}" ${on ? "checked" : ""}/> ${esc(o.label.ko)}</label>`;
+      }).join("");
+    } else {
+      html += `<input type="${f.type}" id="${id}" data-key="${f.key}" value="${esc(saved || "")}"/>`;
+    }
+    if (f.hint) html += `<div class="hint">${esc(f.hint)}</div>`;
+    html += `</div>`;
+  }
+  form.innerHTML = html;
+  form.querySelectorAll("input, select, textarea").forEach(el => {
+    el.addEventListener("input", () => { remember(el); render(); });
+  });
+  const d = form.querySelector('[data-key="doc_date"]');
+  if (d && !d.value) { d.value = new Date().toISOString().slice(0, 10); remember(d); }
+}
+function remember(el) {
+  const key = el.dataset.key;
+  if (el.type === "checkbox") {
+    formState[key] = [...document.querySelectorAll(`[data-key="${key}"]`)].filter(x => x.checked).map(x => x.dataset.opt);
+  } else {
+    formState[key] = el.value;
+  }
+}
+
+/* ================= 렌더러: 고소장 (KO) ================= */
+function renderComplaintKo() {
+  const charges = checkedLabels("charges", "ko");
+  const evidence = lines("evidence");
+  const chargeText = charges.length ? charges.join(" 및 ") : "관련 법령";
+  return `
+    <h1 class="doc-title">고 소 장</h1>
+    <div class="doc-subtitle">(사이버 명예훼손·모욕)</div>
+    <table class="parties">
+      <tr><td class="lbl">고소인</td><td>성명: ${valOr("c_name")}<br/>주소: ${valOr("c_addr")}<br/>연락처: ${valOr("c_phone")}<br/>이메일: ${valOr("c_email")}</td></tr>
+      <tr><td class="lbl">피고소인</td><td>성명(닉네임/ID): ${valOr("d_name")}<br/>기타 특정 정보: ${valOr("d_info")}</td></tr>
+    </table>
+    <h2>1. 고소의 취지</h2>
+    <p class="body">피고소인을 ${esc(chargeText)} 위반 혐의로 고소하오니, 엄정히 수사하여 처벌하여 주시기 바랍니다.</p>
+    <h2>2. 범죄사실</h2>
+    <p class="body">피고소인은 ${esc(fmtDate(val("post_date"), "ko"))} 경, ${esc(optText("platform", "ko"))}에 게시된 게시물(게시물 주소: ${esc(val("post_url")) || "＿＿＿＿"})을 통하여 고소인에 관하여 다음과 같은 내용을 게시하였습니다.</p>
+    <p class="body">「${valOr("post_content")}」</p>
+    <h2>3. 고소 이유</h2>
+    <p class="body">${valOr("harm")}</p>
+    <p class="body">위 게시물은 불특정 다수가 접근할 수 있는 온라인 공간에 공연히 게시된 것으로서, 고소인의 사회적 평가를 저하시키고 정신적 고통을 야기하였습니다. 이에 피고소인의 처벌을 구하기 위하여 본 고소장을 제출합니다.</p>
+    <h2>4. 증거자료</h2>
+    <ol class="evidence">${(evidence.length ? evidence : ["게시물 캡처본 1부"]).map(e => `<li>${esc(e)}</li>`).join("")}</ol>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">고소인 ${valOr("c_name")} &nbsp;(인)</div>
+      <div class="recipient">${valOr("police")} 귀중</div>
+    </div>`;
+}
+
+/* ================= 렌더러: 내용증명/Demand Letter ================= */
+function demandPartiesKo() {
+  return `<table class="parties">
+    <tr><td class="lbl">발신인</td><td>성명: ${valOr("s_name")}<br/>주소: ${valOr("s_addr")}<br/>연락처: ${valOr("s_phone")}</td></tr>
+    <tr><td class="lbl">수신인</td><td>성명: ${valOr("r_name")}<br/>주소: ${valOr("r_addr")}</td></tr>
+  </table>`;
+}
+function renderDemandKo() {
+  const demands = lines("demands");
+  const title = val("title") || optText("purpose", "ko") || "내용증명";
+  return `
+    <h1 class="doc-title">내 용 증 명</h1>
+    <div class="doc-subtitle">${esc(title)}</div>
+    ${demandPartiesKo()}
+    <h2>1. 발신의 취지</h2>
+    <p class="body">본인은 수신인에게 「${esc(optText("purpose", "ko"))}」와 관련하여 아래와 같이 통보합니다.</p>
+    <h2>2. 사실 관계</h2>
+    <p class="body">${valOr("facts")}</p>
+    <h2>3. 요구 사항</h2>
+    <ol class="evidence">${(demands.length ? demands : ["＿＿＿＿"]).map(d => `<li>${esc(d)}</li>`).join("")}</ol>
+    <p class="body">위 사항은 ${valOr("deadline")}까지 이행하여 주시기 바랍니다. 기한 내 이행이 없을 경우 본인은 민·형사상 법적 조치를 포함한 필요한 모든 조치를 검토할 수 있음을 알려드립니다.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">발신인 ${valOr("s_name")} &nbsp;(인)</div>
+      <div class="recipient">${valOr("r_name")} 귀하</div>
+    </div>`;
+}
+function renderDemandEn() {
+  const demands = lines("demands");
+  const title = val("title") || ("Demand for " + optText("purpose", "en"));
+  return `
+    <h1 class="doc-title">DEMAND LETTER</h1>
+    <div class="doc-subtitle">${esc(title)}</div>
+    <table class="parties">
+      <tr><td class="lbl">SENDER</td><td>Name: ${valOr("s_name")}<br/>Address: ${valOr("s_addr")}<br/>Contact: ${valOr("s_phone")}${val("s_email") ? "<br/>Email: " + esc(val("s_email")) : ""}</td></tr>
+      <tr><td class="lbl">RECIPIENT</td><td>Name: ${valOr("r_name")}<br/>Address: ${valOr("r_addr")}</td></tr>
+    </table>
+    <p class="body"><strong>Date:</strong> ${esc(fmtDate(val("doc_date"), "en"))}</p>
+    <h2>1. Purpose</h2>
+    <p class="body">This letter constitutes a formal notice to you concerning ${esc(optText("purpose", "en"))}.</p>
+    <h2>2. Statement of Facts</h2>
+    <p class="body">${valOr("facts")}</p>
+    <h2>3. Demand</h2>
+    <p class="body">You are hereby demanded to take the following actions:</p>
+    <ol class="evidence">${(demands.length ? demands : ["＿＿＿＿"]).map(d => `<li>${esc(d)}</li>`).join("")}</ol>
+    <p class="body">The above must be completed no later than ${valOr("deadline")}. Should you fail to comply, I will have no option but to pursue all available legal remedies, including civil and criminal proceedings, without further notice.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "en"))}</div>
+      <div class="signer">Sincerely,<br/>${valOr("s_name")}</div>
+    </div>`;
+}
+function renderDemandJa() {
+  const demands = lines("demands");
+  const title = val("title") || optText("purpose", "ja");
+  return `
+    <h1 class="doc-title">通 知 書</h1>
+    <div class="doc-subtitle">${esc(title)}</div>
+    <table class="parties">
+      <tr><td class="lbl">差出人</td><td>氏名: ${valOr("s_name")}<br/>住所: ${valOr("s_addr")}<br/>連絡先: ${valOr("s_phone")}</td></tr>
+      <tr><td class="lbl">受取人</td><td>氏名: ${valOr("r_name")}<br/>住所: ${valOr("r_addr")}</td></tr>
+    </table>
+    <h2>1. 通知の趣旨</h2>
+    <p class="body">私は、貴殿に対し、「${esc(optText("purpose", "ja"))}」に関し、以下のとおり通知いたします。</p>
+    <h2>2. 事実経過</h2>
+    <p class="body">${valOr("facts")}</p>
+    <h2>3. 要求事項</h2>
+    <ol class="evidence">${(demands.length ? demands : ["＿＿＿＿"]).map(d => `<li>${esc(d)}</li>`).join("")}</ol>
+    <p class="body">上記事項は、${valOr("deadline")}までに履行してください。期日までに履行がない場合、民事・刑事を問わず法的措置を講じますので、予めご承知おきください。</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ja"))}</div>
+      <div class="signer">差出人　${valOr("s_name")}</div>
+      <div class="recipient">${valOr("r_name")}　殿</div>
+    </div>`;
+}
+function renderDemandZh() {
+  const demands = lines("demands");
+  const title = val("title") || optText("purpose", "zh");
+  return `
+    <h1 class="doc-title">催 告 函</h1>
+    <div class="doc-subtitle">${esc(title)}</div>
+    <table class="parties">
+      <tr><td class="lbl">发函人</td><td>姓名: ${valOr("s_name")}<br/>地址: ${valOr("s_addr")}<br/>联系方式: ${valOr("s_phone")}</td></tr>
+      <tr><td class="lbl">收函人</td><td>姓名: ${valOr("r_name")}<br/>地址: ${valOr("r_addr")}</td></tr>
+    </table>
+    <h2>一、发函目的</h2>
+    <p class="body">本函系就「${esc(optText("purpose", "zh"))}」事宜向贵方发出的正式通知。</p>
+    <h2>二、事实经过</h2>
+    <p class="body">${valOr("facts")}</p>
+    <h2>三、要求事项</h2>
+    <ol class="evidence">${(demands.length ? demands : ["＿＿＿＿"]).map(d => `<li>${esc(d)}</li>`).join("")}</ol>
+    <p class="body">请贵方于${valOr("deadline")}前履行上述事项。逾期未履行的，我方将采取包括民事、刑事措施在内的一切法律手段，特此函告。</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "zh"))}</div>
+      <div class="signer">发函人：${valOr("s_name")}</div>
+      <div class="recipient">${valOr("r_name")} 收悉</div>
+    </div>`;
+}
+
+/* ================= 렌더러: 경고장 / Cease & Desist ================= */
+function renderCndKo() {
+  const demands = lines("demands");
+  const title = val("subject") || "경고장";
+  return `
+    <h1 class="doc-title">경 고 장</h1>
+    <div class="doc-subtitle">${esc(title)}</div>
+    <table class="parties">
+      <tr><td class="lbl">발신인</td><td>성명: ${valOr("s_name")}<br/>주소: ${valOr("s_addr")}<br/>이메일: ${valOr("s_email")}</td></tr>
+      <tr><td class="lbl">수신인</td><td>성명·계정: ${valOr("r_name")}<br/>주소·식별자: ${valOr("r_addr")}</td></tr>
+    </table>
+    <h2>1. 위반 사실</h2>
+    <p class="body">${valOr("violation")}</p>
+    ${val("platform_url") ? `<p class="body">관련 위치: ${esc(val("platform_url"))}</p>` : ""}
+    <h2>2. 중단 요구 사항</h2>
+    <ol class="evidence">${(demands.length ? demands : ["＿＿＿＿"]).map(d => `<li>${esc(d)}</li>`).join("")}</ol>
+    <p class="body">위 사항은 ${valOr("deadline")}까지 이행하여 주시기 바랍니다. 이행되지 않을 경우 본인은 민·형사상 법적 조치를 취할 수 있음을 엄중히 경고합니다.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">발신인 ${valOr("s_name")} &nbsp;(인)</div>
+      <div class="recipient">${valOr("r_name")} 귀하</div>
+    </div>`;
+}
+function renderCndEn() {
+  const demands = lines("demands");
+  const title = val("subject") || "Cease and Desist";
+  return `
+    <h1 class="doc-title">CEASE AND DESIST</h1>
+    <div class="doc-subtitle">${esc(title)}</div>
+    <table class="parties">
+      <tr><td class="lbl">FROM</td><td>Name: ${valOr("s_name")}<br/>Address: ${valOr("s_addr")}<br/>Email: ${valOr("s_email")}</td></tr>
+      <tr><td class="lbl">TO</td><td>Name/Account: ${valOr("r_name")}<br/>Address/Identifier: ${valOr("r_addr")}</td></tr>
+    </table>
+    <p class="body"><strong>Date:</strong> ${esc(fmtDate(val("doc_date"), "en"))}</p>
+    <h2>1. Statement of Violation</h2>
+    <p class="body">${valOr("violation")}</p>
+    ${val("platform_url") ? `<p class="body">Location of the material: ${esc(val("platform_url"))}</p>` : ""}
+    <h2>2. Demand to Cease and Desist</h2>
+    <p class="body">You are hereby directed to immediately:</p>
+    <ol class="evidence">${(demands.length ? demands : ["＿＿＿＿"]).map(d => `<li>${esc(d)}</li>`).join("")}</ol>
+    <p class="body">You must comply no later than ${valOr("deadline")}. Failure to comply will result in the pursuit of all available legal remedies without further notice.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "en"))}</div>
+      <div class="signer">Sincerely,<br/>${valOr("s_name")}</div>
+    </div>`;
+}
+function renderCndJa() {
+  const demands = lines("demands");
+  const title = val("subject") || "警告書";
+  return `
+    <h1 class="doc-title">警 告 書</h1>
+    <div class="doc-subtitle">${esc(title)}</div>
+    <table class="parties">
+      <tr><td class="lbl">差出人</td><td>氏名: ${valOr("s_name")}<br/>住所: ${valOr("s_addr")}<br/>メール: ${valOr("s_email")}</td></tr>
+      <tr><td class="lbl">受取人</td><td>氏名・アカウント: ${valOr("r_name")}<br/>住所・識別情報: ${valOr("r_addr")}</td></tr>
+    </table>
+    <h2>1. 違反行為</h2>
+    <p class="body">${valOr("violation")}</p>
+    ${val("platform_url") ? `<p class="body">当該コンテンツの所在: ${esc(val("platform_url"))}</p>` : ""}
+    <h2>2. 中止要求事項</h2>
+    <ol class="evidence">${(demands.length ? demands : ["＿＿＿＿"]).map(d => `<li>${esc(d)}</li>`).join("")}</ol>
+    <p class="body">上記事項は、${valOr("deadline")}までに履行してください。履行がない場合、民事・刑事を問わず法的措置を講じますので、厳重に警告いたします。</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ja"))}</div>
+      <div class="signer">差出人　${valOr("s_name")}</div>
+      <div class="recipient">${valOr("r_name")}　殿</div>
+    </div>`;
+}
+function renderCndZh() {
+  const demands = lines("demands");
+  const title = val("subject") || "警告函";
+  return `
+    <h1 class="doc-title">警 告 函</h1>
+    <div class="doc-subtitle">${esc(title)}</div>
+    <table class="parties">
+      <tr><td class="lbl">发函人</td><td>姓名: ${valOr("s_name")}<br/>地址: ${valOr("s_addr")}<br/>邮箱: ${valOr("s_email")}</td></tr>
+      <tr><td class="lbl">收函人</td><td>姓名·账号: ${valOr("r_name")}<br/>地址·标识: ${valOr("r_addr")}</td></tr>
+    </table>
+    <h2>一、侵权事实</h2>
+    <p class="body">${valOr("violation")}</p>
+    ${val("platform_url") ? `<p class="body">相关内容所在位置：${esc(val("platform_url"))}</p>` : ""}
+    <h2>二、停止要求事项</h2>
+    <ol class="evidence">${(demands.length ? demands : ["＿＿＿＿"]).map(d => `<li>${esc(d)}</li>`).join("")}</ol>
+    <p class="body">请贵方于${valOr("deadline")}前履行上述事项。逾期未履行的，我方将采取一切法律手段，特此严正警告。</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "zh"))}</div>
+      <div class="signer">发函人：${valOr("s_name")}</div>
+      <div class="recipient">${valOr("r_name")} 收悉</div>
+    </div>`;
+}
+
+/* ================= 렌더러: 차용증 / Loan Agreement ================= */
+function renderLoanKo() {
+  const interest = val("interest");
+  const interestText = !interest || interest === "0" ? "무이자" : `연 ${esc(interest)}%`;
+  const amountText = val("amount_words")
+    ? `${esc(val("amount_words"))}(₩${esc(val("amount"))})`
+    : `금 ${esc(val("amount"))}원`;
+  return `
+    <h1 class="doc-title">차 용 증</h1>
+    <div class="doc-subtitle">(금전소비대차계약 증서)</div>
+    <table class="parties">
+      <tr><td class="lbl">대여인<br/>(채권자)</td><td>성명: ${valOr("l_name")}<br/>주소: ${valOr("l_addr")}</td></tr>
+      <tr><td class="lbl">차용인<br/>(채무자)</td><td>성명: ${valOr("b_name")}<br/>주소: ${valOr("b_addr")}<br/>식별정보: ${valOr("b_id")}</td></tr>
+    </table>
+    <h2>1. 대여 금액</h2>
+    <p class="body">${amountText}</p>
+    <h2>2. 대여일 및 변제 기일</h2>
+    <p class="body">대여일: ${esc(fmtDate(val("loan_date"), "ko"))}　/　변제 기일: ${esc(fmtDate(val("repay_date"), "ko"))}</p>
+    <h2>3. 이자</h2>
+    <p class="body">${interestText}</p>
+    <h2>4. 변제 방법</h2>
+    <p class="body">${esc(optText("repay_method", "ko"))}${val("repay_account") ? " — 변제 계좌: " + esc(val("repay_account")) : ""}</p>
+    ${val("special") ? `<h2>5. 특약 사항</h2><p class="body">${valOr("special")}</p>` : ""}
+    <p class="body" style="margin-top:24px;">차용인은 위 대여금을 변제 기일까지 대여인에게 확실히 변제할 것을 약속하고, 본 증서를 작성하여 대여인에게 교부한다.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">차용인(채무자) ${valOr("b_name")} ${sig("sig_b")}</div>
+      <div class="signer">대여인(채권자) ${valOr("l_name")} ${sig("sig_l")}</div>
+    </div>`;
+}
+function renderLoanEn() {
+  const interest = val("interest");
+  const interestText = !interest || interest === "0" ? "interest-free" : `${esc(interest)}% per annum`;
+  return `
+    <h1 class="doc-title">LOAN AGREEMENT</h1>
+    <div class="doc-subtitle">Acknowledgment of Debt</div>
+    <table class="parties">
+      <tr><td class="lbl">LENDER</td><td>Name: ${valOr("l_name")}<br/>Address: ${valOr("l_addr")}</td></tr>
+      <tr><td class="lbl">BORROWER</td><td>Name: ${valOr("b_name")}<br/>Address: ${valOr("b_addr")}<br/>ID/DOB: ${valOr("b_id")}</td></tr>
+    </table>
+    <h2>1. Principal</h2>
+    <p class="body">${esc(val("currency"))} ${valOr("amount")}</p>
+    <h2>2. Loan Date and Repayment Due Date</h2>
+    <p class="body">Loan date: ${esc(fmtDate(val("loan_date"), "en"))} &nbsp;·&nbsp; Repayment due: ${esc(fmtDate(val("repay_date"), "en"))}</p>
+    <h2>3. Interest</h2>
+    <p class="body">${interestText}</p>
+    <h2>4. Repayment Method</h2>
+    <p class="body">${esc(optText("repay_method", "en"))}${val("repay_account") ? " — to account: " + esc(val("repay_account")) : ""}</p>
+    ${val("special") ? `<h2>5. Special Terms</h2><p class="body">${valOr("special")}</p>` : ""}
+    <p class="body" style="margin-top:24px;">The Borrower acknowledges receipt of the Principal and unconditionally undertakes to repay it in full to the Lender by the Repayment Due Date.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "en"))}</div>
+      <div class="signer">Borrower: ${valOr("b_name")} ${sig("sig_b", "________________")}</div>
+      <div class="signer">Lender: ${valOr("l_name")} ${sig("sig_l", "________________")}</div>
+    </div>`;
+}
+
+/* ================= 렌더러: 용역계약서 / Services Agreement ================= */
+function renderContractKo() {
+  return `
+    <h1 class="doc-title">용 역 계 약 서</h1>
+    <table class="parties">
+      <tr><td class="lbl">갑 (도급인)</td><td>성명·상호: ${valOr("a_name")}<br/>주소: ${valOr("a_addr")}<br/>연락처: ${valOr("a_contact")}</td></tr>
+      <tr><td class="lbl">을 (수급인)</td><td>성명·상호: ${valOr("b_name")}<br/>주소: ${valOr("b_addr")}<br/>연락처: ${valOr("b_contact")}</td></tr>
+    </table>
+    <p class="body">갑과 을은 다음과 같이 용역 수행에 관한 계약을 체결한다.</p>
+    <h2>제1조 (목적)</h2>
+    <p class="body">본 계약은 을이 수행하는 용역의 범위, 대금, 권리관계 등을 정함을 목적으로 한다.</p>
+    <h2>제2조 (용역의 내용)</h2>
+    <p class="body">${valOr("scope")}</p>
+    <h2>제3조 (계약 기간)</h2>
+    <p class="body">착수일 ${esc(fmtDate(val("start_date"), "ko"))}부터 완료 기일 ${esc(fmtDate(val("end_date"), "ko"))}까지로 한다.</p>
+    <h2>제4조 (대금 및 지급)</h2>
+    <p class="body">용역 대금은 ${esc(val("currency"))} ${valOr("amount")}으로 하며(부가세 별도/포함 여부 별도 확인), 지급 방법은 「${esc(optText("pay_terms", "ko"))}」로 한다.</p>
+    <h2>제5조 (검수 및 수정)</h2>
+    <p class="body">갑은 산출물 인도 후 지체 없이 검수하고, 을의 무상 수정 의무는 ${valOr("revisions")}회를 한도로 한다. 이를 초과하는 수정은 별도 대금을 지급한다.</p>
+    <h2>제6조 (지식재산권)</h2>
+    <p class="body">본 용역의 결과물에 대한 지식재산권은 ${esc(optText("ip_clause", "ko"))}한다.</p>
+    <h2>제7조 (계약의 해지)</h2>
+    <p class="body">일방 당사자가 계약을 해지하고자 할 때는 ${valOr("notice_days")}일 전까지 서면으로 통보하여야 하며, 기수행 부분에 대한 정산은 별도로 한다.</p>
+    <p class="body" style="margin-top:24px;">본 계약의 성립을 증명하기 위하여 계약서 2부를 작성하고 갑과 을이 각각 서명·날인하여 1부씩 보관한다.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">갑 ${valOr("a_name")} ${sig("sig_a")}</div>
+      <div class="signer">을 ${valOr("b_name")} ${sig("sig_b")}</div>
+    </div>`;
+}
+function renderContractEn() {
+  return `
+    <h1 class="doc-title">SERVICES AGREEMENT</h1>
+    <table class="parties">
+      <tr><td class="lbl">CLIENT</td><td>Name: ${valOr("a_name")}<br/>Address: ${valOr("a_addr")}<br/>Contact: ${valOr("a_contact")}</td></tr>
+      <tr><td class="lbl">CONTRACTOR</td><td>Name: ${valOr("b_name")}<br/>Address: ${valOr("b_addr")}<br/>Contact: ${valOr("b_contact")}</td></tr>
+    </table>
+    <p class="body">The Client and the Contractor enter into this Services Agreement on the following terms.</p>
+    <h2>1. Scope of Services</h2>
+    <p class="body">${valOr("scope")}</p>
+    <h2>2. Term</h2>
+    <p class="body">From ${esc(fmtDate(val("start_date"), "en"))} to ${esc(fmtDate(val("end_date"), "en"))}.</p>
+    <h2>3. Fees and Payment</h2>
+    <p class="body">The fee is ${esc(val("currency"))} ${esc(val("amount")) || "＿＿＿＿"}, payable as follows: ${esc(optText("pay_terms", "en"))}.</p>
+    <h2>4. Acceptance and Revisions</h2>
+    <p class="body">The Client shall inspect deliverables promptly upon delivery. The Contractor's obligation to revise without charge is limited to ${valOr("revisions")} revision round(s); further revisions require additional fees.</p>
+    <h2>5. Intellectual Property</h2>
+    <p class="body">Intellectual property in the deliverables ${esc(optText("ip_clause", "en"))}.</p>
+    <h2>6. Termination</h2>
+    <p class="body">Either party may terminate with ${valOr("notice_days")} days' written notice; work performed to date shall be settled separately.</p>
+    <p class="body" style="margin-top:24px;">Executed in two counterparts, each party retaining one.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "en"))}</div>
+      <div class="signer">Client: ${valOr("a_name")} ${sig("sig_a", "________________")}</div>
+      <div class="signer">Contractor: ${valOr("b_name")} ${sig("sig_b", "________________")}</div>
+    </div>`;
+}
+
+/* ================= 렌더러: 합의서 / Settlement ================= */
+function renderSettlementKo() {
+  const terms = lines("terms");
+  const confidential = checkedLabels("confidential", "ko").length > 0;
+  return `
+    <h1 class="doc-title">합 의 서</h1>
+    <table class="parties">
+      <tr><td class="lbl">갑</td><td>성명·상호: ${valOr("a_name")}<br/>주소: ${valOr("a_addr")}</td></tr>
+      <tr><td class="lbl">을</td><td>성명·상호: ${valOr("b_name")}<br/>주소: ${valOr("b_addr")}</td></tr>
+    </table>
+    <p class="body">갑과 을은 아래 사건에 관하여 다음과 같이 합의한다.</p>
+    <h2>1. 사건의 경위</h2>
+    <p class="body">${valOr("incident")}</p>
+    <h2>2. 합의 내용</h2>
+    ${val("amount") ? `<p class="body">갑은 을에게 합의금으로 금 ${esc(val("amount"))}원(${esc(val("currency"))})을 ${valOr("pay_deadline")}에 지급한다.</p>` : ""}
+    ${terms.length ? `<ol class="evidence">${terms.map(t => `<li>${esc(t)}</li>`).join("")}</ol>` : ""}
+    <p class="body">을은 본 합의금 수령 후 본 사건에 관하여 갑에 대하여 민·형사상 일체의 청구·이의를 제기하지 아니한다.</p>
+    ${confidential ? `<h2>3. 비밀유지</h2><p class="body">갑과 을은 본 합의의 존재 및 내용을 제3자에게 공개하지 아니한다.</p>` : ""}
+    <h2>${confidential ? "4" : "3"}. 기타</h2>
+    <p class="body">본 합의서는 2부를 작성하여 갑과 을이 각 1부씩 보관한다.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">갑 ${valOr("a_name")} ${sig("sig_a")}</div>
+      <div class="signer">을 ${valOr("b_name")} ${sig("sig_b")}</div>
+    </div>`;
+}
+function renderSettlementEn() {
+  const terms = lines("terms");
+  const confidential = checkedLabels("confidential", "ko").length > 0;
+  return `
+    <h1 class="doc-title">SETTLEMENT AGREEMENT</h1>
+    <div class="doc-subtitle">and Mutual Release</div>
+    <table class="parties">
+      <tr><td class="lbl">PARTY A</td><td>Name: ${valOr("a_name")}<br/>Address: ${valOr("a_addr")}</td></tr>
+      <tr><td class="lbl">PARTY B</td><td>Name: ${valOr("b_name")}<br/>Address: ${valOr("b_addr")}</td></tr>
+    </table>
+    <h2>1. Background</h2>
+    <p class="body">${valOr("incident")}</p>
+    <h2>2. Settlement Terms</h2>
+    ${val("amount") ? `<p class="body">Party A shall pay Party B a settlement amount of ${esc(val("currency"))} ${esc(val("amount"))} by ${valOr("pay_deadline")}.</p>` : ""}
+    ${terms.length ? `<ol class="evidence">${terms.map(t => `<li>${esc(t)}</li>`).join("")}</ol>` : ""}
+    <p class="body">Upon receipt, Party B releases Party A from all civil and criminal claims arising out of this matter.</p>
+    ${confidential ? `<h2>3. Confidentiality</h2><p class="body">The parties shall not disclose the existence or terms of this Agreement to any third party.</p>` : ""}
+    <h2>${confidential ? "4" : "3"}. Counterparts</h2>
+    <p class="body">This Agreement is executed in two counterparts, each party retaining one.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "en"))}</div>
+      <div class="signer">Party A: ${valOr("a_name")} ${sig("sig_a", "________________")}</div>
+      <div class="signer">Party B: ${valOr("b_name")} ${sig("sig_b", "________________")}</div>
+    </div>`;
+}
+
+/* ---------- 화면 상태 ---------- */
+function render() {
+  const paper = document.getElementById("paper");
+  const renderer = activeDoc.render[curLang] || activeDoc.render[activeDoc.langs[0]];
+  paper.innerHTML = renderer() + `<div class="doc-hash" id="doc-hash"></div>`;
+  paper.lang = (LANGUAGES.find(l => l.id === curLang) || LANGUAGES[0]).paperLang;
+  stampDocHash();
+}
+/* 문서 식별 해시 — 완성본의 SHA-256을 문서 하단에 표기 (버전 식별용) */
+async function stampDocHash() {
+  const stamp = document.getElementById("doc-hash");
+  const paper = document.getElementById("paper");
+  if (!stamp || !paper || !crypto.subtle) return;
+  const text = paper.textContent.replace(/문서 식별 해시.*$/s, "").trim();
+  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
+  const hex = [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, "0")).join("");
+  stamp.textContent = `문서 식별 해시(SHA-256): ${hex.slice(0, 16)}…${hex.slice(-8)} — 이 문서본의 내용이 그대로임을 확인하는 식별 표시입니다 (법적 효력을 보증하지 않음)`;
+}
+
+/* ---------- 전자서명 패널 ---------- */
+function buildSigPanel() {
+  const panel = document.getElementById("sig-panel");
+  if (!activeDoc.signers || !activeDoc.signers.length) { panel.style.display = "none"; panel.innerHTML = ""; return; }
+  panel.style.display = "block";
+  panel.innerHTML = `
+    <div class="sig-title">✍ 전자서명 (선택)</div>
+    <div class="sig-hint">아래 칸에 마우스·터치로 서명하면 문서의 서명란에 자동으로 박제됩니다. 서명 이미지는 이 브라우저에만 저장되며 서버로 전송되지 않습니다. 본 기능은 편의용 전자 서명으로, 인증서 기반 전자서명(공인전자서명)이 아닙니다.</div>
+    <div class="sig-grid">
+      ${activeDoc.signers.map(sgn => `
+        <div class="sig-box">
+          <label>${esc(curLang === "ko" ? sgn.label : (sgn.enLabel || sgn.label))}</label>
+          <canvas id="sig_${sgn.key}" width="440" height="180"></canvas>
+          <button type="button" class="sig-clear" data-sig="${sgn.key}">지우기</button>
+        </div>`).join("")}
+    </div>`;
+  activeDoc.signers.forEach(sgn => initPad(sgn.key));
+}
+function initPad(key) {
+  const c = document.getElementById("sig_" + key);
+  if (!c) return;
+  const ctx = c.getContext("2d");
+  ctx.lineWidth = 2.4; ctx.lineCap = "round"; ctx.strokeStyle = "#1a1a2e";
+  if (formState[key] && /^data:image\//.test(formState[key])) {
+    const im = new Image();
+    im.onload = () => ctx.drawImage(im, 0, 0, c.width, c.height);
+    im.src = formState[key];
+  }
+  let drawing = false;
+  const pos = e => {
+    const r = c.getBoundingClientRect();
+    const p = e.touches ? e.touches[0] : e;
+    return [(p.clientX - r.left) * (c.width / r.width), (p.clientY - r.top) * (c.height / r.height)];
+  };
+  const commit = () => { formState[key] = c.toDataURL("image/png"); render(); };
+  c.addEventListener("pointerdown", e => { drawing = true; ctx.beginPath(); ctx.moveTo(...pos(e)); c.setPointerCapture(e.pointerId); });
+  c.addEventListener("pointermove", e => { if (!drawing) return; ctx.lineTo(...pos(e)); ctx.stroke(); });
+  c.addEventListener("pointerup", () => { if (drawing) { drawing = false; commit(); } });
+  const btn = document.querySelector(`.sig-clear[data-sig="${key}"]`);
+  if (btn) btn.addEventListener("click", () => { ctx.clearRect(0, 0, c.width, c.height); delete formState[key]; render(); });
+}
+
+/* ---------- 내문서함 (localStorage) ---------- */
+const MYDOCS_KEY = "omni_studio_docs";
+function myDocs() { try { return JSON.parse(localStorage.getItem(MYDOCS_KEY)) || []; } catch (e) { return []; } }
+function saveMyDoc() {
+  const label = prompt("문서 이름을 입력하세요", `${activeDoc.name} (${new Date().toLocaleDateString("ko-KR")})`);
+  if (!label) return;
+  const docs = myDocs();
+  docs.unshift({
+    id: Date.now().toString(36), docId: activeDoc.id, lang: curLang,
+    label: label.trim(), savedAt: new Date().toISOString(),
+    state: Object.assign({}, formState)
+  });
+  localStorage.setItem(MYDOCS_KEY, JSON.stringify(docs.slice(0, 20)));
+  renderMyDocs();
+  showToast("내문서함에 저장되었습니다 (이 브라우저에만 보관됩니다).");
+}
+function resumeMyDoc(id) {
+  const d = myDocs().find(x => x.id === id);
+  if (!d) return;
+  Object.keys(formState).forEach(k => delete formState[k]);
+  Object.assign(formState, d.state || {});
+  if (d.docId !== activeDoc.id) {
+    selectDoc(d.docId);
+  }
+  if (d.lang && activeDoc.langs.includes(d.lang)) { curLang = d.lang; buildLangRow(); }
+  buildForm(activeDoc); buildSigPanel(); render(); updateStatus();
+  showToast(`「${d.label}」을(를) 불러왔습니다.`);
+}
+function deleteMyDoc(id) {
+  localStorage.setItem(MYDOCS_KEY, JSON.stringify(myDocs().filter(x => x.id !== id)));
+  renderMyDocs();
+}
+function renderMyDocs() {
+  const box = document.getElementById("mydocs");
+  const docs = myDocs();
+  if (!docs.length) { box.innerHTML = ""; return; }
+  box.innerHTML = `<div class="md-title">📁 내문서함 (${docs.length})</div>` + docs.map(d =>
+    `<div class="mydocs-item">
+      <span class="lbl">${esc(d.label)}</span>
+      <button class="btn btn-ghost" onclick="resumeMyDoc('${d.id}')">불러오기</button>
+      <button class="btn btn-ghost" onclick="deleteMyDoc('${d.id}')">삭제</button>
+    </div>`).join("");
+}
+function updateStatus() {
+  const status = document.getElementById("preview-status");
+  const btn = document.getElementById("btn-original");
+  const wm = document.getElementById("watermark");
+  const langTag = ` · 출력 언어: ${LANG_NAME[curLang]}`;
+  if (unlocked) {
+    status.innerHTML = `<span class="unlock-badge">✓ 원본 잠금 해제됨</span>${langTag}`;
+    btn.textContent = "⬇ 원본 다운로드";
+    btn.classList.add("unlocked");
+    wm.classList.remove("on");
+  } else {
+    status.innerHTML = `<span class="lock-badge">🔒 미리보기 모드</span>${langTag} · 원본 ${krw(docPrice(activeDoc))}`;
+    btn.innerHTML = `⬇ 원본 다운로드 <span style="opacity:0.8">· ${krw(docPrice(activeDoc))}</span>`;
+    btn.classList.remove("unlocked");
+    wm.classList.add("on");
+  }
+}
+function buildWatermark() {
+  const wm = document.getElementById("watermark");
+  let spans = "";
+  for (let y = 0; y < 14; y++)
+    for (let x = 0; x < 3; x++)
+      spans += `<span style="top:${y * 90 - 30}px; left:${x * 340 - 60}px;">OMNILEGAL SAMPLE</span>`;
+  wm.innerHTML = spans;
+}
+function buildTabs() {
+  document.getElementById("doc-tabs").innerHTML = DOC_TYPES.map(d =>
+    `<button class="doc-tab ${d.id === activeDoc.id ? "active" : ""}" onclick="selectDoc('${d.id}')">${esc(d.name)} · ${krw(docPrice(d))}<span class="langs">${d.langs.map(l => LANG_NAME[l]).join(" · ")}</span></button>`
+  ).join("");
+}
+function buildLangRow() {
+  document.getElementById("lang-row").innerHTML =
+    `<span class="lbl">문서 출력 언어</span>` +
+    LANGUAGES.map(l => {
+      const ok = activeDoc.langs.includes(l.id);
+      return `<button class="lang-chip ${curLang === l.id && ok ? "active" : ""}" ${ok ? "" : "disabled"} onclick="selectLang('${l.id}')">${l.name}</button>`;
+    }).join("");
+}
+function selectLang(id) {
+  if (!activeDoc.langs.includes(id)) return;
+  curLang = id;
+  buildLangRow();
+  render();
+  updateStatus();
+}
+function selectDoc(id) {
+  activeDoc = DOC_TYPES.find(d => d.id === id) || DOC_TYPES[0];
+  if (!activeDoc.langs.includes(curLang)) {
+    curLang = activeDoc.langs[0];
+    showToast(`이 문서는 ${activeDoc.langs.map(l => LANG_NAME[l]).join("·")} 출력을 지원합니다.`);
+  }
+  buildTabs();
+  buildLangRow();
+  buildForm(activeDoc);
+  buildSigPanel();
+  render();
+  updateStatus();
+}
+
+/* ---------- 출력 ---------- */
+const SAMPLES = {
+  "defamation-complaint": {
+    c_name: "홍길동", c_phone: "010-1234-5678", c_addr: "서울특별시 강남구 ○○로 123", c_email: "hong@example.com",
+    d_name: "baduser123", d_info: "디시인사이드 갤러리 고정닉",
+    platform: "dcinside", post_url: "https://gall.dcinside.com/xxxx/12345", post_date: "2026-09-01",
+    post_content: "홍길동은 사기꾼이며 ○○한 행위를 하였다는 허위 사실을 게시",
+    harm: "2026년 9월 2일 지인의 제보로 발견하였으며, 해당 게시물로 인해 직장 내 평판이 훼손되고 극심한 정신적 고통을 받고 있습니다.",
+    evidence: "게시물 캡처본 1부\n게시물 URL 출력물 1부\n지인 진술서 1부", police: "서울강남경찰서"
+  },
+  "demand-notice": {
+    s_name: "Kim Cheolsu", s_addr: "12-3 Gangnam-daero, Seoul, Korea", s_phone: "+82-10-1234-5678", s_email: "kim@example.com",
+    r_name: "Acme Trading Co.", r_addr: "100 Market St, San Francisco, CA",
+    purpose: "payment", title: "", facts: "On 2026-08-15 the Respondent received goods under Invoice #2026-081, but the payment of USD 4,200 remains outstanding despite two reminders.",
+    demands: "Pay USD 4,200 in full\nConfirm payment in writing", deadline: "within 14 days of receipt of this letter", doc_date: ""
+  },
+  "cease-desist": {
+    s_name: "Shin Yoohak", s_addr: "Seoul, Korea", s_email: "shin@example.com",
+    r_name: "account_handle_x", r_addr: "X (Twitter) user @account_handle_x",
+    subject: "", violation: "The Recipient has repeatedly published false and defamatory statements about the Sender on the platform identified below since August 2026.",
+    platform_url: "https://x.com/account_handle_x/status/0000", demands: "Immediately delete the identified posts\nCease all further publication of similar statements\nPreserve all related records", deadline: "within 7 days of receipt"
+  },
+  "loan-agreement": {
+    l_name: "김채권", l_addr: "서울특별시 마포구 ○○로 45",
+    b_name: "이채무", b_addr: "경기도 성남시 ○○동 67-8", b_id: "생년월일 1990.01.01",
+    amount: "5,000,000", amount_words: "금오백만원정", currency: "KRW",
+    loan_date: "2026-09-12", repay_date: "2027-03-12", interest: "0", repay_method: "lump",
+    repay_account: "카카오뱅크 000-00-000000 김채권", special: ""
+  },
+  "freelance-contract": {
+    a_name: "주식회사 ○○테크", a_addr: "서울특별시 서초구 ○○로 100", a_contact: "contact@acmetech.kr",
+    b_name: "박개발", b_addr: "서울특별시 송파구 ○○길 12", b_contact: "dev@example.com",
+    scope: "모바일 앱 백엔드 API 개발 (회원 인증, 결제 연동, 관리자 페이지) 및 산출물 소스코드 인도",
+    fee: "12,000,000", currency: "KRW", pay_terms: "milestone",
+    start_date: "2026-09-15", end_date: "2026-12-15", revisions: "2", ip_clause: "on_payment", notice_days: "14"
+  },
+  "settlement": {
+    a_name: "김갑", a_addr: "서울특별시 ○○구 ○○로 1",
+    b_name: "박을", b_addr: "인천광역시 ○○구 ○○동 2",
+    incident: "을은 2026년 8월경 온라인 커뮤니티에 갑에 대한 허위 사실을 게시하여 갑의 명예를 훼손하였고, 갑은 이에 대해 법적 조치를 준비 중이었다.",
+    amount: "3,000,000", currency: "KRW", pay_deadline: "2026년 10월 15일까지",
+    terms: "을은 해당 게시물을 즉시 삭제한다\n을은 동일한 내용의 게시를 반복하지 않는다", confidential: ["yes"]
+  }
+};
+function fillSample() {
+  Object.assign(formState, SAMPLES[activeDoc.id] || {});
+  buildForm(activeDoc);
+  render();
+  showToast("예시 데이터로 채웠습니다 — 실제 정보로 바꿔치기하세요.");
+}
+function printPreview() { window.print(); }
+function onOriginalClick() {
+  if (unlocked) { downloadOriginal(); return; }
+  if (!STUDIO.salesEnabled) { alert("현재 결제 채널 준비 중입니다. 문의: " + (STUDIO.contactEmail || "")); return; }
+  openOrderModal();
+}
+function downloadOriginal() {
+  const text = document.getElementById("paper").innerText;
+  const blob = new Blob(["\ufeff" + text], { type: "text/plain;charset=utf-8" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = `${activeDoc.id}-${curLang}-${new Date().toISOString().slice(0, 10)}.txt`;
+  a.click();
+  URL.revokeObjectURL(a.href);
+  showToast("텍스트 사본이 다운로드되었습니다. 인쇄(PDF 저장)는 워터마크 없이 출력됩니다.");
+  setTimeout(() => window.print(), 600);
+}
+
+/* ---------- 주문 모달 ---------- */
+function openOrderModal() {
+  currentOrderId = "ORD-" + Date.now().toString(36).toUpperCase();
+  document.getElementById("order-doc-name").textContent = `${activeDoc.name} (${LANG_NAME[curLang]})`;
+  document.getElementById("order-price").textContent = krw(docPrice(activeDoc));
+  document.getElementById("order-id").textContent = currentOrderId;
+  document.getElementById("contact-email").textContent = STUDIO.contactEmail || "";
+
+  const s = window.OMNI_SETTLEMENT || {};
+  const channels = [];
+  if (STUDIO.gumroadUrl) {
+    channels.push({
+      name: "💳 카드·PayPal 즉시 결제 (자동 발급)",
+      detail: STUDIO.gumroadUrl,
+      url: STUDIO.gumroadUrl,
+      note: "결제 즉시 라이선스 키가 이메일로 발급됩니다. 받은 키를 아래에 입력하세요."
+    });
+  }
+  if (s.bank && s.bank.salesEnabled !== false && s.bank.accountNumber && !String(s.bank.accountNumber).includes("PAUSED")) {
+    channels.push({ name: "계좌이체", detail: `${s.bank.name} ${s.bank.accountNumber} (${s.bank.holder})`, note: "입금자명을 주문번호와 동일하게 기재하면 확인이 빠릅니다." });
+  }
+  if (s.paypal && s.paypal.receiverEmail) {
+    channels.push({ name: "PayPal", detail: s.paypal.receiverEmail + " (USD " + Math.ceil(docPrice(activeDoc) / 1300) + ")", note: "메모란에 주문번호를 기재해 주세요." });
+  }
+  channels.push({ name: "이메일 주문", detail: STUDIO.contactEmail || "", note: "주문번호와 결제 수단을 메일로 보내주시면 입금 안내 후 코드를 발급해 드립니다." });
+
+  document.getElementById("pay-channels").innerHTML = channels.map(c =>
+    `<div class="pay-channel"><div class="ch-name">${esc(c.name)}</div><div class="ch-detail">${c.url ? `<a href="${esc(c.url)}" target="_blank" rel="noopener" style="color:var(--accent-cyan);">${esc(c.detail)}</a>` : esc(c.detail)}</div><div class="ch-note">${esc(c.note)}</div></div>`
+  ).join("");
+  const passEl = document.getElementById("pass-offer");
+  if (passEl && STUDIO.passPriceKrw) {
+    passEl.innerHTML = `💡 <b>전 문서 무제한 패스 ${krw(STUDIO.passPriceKrw)}</b> — 이 문서만 ${krw(docPrice(activeDoc))}에 살 수도 있지만, 패스 하나로 모든 문서(신규 추가 포함)를 무제한 출력합니다. 주문 시 "패스 구매"라고만 적어주세요.`;
+  }
+  document.getElementById("pay-instructions").textContent =
+    "결제 확인 후 해제 코드가 발급됩니다. 코드는 이 브라우저에 저장되어 이후 동일 문서 출력에 계속 적용됩니다.";
+  document.getElementById("order-modal").classList.add("open");
+}
+function closeOrderModal() { document.getElementById("order-modal").classList.remove("open"); }
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") closeOrderModal();
+});
+async function tryUnlock() {
+  const input = document.getElementById("unlock-code");
+  const code = input.value;
+  if (verifyCode(code) || await tryGumroad(code)) {
+    unlocked = true;
+    localStorage.setItem("omni_studio_unlocked", "1");
+    closeOrderModal();
+    updateStatus();
+    showToast("✓ 잠금이 해제되었습니다. 원본을 인쇄·다운로드할 수 있습니다.");
+  } else {
+    showToast("⚠️ 유효하지 않은 해제 코드·라이선스 키입니다. 주문번호를 확인해 주세요.");
+    input.focus();
+  }
+}
+async function tryGumroad(code) {
+  if (!STUDIO.gumroadProductId || !code.trim()) return false;
+  try {
+    return await verifyGumroadLicense(code);
+  } catch (_) {
+    return false; // 네트워크 오류 시 로컬 코드만 유효
+  }
+}
+function showToast(msg) {
+  let t = document.getElementById("studio-toast");
+  if (!t) {
+    t = document.createElement("div");
+    t.id = "studio-toast";
+    t.style.cssText = "position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:#1E293B;border:1px solid #38BDF8;color:#F8FAFC;padding:12px 24px;border-radius:10px;font-size:0.92rem;font-weight:600;box-shadow:0 10px 25px rgba(0,0,0,0.5);z-index:99999;transition:opacity 0.3s;";
+    document.body.appendChild(t);
+  }
+  t.textContent = msg;
+  t.style.opacity = "1";
+  setTimeout(() => { t.style.opacity = "0"; }, 3200);
+}
+
+/* 운영자용: 콘솔에서
+ *   OmniStudio.mintCode("주문번호-이메일")  → {code, digest}
+ * digest를 settlement_config.js의 studio.unlockDigests에 추가·배포 후
+ * code를 고객에게 발급한다. 임의 코드의 digest는 OmniStudio.digestFor(code). */
+window.OmniStudio = { mintCode, digestFor };
+
+/* ---------- 초기화 ---------- */
+buildWatermark();
+renderMyDocs();
+selectDoc(activeDoc.id);
+</script>
+</body>
+</html>
