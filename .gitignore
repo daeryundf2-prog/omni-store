@@ -1,0 +1,2 @@
+# Commercial package binaries - distribute via private channel, not the repo
+COMMERCIAL_PACKAGE_*.zip

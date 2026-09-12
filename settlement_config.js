@@ -20,9 +20,9 @@ window.OMNI_SETTLEMENT = {
     salesEnabled: false
   },
 
-  // 2. 국내 전자결제 (토스페이먼츠)
+  // 2. 국내 전자결제 (토스페이먼츠) — clientKey는 배포 시 환경별로 주입
   toss: {
-    clientKey: "test_ck_D5GePWvyJnrK0W0k6q8gLzN97Eoq",
+    clientKey: "",
     mode: "PAUSED_FOR_QUALITY_ENHANCEMENT",
     status: "PAUSED_FOR_QUALITY_ENHANCEMENT",
     salesEnabled: false
