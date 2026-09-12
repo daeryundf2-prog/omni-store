@@ -112,7 +112,7 @@
     .preview-status { font-size: 0.85rem; color: var(--text-tertiary); display: flex; align-items: center; gap: 8px; }
     .lock-badge { color: var(--accent-gold); font-weight: 700; }
     .unlock-badge { color: #34D399; font-weight: 700; }
-    .preview-actions { display: flex; gap: 8px; }
+    .preview-actions { display: flex; gap: 8px; flex-wrap: wrap; }
     .btn {
       padding: 9px 16px; border-radius: 8px; font-weight: 700; font-size: 0.88rem; cursor: pointer;
       border: none; font-family: var(--font-sans); text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
@@ -161,6 +161,12 @@
       position: absolute; font-family: var(--font-mono); font-weight: 700; font-size: 30px;
       color: rgba(159, 47, 45, 0.13); transform: rotate(-32deg); white-space: nowrap;
       letter-spacing: 0.15em;
+    }
+    .print-wm { display: none; }
+    .print-wm span {
+      position: fixed; font-family: var(--font-mono); font-weight: 700; font-size: 34px;
+      color: rgba(159, 47, 45, 0.16); transform: rotate(-32deg); white-space: nowrap;
+      letter-spacing: 0.15em; pointer-events: none;
     }
 
     .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.75); backdrop-filter: blur(8px); z-index: 10000; align-items: center; justify-content: center; }
@@ -247,6 +253,7 @@
       .paper-wrap, .paper-wrap * { visibility: visible; }
       .paper-wrap { position: absolute; inset: 0; box-shadow: none; border-radius: 0; }
       .paper { min-height: auto; padding: 24mm 18mm; }
+      .print-wm.on, .print-wm.on * { display: block; visibility: visible; }
       @page { margin: 0; size: A4; }
     }
   </style>
@@ -296,6 +303,7 @@
         <div class="watermark-layer" id="watermark"></div>
         <div class="paper" id="paper"></div>
       </div>
+      <div class="print-wm" id="print-wm"></div>
     </div>
   </div>
 
@@ -1141,16 +1149,27 @@ function render() {
   paper.innerHTML = renderer() + `<div class="doc-hash" id="doc-hash"></div>`;
   paper.lang = (LANGUAGES.find(l => l.id === curLang) || LANGUAGES[0]).paperLang;
   stampDocHash();
+  if (!unlocked) buildWatermark();
 }
 /* 문서 식별 해시 — 완성본의 SHA-256을 문서 하단에 표기 (버전 식별용) */
 async function stampDocHash() {
   const stamp = document.getElementById("doc-hash");
   const paper = document.getElementById("paper");
   if (!stamp || !paper || !crypto.subtle) return;
-  const text = paper.textContent.replace(/문서 식별 해시.*$/s, "").trim();
+  const text = (paper.textContent || "").replace(stamp.textContent || "", "").trim();
   const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
   const hex = [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, "0")).join("");
-  stamp.textContent = `문서 식별 해시(SHA-256): ${hex.slice(0, 16)}…${hex.slice(-8)} — 이 문서본의 내용이 그대로임을 확인하는 식별 표시입니다 (법적 효력을 보증하지 않음)`;
+  const LBL = {
+    ko: "문서 식별 해시(SHA-256)", en: "Document ID (SHA-256)",
+    ja: "文書識別ハッシュ(SHA-256)", zh: "文件识别哈希(SHA-256)"
+  };
+  const NOTE = {
+    ko: "이 문서본의 내용이 그대로임을 확인하는 식별 표시입니다 (법적 효력을 보증하지 않음)",
+    en: "integrity marker for this copy — not a legal guarantee",
+    ja: "この写しの内容確認用の識別表示（法的効力を保証するものではありません）",
+    zh: "用于确认本件内容的识别标记（不构成法律效力保证）"
+  };
+  stamp.textContent = `${LBL[curLang] || LBL.ko}: ${hex.slice(0, 16)}…${hex.slice(-8)} — ${NOTE[curLang] || NOTE.ko}`;
 }
 
 /* ---------- 전자서명 패널 ---------- */
@@ -1248,20 +1267,35 @@ function updateStatus() {
     btn.textContent = "⬇ 원본 다운로드";
     btn.classList.add("unlocked");
     wm.classList.remove("on");
+    const pw = document.getElementById("print-wm");
+    if (pw) pw.classList.remove("on");
   } else {
     status.innerHTML = `<span class="lock-badge">🔒 미리보기 모드</span>${langTag} · 원본 ${krw(docPrice(activeDoc))}`;
     btn.innerHTML = `⬇ 원본 다운로드 <span style="opacity:0.8">· ${krw(docPrice(activeDoc))}</span>`;
     btn.classList.remove("unlocked");
     wm.classList.add("on");
+    const pw = document.getElementById("print-wm");
+    if (pw) pw.classList.add("on");
   }
 }
 function buildWatermark() {
   const wm = document.getElementById("watermark");
+  const paper = document.getElementById("paper");
+  const h = Math.max(paper ? paper.offsetHeight : 0, 1200);
   let spans = "";
-  for (let y = 0; y < 14; y++)
-    for (let x = 0; x < 3; x++)
-      spans += `<span style="top:${y * 90 - 30}px; left:${x * 340 - 60}px;">OMNILEGAL SAMPLE</span>`;
+  for (let y = 0; y < Math.ceil(h / 90) + 2; y++)
+    for (let x = 0; x < 4; x++)
+      spans += `<span style="top:${y * 90 - 30}px; left:${x * 300 - 80}px;">OMNILEGAL SAMPLE</span>`;
   wm.innerHTML = spans;
+  /* 인쇄용 고정 워터마크: position:fixed는 인쇄 시 모든 페이지에 반복 출력됨 */
+  const pw = document.getElementById("print-wm");
+  if (pw) {
+    let ps = "";
+    for (let y = 0; y < 6; y++)
+      for (let x = 0; x < 2; x++)
+        ps += `<span style="top:${y * 17 + 4}%; left:${x * 48 + 4}%;">OMNILEGAL SAMPLE</span>`;
+    pw.innerHTML = ps;
+  }
 }
 function buildTabs() {
   document.getElementById("doc-tabs").innerHTML = DOC_TYPES.map(d =>
