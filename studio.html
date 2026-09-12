@@ -162,6 +162,18 @@
       color: rgba(159, 47, 45, 0.13); transform: rotate(-32deg); white-space: nowrap;
       letter-spacing: 0.15em;
     }
+    .field.missing { border-left: 3px solid var(--accent-crimson, #9f2f2d); padding-left: 8px; }
+    .field.missing input, .field.missing textarea { border-color: var(--accent-crimson, #9f2f2d); }
+    .miss-badge { color: var(--accent-gold, #f59e0b); font-weight: 700; }
+    /* 잠금 상태 인쇄 시 문서 대신 표지 페이지만 출력 */
+    .print-cover { display: none; }
+    .print-cover-inner {
+      position: fixed; inset: 0; background: #fff; color: #333;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; font-family: var(--font-sans); padding: 40px;
+    }
+    .print-cover h2 { font-size: 22px; margin-bottom: 14px; }
+    .print-cover p { font-size: 14px; line-height: 1.8; color: #666; }
     .print-wm { display: none; }
     .print-wm span {
       position: fixed; font-family: var(--font-mono); font-weight: 700; font-size: 34px;
@@ -254,6 +266,8 @@
       .paper-wrap { position: absolute; inset: 0; box-shadow: none; border-radius: 0; }
       .paper { min-height: auto; padding: 24mm 18mm; }
       .print-wm.on, .print-wm.on * { display: block; visibility: visible; }
+      body.locked .paper-wrap, body.locked .paper-wrap * { visibility: hidden !important; }
+      body.locked .print-cover, body.locked .print-cover * { display: flex; visibility: visible !important; }
       @page { margin: 0; size: A4; }
     }
   </style>
@@ -295,7 +309,7 @@
         <div class="preview-actions">
           <button class="btn btn-ghost" onclick="fillSample()" title="예시 데이터로 즉시 채워보기">✨ 예시 채우기</button>
           <button class="btn btn-ghost" onclick="saveMyDoc()" title="작성 중인 문서를 내문서함에 저장 (이 브라우저에만 보관)">💾 저장</button>
-          <button class="btn btn-ghost" onclick="printPreview()" title="워터마크가 포함된 무료 미리보기">🖨 미리보기 인쇄</button>
+          <button class="btn btn-ghost" onclick="printPreview()" title="인쇄는 잠금 해제 후 이용 가능합니다">🖨 인쇄</button>
           <button class="btn btn-pay" id="btn-original" onclick="onOriginalClick()"></button>
         </div>
       </div>
@@ -304,6 +318,10 @@
         <div class="paper" id="paper"></div>
       </div>
       <div class="print-wm" id="print-wm"></div>
+      <div class="print-cover"><div class="print-cover-inner">
+        <h2>🔒 미리보기 전용 문서</h2>
+        <p>이 문서는 화면 미리보기 전용입니다.<br/>워터마크 없는 원본 출력은 결제 후 해제 코드 입력 시 이용할 수 있습니다.<br/>— OmniLegal 문서 스튜디오</p>
+      </div></div>
     </div>
   </div>
 
@@ -336,17 +354,17 @@
       </article>
       <article class="catalog-card" id="cat-loan-agreement">
         <h3>차용증 · Loan Agreement</h3>
-        <p>개인 간 금전 대여의 금액·이자·변제일·변제 방법을 명확히 기록하는 차용증. 분쟁 예방과 소송 시 증거력 확보를 위한 필수 항목을 표준 구조로 정리합니다.</p>
+        <p>개인 간 금전 대여의 금액·이자·변제일·변제 방법을 명확히 기록하는 차용증. 분쟁 예방과 소송 시 증거력 확보를 위한 필수 항목을 표준 구조로 정리합니다. 한국어·영어·일본어·중국어 4개 언어 지원.</p>
         <button class="btn btn-ghost" onclick="selectDoc('loan-agreement');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
       <article class="catalog-card" id="cat-freelance-contract">
         <h3>프리랜서 용역계약서 · Services Agreement</h3>
-        <p>외주 개발·디자인·콘텐츠 작업의 용역 범위·대금·납기·수정 횟수·지식재산권 귀속을 규정하는 계약서. 무상 수정 범위 한정과 대금 완납 시 IP 양도 조항 등 실무 분쟁 방지 장치를 포함합니다.</p>
+        <p>외주 개발·디자인·콘텐츠 작업의 용역 범위·대금·납기·수정 횟수·지식재산권 귀속을 규정하는 계약서. 무상 수정 범위 한정과 대금 완납 시 IP 양도 조항 등 실무 분쟁 방지 장치를 포함합니다. 한국어·영어·일본어·중국어 4개 언어 지원.</p>
         <button class="btn btn-ghost" onclick="selectDoc('freelance-contract');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
       <article class="catalog-card" id="cat-settlement">
         <h3>합의서 · Settlement Agreement</h3>
-        <p>분쟁 당사자 간 합의 내용·합의금·상호 면책·비밀유지 의무를 문서화하는 합의서. 형사·민사 분쟁 종결 시 재분쟁을 막는 상호 완전 해결 조항을 포함합니다.</p>
+        <p>분쟁 당사자 간 합의 내용·합의금·상호 면책·비밀유지 의무를 문서화하는 합의서. 형사·민사 분쟁 종결 시 재분쟁을 막는 상호 완전 해결 조항을 포함합니다. 한국어·영어·일본어·중국어 4개 언어 지원.</p>
         <button class="btn btn-ghost" onclick="selectDoc('settlement');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
     </div>
@@ -530,7 +548,7 @@ const DOC_TYPES = [
   {
     id: "loan-agreement",
     name: "차용증 · Loan Agreement",
-    langs: ["ko", "en"],
+    langs: ["ko", "en", "ja", "zh"],
     price: STUDIO.priceKrw,
     fields: [
       { section: "채권자 (돈을 빌려준 사람) / Lender" },
@@ -548,8 +566,8 @@ const DOC_TYPES = [
       { key: "repay_date", label: "변제 기일", type: "date" },
       { key: "interest", label: "이자율 (연 %)", type: "text", hint: "무이자면 0" },
       { key: "repay_method", label: "변제 방법", type: "select", options: [
-        { v: "lump", label: { ko: "만기 일시 변제", en: "lump-sum repayment at maturity" } },
-        { v: "installment", label: { ko: "분할 변제", en: "installment repayment" } }
+        { v: "lump", label: { ko: "만기 일시 변제", en: "lump-sum repayment at maturity", ja: "満期一括弁済", zh: "到期一次性偿还" } },
+        { v: "installment", label: { ko: "분할 변제", en: "installment repayment", ja: "分割弁済", zh: "分期偿还" } }
       ]},
       { key: "repay_account", label: "변제 계좌", type: "text" },
       { key: "special", label: "특약 사항", type: "textarea", hint: "연체이자·분할 일정 등, 없으면 비움" },
@@ -559,12 +577,12 @@ const DOC_TYPES = [
       { key: "sig_l", label: "채권자 서명", enLabel: "Lender signature" },
       { key: "sig_b", label: "채무자 서명", enLabel: "Borrower signature" }
     ],
-    render: { ko: renderLoanKo, en: renderLoanEn }
+    render: { ko: renderLoanKo, en: renderLoanEn, ja: renderLoanJa, zh: renderLoanZh }
   },
   {
     id: "freelance-contract",
     name: "프리랜서 용역계약서 · Services Agreement",
-    langs: ["ko", "en"],
+    langs: ["ko", "en", "ja", "zh"],
     price: 14900,
     fields: [
       { section: "갑 (도급인·클라이언트) / Client" },
@@ -580,17 +598,17 @@ const DOC_TYPES = [
       { key: "fee", label: "용역 대금 (숫자)", type: "text", required: true },
       { key: "currency", label: "통화", type: "select", options: CURRENCIES },
       { key: "pay_terms", label: "대금 지급 방법", type: "select", options: [
-        { v: "completion", label: { ko: "완료·검수 후 일시불", en: "lump sum upon completion and acceptance" } },
-        { v: "milestone", label: { ko: "착수금 50% + 완료 후 잔금", en: "50% upfront, balance upon completion" } },
-        { v: "monthly", label: { ko: "월정액", en: "monthly retainer" } }
+        { v: "completion", label: { ko: "완료·검수 후 일시불", en: "lump sum upon completion and acceptance", ja: "完成・検収後一括払い", zh: "验收完成后一次性支付" } },
+        { v: "milestone", label: { ko: "착수금 50% + 완료 후 잔금", en: "50% upfront, balance upon completion", ja: "着手金50%＋完成後残金", zh: "启动金50%＋完成后付尾款" } },
+        { v: "monthly", label: { ko: "월정액", en: "monthly retainer", ja: "月額定額", zh: "按月支付" } }
       ]},
       { key: "start_date", label: "착수일", type: "date" },
       { key: "end_date", label: "완료(납품) 기일", type: "date" },
       { key: "revisions", label: "무상 수정 횟수", type: "text", hint: "예: 2 — 무제한 수정 요구 차단용" },
       { key: "ip_clause", label: "지식재산권 귀속", type: "select", options: [
-        { v: "on_payment", label: { ko: "대금 완납 시 갑에게 양도", en: "transfers to the Client upon full payment" } },
-        { v: "on_sign", label: { ko: "계약 체결 시 갑에게 양도", en: "assigned to the Client upon execution" } },
-        { v: "license", label: { ko: "을이 보유, 갑에게 사용 허락", en: "retained by the Contractor; license granted to the Client" } }
+        { v: "on_payment", label: { ko: "대금 완납 시 갑에게 양도", en: "transfers to the Client upon full payment", ja: "報酬完済時に甲へ譲渡", zh: "报酬付清时转让给甲方" } },
+        { v: "on_sign", label: { ko: "계약 체결 시 갑에게 양도", en: "assigned to the Client upon execution", ja: "契約締結時に甲へ譲渡", zh: "签订时转让给甲方" } },
+        { v: "license", label: { ko: "을이 보유, 갑에게 사용 허락", en: "retained by the Contractor; license granted to the Client", ja: "乙が保有し甲に使用を許諾", zh: "归乙方所有，许可甲方使用" } }
       ]},
       { key: "notice_days", label: "해지 통보 기간 (일)", type: "text", hint: "예: 14" },
       { key: "doc_date", label: "작성 일자", type: "date" }
@@ -599,12 +617,12 @@ const DOC_TYPES = [
       { key: "sig_a", label: "갑 서명", enLabel: "Client signature" },
       { key: "sig_b", label: "을 서명", enLabel: "Contractor signature" }
     ],
-    render: { ko: renderContractKo, en: renderContractEn }
+    render: { ko: renderContractKo, en: renderContractEn, ja: renderContractJa, zh: renderContractZh }
   },
   {
     id: "settlement",
     name: "합의서 · Settlement Agreement",
-    langs: ["ko", "en"],
+    langs: ["ko", "en", "ja", "zh"],
     price: 12900,
     fields: [
       { section: "갑 / Party A" },
@@ -620,7 +638,7 @@ const DOC_TYPES = [
       { key: "pay_deadline", label: "지급 기한", type: "text", hint: "예: 2026년 10월 1일까지" },
       { key: "terms", label: "추가 합의 조항", type: "textarea", hint: "한 줄에 하나씩 (재발 방지, 게시물 삭제 등)" },
       { key: "confidential", label: "비밀유지 조항 포함", type: "checks", options: [
-        { v: "yes", label: { ko: "합의 내용을 제3자에게 공개하지 않는다" } }
+        { v: "yes", label: { ko: "합의 내용을 제3자에게 공개하지 않는다", en: "non-disclosure of terms", ja: "合意内容を第三者に開示しない", zh: "不向第三方披露和解内容" } }
       ]},
       { key: "doc_date", label: "작성 일자", type: "date" }
     ],
@@ -628,7 +646,7 @@ const DOC_TYPES = [
       { key: "sig_a", label: "갑 서명", enLabel: "Party A signature" },
       { key: "sig_b", label: "을 서명", enLabel: "Party B signature" }
     ],
-    render: { ko: renderSettlementKo, en: renderSettlementEn }
+    render: { ko: renderSettlementKo, en: renderSettlementEn, ja: renderSettlementJa, zh: renderSettlementZh }
   }
 ];
 
@@ -1142,6 +1160,170 @@ function renderSettlementEn() {
     </div>`;
 }
 
+
+function renderLoanJa() {
+  const interest = val("interest");
+  const interestText = !interest || interest === "0" ? "無利息" : `年利 ${esc(interest)}%`;
+  return `
+    <h1 class="doc-title">金銭消費貸借契約書</h1>
+    <div class="doc-subtitle">（借 用 証）</div>
+    <table class="parties">
+      <tr><td class="lbl">貸主</td><td>氏名: ${valOr("l_name")}<br/>住所: ${valOr("l_addr")}</td></tr>
+      <tr><td class="lbl">借主</td><td>氏名: ${valOr("b_name")}<br/>住所: ${valOr("b_addr")}<br/>生年月日・識別情報: ${valOr("b_id")}</td></tr>
+    </table>
+    <h2>第1条（貸付金額）</h2>
+    <p class="body">${esc(val("currency"))} ${valOr("amount")}</p>
+    <h2>第2条（貸付日・弁済期日）</h2>
+    <p class="body">貸付日: ${esc(fmtDate(val("loan_date"), "ja"))}　弁済期日: ${esc(fmtDate(val("repay_date"), "ja"))}</p>
+    <h2>第3条（利息）</h2>
+    <p class="body">${interestText}</p>
+    <h2>第4条（弁済方法）</h2>
+    <p class="body">${esc(optText("repay_method", "ja"))}${val("repay_account") ? "　振込先: " + esc(val("repay_account")) : ""}</p>
+    ${val("special") ? `<h2>第5条（特約事項）</h2><p class="body">${valOr("special")}</p>` : ""}
+    <p class="body" style="margin-top:24px;">借主は上記貸付金を弁済期日までに貸主に対し確実に弁済することを約し、本証書を作成して貸主に交付する。</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ja"))}</div>
+      <div class="signer">借主（債務者）　${valOr("b_name")}　${sig("sig_b", "印")}</div>
+      <div class="signer">貸主（債権者）　${valOr("l_name")}　${sig("sig_l", "印")}</div>
+    </div>`;
+}
+function renderLoanZh() {
+  const interest = val("interest");
+  const interestText = !interest || interest === "0" ? "无息" : `年利率 ${esc(interest)}%`;
+  return `
+    <h1 class="doc-title">借 款 凭 证</h1>
+    <table class="parties">
+      <tr><td class="lbl">出借人</td><td>姓名: ${valOr("l_name")}<br/>地址: ${valOr("l_addr")}</td></tr>
+      <tr><td class="lbl">借款人</td><td>姓名: ${valOr("b_name")}<br/>地址: ${valOr("b_addr")}<br/>出生日期·识别信息: ${valOr("b_id")}</td></tr>
+    </table>
+    <h2>一、借款金额</h2>
+    <p class="body">${esc(val("currency"))} ${valOr("amount")}</p>
+    <h2>二、借款日期与还款期限</h2>
+    <p class="body">借款日期: ${esc(fmtDate(val("loan_date"), "zh"))}　还款期限: ${esc(fmtDate(val("repay_date"), "zh"))}</p>
+    <h2>三、利息</h2>
+    <p class="body">${interestText}</p>
+    <h2>四、还款方式</h2>
+    <p class="body">${esc(optText("repay_method", "zh"))}${val("repay_account") ? "　还款账户: " + esc(val("repay_account")) : ""}</p>
+    ${val("special") ? `<h2>五、其他约定</h2><p class="body">${valOr("special")}</p>` : ""}
+    <p class="body" style="margin-top:24px;">借款人承诺于还款期限届满前向出借人足额偿还上述借款，特立此据为证。</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "zh"))}</div>
+      <div class="signer">借款人（债务人）　${valOr("b_name")}　${sig("sig_b", "（签章）")}</div>
+      <div class="signer">出借人（债权人）　${valOr("l_name")}　${sig("sig_l", "（签章）")}</div>
+    </div>`;
+}
+
+function renderContractJa() {
+  return `
+    <h1 class="doc-title">業務委託契約書</h1>
+    <table class="parties">
+      <tr><td class="lbl">甲（委託者）</td><td>氏名・商号: ${valOr("a_name")}<br/>住所: ${valOr("a_addr")}<br/>連絡先: ${valOr("a_contact")}</td></tr>
+      <tr><td class="lbl">乙（受託者）</td><td>氏名・商号: ${valOr("b_name")}<br/>住所: ${valOr("b_addr")}<br/>連絡先: ${valOr("b_contact")}</td></tr>
+    </table>
+    <p class="body">甲及び乙は、次のとおり業務委託契約を締結する。</p>
+    <h2>第1条（目的）</h2>
+    <p class="body">本契約は、乙が遂行する業務の範囲、報酬、権利関係等を定めることを目的とする。</p>
+    <h2>第2条（業務内容）</h2>
+    <p class="body">${valOr("scope")}</p>
+    <h2>第3条（契約期間）</h2>
+    <p class="body">着手日 ${esc(fmtDate(val("start_date"), "ja"))}から完了期日 ${esc(fmtDate(val("end_date"), "ja"))}までとする。</p>
+    <h2>第4条（報酬及び支払）</h2>
+    <p class="body">委託報酬は ${esc(val("currency"))} ${valOr("amount")} とし、支払方法は「${esc(optText("pay_terms", "ja"))}」とする。</p>
+    <h2>第5条（検収・修正）</h2>
+    <p class="body">甲は成果物の引渡し後、遅滞なく検収するものとし、乙の無償修正義務は ${valOr("revisions")} 回を上限とする。これを超える修正は別途報酬を支払う。</p>
+    <h2>第6条（知的財産権）</h2>
+    <p class="body">本業務の成果物に係る知的財産権は、${esc(optText("ip_clause", "ja"))}する。</p>
+    <h2>第7条（解除）</h2>
+    <p class="body">一方の当事者が本契約を解除しようとするときは、${valOr("notice_days")}日前までに書面で通知しなければならず、既遂行部分の精算は別途行う。</p>
+    <p class="body" style="margin-top:24px;">本契約締結の証として本書2通を作成し、甲乙がそれぞれ署名又は記名押印のうえ各1通を保管する。</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ja"))}</div>
+      <div class="signer">甲　${valOr("a_name")}　${sig("sig_a", "印")}</div>
+      <div class="signer">乙　${valOr("b_name")}　${sig("sig_b", "印")}</div>
+    </div>`;
+}
+function renderContractZh() {
+  return `
+    <h1 class="doc-title">服 务 合 同</h1>
+    <table class="parties">
+      <tr><td class="lbl">甲方（委托方）</td><td>姓名·商号: ${valOr("a_name")}<br/>地址: ${valOr("a_addr")}<br/>联系方式: ${valOr("a_contact")}</td></tr>
+      <tr><td class="lbl">乙方（受托方）</td><td>姓名·商号: ${valOr("b_name")}<br/>地址: ${valOr("b_addr")}<br/>联系方式: ${valOr("b_contact")}</td></tr>
+    </table>
+    <p class="body">甲乙双方就下列事项达成本合同。</p>
+    <h2>第一条　合同目的</h2>
+    <p class="body">本合同旨在约定乙方所提供服务的范围、报酬及权利关系。</p>
+    <h2>第二条　服务内容</h2>
+    <p class="body">${valOr("scope")}</p>
+    <h2>第三条　合同期限</h2>
+    <p class="body">自 ${esc(fmtDate(val("start_date"), "zh"))}（开始日）起至 ${esc(fmtDate(val("end_date"), "zh"))}（完成期限）止。</p>
+    <h2>第四条　报酬及支付</h2>
+    <p class="body">服务报酬为 ${esc(val("currency"))} ${valOr("amount")}，支付方式为「${esc(optText("pay_terms", "zh"))}」。</p>
+    <h2>第五条　验收与修改</h2>
+    <p class="body">甲方应于成果交付后及时验收，乙方免费修改义务以 ${valOr("revisions")} 次为限；超出部分的修改须另行支付报酬。</p>
+    <h2>第六条　知识产权</h2>
+    <p class="body">本服务成果的知识产权${esc(optText("ip_clause", "zh"))}。</p>
+    <h2>第七条　合同解除</h2>
+    <p class="body">任何一方解除本合同，应提前 ${valOr("notice_days")} 日书面通知对方；已完成部分另行结算。</p>
+    <p class="body" style="margin-top:24px;">本合同一式两份，甲乙双方签字或盖章后各执一份为凭。</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "zh"))}</div>
+      <div class="signer">甲方　${valOr("a_name")}　${sig("sig_a", "（签章）")}</div>
+      <div class="signer">乙方　${valOr("b_name")}　${sig("sig_b", "（签章）")}</div>
+    </div>`;
+}
+
+function renderSettlementJa() {
+  const terms = lines("terms");
+  const confidential = checkedLabels("confidential", "ja").length > 0;
+  return `
+    <h1 class="doc-title">合 意 書</h1>
+    <div class="doc-subtitle">（示 談 書）</div>
+    <table class="parties">
+      <tr><td class="lbl">甲</td><td>氏名・商号: ${valOr("a_name")}<br/>住所: ${valOr("a_addr")}</td></tr>
+      <tr><td class="lbl">乙</td><td>氏名・商号: ${valOr("b_name")}<br/>住所: ${valOr("b_addr")}</td></tr>
+    </table>
+    <p class="body">甲及び乙は、下記事案について次のとおり合意する。</p>
+    <h2>第1条（経緯）</h2>
+    <p class="body">${valOr("incident")}</p>
+    <h2>第2条（合意内容）</h2>
+    ${val("amount") ? `<p class="body">甲は乙に対し、示談金として ${esc(val("currency"))} ${esc(val("amount"))} を ${valOr("pay_deadline")} までに支払う。</p>` : ""}
+    ${terms.length ? `<ol class="evidence">${terms.map(t => `<li>${esc(t)}</li>`).join("")}</ol>` : ""}
+    <p class="body">乙は本示談金受領後、本件事案について甲に対し民事・刑事上の一切の請求・異議を申し立てない。</p>
+    ${confidential ? `<h2>第3条（守秘義務）</h2><p class="body">甲及び乙は、本合意の存在及び内容を第三者に開示しない。</p>` : ""}
+    <h2>第${confidential ? "4" : "3"}条（その他）</h2>
+    <p class="body">本書は2通を作成し、甲乙が各1通を保管する。</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ja"))}</div>
+      <div class="signer">甲　${valOr("a_name")}　${sig("sig_a", "印")}</div>
+      <div class="signer">乙　${valOr("b_name")}　${sig("sig_b", "印")}</div>
+    </div>`;
+}
+function renderSettlementZh() {
+  const terms = lines("terms");
+  const confidential = checkedLabels("confidential", "zh").length > 0;
+  return `
+    <h1 class="doc-title">和 解 协 议 书</h1>
+    <table class="parties">
+      <tr><td class="lbl">甲方</td><td>姓名·商号: ${valOr("a_name")}<br/>地址: ${valOr("a_addr")}</td></tr>
+      <tr><td class="lbl">乙方</td><td>姓名·商号: ${valOr("b_name")}<br/>地址: ${valOr("b_addr")}</td></tr>
+    </table>
+    <p class="body">甲乙双方就下列事件达成本和解协议。</p>
+    <h2>一、事件经过</h2>
+    <p class="body">${valOr("incident")}</p>
+    <h2>二、和解内容</h2>
+    ${val("amount") ? `<p class="body">甲方应向乙方支付和解金 ${esc(val("currency"))} ${esc(val("amount"))}，支付期限为 ${valOr("pay_deadline")}。</p>` : ""}
+    ${terms.length ? `<ol class="evidence">${terms.map(t => `<li>${esc(t)}</li>`).join("")}</ol>` : ""}
+    <p class="body">乙方收到上述和解金后，就本事件不再向甲方提起任何民事或刑事请求。</p>
+    ${confidential ? `<h2>三、保密义务</h2><p class="body">甲乙双方不得向任何第三方披露本协议的存在及内容。</p>` : ""}
+    <h2>${confidential ? "四" : "三"}、其他</h2>
+    <p class="body">本协议一式两份，甲乙双方各执一份。</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "zh"))}</div>
+      <div class="signer">甲方　${valOr("a_name")}　${sig("sig_a", "（签章）")}</div>
+      <div class="signer">乙方　${valOr("b_name")}　${sig("sig_b", "（签章）")}</div>
+    </div>`;
+}
+
 /* ---------- 화면 상태 ---------- */
 function render() {
   const paper = document.getElementById("paper");
@@ -1149,7 +1331,21 @@ function render() {
   paper.innerHTML = renderer() + `<div class="doc-hash" id="doc-hash"></div>`;
   paper.lang = (LANGUAGES.find(l => l.id === curLang) || LANGUAGES[0]).paperLang;
   stampDocHash();
+  markMissing();
   if (!unlocked) buildWatermark();
+}
+/* 필수 항목 미입력 표시 — 빈 필드를 붉게 표시하고 상태바에 개수 노출 */
+function missingRequired() {
+  return activeDoc.fields.filter(f => f.required && !f.section && !val(f.key)).length;
+}
+function markMissing() {
+  document.querySelectorAll("#doc-form .field.missing").forEach(f => f.classList.remove("missing"));
+  for (const f of activeDoc.fields) {
+    if (!f.required || f.section) continue;
+    if (val(f.key)) continue;
+    const inp = document.querySelector(`#doc-form [data-key="${f.key}"]`);
+    if (inp && inp.closest(".field")) inp.closest(".field").classList.add("missing");
+  }
 }
 /* 문서 식별 해시 — 완성본의 SHA-256을 문서 하단에 표기 (버전 식별용) */
 async function stampDocHash() {
@@ -1265,15 +1461,18 @@ function updateStatus() {
   const btn = document.getElementById("btn-original");
   const wm = document.getElementById("watermark");
   const langTag = ` · 출력 언어: ${LANG_NAME[curLang]}`;
+  const missing = missingRequired();
+  const missTag = missing > 0 ? ` · <span class="miss-badge">⚠️ 필수 ${missing}항목 미입력</span>` : "";
+  document.body.classList.toggle("locked", !unlocked);
   if (unlocked) {
-    status.innerHTML = `<span class="unlock-badge">✓ 원본 잠금 해제됨</span>${langTag}`;
+    status.innerHTML = `<span class="unlock-badge">✓ 원본 잠금 해제됨</span>${langTag}${missTag}`;
     btn.textContent = "⬇ 원본 다운로드";
     btn.classList.add("unlocked");
     wm.classList.remove("on");
     const pw = document.getElementById("print-wm");
     if (pw) pw.classList.remove("on");
   } else {
-    status.innerHTML = `<span class="lock-badge">🔒 미리보기 모드</span>${langTag} · 원본 ${krw(docPrice(activeDoc))}`;
+    status.innerHTML = `<span class="lock-badge">🔒 미리보기 모드</span>${langTag} · 원본 ${krw(docPrice(activeDoc))}${missTag}`;
     btn.innerHTML = `⬇ 원본 다운로드 <span style="opacity:0.8">· ${krw(docPrice(activeDoc))}</span>`;
     btn.classList.remove("unlocked");
     wm.classList.add("on");
@@ -1384,8 +1583,18 @@ function fillSample() {
   render();
   showToast("예시 데이터로 채웠습니다 — 실제 정보로 바꿔치기하세요.");
 }
-function printPreview() { window.print(); }
+function printPreview() {
+  if (!unlocked) {
+    showToast("무료 미리보기는 화면에서만 제공됩니다. 인쇄·다운로드는 원본 잠금 해제 후 이용해 주세요.");
+    return;
+  }
+  window.print();
+}
 function onOriginalClick() {
+  const missing = missingRequired();
+  if (missing > 0) {
+    showToast(`⚠️ 필수 항목 ${missing}개가 비어 있습니다 — 문서에 공란이 표시됩니다.`);
+  }
   if (unlocked) { downloadOriginal(); return; }
   if (!STUDIO.salesEnabled) { alert("현재 결제 채널 준비 중입니다. 문의: " + (STUDIO.contactEmail || "")); return; }
   openOrderModal();
