@@ -396,6 +396,29 @@
       </article>
     </div>
   </section>
+
+  <!-- FAQ: 구매 전 objection 해소 + 검색 유입 -->
+  <section class="doc-catalog">
+    <h2 style="font-size:1.15rem; font-weight:800; margin:36px 0 16px;">자주 묻는 질문</h2>
+    <div class="catalog-grid" style="grid-template-columns: 1fr;">
+      <details class="catalog-card" style="padding:14px 18px;">
+        <summary style="cursor:pointer; font-weight:700; font-size:0.92rem;">이 문서는 법적 효력이 있나요?</summary>
+        <p style="margin-top:8px;">본 도구는 표준 서식 기반의 문서 작성을 돕는 도구이며, 변호사의 법률 자문이나 문서 작성 대행이 아닙니다. 생성된 문서의 법적 효력은 내용과 사용 맥락에 따라 달라지므로, 중요한 사안은 전문가 검토를 권장합니다.</p>
+      </details>
+      <details class="catalog-card" style="padding:14px 18px;">
+        <summary style="cursor:pointer; font-weight:700; font-size:0.92rem;">결제 후 어떻게 원본을 받나요?</summary>
+        <p style="margin-top:8px;">결제 확인 후 발급되는 해제 코드(또는 Gumroad 라이선스 키)를 입력하면 즉시 잠금이 해제됩니다. 이후 워터마크 없이 인쇄·PDF 저장·텍스트 다운로드가 가능합니다. 코드는 해당 브라우저에 저장되어 재방문 시에도 유지됩니다.</p>
+      </details>
+      <details class="catalog-card" style="padding:14px 18px;">
+        <summary style="cursor:pointer; font-weight:700; font-size:0.92rem;">입력한 개인정보는 어디로 가나요?</summary>
+        <p style="margin-top:8px;">어디에도 전송되지 않습니다. 문서 생성은 전부 이용자의 브라우저 안에서 이루어지며, 서버 저장이 없습니다. 내문서함 저장도 이 브라우저의 로컬 저장소에만 보관됩니다.</p>
+      </details>
+      <details class="catalog-card" style="padding:14px 18px;">
+        <summary style="cursor:pointer; font-weight:700; font-size:0.92rem;">환불 규정은 어떻게 되나요?</summary>
+        <p style="margin-top:8px;">디지털 콘텐츠 특성상 해제 코드 사용(원본 출력 개시) 후에는 청약철회가 불가합니다. 코드 미사용 상태라면 결제일로부터 7일 이내 환불 가능합니다. 자세한 내용은 <a href="./legal.html" style="color:var(--accent-cyan);">이용약관</a>을 확인해 주세요.</p>
+      </details>
+    </div>
+  </section>
 </main>
 
 <!-- Order / unlock modal -->
@@ -483,7 +506,7 @@ const DOC_TYPES = [
     fields: [
       { section: "고소인 (피해자)" },
       { key: "c_name", label: "성명", type: "text", required: true },
-      { key: "c_phone", label: "연락처", type: "text" },
+      { key: "c_phone", label: "연락처", type: "tel" },
       { key: "c_addr", label: "주소", type: "text" },
       { key: "c_email", label: "이메일", type: "email" },
       { section: "피고소인 (알려진 범위만)" },
@@ -528,7 +551,7 @@ const DOC_TYPES = [
       { section: "발신인 / Sender" },
       { key: "s_name", label: "성명", type: "text", required: true, hint: "문서 언어로 입력 (영어 문서면 로마자 표기)" },
       { key: "s_addr", label: "주소", type: "text", hint: "문서 언어로 입력" },
-      { key: "s_phone", label: "연락처", type: "text" },
+      { key: "s_phone", label: "연락처", type: "tel" },
       { key: "s_email", label: "이메일", type: "email" },
       { section: "수신인 / Recipient" },
       { key: "r_name", label: "성명·상호", type: "text", required: true },
