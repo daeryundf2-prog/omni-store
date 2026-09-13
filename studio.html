@@ -149,6 +149,7 @@
       font-size: 15px; line-height: 2.0; min-height: 900px;
     }
     .paper[lang="en"] { font-family: Georgia, 'Times New Roman', serif; font-size: 14.5px; line-height: 1.9; }
+    .paper[lang="ko"] { font-family: '함초롬바탕', '휴먼명조', 'HY헤드라인M', 'Nanum Myeongjo', 'AppleMyungjo', 'Batang', serif; }
     .paper[lang="ja"] { font-family: 'Noto Serif JP', 'MS Mincho', serif; }
     .paper[lang="zh-CN"] { font-family: 'Noto Serif SC', 'Songti SC', serif; }
     .paper[lang="de"], .paper[lang="fr"], .paper[lang="es"], .paper[lang="vi"] {
@@ -518,16 +519,21 @@ const DOC_TYPES = [
     name: "사이버 명예훼손·모욕 고소장",
     langs: ["ko"],
     price: STUDIO.priceKrw,
-    usageNote: "완성 후 관할 경찰서 방문 제출 또는 국민신문고(epeople.go.kr) 민원으로 접수 가능합니다. 증거자료는 인화·USB 등으로 별도 지참하세요.",
+    usageNote: "완성 후 관할 경찰서 방문 제출 또는 경찰민원포털(minwon.police.go.kr) → 민원신청 → 고소·고발·진정으로 온라인 접수 가능합니다. 증거자료는 사본(인화·USB)으로 제출하세요.",
     fields: [
       { section: "고소인 (피해자)" },
-      { key: "c_name", label: "성명", type: "text", required: true },
-      { key: "c_phone", label: "연락처", type: "tel" },
-      { key: "c_addr", label: "주소", type: "text" },
+      { key: "c_name", label: "성명 *", type: "text", required: true },
+      { key: "c_id", label: "주민등록번호 *", type: "text", hint: "예: 900101-1****** — 뒷자리 일부 생략 가능" },
+      { key: "c_addr", label: "주소 *", type: "text" },
+      { key: "c_job", label: "직업", type: "text" },
+      { key: "c_phone", label: "연락처 *", type: "tel" },
       { key: "c_email", label: "이메일", type: "email" },
-      { section: "피고소인 (알려진 범위만)" },
-      { key: "d_name", label: "성명 또는 닉네임/ID", type: "text", hint: "성명 미상 시 닉네임·계정 ID 기재" },
-      { key: "d_info", label: "기타 특정 정보", type: "text", hint: "전화번호·계정 URL 등 알고 있는 정보" },
+      { section: "피고소인 (모르면 '불상' 기재)" },
+      { key: "d_name", label: "성명 또는 닉네임/ID *", type: "text", hint: "성명 미상 시 닉네임·계정 ID 또는 '불상'" },
+      { key: "d_id", label: "주민등록번호", type: "text", hint: "모르면 비움 — '불상'으로 표기됩니다" },
+      { key: "d_addr", label: "주소 (현거주지)", type: "text", hint: "모르면 비움 — '불상'으로 표기됩니다" },
+      { key: "d_phone", label: "연락처", type: "text", hint: "모르면 비움" },
+      { key: "d_info", label: "기타 특정 정보", type: "text", hint: "성별·외모·계정 URL 등 특정 가능한 정보" },
       { section: "사건 개요" },
       { key: "platform", label: "게시 플랫폼", type: "select",
         options: [
@@ -553,6 +559,12 @@ const DOC_TYPES = [
       ]},
       { section: "증거 및 관할" },
       { key: "evidence", label: "증거자료 목록", type: "textarea", hint: "한 줄에 하나씩 (예: 게시물 캡처본 1부, URL 출력물 1부)" },
+      { key: "related_case", label: "관련사건 수사·재판 여부", type: "select", options: [
+        { v: "none", label: { ko: "없음" } },
+        { v: "yes", label: { ko: "있음" } },
+        { v: "unknown", label: { ko: "모름" } }
+      ]},
+      { key: "related_detail", label: "관련사건 내용", type: "text", hint: "'있음' 선택 시 — 사건번호·관할 기관 등" },
       { key: "police", label: "관할 경찰서", type: "text", hint: "예: 서울○○경찰서 / ○○지방경찰청 — 기관명만 입력하면 '장 귀중'이 자동 표기됩니다" },
       { key: "doc_date", label: "작성 일자", type: "date" }
     ],
@@ -866,28 +878,44 @@ function remember(el) {
   }
 }
 
-/* ================= 렌더러: 고소장 (KO) ================= */
+/* ================= 렌더러: 고소장 (KO) — 대검찰청 표준서식·특사경규칙 별지20호 구조 ================= */
+function checkedVals(key) {
+  return [...document.querySelectorAll(`[data-key="${key}"]`)]
+    .filter(el => el.type === "checkbox" && el.checked).map(el => el.dataset.opt);
+}
 function renderComplaintKo() {
-  const charges = checkedLabels("charges", "ko");
+  const CRIME = {
+    itm70: "정보통신망이용촉진 및 정보보호 등에 관한 법률 위반(명예훼손)",
+    crim311: "모욕", crim307: "명예훼손", crim283: "협박"
+  };
+  const cv = checkedVals("charges");
+  const chargeText = (cv.length ? cv.map(v => CRIME[v] || v) : ["정보통신망이용촉진 및 정보보호 등에 관한 법률 위반(명예훼손)"]).join("죄 및 ") + "죄";
   const evidence = lines("evidence");
-  const chargeText = charges.length ? charges.join(" 및 ") : "관련 법령";
+  const rc = val("related_case");
+  const relatedText = rc === "yes" ? `있음 — ${valOr("related_detail")}` : rc === "unknown" ? "모름" : "없음";
+  const blankIf = k => val(k) ? esc(val(k)) : "불 상";
   return `
     <h1 class="doc-title">고 소 장</h1>
-    <div class="doc-subtitle">(사이버 명예훼손·모욕)</div>
+    <p class="body" style="text-align:center; font-size:0.82em; color:#555; margin-bottom:18px;">(고소장 기재사항 중 * 표시된 항목은 반드시 기재하여야 합니다.)</p>
     <table class="parties">
-      <tr><td class="lbl">고소인</td><td>성명: ${valOr("c_name")}<br/>주소: ${valOr("c_addr")}<br/>연락처: ${valOr("c_phone")}<br/>이메일: ${valOr("c_email")}</td></tr>
-      <tr><td class="lbl">피고소인</td><td>성명(닉네임/ID): ${valOr("d_name")}<br/>기타 특정 정보: ${valOr("d_info")}</td></tr>
+      <tr><td class="lbl">1. 고소인</td><td>성 명 *: ${valOr("c_name")}<br/>주민등록번호 *: ${valOr("c_id")}<br/>주 소 *: ${valOr("c_addr")}<br/>직 업: ${valOr("c_job")}<br/>연 락 처 *: ${valOr("c_phone")}${val("c_email") ? "<br/>이 메 일: " + esc(val("c_email")) : ""}</td></tr>
+      <tr><td class="lbl">2. 피고소인</td><td>성 명 *: ${valOr("d_name")}<br/>주민등록번호: ${blankIf("d_id")}<br/>주 소(현거주지): ${blankIf("d_addr")}<br/>연 락 처: ${blankIf("d_phone")}${val("d_info") ? "<br/>기타 특정 정보: " + esc(val("d_info")) : ""}</td></tr>
     </table>
-    <h2>1. 고소의 취지</h2>
-    <p class="body">피고소인을 ${esc(chargeText)} 위반 혐의로 고소하오니, 엄정히 수사하여 처벌하여 주시기 바랍니다.</p>
-    <h2>2. 범죄사실</h2>
-    <p class="body">피고소인은 ${esc(fmtDate(val("post_date"), "ko"))} 경, ${esc(optText("platform", "ko"))}에 게시된 게시물(게시물 주소: ${esc(val("post_url")) || "＿＿＿＿"})을 통하여 고소인에 관하여 다음과 같은 내용을 게시하였습니다.</p>
+    <h2>3. 고소취지 *</h2>
+    <p class="body">고소인은 피고소인을 ${esc(chargeText)}로 고소하오니 엄중히 수사하여 처벌하여 주시기 바랍니다.</p>
+    <h2>4. 범죄사실 *</h2>
+    <p class="body">피고소인은 ${esc(fmtDate(val("post_date"), "ko"))} 경, 불특정 다수가 접근할 수 있는 온라인 공간인 ${esc(optText("platform", "ko"))}에 접속하여, 게시물(주소: ${esc(val("post_url")) || "＿＿＿＿"})을 통하여 고소인에 관하여 다음과 같은 내용을 공연히 게시하였습니다.</p>
     <p class="body">「${valOr("post_content")}」</p>
-    <h2>3. 고소 이유</h2>
+    <h2>5. 고소이유</h2>
     <p class="body">${valOr("harm")}</p>
-    <p class="body">위 게시물은 불특정 다수가 접근할 수 있는 온라인 공간에 공연히 게시된 것으로서, 고소인의 사회적 평가를 저하시키고 정신적 고통을 야기하였습니다. 이에 피고소인의 처벌을 구하기 위하여 본 고소장을 제출합니다.</p>
-    <h2>4. 증거자료</h2>
+    <p class="body">이와 같이 피고소인은 공연히 사실을 적시하여 고소인의 명예를 훼손하거나 고소인을 모욕하여 고소인에게 정신적 고통을 야기하였습니다. 이에 피고소인의 처벌을 구하기 위하여 본 고소장을 제출합니다.</p>
+    <h2>6. 증거자료</h2>
     <ol class="evidence">${(evidence.length ? evidence : ["게시물 캡처본 1부"]).map(e => `<li>${esc(e)}</li>`).join("")}</ol>
+    <p class="body" style="font-size:0.85em; color:#555;">※ 증거의 세부내역은 별지(증거자료 세부 목록)를 작성하여 첨부할 수 있습니다.</p>
+    <h2>7. 관련사건의 수사 및 재판 여부</h2>
+    <p class="body">${relatedText}</p>
+    <h2>8. 첨부서류</h2>
+    <ol class="evidence"><li>고소장 1부</li><li>위 증거자료 각 1부</li></ol>
     <div class="doc-foot">
       <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
       <div class="signer">고소인 ${valOr("c_name")} &nbsp;(인)</div>
