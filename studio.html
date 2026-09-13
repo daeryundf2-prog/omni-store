@@ -25,7 +25,7 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Serif+JP:wght@400;700&family=Noto+Serif+SC:wght@400;700&family=Noto+Serif+Thai:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Serif+JP:wght@400;700&family=Noto+Serif+SC:wght@400;700&family=Noto+Serif+Thai:wght@400;700&family=Noto+Naskh+Arabic:wght@400;600&family=PT+Serif:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg-base: #0B0F19;
@@ -164,6 +164,10 @@
     .paper[lang="ru"] { font-family: Georgia, 'Times New Roman', 'PT Serif', serif; }
     .paper[lang="ar"] { font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', Georgia, serif; direction: rtl; text-align: right; }
     .paper[lang="ar"] h1.doc-title, .paper[lang="ar"] h2, .paper[lang="ar"] .parties { direction: rtl; }
+    .paper[lang="ar"] h1.doc-title { letter-spacing: 0.04em; font-size: 24px; }
+    .paper[lang="ar"] h2 { letter-spacing: 0; }
+    .paper[lang="ar"] p.body { text-indent: 0; }
+    .paper[lang="ar"] ol.evidence { margin: 8px 28px 10px 0; }
     }
     .paper[lang="th"] { font-family: 'Noto Serif Thai', Georgia, serif; }
     .paper h1.doc-title { text-align: center; font-size: 26px; font-weight: 800; letter-spacing: 0.35em; margin-bottom: 6px; }
@@ -3308,7 +3312,7 @@ const DOC_TYPES = [
       { key: "facts", label: "Olay ve olgular *", type: "textarea", required: true },
       { key: "demands", label: "Talepler *", type: "textarea", required: true, hint: "Her satıra bir talep" },
       { key: "amount", label: "Talep tutarı (TRY)", type: "text" },
-      { key: "deadline", label: "Süre", type: "text", hint: "예: Tebliğden itibaren 7 gün" },
+      { key: "deadline", label: "Süre", type: "text", hint: "예: 7 gün (tebliğden itibaren은 자동 삽입)" },
       { key: "doc_date", label: "Tarih", type: "date" }
     ],
     render: { tr: renderIhtarnameTr }
@@ -3329,9 +3333,9 @@ const DOC_TYPES = [
       { key: "r_addr", label: "Adres", type: "text" },
       { section: "Wypowiedzenie" },
       { key: "contract_type", label: "문서 유형", type: "select", options: [
-        { v: "employment", label: { pl: "Umowa o pracę" } },
-        { v: "service", label: { pl: "Umowa o usługi/najem" } },
-        { v: "subscription", label: { pl: "Subskrypcja/abonament" } }
+        { v: "employment", label: { pl: "umowę o pracę" } },
+        { v: "service", label: { pl: "umowę o usługi/najem" } },
+        { v: "subscription", label: { pl: "subskrypcję/abonament" } }
       ]},
       { key: "eff_date", label: "Data zakończenia *", type: "text", required: true },
       { key: "reason", label: "Uzasadnienie (선택)", type: "textarea" },
@@ -3355,10 +3359,10 @@ const DOC_TYPES = [
       { key: "r_addr", label: "Adres", type: "text" },
       { section: "Opzegging" },
       { key: "contract_type", label: "대상", type: "select", options: [
-        { v: "subscription", label: { nl: "Abonnement/lidmaatschap" } },
-        { v: "employment", label: { nl: "Arbeidsovereenkomst" } },
-        { v: "rental", label: { nl: "Huurovereenkomst" } },
-        { v: "insurance", label: { nl: "Verzekering" } }
+        { v: "subscription", label: { nl: "abonnement/lidmaatschap" } },
+        { v: "employment", label: { nl: "arbeidsovereenkomst" } },
+        { v: "rental", label: { nl: "huurovereenkomst" } },
+        { v: "insurance", label: { nl: "verzekering" } }
       ]},
       { key: "eff_date", label: "Einddatum *", type: "text", required: true },
       { key: "reason", label: "Reden (선택)", type: "textarea" },
@@ -3677,8 +3681,8 @@ const DOC_TYPES = [
       { section: "Members" },
       { key: "members", label: "Members *", type: "textarea", required: true, hint: "One per line: Name | Ownership % | Capital contribution" },
       { key: "management", label: "Management", type: "select", options: [
-        { v: "member", label: { en: "Member-managed" } },
-        { v: "manager", label: { en: "Manager-managed" } }
+        { v: "member", label: { en: "member-managed" } },
+        { v: "manager", label: { en: "manager-managed" } }
       ]},
       { key: "votes", label: "Voting", type: "select", options: [
         { v: "proportional", label: { en: "in proportion to ownership interest" } },
@@ -3781,12 +3785,15 @@ function esc(s) {
 }
 function val(key) { const el = document.getElementById("f_" + key); return el ? el.value.trim() : (formState[key] || ""); }
 function valOr(key) { const v = val(key); return v ? esc(v) : BLANK; }
+function ro(t) { const c = t.charCodeAt(t.length - 1); return t + ((c >= 0xAC00 && c <= 0xD7A3 && (c - 0xAC00) % 28 !== 0) ? "으로" : "로"); }
 function krw(n) { return "₩" + Number(n).toLocaleString("ko-KR"); }
 
 const MONTHS_EN = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 function fmtDate(d, lang) {
-  if (!d) return lang === "ko" ? "20    .    .    ." : "＿＿＿＿";
+  const blank = lang === "ko" ? "20    .    .    ." : "＿＿＿＿";
+  if (!d) return blank;
   const [y, m, dd] = d.split("-").map(Number);
+  if (!y || !m || !dd || isNaN(y) || isNaN(m) || isNaN(dd) || m > 12 || dd > 31) return esc(String(d));
   if (lang === "ko") return `${y}. ${m}. ${dd}.`;
   if (lang === "en") return `${MONTHS_EN[m - 1]} ${dd}, ${y}`;
   if (lang === "ja" || lang === "zh") return `${y}年${m}月${dd}日`;
@@ -4257,8 +4264,8 @@ function payerSentence(lang) {
   const amt = `${esc(val("currency"))} ${esc(val("amount"))}`;
   const dl = valOr("pay_deadline");
   const M = {
-    ko: payB ? `갑은 을에게 합의금으로 금 ${esc(val("amount"))}원(${esc(val("currency"))})을 ${dl}에 지급한다.`
-             : `을은 갑에게 합의금으로 금 ${esc(val("amount"))}원(${esc(val("currency"))})을 ${dl}에 지급한다.`,
+    ko: payB ? `갑은 을에게 합의금으로 금 ${esc(val("amount"))}원(${esc(val("currency"))})을 ${dl.replace(/까지\s*$/, "")}까지 지급한다.`
+             : `을은 갑에게 합의금으로 금 ${esc(val("amount"))}원(${esc(val("currency"))})을 ${dl.replace(/까지\s*$/, "")}까지 지급한다.`,
     en: payB ? `Party A shall pay Party B a settlement amount of ${amt} by ${dl}.`
              : `Party B shall pay Party A a settlement amount of ${amt} by ${dl}.`,
     ja: payB ? `甲は乙に対し、示談金として ${amt} を ${dl} までに支払う。`
@@ -5335,8 +5342,10 @@ function renderLeaseKo() {
   const payRows = [];
   if (down) payRows.push(`계약금: 금 ${esc(down)}원은 계약 체결과 동시에 지급한다`);
   if (mid) payRows.push(`중도금: 금 ${esc(mid)}원은 ${val("mid_pay_when") ? esc(val("mid_pay_when")) : BLANK}에 지급한다`);
+  const _num = x => { const n = Number(String(x || "").replace(/,/g, "")); return isNaN(n) ? 0 : n; };
+  const _bal = _num(val("deposit")) - _num(down) - _num(mid);
   const balance = val("deposit") && down
-    ? `잔금: 금 ${(Number(String(val("deposit")).replace(/,/g,"")) - Number(String(down).replace(/,/g,"")) - (mid ? Number(String(mid).replace(/,/g,"")) : 0)).toLocaleString("ko-KR")}원은 ${val("balance_when") ? esc(val("balance_when")) : "입주일"}에 지급한다`
+    ? `잔금: 금 ${_bal > 0 ? _bal.toLocaleString("ko-KR") : "＿＿＿＿"}원은 ${val("balance_when") ? esc(val("balance_when")) : "입주일"}에 지급한다`
     : `잔금: 금 ${valOr("deposit")}원은 ${val("balance_when") ? esc(val("balance_when")) : "입주일"}에 지급한다`;
   payRows.push(balance);
   const clearChecked = checkedLabels("prior_rights", "ko").length > 0;
@@ -5825,7 +5834,7 @@ function renderResignKo() {
       <tr><td class="lbl">입사일</td><td>${esc(fmtDate(val("start_date"), "ko"))}</td></tr>
       <tr><td class="lbl">퇴직 예정일</td><td>${esc(fmtDate(val("end_date"), "ko"))}</td></tr>
     </table>
-    <p class="body">본인은 ${esc(optText("reason", "ko") || "일신상의 사유")}로 인하여 ${esc(fmtDate(val("end_date"), "ko"))}부로 사직하고자 이에 사직서를 제출합니다.${val("facts") ? "<br/><br/>" + valOr("facts") : ""}</p>
+    <p class="body">본인은 ${esc(ro(optText("reason", "ko") || "일신상의 사유"))} 인하여 ${esc(fmtDate(val("end_date"), "ko"))}부로 사직하고자 이에 사직서를 제출합니다.${val("facts") ? "<br/><br/>" + valOr("facts") : ""}</p>
     <div class="doc-foot">
       <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
       <div class="signer">작성인 ${valOr("b_name")} &nbsp;(인)</div>
@@ -6567,7 +6576,7 @@ function renderRealEstateSaleKo() {
     <p class="body">매매 대금은 금 ${valOr("price")}원으로 하며, 매수인은 다음과 같이 지급한다.</p>
     <table class="parties">
       <tr><td class="lbl">계약금</td><td>금 ${valOr("contract_fee")}원 — 계약 체결 시 지급</td></tr>
-      ${val("interim_fee") ? `<tr><td class="lbl">중도금</td><td>금 ${esc(val("interim_fee"))}원</td></tr>` : ""}
+      ${val("interim_fee") ? `<tr><td class="lbl">중도금</td><td>${/^[0-9,\s]+$/.test(val("interim_fee")) ? "금 " + esc(val("interim_fee")) + "원" : esc(val("interim_fee"))}</td></tr>` : ""}
       <tr><td class="lbl">잔금</td><td>인도일(${valOr("delivery_date")})에 지급</td></tr>
     </table>
     ${val("pay_method") ? `<p class="body">지급 방법: ${esc(val("pay_method"))}</p>` : ""}
@@ -7533,7 +7542,7 @@ function renderKuendigungDe() {
     <p class="body" style="text-align:right;">${esc(fmtDate(val("doc_date"), "de"))}</p>
     <h1 class="doc-title" style="font-size:19px;">Kündigung — ${esc(optText("contract_type", "de") || "Vertrag")}</h1>
     <p class="body">Sehr geehrte Damen und Herren,</p>
-    <p class="body">hiermit kündige ich den mit Ihnen bestehenden Vertrag${val("contract_no") ? " (" + esc(val("contract_no")) + ")" : ""} ${val("frist") === "fristlos" ? "fristlos aus wichtigem Grund" : "ordentlich und fristgerecht"}${val("eff_date") ? " zum " + esc(val("eff_date")) : ", zum nächstmöglichen Zeitpunkt"}.</p>
+    <p class="body">hiermit kündige ich den mit Ihnen bestehenden Vertrag${val("contract_no") ? " (" + esc(val("contract_no")) + ")" : ""} ${val("frist") === "fristlos" ? "fristlos aus wichtigem Grund" : "ordentlich und fristgerecht"}${val("eff_date") ? " zum " + esc(val("eff_date").replace(/^zum\s+/i, "")) : ", zum nächstmöglichen Zeitpunkt"}.</p>
     ${val("reason") ? `<p class="body">Begründung: ${valOr("reason")}</p>` : ""}
     <p class="body">Ich bitte Sie, mir die Kündigung sowie das Vertragsende schriftlich zu bestätigen.</p>
     <div class="doc-foot">
@@ -8136,7 +8145,7 @@ function renderWypowiedzeniePl() {
       <tr><td class="lbl">WYSTAWCA</td><td>Imię i nazwisko/Nazwa: ${valOr("s_name")}<br/>Adres: ${valOr("s_addr")}</td></tr>
       <tr><td class="lbl">ADRESAT</td><td>Imię i nazwisko/Nazwa: ${valOr("r_name")}<br/>Adres: ${valOr("r_addr")}</td></tr>
     </table>
-    <p class="body">Niniejszym wypowiadam ${esc(ct)}, zawartą między stronami, ze skutkiem na dzień <strong>${valOr("eff_date")}</strong>, z zachowaniem obowiązującego okresu wypowiedzenia.</p>
+    <p class="body">Niniejszym wypowiadam ${esc(ct)} zawartą między stronami, ze skutkiem na dzień <strong>${valOr("eff_date")}</strong>, z zachowaniem obowiązującego okresu wypowiedzenia.</p>
     ${val("reason") ? `<h2>Uzasadnienie</h2><p class="body">${valOr("reason")}</p>` : ""}
     <p class="body">Proszę o pisemne potwierdzenie otrzymania niniejszego wypowiedzenia oraz o informację dotyczącą dalszych czynności rozliczeniowych.</p>
     <div class="doc-foot">
@@ -8544,7 +8553,7 @@ function renderLlcEn() {
   const members = lines("members").map(l => l.split("|").map(x => x.trim()));
   return `
     <h1 class="doc-title">OPERATING AGREEMENT</h1>
-    <div class="doc-subtitle">of ${valOr("co_name")}, LLC</div>
+    <div class="doc-subtitle">of ${valOr("co_name")}</div>
     <p class="body">This Operating Agreement of <strong>${valOr("co_name")}</strong>, a ${valOr("co_state")} limited liability company (the "Company"), is adopted by the undersigned members effective as of ${esc(fmtDate(val("doc_date"), "en"))}.</p>
     <h2>Article I — Formation</h2>
     <p class="body">The Company was formed under the laws of the State of ${valOr("co_state")}. Its principal place of business is ${valOr("co_addr")}. The purpose of the Company is ${valOr("purpose")}.</p>
@@ -8957,7 +8966,8 @@ const SAMPLES = {
     platform: "dcinside", post_url: "https://gall.dcinside.com/xxxx/12345", post_date: "2026-09-01",
     post_content: "홍길동은 사기꾼이며 ○○한 행위를 하였다는 허위 사실을 게시",
     harm: "2026년 9월 2일 지인의 제보로 발견하였으며, 해당 게시물로 인해 직장 내 평판이 훼손되고 극심한 정신적 고통을 받고 있습니다.",
-    evidence: "게시물 캡처본 1부\n게시물 URL 출력물 1부\n지인 진술서 1부", police: "서울강남경찰서"
+    evidence: "게시물 캡처본 1부\n게시물 URL 출력물 1부\n지인 진술서 1부", police: "서울강남경찰서",
+    c_id: "900101-1******", c_job: "회사원", charges: ["itm70", "crim311"], related_case: "none"
   },
   "demand-notice": {
     s_name: "Kim Cheolsu", s_addr: "12-3 Gangnam-daero, Seoul, Korea", s_phone: "+82-10-1234-5678", s_email: "kim@example.com",
@@ -8983,13 +8993,13 @@ const SAMPLES = {
     b_name: "박개발", b_addr: "서울특별시 송파구 ○○길 12", b_contact: "dev@example.com",
     scope: "모바일 앱 백엔드 API 개발 (회원 인증, 결제 연동, 관리자 페이지) 및 산출물 소스코드 인도",
     amount: "12,000,000", currency: "KRW", pay_terms: "milestone",
-    start_date: "2026-09-15", end_date: "2026-12-15", revisions: "2", ip_clause: "on_payment", notice_days: "14"
+    start_date: "2026-09-15", end_date: "2026-12-15", revisions: "2", ip_clause: "on_payment", notice_days: "14", wht: ["yes"], gov_law: "kr"
   },
   "settlement": {
     a_name: "김갑", a_addr: "서울특별시 ○○구 ○○로 1",
     b_name: "박을", b_addr: "인천광역시 ○○구 ○○동 2",
     incident: "을은 2026년 8월경 온라인 커뮤니티에 갑에 대한 허위 사실을 게시하여 갑의 명예를 훼손하였고, 갑은 이에 대해 법적 조치를 준비 중이었다.",
-    amount: "3,000,000", currency: "KRW", pay_deadline: "2026년 10월 15일까지",
+    amount: "3,000,000", currency: "KRW", payer: "b_to_a", pay_deadline: "2026년 10월 15일까지",
     terms: "을은 해당 게시물을 즉시 삭제한다\n을은 동일한 내용의 게시를 반복하지 않는다", confidential: ["yes"]
   },
   "power-of-attorney": {
@@ -9022,7 +9032,8 @@ const SAMPLES = {
     l_name: "김임대", l_addr: "서울특별시 ○○구 ○○로 5", l_phone: "010-3333-4444",
     t_name: "박임차", t_addr: "경기도 ○○시 ○○동 11", t_phone: "010-5555-6666",
     prop_addr: "서울특별시 송파구 ○○로 77, ○○아파트 101동 505호", prop_desc: "아파트, 전용면적 59.9㎡",
-    deposit: "100,000,000", rent: "0", rent_day: "", mgmt_fee: "월 150,000원",
+    prop_land: "대 330㎡", prop_bldg: "철근콘크리트조 아파트 59.9㎡", deposit: "100,000,000", rent: "0", rent_day: "", mgmt_fee: "월 150,000원",
+    down_pay: "10,000,000", mid_pay: "30,000,000", mid_pay_when: "2026. 11. 15.", balance_when: "입주일(2026. 12. 1.)", move_in: "2026. 12. 1.", prior_rights: ["clear"], repair_duty: "landlord",
     start_date: "2026-10-01", end_date: "2028-09-30",
     special: "임차인은 전입신고와 확정일자를 받을 수 있고, 임대인은 이에 협조한다\n임대인은 계약 체결일까지 해당 부동산에 저당권 등 담보권을 설정하지 않는다"
   },
@@ -9032,7 +9043,7 @@ const SAMPLES = {
     start_date: "2026-10-01", workplace: "본사 (서울특별시 서초구 ○○로 100)",
     scope: "웹 프론트엔드 개발 업무",
     work_hours: "주 5일 (월~금), 09:00~18:00 / 휴게시간 12:00~13:00",
-    wage: "3,500,000", wage_extra: "식대 월 100,000원", pay_day: "매월 25일"
+    probation: "3개월", wage: "3,500,000", wage_extra: "식대 월 100,000원", wage_type: "monthly", pay_day: "매월 25일", pay_method: "bank"
   },
   "severance": {
     a_name: "주식회사 ○○테크", a_addr: "서울특별시 서초구 ○○로 100",
@@ -9073,11 +9084,11 @@ const SAMPLES = {
   },
   "resignation": {
     b_name: "박근로", dept: "개발팀 대리", b_id: "EMP-1024", start_date: "2020-03-02",
-    end_date: "2026-10-15", reason: "career", a_name: "주식회사 ○○테크"
+    end_date: "2026-10-15", reason: "career", facts: "새로운 분야로의 커리어 전환을 위해 사직을 결심하였습니다. 재직 기간 중 배려해 주셔서 감사합니다.", a_name: "주식회사 ○○테크"
   },
   "accusation": {
     c_name: "홍길동", c_id: "900101-1******", c_addr: "서울특별시 강남구 ○○로 123", c_phone: "010-1234-5678",
-    d_name: "김피고", d_addr: "서울특별시 ○○구 ○○동 55",
+    d_name: "김피고", d_id: "미상", d_addr: "서울특별시 ○○구 ○○동 55",
     crime_type: "fraud",
     facts: "피고발인은 2026년 6월경 발신인에게 ○○ 투자 수익률을 보장한다며 금 3,000,000원을 편취하였습니다.",
     reason: "동종 피해자가 다수 존재하는 것으로 보여 엄정한 수사가 필요합니다.",
@@ -9219,7 +9230,7 @@ const SAMPLES = {
   "receipt": {
     s_name: "홍길동", s_addr: "서울특별시 ○○구 ○○로 1",
     r_name: "김지급",
-    items: "강연료 | 1 | 500,000", currency: "KRW", pay_method: "bank",
+    items: "강연료 | 1 | 500,000", amount: "500,000", currency: "KRW", pay_method: "bank",
     purpose: "9월 강연 대가"
   },
   "mou": {
@@ -9243,14 +9254,14 @@ const SAMPLES = {
     prop_addr: "서울특별시 송파구 ○○로 77, 101동 505호", prop_desc: "대지권 및 전유부분 84.5㎡, 철근콘크리트조 아파트",
     price: "700,000,000", contract_fee: "70,000,000", interim_fee: "210,000,000 / 2026. 11. 30.",
     pay_method: "계좌이체", delivery_date: "2026. 12. 31.", reg_duty: "buyer",
-    special: "매도인은 잔금일까지 근저당권을 말소한다\\n첨부 시설물(붙박이장·시스템에어컨)은 매매 대금에 포함한다"
+    special: "매도인은 잔금일까지 근저당권을 말소한다\n첨부 시설물(붙박이장·시스템에어컨)은 매매 대금에 포함한다"
   },
   "goods-sale": {
     a_name: "주식회사 ○○제조", a_addr: "경기도 ○○시 ○○로 12",
     b_name: "주식회사 ○○물산", b_addr: "서울특별시 강남구 ○○로 88",
-    items: "부품 A-100 | 500 | 2,000\\n부품 B-200 | 200 | 5,500",
+    items: "부품 A-100 | 500 | 2,000\n부품 B-200 | 200 | 5,500",
     currency: "KRW", pay_terms: "검수 완료 후 30일 이내 계좌이체",
-    delivery_date: "2026. 10. 31.", delivery_addr: "경기도 ○○시 물류센터", inspection: "7"
+    delivery_date: "2026. 10. 31.", delivery_addr: "경기도 ○○시 물류센터", inspection: "7", special: "검수 불합격 시 매도인은 14일 이내 대체 납품한다"
   },
   "model-release": {
     b_name: "김모델", b_id: "1998.04.12", b_phone: "010-8888-9999",
@@ -9277,7 +9288,7 @@ const SAMPLES = {
     a_name: "주식회사 ○○테크", a_addr: "서울특별시 서초구 ○○로 100",
     scope: "회사와 동종의 ○○ 솔루션 개발·판매 업무",
     period: "1y", region: "대한민국",
-    compensation: "퇴직 시 금 10,000,000원", penalty: "civil"
+    compensation: "퇴직 시 금 10,000,000원", penalty: "civil", amount: "금 30,000,000원"
   },
   "personal-guarantee": {
     b_name: "박근로", b_id: "950505-1******", b_addr: "서울특별시 ○○구 ○○길 33",
@@ -9344,7 +9355,8 @@ const SAMPLES = {
     s_name: "Max Mustermann", s_addr: "Musterstraße 1, 10115 Berlin",
     r_name: "Muster GmbH", r_addr: "Hauptstraße 10, 10115 Berlin",
     contract_type: "subscription", contract_no: "Kunde-Nr. 123456",
-    eff_date: "zum nächstmöglichen Zeitpunkt", frist: "fristgerecht"
+    eff_date: "nächstmöglichen Zeitpunkt", frist: "fristgerecht"
+, reason: "Umzug in eine andere Stadt"
   },
   "mahnung-de": {
     s_name: "Muster GmbH", s_addr: "Hauptstraße 10, 10115 Berlin",
@@ -9364,11 +9376,13 @@ const SAMPLES = {
     r_name: "Opérateur S.A.", r_addr: "Service résiliation, 75000 Paris",
     contract_type: "telecom", contract_no: "Contrat n° 789456",
     eff_date: "à l'échéance du contrat"
+, reason: "Changement de fournisseur"
   },
   "demission-fr": {
     b_name: "Jean Dupont", b_addr: "12 rue de la Paix, 75002 Paris", dept: "Chef de projet",
     a_name: "Société Exemple SARL", a_addr: "30 avenue des Champs, 75008 Paris",
     eff_date: "30 novembre 2026", notice: "full"
+, reason: "Évolution de carrière"
   },
   "taishoku-ja": {
     b_name: "山田太郎", dept: "開発部 課長", b_id: "EMP-1024",
@@ -9437,17 +9451,19 @@ const SAMPLES = {
     r_name: "Örnek Ticaret A.Ş.", r_addr: "Şişli, İstanbul",
     facts: "01.08.2026 tarihinde satın aldığım ürünün ayıplı çıkması ve iade talebimin reddedilmesi üzerine...",
     demands: "Ayıplı ürünün bedelinin iade edilmesi\nKargo masraflarının karşılanması",
-    amount: "15.000", deadline: "Tebliğden itibaren 7 gün", doc_date: "2026-09-14"
+    amount: "15.000", deadline: "7 gün", doc_date: "2026-09-14"
   },
   "wypowiedzenie-pl": {
     s_name: "Jan Kowalski", s_addr: "ul. Przykładowa 1, Warszawa",
     r_name: "Przykład Sp. z o.o.", r_addr: "ul. Testowa 5, Warszawa",
     contract_type: "employment", eff_date: "31.10.2026", doc_date: "2026-09-14"
+, reason: "Zmiana miejsca zamieszkania"
   },
   "opzegging-nl": {
     s_name: "Jan de Vries", s_addr: "Voorbeeldstraat 1, Amsterdam", s_id: "KL-12345",
     r_name: "Voorbeeld B.V.", r_addr: "Testlaan 10, Rotterdam",
     contract_type: "subscription", eff_date: "31.10.2026", doc_date: "2026-09-14"
+, reason: "Overstap naar een andere aanbieder"
   },
   "th-resign": {
     b_name: "สมชาย ใจดี", dept: "พนักงานขาย", b_id: "EMP-001",
@@ -9461,7 +9477,7 @@ const SAMPLES = {
     b_name: "John Smith", b_addr: "45 Oak St, Austin, TX",
     l_name: "Jane Doe", l_addr: "12 Pine Ave, Austin, TX",
     principal: "5,000", currency: "USD", interest: "6", repay_method: "installment",
-    due_date: "2027-09-14", security: "unsecured", gov_state: "Texas", doc_date: "2026-09-14"
+    due_date: "September 14, 2027", security: "unsecured", gov_state: "Texas", doc_date: "2026-09-14"
   },
   "letter-before-action-en": {
     s_name: "Alice Cooper", s_addr: "10 High Street, London", s_email: "alice@example.com",
@@ -9547,6 +9563,8 @@ const SAMPLES = {
 function fillSample() {
   track("sample_fill", activeDoc.id);
   Object.assign(formState, SAMPLES[activeDoc.id] || {});
+  if (activeDoc.fields.some(f => f.key === "doc_date") && !formState.doc_date)
+    formState.doc_date = new Date().toISOString().slice(0, 10);
   buildForm(activeDoc);
   render();
   showToast("예시 데이터로 채웠습니다 — 실제 정보로 바꿔치기하세요.");
