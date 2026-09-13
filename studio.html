@@ -974,6 +974,72 @@
         <div class="cat-price" data-doc="deposit-return-en"></div>
         <button class="btn btn-ghost" onclick="selectDoc('deposit-return-en');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
+      <article class="catalog-card" id="cat-resume" data-cat="labor">
+        <h3>이력서 · Resume/CV</h3>
+        <p>경력·학력·기술 표 구조 자동 생성. KO·EN 출력.</p>
+        <div class="cat-price" data-doc="resume"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('resume');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-transaction-statement" data-cat="business">
+        <h3>거래명세서 · Transaction Statement</h3>
+        <p>품목 합계·부가세 자동 계산. KO·EN 출력.</p>
+        <div class="cat-price" data-doc="transaction-statement"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('transaction-statement');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-expense-report" data-cat="business">
+        <h3>지출결의서 · Expense Approval</h3>
+        <p>내역 합계 자동 계산·결재란. 사내 표준 양식.</p>
+        <div class="cat-price" data-doc="expense-report"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('expense-report');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-seal-delegation" data-cat="business">
+        <h3>사용인감계</h3>
+        <p>사용인감 등록·날인란·사용 범위 기재. 법인 실무 필수.</p>
+        <div class="cat-price" data-doc="seal-delegation"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('seal-delegation');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-payoff-cert" data-cat="notice">
+        <h3>완납증명서 · Payoff Confirmation</h3>
+        <p>채무 완제 증명 + 채권자 청구 포기 문구. KO·EN 출력.</p>
+        <div class="cat-price" data-doc="payoff-cert"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('payoff-cert');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-construction-contract" data-cat="realestate">
+        <h3>공사 도급계약서 (인테리어)</h3>
+        <p>대금 지급 일정 표·하자보수·지체상금 조항. 소규모 공사용.</p>
+        <div class="cat-price" data-doc="construction-contract"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('construction-contract');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-leave-request" data-cat="labor">
+        <h3>휴가·연차 신청서 · Leave Request</h3>
+        <p>연차/병가/경조사/무급 구분·인수인계란. KO·EN 출력.</p>
+        <div class="cat-price" data-doc="leave-request"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('leave-request');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-llc-operating" data-cat="business">
+        <h3>LLC Operating Agreement — 미국</h3>
+        <p>지분·출자·의결·분배·양도 제한. LegalZoom 베스트셀러 서식.</p>
+        <div class="cat-price" data-doc="llc-operating"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('llc-operating');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-website-terms" data-cat="business">
+        <h3>이용약관 · Terms of Service</h3>
+        <p>웹사이트·앱용 ToS 골격. 유료 서비스 조항 옵션. KO·EN 출력.</p>
+        <div class="cat-price" data-doc="website-terms"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('website-terms');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-privacy-policy" data-cat="business">
+        <h3>개인정보처리방침 · Privacy Policy</h3>
+        <p>수집항목·목적·보유기간 표. 개인정보보호법 공개 의무 대응.</p>
+        <div class="cat-price" data-doc="privacy-policy"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('privacy-policy');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-residential-lease-en" data-cat="realestate">
+        <h3>Residential Lease — 미국 주택 임대</h3>
+        <p>임대료·보증금·연체료·펫 조항. 주별 공시 요건 안내.</p>
+        <div class="cat-price" data-doc="residential-lease-en"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('residential-lease-en');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
     </div>
   </section>
 
@@ -3430,6 +3496,274 @@ const DOC_TYPES = [
       { key: "doc_date", label: "Date", type: "date" }
     ],
     render: { en: renderDepositReturnEn }
+  },
+  {
+    id: "resume",
+    cat: "labor",
+    name: "이력서 · Resume / CV",
+    langs: ["ko", "en"],
+    price: STUDIO.priceKrw,
+    usageNote: "입사 지원용 표준 이력서. 지원처 요구 형식이 있으면 그 양식을 우선하세요.",
+    fields: [
+      { section: "인적사항 / Personal" },
+      { key: "name", label: "성명 *", type: "text", required: true },
+      { key: "birth", label: "생년월일", type: "text" },
+      { key: "phone", label: "연락처 *", type: "text", required: true },
+      { key: "email", label: "이메일", type: "text" },
+      { key: "addr", label: "주소", type: "text" },
+      { section: "지원 / Position" },
+      { key: "position", label: "지원 분야·직무", type: "text" },
+      { key: "summary", label: "자기소개 요약", type: "textarea" },
+      { section: "경력 / Experience" },
+      { key: "experience", label: "경력사항 *", type: "textarea", required: true, hint: "줄마다: 회사명 | 직무 | 기간 | 주요 업무" },
+      { key: "education", label: "학력", type: "textarea", hint: "줄마다: 학교 | 전공 | 기간" },
+      { key: "skills", label: "자격·기술", type: "textarea", hint: "줄마다 하나씩" },
+      { key: "doc_date", label: "작성일", type: "date" }
+    ],
+    render: { ko: renderResumeKo, en: renderResumeEn }
+  },
+  {
+    id: "transaction-statement",
+    cat: "business",
+    name: "거래명세서 · Transaction Statement",
+    langs: ["ko", "en"],
+    price: STUDIO.priceKrw,
+    fields: [
+      { section: "공급자 / Supplier" },
+      { key: "s_name", label: "공급자 상호·성명 *", type: "text", required: true },
+      { key: "s_addr", label: "주소", type: "text" },
+      { key: "s_reg", label: "사업자등록번호", type: "text" },
+      { section: "공급받는 자 / Buyer" },
+      { key: "r_name", label: "상호·성명 *", type: "text", required: true },
+      { section: "거래 내역" },
+      { key: "items", label: "품목 *", type: "textarea", required: true, hint: "줄마다: 품목 | 수량 | 단가" },
+      { key: "vat", label: "부가가치세", type: "select", options: [
+        { v: "included", label: { ko: "공급가액에 포함", en: "VAT included" } },
+        { v: "separate", label: { ko: "별도 (10% 가산)", en: "separate (10% added)" } }
+      ]},
+      { key: "notes", label: "비고", type: "textarea" },
+      { key: "doc_date", label: "거래 일자", type: "date" }
+    ],
+    render: { ko: renderTransStmtKo, en: renderTransStmtEn }
+  },
+  {
+    id: "expense-report",
+    cat: "business",
+    name: "지출결의서 · Expense Approval",
+    langs: ["ko", "en"],
+    price: STUDIO.priceKrw,
+    fields: [
+      { section: "신청인 / Requester" },
+      { key: "req_name", label: "성명 *", type: "text", required: true },
+      { key: "dept", label: "부서·직위", type: "text" },
+      { section: "지출 내역" },
+      { key: "purpose", label: "지출 목적 *", type: "text", required: true },
+      { key: "items", label: "내역 *", type: "textarea", required: true, hint: "줄마다: 항목 | 수량 | 금액" },
+      { key: "pay_method", label: "지급 방법", type: "select", options: [
+        { v: "transfer", label: { ko: "계좌이체", en: "bank transfer" } },
+        { v: "cash", label: { ko: "현금", en: "cash" } },
+        { v: "card", label: { ko: "법인카드", en: "corporate card" } }
+      ]},
+      { key: "account", label: "입금 계좌", type: "text" },
+      { key: "doc_date", label: "작성일", type: "date" }
+    ],
+    render: { ko: renderExpenseKo, en: renderExpenseEn }
+  },
+  {
+    id: "seal-delegation",
+    cat: "business",
+    name: "사용인감계 · Seal Registration",
+    langs: ["ko"],
+    price: STUDIO.priceKrw,
+    usageNote: "법인 인감 대신 사용할 사용인감을 등록하는 서류. 사용인감 날인 시 법인인감과 동일 효력.",
+    fields: [
+      { section: "법인" },
+      { key: "co_name", label: "법인명 *", type: "text", required: true },
+      { key: "co_addr", label: "본점 소재지", type: "text" },
+      { key: "rep_name", label: "대표이사 성명 *", type: "text", required: true },
+      { key: "co_reg", label: "법인등록번호", type: "text" },
+      { section: "사용인감" },
+      { key: "seal_desc", label: "사용인감 표시", type: "text", hint: "예: ○○주식회사之印" },
+      { key: "use_scope", label: "사용 범위", type: "textarea", hint: "예: 거래 계약서·청구서·세금계산서 관련 업무" },
+      { key: "doc_date", label: "작성일", type: "date" }
+    ],
+    render: { ko: renderSealKo }
+  },
+  {
+    id: "payoff-cert",
+    cat: "notice",
+    name: "완납증명서 · Payoff Confirmation",
+    langs: ["ko", "en"],
+    price: STUDIO.priceKrw,
+    usageNote: "채무 완제를 증명하는 서류. 대출·사적 차입 변제 완료 시 채권자가 발행.",
+    fields: [
+      { section: "채권자 / Creditor" },
+      { key: "l_name", label: "성명·상호 *", type: "text", required: true },
+      { key: "l_addr", label: "주소", type: "text" },
+      { section: "채무자 / Debtor" },
+      { key: "b_name", label: "성명 *", type: "text", required: true },
+      { section: "완납 내역" },
+      { key: "principal", label: "원 채무액 *", type: "text", required: true },
+      { key: "origin", label: "채무 발생 경위", type: "text", hint: "예: 2025. 3. 1.자 금전소비대차계약" },
+      { key: "payoff_date", label: "완납일 *", type: "text", required: true },
+      { key: "doc_date", label: "작성일", type: "date" }
+    ],
+    render: { ko: renderPayoffKo, en: renderPayoffEn }
+  },
+  {
+    id: "construction-contract",
+    cat: "realestate",
+    name: "공사 도급계약서 (인테리어·소규모)",
+    langs: ["ko"],
+    price: 12900,
+    usageNote: "인테리어·소규모 공사 도급용. 공사대금 지급 일정과 하자보수 조항을 반드시 확인하세요.",
+    fields: [
+      { section: "도급인 (발주자)" },
+      { key: "a_name", label: "성명·상호 *", type: "text", required: true },
+      { key: "a_addr", label: "주소", type: "text" },
+      { section: "수급인 (시공자)" },
+      { key: "b_name", label: "성명·상호 *", type: "text", required: true },
+      { key: "b_addr", label: "주소", type: "text" },
+      { key: "b_reg", label: "사업자등록번호", type: "text" },
+      { section: "공사" },
+      { key: "site", label: "공사 현장 *", type: "text", required: true },
+      { key: "work_scope", label: "공사 내용 *", type: "textarea", required: true },
+      { key: "total", label: "공사대금 (부가세 포함) *", type: "text", required: true },
+      { key: "pay_schedule", label: "대금 지급 일정 *", type: "textarea", required: true, hint: "줄마다: 항목 | 금액 | 지급 시기 (예: 착수금 | 3,000,000 | 착공일)" },
+      { key: "start_date", label: "착공일", type: "date" },
+      { key: "end_date", label: "준공 예정일", type: "date" },
+      { key: "defect_months", label: "하자보수 기간 (개월)", type: "text", hint: "예: 12" },
+      { key: "doc_date", label: "작성일", type: "date" }
+    ],
+    render: { ko: renderConstructionKo }
+  },
+  {
+    id: "leave-request",
+    cat: "labor",
+    name: "휴가·연차 신청서 · Leave Request",
+    langs: ["ko", "en"],
+    price: STUDIO.priceKrw,
+    fields: [
+      { key: "name", label: "성명 *", type: "text", required: true },
+      { key: "dept", label: "부서·직위", type: "text" },
+      { key: "leave_type", label: "휴가 종류", type: "select", options: [
+        { v: "annual", label: { ko: "연차유급휴가", en: "annual leave" } },
+        { v: "sick", label: { ko: "병가", en: "sick leave" } },
+        { v: "family", label: { ko: "경조사 휴가", en: "family event leave" } },
+        { v: "unpaid", label: { ko: "무급 휴가", en: "unpaid leave" } },
+        { v: "other", label: { ko: "기타", en: "other" } }
+      ]},
+      { key: "start_date", label: "시작일 *", type: "date", required: true },
+      { key: "end_date", label: "종료일 *", type: "date", required: true },
+      { key: "reason", label: "사유", type: "textarea" },
+      { key: "handover", label: "업무 인수인계자", type: "text" },
+      { key: "doc_date", label: "신청일", type: "date" }
+    ],
+    render: { ko: renderLeaveKo, en: renderLeaveEn }
+  },
+  {
+    id: "llc-operating",
+    cat: "business",
+    name: "LLC Operating Agreement — 미국 유한회사 운영계약",
+    langs: ["en"],
+    price: 14900,
+    usageNote: "US LLC internal governance document. Not filed with the state — kept by members. Some banks require it to open accounts.",
+    fields: [
+      { section: "Company" },
+      { key: "co_name", label: "LLC name *", type: "text", required: true },
+      { key: "co_state", label: "State of formation *", type: "text", required: true },
+      { key: "co_addr", label: "Principal place of business", type: "text" },
+      { key: "purpose", label: "Business purpose", type: "text", hint: "e.g. any lawful business" },
+      { section: "Members" },
+      { key: "members", label: "Members *", type: "textarea", required: true, hint: "One per line: Name | Ownership % | Capital contribution" },
+      { key: "management", label: "Management", type: "select", options: [
+        { v: "member", label: { en: "Member-managed" } },
+        { v: "manager", label: { en: "Manager-managed" } }
+      ]},
+      { key: "votes", label: "Voting", type: "select", options: [
+        { v: "proportional", label: { en: "in proportion to ownership interest" } },
+        { v: "equal", label: { en: "one vote per member" } }
+      ]},
+      { key: "distributions", label: "Distributions", type: "select", options: [
+        { v: "proportional", label: { en: "pro rata to ownership" } },
+        { v: "discretion", label: { en: "as determined by the members" } }
+      ]},
+      { key: "doc_date", label: "Effective date", type: "date" }
+    ],
+    render: { en: renderLlcEn }
+  },
+  {
+    id: "website-terms",
+    cat: "business",
+    name: "이용약관 · Website Terms of Service",
+    langs: ["ko", "en"],
+    price: STUDIO.priceKrw,
+    usageNote: "웹사이트·앱·온라인 서비스용 표준 이용약관 골격. 개인정보처리방침과 별도 운영하세요.",
+    fields: [
+      { key: "co_name", label: "사업자·서비스명 *", type: "text", required: true },
+      { key: "co_addr", label: "사업자 주소", type: "text" },
+      { key: "site_url", label: "사이트 주소", type: "text" },
+      { key: "service_desc", label: "서비스 내용 *", type: "textarea", required: true },
+      { key: "paid", label: "유료 서비스?", type: "select", options: [
+        { v: "no", label: { ko: "무료 또는 해당 없음", en: "free / not applicable" } },
+        { v: "yes", label: { ko: "유료 결제 있음", en: "paid services offered" } }
+      ]},
+      { key: "gov_law", label: "준거법", type: "text", hint: "예: 대한민국 / State of Delaware" },
+      { key: "contact", label: "문의 이메일", type: "text" },
+      { key: "doc_date", label: "시행일", type: "date" }
+    ],
+    render: { ko: renderTermsKo, en: renderTermsEn }
+  },
+  {
+    id: "privacy-policy",
+    cat: "business",
+    name: "개인정보처리방침 · Privacy Policy",
+    langs: ["ko", "en"],
+    price: STUDIO.priceKrw,
+    usageNote: "개인정보보호법상 개인정보 수집 시 공개 의무. 수집 항목·목적·보유기간을 실제 운영과 일치시키세요.",
+    fields: [
+      { key: "co_name", label: "사업자·서비스명 *", type: "text", required: true },
+      { key: "co_addr", label: "사업자 주소", type: "text" },
+      { key: "items", label: "수집하는 개인정보 항목 *", type: "textarea", required: true, hint: "줄마다: 항목 | 수집 목적 | 보유 기간 (예: 이메일 | 회원 식별·문의 응대 | 탈퇴 시까지)" },
+      { key: "third_party", label: "제3자 제공 여부", type: "select", options: [
+        { v: "no", label: { ko: "제3자에게 제공하지 않음", en: "not shared with third parties" } },
+        { v: "yes", label: { ko: "제공 있음 (아래 기재)", en: "shared (described below)" } }
+      ]},
+      { key: "third_detail", label: "제3자 제공 내역", type: "textarea", hint: "제공받는 자 | 목적 | 항목 | 기간" },
+      { key: "officer", label: "개인정보 보호책임자", type: "text", hint: "성명·직위·연락처·이메일" },
+      { key: "doc_date", label: "시행일", type: "date" }
+    ],
+    render: { ko: renderPrivacyPolicyKo, en: renderPrivacyPolicyEn }
+  },
+  {
+    id: "residential-lease-en",
+    cat: "realestate",
+    name: "Residential Lease Agreement — 미국 주택 임대계약",
+    langs: ["en"],
+    price: 12900,
+    usageNote: "US residential lease template. State-specific disclosures (lead paint, mold, etc.) are NOT included — add your state's required addenda.",
+    fields: [
+      { section: "Landlord" },
+      { key: "l_name", label: "Landlord name *", type: "text", required: true },
+      { key: "l_addr", label: "Landlord address", type: "text" },
+      { section: "Tenant" },
+      { key: "t_name", label: "Tenant name(s) *", type: "text", required: true },
+      { section: "Premises & Term" },
+      { key: "property", label: "Property address *", type: "text", required: true },
+      { key: "start_date", label: "Lease start *", type: "date", required: true },
+      { key: "end_date", label: "Lease end *", type: "date", required: true },
+      { key: "rent", label: "Monthly rent ($) *", type: "text", required: true },
+      { key: "due_day", label: "Rent due day", type: "text", hint: "e.g. 1st of each month" },
+      { key: "deposit", label: "Security deposit ($)", type: "text" },
+      { key: "late_fee", label: "Late fee ($)", type: "text" },
+      { key: "pets", label: "Pets", type: "select", options: [
+        { v: "no", label: { en: "No pets allowed" } },
+        { v: "yes", label: { en: "Pets allowed (describe)" } }
+      ]},
+      { key: "pet_desc", label: "Pet description", type: "text" },
+      { key: "doc_date", label: "Date", type: "date" }
+    ],
+    render: { en: renderLeaseEn }
   },
 
 ];
@@ -7954,6 +8288,397 @@ function renderDepositReturnEn() {
     </div>`;
 }
 
+
+/* --- 베스트셀러 기반 신규 양식 렌더러 --- */
+function renderResumeKo() {
+  const exp = lines("experience").map(l => l.split("|").map(x => x.trim()));
+  const edu = lines("education").map(l => l.split("|").map(x => x.trim()));
+  const skills = lines("skills");
+  return `
+    <h1 class="doc-title">이 력 서</h1>
+    <table class="parties">
+      <tr><td class="lbl">성 명</td><td>${valOr("name")}</td><td class="lbl">생년월일</td><td>${valOr("birth")}</td></tr>
+      <tr><td class="lbl">연락처</td><td>${valOr("phone")}</td><td class="lbl">이메일</td><td>${valOr("email")}</td></tr>
+      <tr><td class="lbl">주 소</td><td colspan="3">${valOr("addr")}</td></tr>
+      <tr><td class="lbl">지원분야</td><td colspan="3">${valOr("position")}</td></tr>
+    </table>
+    ${val("summary") ? `<h2>자기소개</h2><p class="body">${valOr("summary")}</p>` : ""}
+    <h2>경력사항</h2>
+    <table class="parties">
+      <tr><td class="lbl">회사·기관</td><td class="lbl">직무</td><td class="lbl">기간</td><td class="lbl">주요 업무</td></tr>
+      ${exp.map(r => `<tr><td>${esc(r[0] || "")}</td><td>${esc(r[1] || "")}</td><td>${esc(r[2] || "")}</td><td>${esc(r[3] || "")}</td></tr>`).join("") || `<tr><td colspan="4">${BLANK}</td></tr>`}
+    </table>
+    ${edu.length ? `<h2>학력사항</h2><table class="parties">
+      <tr><td class="lbl">학교</td><td class="lbl">전공</td><td class="lbl">기간</td></tr>
+      ${edu.map(r => `<tr><td>${esc(r[0] || "")}</td><td>${esc(r[1] || "")}</td><td>${esc(r[2] || "")}</td></tr>`).join("")}
+    </table>` : ""}
+    ${skills.length ? `<h2>자격·기술</h2><ul class="evidence">${skills.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : ""}
+    <p class="body" style="margin-top:20px;">위 기재 내용은 사실과 다름이 없음을 확인합니다.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">지원자 ${valOr("name")} ${sig("sig_a")}</div>
+    </div>`;
+}
+function renderResumeEn() {
+  const exp = lines("experience").map(l => l.split("|").map(x => x.trim()));
+  const edu = lines("education").map(l => l.split("|").map(x => x.trim()));
+  const skills = lines("skills");
+  return `
+    <h1 class="doc-title">CURRICULUM VITAE</h1>
+    <table class="parties">
+      <tr><td class="lbl">Name</td><td>${valOr("name")}</td><td class="lbl">Contact</td><td>${valOr("phone")}</td></tr>
+      <tr><td class="lbl">Email</td><td>${valOr("email")}</td><td class="lbl">Address</td><td>${valOr("addr")}</td></tr>
+      ${val("position") ? `<tr><td class="lbl">Position</td><td colspan="3">${valOr("position")}</td></tr>` : ""}
+    </table>
+    ${val("summary") ? `<h2>Summary</h2><p class="body">${valOr("summary")}</p>` : ""}
+    <h2>Experience</h2>
+    <table class="parties">
+      <tr><td class="lbl">Company</td><td class="lbl">Role</td><td class="lbl">Period</td><td class="lbl">Key work</td></tr>
+      ${exp.map(r => `<tr><td>${esc(r[0] || "")}</td><td>${esc(r[1] || "")}</td><td>${esc(r[2] || "")}</td><td>${esc(r[3] || "")}</td></tr>`).join("") || `<tr><td colspan="4">${BLANK}</td></tr>`}
+    </table>
+    ${edu.length ? `<h2>Education</h2><table class="parties">
+      <tr><td class="lbl">Institution</td><td class="lbl">Field</td><td class="lbl">Period</td></tr>
+      ${edu.map(r => `<tr><td>${esc(r[0] || "")}</td><td>${esc(r[1] || "")}</td><td>${esc(r[2] || "")}</td></tr>`).join("")}
+    </table>` : ""}
+    ${skills.length ? `<h2>Skills &amp; Certifications</h2><ul class="evidence">${skills.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : ""}
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "en"))}</div>
+      <div class="signer">${valOr("name")} ${sig("sig_a", "________________")}</div>
+    </div>`;
+}
+function renderTransStmtKo() {
+  const rows = parseInvoiceItems();
+  const total = rows.reduce((a, r) => a + r.amt, 0);
+  const sep = val("vat") === "separate";
+  return `
+    <h1 class="doc-title">거 래 명 세 서</h1>
+    <table class="parties">
+      <tr><td class="lbl">공급자</td><td>상호·성명: ${valOr("s_name")}<br/>주소: ${valOr("s_addr")}<br/>사업자등록번호: ${valOr("s_reg")}</td></tr>
+      <tr><td class="lbl">공급받는 자</td><td>상호·성명: ${valOr("r_name")}</td></tr>
+    </table>
+    <table class="parties">
+      <tr><td class="lbl">품목</td><td>수량</td><td>단가</td><td>금액</td></tr>
+      ${rows.map(r => `<tr><td>${esc(r.name)}</td><td>${r.qty}</td><td>${r.unit.toLocaleString()}</td><td>${r.amt.toLocaleString()}</td></tr>`).join("") || `<tr><td colspan="4">품목을 입력하세요 (품목 | 수량 | 단가)</td></tr>`}
+      <tr><td class="lbl">공급가액</td><td colspan="3">${total.toLocaleString()}원</td></tr>
+      ${sep ? `<tr><td class="lbl">부가가치세(10%)</td><td colspan="3">${Math.round(total * 0.1).toLocaleString()}원</td></tr>
+      <tr><td class="lbl">합계</td><td colspan="3"><strong>${Math.round(total * 1.1).toLocaleString()}원</strong></td></tr>` : `<tr><td class="lbl">합계(부가세 포함)</td><td colspan="3"><strong>${total.toLocaleString()}원</strong></td></tr>`}
+    </table>
+    ${val("notes") ? `<p class="body">비고: ${valOr("notes")}</p>` : ""}
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">공급자 ${valOr("s_name")} ${sig("sig_a")}</div>
+    </div>`;
+}
+function renderTransStmtEn() {
+  const rows = parseInvoiceItems();
+  const total = rows.reduce((a, r) => a + r.amt, 0);
+  return `
+    <h1 class="doc-title">TRANSACTION STATEMENT</h1>
+    <table class="parties">
+      <tr><td class="lbl">SUPPLIER</td><td>${valOr("s_name")}<br/>${valOr("s_addr")}<br/>Reg. No: ${valOr("s_reg")}</td></tr>
+      <tr><td class="lbl">BUYER</td><td>${valOr("r_name")}</td></tr>
+    </table>
+    <table class="parties">
+      <tr><td class="lbl">Item</td><td>Qty</td><td>Unit Price</td><td>Amount</td></tr>
+      ${rows.map(r => `<tr><td>${esc(r.name)}</td><td>${r.qty}</td><td>${r.unit.toLocaleString()}</td><td>${r.amt.toLocaleString()}</td></tr>`).join("") || `<tr><td colspan="4">Add items (name | qty | unit price)</td></tr>`}
+      <tr><td class="lbl">TOTAL</td><td colspan="3"><strong>${total.toLocaleString()}</strong></td></tr>
+    </table>
+    ${val("notes") ? `<p class="body">Notes: ${valOr("notes")}</p>` : ""}
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "en"))}</div>
+      <div class="signer">Supplier: ${valOr("s_name")} ${sig("sig_a", "________________")}</div>
+    </div>`;
+}
+function renderExpenseKo() {
+  const rows = parseInvoiceItems();
+  const total = rows.reduce((a, r) => a + r.amt, 0);
+  return `
+    <h1 class="doc-title">지 출 결 의 서</h1>
+    <table class="parties">
+      <tr><td class="lbl">신청인</td><td>${valOr("req_name")}</td><td class="lbl">부서·직위</td><td>${valOr("dept")}</td></tr>
+      <tr><td class="lbl">지출 목적</td><td colspan="3">${valOr("purpose")}</td></tr>
+    </table>
+    <table class="parties">
+      <tr><td class="lbl">항목</td><td>수량</td><td>금액</td></tr>
+      ${rows.map(r => `<tr><td>${esc(r.name)}</td><td>${r.qty}</td><td>${r.amt.toLocaleString()}</td></tr>`).join("") || `<tr><td colspan="3">내역을 입력하세요 (항목 | 수량 | 금액)</td></tr>`}
+      <tr><td class="lbl">합계</td><td colspan="2"><strong>금 ${total.toLocaleString()}원정</strong></td></tr>
+    </table>
+    <p class="body">지급 방법: ${esc(optText("pay_method", "ko"))} ${val("account") ? `· 계좌: ${esc(val("account"))}` : ""}</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">신청인 ${valOr("req_name")} ${sig("sig_a")}</div>
+      <div class="signer">결재 ${sig("sig_b")}</div>
+    </div>`;
+}
+function renderExpenseEn() {
+  const rows = parseInvoiceItems();
+  const total = rows.reduce((a, r) => a + r.amt, 0);
+  return `
+    <h1 class="doc-title">EXPENSE APPROVAL REQUEST</h1>
+    <table class="parties">
+      <tr><td class="lbl">REQUESTED BY</td><td>${valOr("req_name")}</td><td class="lbl">DEPT</td><td>${valOr("dept")}</td></tr>
+      <tr><td class="lbl">PURPOSE</td><td colspan="3">${valOr("purpose")}</td></tr>
+    </table>
+    <table class="parties">
+      <tr><td class="lbl">Item</td><td>Qty</td><td>Amount</td></tr>
+      ${rows.map(r => `<tr><td>${esc(r.name)}</td><td>${r.qty}</td><td>${r.amt.toLocaleString()}</td></tr>`).join("") || `<tr><td colspan="3">Add items (item | qty | amount)</td></tr>`}
+      <tr><td class="lbl">TOTAL</td><td colspan="2"><strong>${total.toLocaleString()}</strong></td></tr>
+    </table>
+    <p class="body">Payment method: ${esc(optText("pay_method", "en"))} ${val("account") ? `· Account: ${esc(val("account"))}` : ""}</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "en"))}</div>
+      <div class="signer">Requester: ${valOr("req_name")} ${sig("sig_a", "________________")}</div>
+      <div class="signer">Approved: ${sig("sig_b", "________________")}</div>
+    </div>`;
+}
+function renderSealKo() {
+  return `
+    <h1 class="doc-title">사 용 인 감 계</h1>
+    <table class="parties">
+      <tr><td class="lbl">법인명</td><td>${valOr("co_name")}</td></tr>
+      <tr><td class="lbl">본점소재지</td><td>${valOr("co_addr")}</td></tr>
+      <tr><td class="lbl">대표이사</td><td>${valOr("rep_name")}</td></tr>
+      <tr><td class="lbl">법인등록번호</td><td>${valOr("co_reg")}</td></tr>
+    </table>
+    <p class="body">상기 법인은 아래 인영을 사용인감으로 등록하고, 사용인감 날인은 법인인감과 동일한 효력을 갖는 것에 동의합니다.</p>
+    <table class="parties">
+      <tr><td class="lbl">사용인감 표시</td><td>${valOr("seal_desc")}</td></tr>
+      <tr><td class="lbl">사용 범위</td><td>${valOr("use_scope")}</td></tr>
+      <tr><td class="lbl">인 영</td><td style="height:60px;">&nbsp;</td></tr>
+    </table>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">대표이사 ${valOr("rep_name")} ${sig("sig_a")}</div>
+    </div>`;
+}
+function renderPayoffKo() {
+  return `
+    <h1 class="doc-title">완 납 증 명 서</h1>
+    <table class="parties">
+      <tr><td class="lbl">채권자</td><td>성명·상호: ${valOr("l_name")}<br/>주소: ${valOr("l_addr")}</td></tr>
+      <tr><td class="lbl">채무자</td><td>성명: ${valOr("b_name")}</td></tr>
+    </table>
+    <p class="body">채무자 ${valOr("b_name")}은 ${valOr("origin")}에 의하여 채권자에게 부담하던 채무 금 ${valOr("principal")}원 및 이에 따른 일체의 채무를 <strong>${valOr("payoff_date")}</strong>에 전부 변제하였음을 증명합니다.</p>
+    <p class="body">이에 채권자는 위 채무에 관한 일체의 권리를 포기하며, 향후 채무자에게 어떠한 청구도 하지 아니할 것을 확인합니다.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">채권자 ${valOr("l_name")} ${sig("sig_a")}</div>
+    </div>`;
+}
+function renderPayoffEn() {
+  return `
+    <h1 class="doc-title">PAYOFF CONFIRMATION</h1>
+    <table class="parties">
+      <tr><td class="lbl">CREDITOR</td><td>${valOr("l_name")}<br/>${valOr("l_addr")}</td></tr>
+      <tr><td class="lbl">DEBTOR</td><td>${valOr("b_name")}</td></tr>
+    </table>
+    <p class="body">This confirms that ${valOr("b_name")} has paid in full the obligation of ${valOr("principal")} arising from ${valOr("origin")}, including all related charges, as of <strong>${valOr("payoff_date")}</strong>.</p>
+    <p class="body">The Creditor releases all claims relating to this obligation and agrees not to make any further demand upon the Debtor in respect of it.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "en"))}</div>
+      <div class="signer">Creditor: ${valOr("l_name")} ${sig("sig_a", "________________")}</div>
+    </div>`;
+}
+function renderConstructionKo() {
+  const sched = lines("pay_schedule").map(l => l.split("|").map(x => x.trim()));
+  return `
+    <h1 class="doc-title">공 사 도 급 계 약 서</h1>
+    <table class="parties">
+      <tr><td class="lbl">도급인(발주자)</td><td>성명·상호: ${valOr("a_name")}<br/>주소: ${valOr("a_addr")}</td></tr>
+      <tr><td class="lbl">수급인(시공자)</td><td>성명·상호: ${valOr("b_name")}<br/>주소: ${valOr("b_addr")}<br/>사업자등록번호: ${valOr("b_reg")}</td></tr>
+    </table>
+    <p class="body">도급인과 수급인은 다음과 같이 공사 도급계약을 체결한다.</p>
+    <h2>제1조 (공사 개요)</h2>
+    <p class="body">공사 현장: ${valOr("site")}<br/>공사 내용: ${valOr("work_scope")}</p>
+    <h2>제2조 (공사 기간)</h2>
+    <p class="body">착공일: ${esc(fmtDate(val("start_date"), "ko"))} ~ 준공 예정일: ${esc(fmtDate(val("end_date"), "ko"))}</p>
+    <h2>제3조 (공사대금 및 지급)</h2>
+    <p class="body">총 공사대금: 금 ${valOr("total")}원 (부가가치세 포함)</p>
+    <table class="parties">
+      <tr><td class="lbl">항목</td><td class="lbl">금액</td><td class="lbl">지급 시기</td></tr>
+      ${sched.map(r => `<tr><td>${esc(r[0] || "")}</td><td>${esc(r[1] || "")}</td><td>${esc(r[2] || "")}</td></tr>`).join("") || `<tr><td colspan="3">${BLANK}</td></tr>`}
+    </table>
+    <h2>제4조 (하자보수)</h2>
+    <p class="body">수급인은 준공 후 ${valOr("defect_months")}개월간 공사상 하자에 대하여 무상 보수할 책임을 진다. 하자가 발견되면 도급인은 수급인에게 보수를 요청할 수 있다.</p>
+    <h2>제5조 (지체상금)</h2>
+    <p class="body">수급인의 귀책사유로 준공이 지연된 경우, 지연 1일당 공사대금의 0.1%를 지체상금으로 공제할 수 있다.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">도급인 ${valOr("a_name")} ${sig("sig_a")}</div>
+      <div class="signer">수급인 ${valOr("b_name")} ${sig("sig_b")}</div>
+    </div>`;
+}
+function renderLeaveKo() {
+  return `
+    <h1 class="doc-title">휴 가 신 청 서</h1>
+    <table class="parties">
+      <tr><td class="lbl">성명</td><td>${valOr("name")}</td><td class="lbl">부서·직위</td><td>${valOr("dept")}</td></tr>
+      <tr><td class="lbl">휴가 종류</td><td colspan="3">${esc(optText("leave_type", "ko"))}</td></tr>
+      <tr><td class="lbl">기간</td><td colspan="3">${esc(fmtDate(val("start_date"), "ko"))} ~ ${esc(fmtDate(val("end_date"), "ko"))}</td></tr>
+      <tr><td class="lbl">사유</td><td colspan="3">${valOr("reason")}</td></tr>
+      <tr><td class="lbl">인수인계</td><td colspan="3">${valOr("handover")}</td></tr>
+    </table>
+    <p class="body">상기와 같이 휴가를 신청하오니 승인하여 주시기 바랍니다.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">신청인 ${valOr("name")} ${sig("sig_a")}</div>
+    </div>`;
+}
+function renderLeaveEn() {
+  return `
+    <h1 class="doc-title">LEAVE REQUEST</h1>
+    <table class="parties">
+      <tr><td class="lbl">Name</td><td>${valOr("name")}</td><td class="lbl">Dept</td><td>${valOr("dept")}</td></tr>
+      <tr><td class="lbl">Type</td><td colspan="3">${esc(optText("leave_type", "en"))}</td></tr>
+      <tr><td class="lbl">Period</td><td colspan="3">${esc(fmtDate(val("start_date"), "en"))} ~ ${esc(fmtDate(val("end_date"), "en"))}</td></tr>
+      <tr><td class="lbl">Reason</td><td colspan="3">${valOr("reason")}</td></tr>
+      <tr><td class="lbl">Handover</td><td colspan="3">${valOr("handover")}</td></tr>
+    </table>
+    <p class="body">I hereby request approval of the above leave.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "en"))}</div>
+      <div class="signer">${valOr("name")} ${sig("sig_a", "________________")}</div>
+    </div>`;
+}
+function renderLlcEn() {
+  const members = lines("members").map(l => l.split("|").map(x => x.trim()));
+  return `
+    <h1 class="doc-title">OPERATING AGREEMENT</h1>
+    <div class="doc-subtitle">of ${valOr("co_name")}, LLC</div>
+    <p class="body">This Operating Agreement of <strong>${valOr("co_name")}</strong>, a ${valOr("co_state")} limited liability company (the "Company"), is adopted by the undersigned members effective as of ${esc(fmtDate(val("doc_date"), "en"))}.</p>
+    <h2>Article I — Formation</h2>
+    <p class="body">The Company was formed under the laws of the State of ${valOr("co_state")}. Its principal place of business is ${valOr("co_addr")}. The purpose of the Company is ${valOr("purpose")}.</p>
+    <h2>Article II — Members and Capital Contributions</h2>
+    <table class="parties">
+      <tr><td class="lbl">Member</td><td class="lbl">Ownership %</td><td class="lbl">Capital Contribution</td></tr>
+      ${members.map(r => `<tr><td>${esc(r[0] || "")}</td><td>${esc(r[1] || "")}</td><td>${esc(r[2] || "")}</td></tr>`).join("") || `<tr><td colspan="3">${BLANK}</td></tr>`}
+    </table>
+    <h2>Article III — Management and Voting</h2>
+    <p class="body">The Company shall be <strong>${esc(optText("management", "en"))}</strong>. Members shall vote ${esc(optText("votes", "en"))}. Decisions requiring a vote shall be made by a majority unless this Agreement provides otherwise.</p>
+    <h2>Article IV — Distributions</h2>
+    <p class="body">Distributions shall be made ${esc(optText("distributions", "en"))}, at such times as the members determine, subject to applicable law.</p>
+    <h2>Article V — Transfer of Interests</h2>
+    <p class="body">No member may transfer an interest in the Company without the written consent of all other members.</p>
+    <h2>Article VI — Miscellaneous</h2>
+    <p class="body">This Agreement is governed by the laws of the State of ${valOr("co_state")} and constitutes the entire agreement of the members concerning the Company.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "en"))}</div>
+      ${members.map(r => `<div class="signer">Member: ${esc(r[0] || "")} ${sig("sig_a", "________________")}</div>`).join("")}
+    </div>`;
+}
+function renderTermsKo() {
+  const paid = val("paid") === "yes";
+  return `
+    <h1 class="doc-title">이 용 약 관</h1>
+    <p class="body">${valOr("co_name")}(이하 "회사")이 운영하는 ${valOr("site_url")} 서비스의 이용 조건은 다음과 같습니다.</p>
+    <h2>제1조 (목적)</h2>
+    <p class="body">본 약관은 회사가 제공하는 서비스의 이용 조건 및 절차, 회사와 이용자의 권리·의무를 규정합니다.</p>
+    <h2>제2조 (서비스 내용)</h2>
+    <p class="body">${valOr("service_desc")}</p>
+    <h2>제3조 (약관의 효력 및 변경)</h2>
+    <p class="body">본 약관은 서비스 화면에 게시함으로써 효력이 발생하며, 회사는 관련 법령을 위반하지 않는 범위에서 약관을 변경할 수 있습니다.</p>
+    ${paid ? `<h2>제4조 (유료 서비스 및 환불)</h2>
+    <p class="body">유료 서비스의 가격·결제 방법·환불 조건은 서비스 내 별도 안내를 따릅니다. 디지털 콘텐츠 특성상 제공 개시 후에는 청약철회가 제한될 수 있습니다.</p>` : ""}
+    <h2>제${paid ? "5" : "4"}조 (면책)</h2>
+    <p class="body">회사는 천재지변·불가항력 또는 이용자의 귀책사유로 인한 서비스 장애에 대해 책임을 지지 않습니다.</p>
+    <h2>제${paid ? "6" : "5"}조 (준거법)</h2>
+    <p class="body">본 약관은 ${valOr("gov_law")}에 따라 해석됩니다.</p>
+    <p class="body">문의: ${valOr("contact")}</p>
+    <div class="doc-foot"><div class="date">시행일: ${esc(fmtDate(val("doc_date"), "ko"))}</div></div>`;
+}
+function renderTermsEn() {
+  const paid = val("paid") === "yes";
+  return `
+    <h1 class="doc-title">TERMS OF SERVICE</h1>
+    <p class="body">These Terms of Service govern your use of ${valOr("site_url")} operated by <strong>${valOr("co_name")}</strong> ("we", "us").</p>
+    <h2>1. The Service</h2>
+    <p class="body">${valOr("service_desc")}</p>
+    <h2>2. Acceptance</h2>
+    <p class="body">By accessing or using the service you agree to these Terms. If you do not agree, do not use the service.</p>
+    <h2>3. Intellectual Property</h2>
+    <p class="body">All content and materials on the service are the property of ${valOr("co_name")} or its licensors and may not be copied or redistributed without permission.</p>
+    ${paid ? `<h2>4. Paid Services &amp; Refunds</h2>
+    <p class="body">Pricing, payment and refund terms for paid services are stated at the point of purchase. Digital content may be exempt from withdrawal rights once delivery has begun.</p>` : ""}
+    <h2>${paid ? "5" : "4"}. Disclaimers &amp; Limitation of Liability</h2>
+    <p class="body">The service is provided "as is". To the maximum extent permitted by law, we disclaim all warranties and shall not be liable for indirect or consequential damages.</p>
+    <h2>${paid ? "6" : "5"}. Governing Law</h2>
+    <p class="body">These Terms are governed by the laws of ${valOr("gov_law")}.</p>
+    <p class="body">Contact: ${valOr("contact")}</p>
+    <div class="doc-foot"><div class="date">Effective: ${esc(fmtDate(val("doc_date"), "en"))}</div></div>`;
+}
+function renderPrivacyPolicyKo() {
+  const items = lines("items").map(l => l.split("|").map(x => x.trim()));
+  const third = val("third_party") === "yes";
+  return `
+    <h1 class="doc-title">개인정보 처리방침</h1>
+    <p class="body">${valOr("co_name")}(이하 "회사")는 이용자의 개인정보를 소중히 여기며, 개인정보보호법 등 관련 법령을 준수합니다.</p>
+    <h2>제1조 (수집하는 개인정보 항목 및 목적)</h2>
+    <table class="parties">
+      <tr><td class="lbl">수집 항목</td><td class="lbl">수집 목적</td><td class="lbl">보유 기간</td></tr>
+      ${items.map(r => `<tr><td>${esc(r[0] || "")}</td><td>${esc(r[1] || "")}</td><td>${esc(r[2] || "")}</td></tr>`).join("") || `<tr><td colspan="3">${BLANK}</td></tr>`}
+    </table>
+    <h2>제2조 (개인정보의 제3자 제공)</h2>
+    ${third ? `<p class="body">회사는 아래와 같이 개인정보를 제3자에게 제공합니다.</p>
+    <table class="parties"><tr><td class="lbl">제공받는 자</td><td class="lbl">목적</td><td class="lbl">항목</td><td class="lbl">기간</td></tr>
+    ${lines("third_detail").map(l => l.split("|").map(x => x.trim())).map(r => `<tr><td>${esc(r[0] || "")}</td><td>${esc(r[1] || "")}</td><td>${esc(r[2] || "")}</td><td>${esc(r[3] || "")}</td></tr>`).join("") || `<tr><td colspan="4">${BLANK}</td></tr>`}</table>`
+    : `<p class="body">회사는 이용자의 개인정보를 제3자에게 제공하지 않습니다.</p>`}
+    <h2>제3조 (이용자의 권리)</h2>
+    <p class="body">이용자는 언제든지 자신의 개인정보에 대한 열람·정정·삭제·처리정지를 요청할 수 있습니다.</p>
+    <h2>제4조 (개인정보 보호책임자)</h2>
+    <p class="body">${valOr("officer")}</p>
+    <p class="body">사업자 주소: ${valOr("co_addr")}</p>
+    <div class="doc-foot"><div class="date">시행일: ${esc(fmtDate(val("doc_date"), "ko"))}</div></div>`;
+}
+function renderPrivacyPolicyEn() {
+  const items = lines("items").map(l => l.split("|").map(x => x.trim()));
+  const third = val("third_party") === "yes";
+  return `
+    <h1 class="doc-title">PRIVACY POLICY</h1>
+    <p class="body"><strong>${valOr("co_name")}</strong> ("we") respects your privacy. This policy describes what personal data we collect and why.</p>
+    <h2>1. Data we collect</h2>
+    <table class="parties">
+      <tr><td class="lbl">Data</td><td class="lbl">Purpose</td><td class="lbl">Retention</td></tr>
+      ${items.map(r => `<tr><td>${esc(r[0] || "")}</td><td>${esc(r[1] || "")}</td><td>${esc(r[2] || "")}</td></tr>`).join("") || `<tr><td colspan="3">${BLANK}</td></tr>`}
+    </table>
+    <h2>2. Sharing with third parties</h2>
+    ${third ? `<p class="body">We share personal data as follows:</p>
+    <table class="parties"><tr><td class="lbl">Recipient</td><td class="lbl">Purpose</td><td class="lbl">Data</td><td class="lbl">Period</td></tr>
+    ${lines("third_detail").map(l => l.split("|").map(x => x.trim())).map(r => `<tr><td>${esc(r[0] || "")}</td><td>${esc(r[1] || "")}</td><td>${esc(r[2] || "")}</td><td>${esc(r[3] || "")}</td></tr>`).join("") || `<tr><td colspan="4">${BLANK}</td></tr>`}</table>`
+    : `<p class="body">We do not share your personal data with third parties.</p>`}
+    <h2>3. Your rights</h2>
+    <p class="body">You may request access to, correction of, or deletion of your personal data at any time by contacting us.</p>
+    <h2>4. Data protection contact</h2>
+    <p class="body">${valOr("officer")}</p>
+    <p class="body">Address: ${valOr("co_addr")}</p>
+    <div class="doc-foot"><div class="date">Effective: ${esc(fmtDate(val("doc_date"), "en"))}</div></div>`;
+}
+function renderLeaseEn() {
+  return `
+    <h1 class="doc-title">RESIDENTIAL LEASE AGREEMENT</h1>
+    <table class="parties">
+      <tr><td class="lbl">LANDLORD</td><td>${valOr("l_name")}<br/>${valOr("l_addr")}</td></tr>
+      <tr><td class="lbl">TENANT</td><td>${valOr("t_name")}</td></tr>
+      <tr><td class="lbl">PREMISES</td><td>${valOr("property")}</td></tr>
+    </table>
+    <h2>1. Term</h2>
+    <p class="body">This lease begins on ${esc(fmtDate(val("start_date"), "en"))} and ends on ${esc(fmtDate(val("end_date"), "en"))}.</p>
+    <h2>2. Rent</h2>
+    <p class="body">Rent is <strong>$${valOr("rent")}</strong> per month, payable on the ${valOr("due_day")} of each month. ${val("late_fee") ? `A late fee of $${esc(val("late_fee"))} applies to late payments.` : ""}</p>
+    <h2>3. Security Deposit</h2>
+    <p class="body">Tenant shall pay a security deposit of $${valOr("deposit")}, refundable per state law after move-out, less lawful deductions.</p>
+    <h2>4. Pets</h2>
+    <p class="body">${val("pets") === "yes" ? `Pets permitted: ${valOr("pet_desc")}.` : "No pets are permitted on the premises."}</p>
+    <h2>5. Use &amp; Maintenance</h2>
+    <p class="body">The premises shall be used as a private residence only. Tenant shall keep the premises clean and report needed repairs promptly. Landlord is responsible for structural and habitability repairs.</p>
+    <h2>6. Entry &amp; Termination</h2>
+    <p class="body">Landlord may enter with reasonable notice except in emergencies. Upon termination, Tenant shall return the premises in the condition received, normal wear excepted.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "en"))}</div>
+      <div class="signer">Landlord: ${valOr("l_name")} ${sig("sig_a", "________________")}</div>
+      <div class="signer">Tenant: ${valOr("t_name")} ${sig("sig_b", "________________")}</div>
+    </div>`;
+}
+
 /* ---------- 화면 상태 ---------- */
 function render() {
   const paper = document.getElementById("paper");
@@ -8749,6 +9474,74 @@ const SAMPLES = {
     r_name: "Sunset Property Management", r_addr: "55 Main St, Los Angeles, CA",
     property_addr: "101 Elm St Apt 4, Los Angeles, CA", deposit: "1,800", move_out: "August 31, 2026",
     state_deadline: "21 days (California)", deadline: "10 days", doc_date: "2026-09-14"
+  },
+  "resume": {
+    name: "김민준", birth: "1995. 3. 12.", phone: "010-5555-1234", email: "mj.kim@example.com",
+    addr: "서울특별시 서초구", position: "백엔드 개발자",
+    summary: "5년차 백엔드 개발자로 커머스 결제 시스템을 설계·운영했습니다.",
+    experience: "ABC테크 | 백엔드 개발자 | 2021.03~현재 | 결제 API 설계·운영\nXYZ소프트 | 개발자 | 2019.01~2021.02 | 사내 ERP 개발",
+    education: "한국대학교 | 컴퓨터공학 | 2014~2019",
+    skills: "정보처리기사\nAWS SAA\nJava, Kotlin, MySQL", doc_date: "2026-09-14"
+  },
+  "transaction-statement": {
+    s_name: "주식회사 공급상사", s_addr: "서울특별시 중구 ○○로 10", s_reg: "123-45-67890",
+    r_name: "주식회사 구매상사",
+    items: "사무용 의자 | 10 | 85,000\n책상 | 5 | 120,000", vat: "separate", doc_date: "2026-09-14"
+  },
+  "expense-report": {
+    req_name: "이영희", dept: "마케팅팀 대리",
+    purpose: "9월 광고 소재 제작비",
+    items: "디자인 외주비 | 1 | 500,000\n이미지 라이선스 | 3 | 30,000",
+    pay_method: "transfer", account: "카카오뱅크 3333-00-1234567", doc_date: "2026-09-14"
+  },
+  "seal-delegation": {
+    co_name: "주식회사 예시상사", co_addr: "서울특별시 강남구 ○○로 100",
+    rep_name: "김대표", co_reg: "110111-1234567",
+    seal_desc: "주식회사예시상사之印", use_scope: "거래 계약서·청구서·세금계산서 관련 업무", doc_date: "2026-09-14"
+  },
+  "payoff-cert": {
+    l_name: "김채권", l_addr: "서울특별시 마포구",
+    b_name: "이채무",
+    principal: "10,000,000", origin: "2025. 3. 1.자 금전소비대차계약",
+    payoff_date: "2026년 9월 10일", doc_date: "2026-09-14"
+  },
+  "construction-contract": {
+    a_name: "김집주", a_addr: "서울특별시 송파구",
+    b_name: "주식회사 인테리어프로", b_addr: "서울특별시 강동구", b_reg: "234-56-78901",
+    site: "서울특별시 송파구 ○○아파트 101동 202호",
+    work_scope: "주방·욕실 리모델링 및 도배·장판 교체",
+    total: "15,000,000",
+    pay_schedule: "착수금 | 5,000,000 | 착공일\n중도금 | 5,000,000 | 공정 50% 시\n잔금 | 5,000,000 | 준공·검수 후",
+    start_date: "2026-09-20", end_date: "2026-10-20", defect_months: "12", doc_date: "2026-09-14"
+  },
+  "leave-request": {
+    name: "박사원", dept: "개발팀 주임",
+    leave_type: "annual", start_date: "2026-10-05", end_date: "2026-10-09",
+    reason: "가족 여행", handover: "최대리", doc_date: "2026-09-14"
+  },
+  "llc-operating": {
+    co_name: "Blue Ridge Ventures LLC", co_state: "Delaware", co_addr: "1209 Orange St, Wilmington, DE",
+    purpose: "any lawful business",
+    members: "Jane Doe | 60% | $60,000\nJohn Smith | 40% | $40,000",
+    management: "member", votes: "proportional", distributions: "proportional", doc_date: "2026-09-14"
+  },
+  "website-terms": {
+    co_name: "OmniLegal", co_addr: "Seoul, Korea", site_url: "https://example.com",
+    service_desc: "브라우저 기반 문서 자동 생성 도구 및 관련 콘텐츠 제공",
+    paid: "yes", gov_law: "대한민국", contact: "daeryundf2@gmail.com", doc_date: "2026-09-14"
+  },
+  "privacy-policy": {
+    co_name: "OmniLegal", co_addr: "Seoul, Korea",
+    items: "이메일 | 주문 문의 응대·해제 코드 발급 | 문의 처리 완료 후 3개월\n결제 기록 | 환불·정산 | 관련 법령상 보관 기간",
+    third_party: "no", officer: "신유학 · 대표 · daeryundf2@gmail.com", doc_date: "2026-09-14"
+  },
+  "residential-lease-en": {
+    l_name: "Oak Properties LLC", l_addr: "88 Market St, Austin, TX",
+    t_name: "Emily Chen",
+    property: "742 Willow Ln Apt 3B, Austin, TX 78704",
+    start_date: "2026-10-01", end_date: "2027-09-30",
+    rent: "1,450", due_day: "1st", deposit: "1,450", late_fee: "50",
+    pets: "no", doc_date: "2026-09-14"
   }
 };
 function fillSample() {
