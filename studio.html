@@ -466,6 +466,26 @@
       <button class="cat-chip" data-cat="labor" onclick="filterCatalog('labor')">직장·노동</button>
       <button class="cat-chip" data-cat="family" onclick="filterCatalog('family')">가사·개인</button>
       <button class="cat-chip" data-cat="business" onclick="filterCatalog('business')">비즈니스·무역</button>
+      <select class="doc-filter" style="max-width:150px; margin-left:auto;" onchange="filterCatalogLang(this.value)">
+        <option value="all">전체 언어</option>
+        <option value="ko">한국어 지원</option>
+        <option value="en">English 지원</option>
+        <option value="ja">日本語 지원</option>
+        <option value="zh">中文 지원</option>
+        <option value="de">Deutsch 지원</option>
+        <option value="fr">Français 지원</option>
+        <option value="es">Español 지원</option>
+        <option value="vi">Tiếng Việt 지원</option>
+        <option value="th">ไทย 지원</option>
+        <option value="pt">Português 지원</option>
+        <option value="id">Indonesia 지원</option>
+        <option value="ru">Русский 지원</option>
+        <option value="ar">العربية 지원</option>
+        <option value="it">Italiano 지원</option>
+        <option value="tr">Türkçe 지원</option>
+        <option value="pl">Polski 지원</option>
+        <option value="nl">Nederlands 지원</option>
+      </select>
     </div>
     <div class="catalog-grid">
       <article class="catalog-card" id="cat-defamation-complaint" data-cat="litigation">
@@ -7736,10 +7756,42 @@ function renderViResign() {
     </div>`;
 }
 
+
+/* ---------- 로컬 애널리틱스 (전송 없음, localStorage 집계) ---------- */
+const _statSeen = new Set();
+function track(event, key) {
+  try {
+    const k = key ? event + ":" + key : event;
+    const store = JSON.parse(localStorage.getItem("omni_stats") || "{}");
+    store[k] = (store[k] || 0) + 1;
+    store._last = new Date().toISOString();
+    localStorage.setItem("omni_stats", JSON.stringify(store));
+    if (STUDIO.analyticsUrl && navigator.sendBeacon) {
+      navigator.sendBeacon(STUDIO.analyticsUrl, JSON.stringify({ event, key, t: store._last }));
+    }
+  } catch (_) {}
+}
+function trackOnce(event, key) {
+  const k = event + ":" + key;
+  if (_statSeen.has(k)) return;
+  _statSeen.add(k);
+  track(event, key);
+}
+function statsSummary() {
+  const store = JSON.parse(localStorage.getItem("omni_stats") || "{}");
+  const rows = Object.entries(store)
+    .filter(([k]) => !k.startsWith("_"))
+    .map(([k, v]) => ({ 이벤트: k, 횟수: v }))
+    .sort((a, b) => b.횟수 - a.횟수);
+  console.table ? console.table(rows) : console.log(rows);
+  return rows;
+}
+
 /* ---------- 화면 상태 ---------- */
 function render() {
   const paper = document.getElementById("paper");
   const renderer = activeDoc.render[curLang] || activeDoc.render[activeDoc.langs[0]];
+  trackOnce("preview", activeDoc.id + "/" + curLang);
   paper.innerHTML = renderer() + `<div class="doc-hash" id="doc-hash"></div>`;
   const _pl = (LANGUAGES.find(l => l.id === curLang) || LANGUAGES[0]).paperLang;
   paper.lang = _pl;
@@ -7924,15 +7976,17 @@ function buildWatermark() {
     pw.innerHTML = ps;
   }
 }
-let tabFilter = "", tabCat = "all";
+let tabFilter = "", tabCat = "all", tabLang = "all";
 function buildTabs() {
   document.getElementById("doc-tabs").innerHTML =
     `<div class="cat-chips">` + CATEGORIES.map(c =>
       `<button class="cat-chip ${tabCat === c.id ? "active" : ""}" onclick="setCat('${c.id}')">${c.name}</button>`
     ).join("") + `</div>` +
     `<input id="doc-filter" class="doc-filter" type="search" placeholder="문서 검색… (예: 계약서, 고소, invoice)" oninput="filterTabs(this.value)" value="${esc(tabFilter)}" />` +
+    `<select id="lang-filter" class="doc-filter" style="max-width:150px;" onchange="filterLang(this.value)"><option value="all">전체 언어</option>` +
+      LANGUAGES.map(l => `<option value="${l.id}" ${tabLang === l.id ? "selected" : ""}>${l.name} 지원</option>`).join("") + `</select>` +
     `<div class="doc-tab-grid">` + DOC_TYPES.map(d =>
-    `<button class="doc-tab ${d.id === activeDoc.id ? "active" : ""}" data-name="${esc(d.name.toLowerCase())}" data-cat="${d.cat}" onclick="selectDoc('${d.id}')">${esc(d.name)} · ${krw(docPrice(d))}<span class="langs">${d.langs.map(l => LANG_NAME[l]).join(" · ")}</span></button>`
+    `<button class="doc-tab ${d.id === activeDoc.id ? "active" : ""}" data-name="${esc(d.name.toLowerCase())}" data-cat="${d.cat}" data-langs="${d.langs.join(",")}" onclick="selectDoc('${d.id}')">${esc(d.name)} · ${krw(docPrice(d))}<span class="langs">${d.langs.map(l => LANG_NAME[l]).join(" · ")}</span></button>`
   ).join("") + `</div>`;
   applyTabFilter();
 }
@@ -7942,18 +7996,36 @@ function setCat(c) {
   applyTabFilter();
 }
 function filterTabs(q) { tabFilter = (q || "").trim().toLowerCase(); applyTabFilter(); }
+function filterLang(l) { tabLang = l; applyTabFilter(); }
 function applyTabFilter() {
   document.querySelectorAll("#doc-tabs .doc-tab").forEach(b => {
     const okCat = tabCat === "all" || b.dataset.cat === tabCat;
     const okQ = !tabFilter || (b.dataset.name || "").includes(tabFilter);
-    b.style.display = okCat && okQ ? "" : "none";
+    const okL = tabLang === "all" || (b.dataset.langs || "").split(",").includes(tabLang);
+    b.style.display = okCat && okQ && okL ? "" : "none";
   });
 }
+let catalogLang = "all";
 function filterCatalog(c) {
   document.querySelectorAll(".catalog-card").forEach(card => {
-    card.style.display = c === "all" || card.dataset.cat === c ? "" : "none";
+    const okCat = c === "all" || card.dataset.cat === c;
+    const okL = catalogLang === "all" || (card.dataset.langs || "").split(",").includes(catalogLang);
+    card.style.display = okCat && okL ? "" : "none";
   });
   document.querySelectorAll("#catalog-chips .cat-chip").forEach(b => b.classList.toggle("active", b.dataset.cat === c));
+}
+function filterCatalogLang(l) {
+  catalogLang = l;
+  const c = document.querySelector("#catalog-chips .cat-chip.active");
+  filterCatalog(c ? c.dataset.cat : "all");
+}
+function tagCatalogLangs() {
+  document.querySelectorAll(".catalog-card[data-cat]").forEach(card => {
+    const priceEl = card.querySelector(".cat-price[data-doc]");
+    if (!priceEl) return;
+    const doc = DOC_TYPES.find(d => d.id === priceEl.dataset.doc);
+    if (doc) card.dataset.langs = doc.langs.join(",");
+  });
 }
 function buildLangRow() {
   document.getElementById("lang-row").innerHTML =
@@ -7972,6 +8044,7 @@ function selectLang(id) {
 }
 function selectDoc(id) {
   activeDoc = DOC_TYPES.find(d => d.id === id) || DOC_TYPES[0];
+  track("doc_select", id);
   if (!activeDoc.langs.includes(curLang)) {
     curLang = activeDoc.langs[0];
     showToast(`이 문서는 ${activeDoc.langs.map(l => LANG_NAME[l]).join("·")} 출력을 지원합니다.`);
@@ -8494,6 +8567,7 @@ const SAMPLES = {
   }
 };
 function fillSample() {
+  track("sample_fill", activeDoc.id);
   Object.assign(formState, SAMPLES[activeDoc.id] || {});
   buildForm(activeDoc);
   render();
@@ -8504,6 +8578,7 @@ function printPreview() {
     showToast("무료 미리보기는 화면에서만 제공됩니다. 인쇄·다운로드는 원본 잠금 해제 후 이용해 주세요.");
     return;
   }
+  track("print", activeDoc.id);
   window.print();
 }
 function onOriginalClick() {
@@ -8512,10 +8587,12 @@ function onOriginalClick() {
     showToast(`⚠️ 필수 항목 ${missing}개가 비어 있습니다 — 문서에 공란이 표시됩니다.`);
   }
   if (unlocked) { downloadOriginal(); return; }
+  track("original_click", activeDoc.id);
   if (!STUDIO.salesEnabled) { alert("현재 결제 채널 준비 중입니다. 문의: " + (STUDIO.contactEmail || "")); return; }
   openOrderModal();
 }
 function downloadOriginal() {
+  track("download", activeDoc.id);
   const text = document.getElementById("paper").innerText;
   const blob = new Blob(["\ufeff" + text], { type: "text/plain;charset=utf-8" });
   const a = document.createElement("a");
@@ -8529,6 +8606,7 @@ function downloadOriginal() {
 
 /* ---------- 주문 모달 ---------- */
 function openOrderModal() {
+  track("order_open", activeDoc.id);
   currentOrderId = "ORD-" + Date.now().toString(36).toUpperCase();
   document.getElementById("order-doc-name").textContent = `${activeDoc.name} (${LANG_NAME[curLang]})`;
   document.getElementById("order-price").textContent = krw(docPrice(activeDoc));
@@ -8542,6 +8620,7 @@ function openOrderModal() {
       name: "💳 카드·PayPal 즉시 결제 (자동 발급)",
       detail: STUDIO.gumroadUrl,
       url: STUDIO.gumroadUrl,
+      trackClick: "gumroad_click",
       note: "결제 즉시 라이선스 키가 이메일로 발급됩니다. 받은 키를 아래에 입력하세요."
     });
   }
@@ -8573,12 +8652,14 @@ async function tryUnlock() {
   const input = document.getElementById("unlock-code");
   const code = input.value;
   if (verifyCode(code) || await tryGumroad(code)) {
+    track("unlock_ok", activeDoc.id);
     unlocked = true;
     localStorage.setItem("omni_studio_unlocked", "1");
     closeOrderModal();
     updateStatus();
     showToast("✓ 잠금이 해제되었습니다. 원본을 인쇄·다운로드할 수 있습니다.");
   } else {
+    track("unlock_fail", activeDoc.id);
     showToast("⚠️ 유효하지 않은 해제 코드·라이선스 키입니다. 주문번호를 확인해 주세요.");
     input.focus();
   }
@@ -8624,7 +8705,7 @@ function checkConfig() {
   }) : console.log(issues);
   return issues;
 }
-window.OmniStudio = { mintCode, digestFor, checkConfig };
+window.OmniStudio = { mintCode, digestFor, checkConfig, stats: statsSummary };
 
 function renderCatalogPrices() {
   document.querySelectorAll(".cat-price").forEach(elm => {
@@ -8710,6 +8791,7 @@ buildWatermark();
 renderMyDocs();
 renderCatalogPrices();
 initTilt();
+tagCatalogLangs();
 initCardReveal();
 selectDoc(activeDoc.id);
 </script>
