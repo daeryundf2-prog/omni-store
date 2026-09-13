@@ -956,6 +956,24 @@
         <div class="cat-price" data-doc="vi-resign"></div>
         <button class="btn btn-ghost" onclick="selectDoc('vi-resign');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
+      <article class="catalog-card" id="cat-promissory-note-en" data-cat="contract">
+        <h3>Promissory Note — 미국 약속어음</h3>
+        <p>담보/무담보·이자·분할상환·주별 준거법. 미국 최고 검색 서식.</p>
+        <div class="cat-price" data-doc="promissory-note-en"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('promissory-note-en');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-letter-before-action-en" data-cat="notice">
+        <h3>Letter Before Action — 영국 소송 전 통고</h3>
+        <p>Pre-Action Conduct 규정 준수 구조. 청구 근거·금액·회신 기한.</p>
+        <div class="cat-price" data-doc="letter-before-action-en"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('letter-before-action-en');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-deposit-return-en" data-cat="realestate">
+        <h3>Security Deposit Demand — 미국 보증금 반환</h3>
+        <p>주별 반환 기한 명시·법정 페널티 예고·소액재판 경고.</p>
+        <div class="cat-price" data-doc="deposit-return-en"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('deposit-return-en');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
     </div>
   </section>
 
@@ -3331,6 +3349,87 @@ const DOC_TYPES = [
       { key: "doc_date", label: "Ngày", type: "date" }
     ],
     render: { vi: renderViResign }
+  },
+  {
+    id: "promissory-note-en",
+    cat: "contract",
+    name: "Promissory Note — 미국 약속어음",
+    langs: ["en"],
+    price: STUDIO.priceKrw,
+    usageNote: "US promissory note template. Secured notes need collateral description; state usury laws cap interest.",
+    fields: [
+      { section: "Maker (지급인)" },
+      { key: "b_name", label: "Maker name *", type: "text", required: true },
+      { key: "b_addr", label: "Maker address", type: "text" },
+      { section: "Payee (수취인)" },
+      { key: "l_name", label: "Payee name *", type: "text", required: true },
+      { key: "l_addr", label: "Payee address", type: "text" },
+      { section: "Note" },
+      { key: "principal", label: "Principal amount *", type: "text", required: true },
+      { key: "currency", label: "Currency", type: "text", hint: "USD" },
+      { key: "interest", label: "Interest rate (% per year)", type: "text", hint: "0 = interest-free" },
+      { key: "repay_method", label: "Repayment", type: "select", options: [
+        { v: "lump", label: { en: "lump sum on the maturity date" } },
+        { v: "installment", label: { en: "monthly installments" } },
+        { v: "demand", label: { en: "on demand" } }
+      ]},
+      { key: "due_date", label: "Maturity date", type: "text" },
+      { key: "security", label: "Secured?", type: "select", options: [
+        { v: "unsecured", label: { en: "Unsecured" } },
+        { v: "secured", label: { en: "Secured by collateral (describe below)" } }
+      ]},
+      { key: "collateral", label: "Collateral description", type: "textarea" },
+      { key: "gov_state", label: "Governing state", type: "text", hint: "e.g. California" },
+      { key: "doc_date", label: "Date", type: "date" }
+    ],
+    render: { en: renderPromissoryEn }
+  },
+  {
+    id: "letter-before-action-en",
+    cat: "notice",
+    name: "Letter Before Action — 영국 소송 전 최후통고",
+    langs: ["en"],
+    price: STUDIO.priceKrw,
+    usageNote: "England & Wales pre-action letter. Practice Direction on Pre-Action Conduct expects details of claim, amount, and response deadline (usually 14–30 days).",
+    fields: [
+      { section: "Claimant (청구인)" },
+      { key: "s_name", label: "Name *", type: "text", required: true },
+      { key: "s_addr", label: "Address", type: "text" },
+      { key: "s_email", label: "Email", type: "text" },
+      { section: "Respondent (상대방)" },
+      { key: "r_name", label: "Name *", type: "text", required: true },
+      { key: "r_addr", label: "Address *", type: "text", required: true },
+      { section: "Claim" },
+      { key: "facts", label: "Basis of claim *", type: "textarea", required: true },
+      { key: "amount", label: "Amount claimed (£)", type: "text" },
+      { key: "deadline", label: "Response deadline", type: "text", hint: "e.g. 14 days from the date of this letter" },
+      { key: "doc_date", label: "Date", type: "date" }
+    ],
+    render: { en: renderLetterBeforeActionEn }
+  },
+  {
+    id: "deposit-return-en",
+    cat: "realestate",
+    name: "Security Deposit Demand Letter — 미국 보증금 반환 청구",
+    langs: ["en"],
+    price: STUDIO.priceKrw,
+    usageNote: "Demand return of a residential security deposit. State deadlines differ (e.g. 21 days in CA, 30 in TX) — check your state's limit before sending.",
+    fields: [
+      { section: "Tenant (임차인)" },
+      { key: "s_name", label: "Tenant name *", type: "text", required: true },
+      { key: "s_addr", label: "Forwarding address", type: "text" },
+      { section: "Landlord (임대인)" },
+      { key: "r_name", label: "Landlord/property manager *", type: "text", required: true },
+      { key: "r_addr", label: "Address", type: "text" },
+      { section: "Demand" },
+      { key: "property_addr", label: "Rental property address *", type: "text", required: true },
+      { key: "deposit", label: "Deposit amount ($) *", type: "text", required: true },
+      { key: "move_out", label: "Move-out date", type: "text" },
+      { key: "state_deadline", label: "State return deadline", type: "text", hint: "e.g. 21 days (California)" },
+      { key: "deadline", label: "Your demand deadline", type: "text", hint: "e.g. 10 days from receipt" },
+      { key: "doc_date", label: "Date", type: "date" }
+    ],
+    render: { en: renderDepositReturnEn }
   },
 
 ];
@@ -7787,6 +7886,74 @@ function statsSummary() {
   return rows;
 }
 
+
+/* --- EN 국가 특화: Promissory Note / Letter Before Action / Deposit Demand --- */
+function renderPromissoryEn() {
+  const interest = val("interest");
+  const intText = !interest || interest === "0" ? "This note is interest-free." : `The principal shall bear interest at ${esc(interest)}% per annum.`;
+  const secured = val("security") === "secured" && val("collateral");
+  return `
+    <h1 class="doc-title">PROMISSORY NOTE</h1>
+    <table class="parties">
+      <tr><td class="lbl">MAKER</td><td>Name: ${valOr("b_name")}<br/>Address: ${valOr("b_addr")}</td></tr>
+      <tr><td class="lbl">PAYEE</td><td>Name: ${valOr("l_name")}<br/>Address: ${valOr("l_addr")}</td></tr>
+    </table>
+    <p class="body">FOR VALUE RECEIVED, the undersigned Maker promises to pay to the order of the Payee the principal sum of ${esc(val("currency") || "USD")} ${valOr("principal")}.</p>
+    <h2>1. Interest</h2>
+    <p class="body">${intText}</p>
+    <h2>2. Repayment</h2>
+    <p class="body">The principal${interest && interest !== "0" ? " and accrued interest" : ""} shall be repaid by ${esc(optText("repay_method", "en"))}, ${val("repay_method") === "demand" ? "payable upon written demand by the Payee" : `with maturity on <strong>${valOr("due_date")}</strong>`}.</p>
+    ${secured ? `<h2>3. Security</h2><p class="body">This note is secured by the following collateral: ${valOr("collateral")}</p>` : `<h2>3. Security</h2><p class="body">This note is unsecured.</p>`}
+    <h2>${secured ? "4" : "4"}. Default</h2>
+    <p class="body">If the Maker fails to pay any amount when due, the entire unpaid balance shall become immediately due and payable at the Payee's election, together with reasonable costs of collection.</p>
+    <h2>5. Governing Law</h2>
+    <p class="body">This note is governed by the laws of the State of ${valOr("gov_state")}.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "en"))}</div>
+      <div class="signer">Maker: ${valOr("b_name")} ${sig("sig_b", "________________")}</div>
+    </div>`;
+}
+function renderLetterBeforeActionEn() {
+  return `
+    <h1 class="doc-title">LETTER BEFORE ACTION</h1>
+    <table class="parties">
+      <tr><td class="lbl">FROM</td><td>${valOr("s_name")}<br/>${valOr("s_addr")}<br/>${valOr("s_email")}</td></tr>
+      <tr><td class="lbl">TO</td><td>${valOr("r_name")}<br/>${valOr("r_addr")}</td></tr>
+    </table>
+    <p class="body"><strong>Sent by post and email</strong></p>
+    <p class="body">Dear ${valOr("r_name")},</p>
+    <p class="body"><strong>Re: Letter before action — intended court proceedings</strong></p>
+    <h2>1. Basis of claim</h2>
+    <p class="body">${valOr("facts")}</p>
+    <h2>2. Amount claimed</h2>
+    <p class="body">£${valOr("amount")} plus interest and costs where applicable.</p>
+    <h2>3. Required response</h2>
+    <p class="body">You are required to respond within <strong>${valOr("deadline")}</strong>, confirming whether you admit the claim and, if not, setting out your reasons. This letter is sent in accordance with the Practice Direction on Pre-Action Conduct and Protocols.</p>
+    <p class="body">If I do not receive a satisfactory response within the stated period, I intend to issue court proceedings against you without further notice. This may increase your liability for costs.</p>
+    <p class="body">Yours faithfully,</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "en"))}</div>
+      <div class="signer">${valOr("s_name")} ${sig("sig_a", "________________")}</div>
+    </div>`;
+}
+function renderDepositReturnEn() {
+  return `
+    <h1 class="doc-title">DEMAND FOR RETURN OF SECURITY DEPOSIT</h1>
+    <table class="parties">
+      <tr><td class="lbl">FROM</td><td>${valOr("s_name")}<br/>Forwarding address: ${valOr("s_addr")}</td></tr>
+      <tr><td class="lbl">TO</td><td>${valOr("r_name")}<br/>${valOr("r_addr")}</td></tr>
+    </table>
+    <p class="body">Dear ${valOr("r_name")},</p>
+    <p class="body">I was a tenant at <strong>${valOr("property_addr")}</strong> and vacated the premises on ${valOr("move_out")}. A security deposit of $${valOr("deposit")} was paid at the start of the tenancy.</p>
+    <p class="body">Under applicable state law, the deposit was required to be returned (or an itemized statement of deductions provided) within ${valOr("state_deadline")} of move-out. As of the date of this letter, I have received neither the deposit nor a lawful itemization.</p>
+    <p class="body">I therefore demand return of the full deposit of <strong>$${valOr("deposit")}</strong> within <strong>${valOr("deadline")}</strong> of your receipt of this letter, sent to the forwarding address above. If the deposit is not returned, I will pursue all available remedies, including statutory penalties for bad-faith retention and recovery in small claims court, together with court costs.</p>
+    <p class="body">Sincerely,</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "en"))}</div>
+      <div class="signer">${valOr("s_name")} ${sig("sig_a", "________________")}</div>
+    </div>`;
+}
+
 /* ---------- 화면 상태 ---------- */
 function render() {
   const paper = document.getElementById("paper");
@@ -8564,6 +8731,24 @@ const SAMPLES = {
   "vi-resign": {
     b_name: "Nguyễn Văn A", dept: "Nhân viên kinh doanh", b_id: "NV-001",
     a_name: "Công ty TNHH Ví dụ", eff_date: "15/10/2026", reason: "private", doc_date: "2026-09-14"
+  },
+  "promissory-note-en": {
+    b_name: "John Smith", b_addr: "45 Oak St, Austin, TX",
+    l_name: "Jane Doe", l_addr: "12 Pine Ave, Austin, TX",
+    principal: "5,000", currency: "USD", interest: "6", repay_method: "installment",
+    due_date: "2027-09-14", security: "unsecured", gov_state: "Texas", doc_date: "2026-09-14"
+  },
+  "letter-before-action-en": {
+    s_name: "Alice Cooper", s_addr: "10 High Street, London", s_email: "alice@example.com",
+    r_name: "Builder Ltd", r_addr: "99 Works Road, Manchester",
+    facts: "On 1 June 2026 the Respondent carried out building works which were defective, requiring £3,400 of remedial work.",
+    amount: "3,400", deadline: "14 days from the date of this letter", doc_date: "2026-09-14"
+  },
+  "deposit-return-en": {
+    s_name: "Maria Garcia", s_addr: "200 New Ave, Los Angeles, CA",
+    r_name: "Sunset Property Management", r_addr: "55 Main St, Los Angeles, CA",
+    property_addr: "101 Elm St Apt 4, Los Angeles, CA", deposit: "1,800", move_out: "August 31, 2026",
+    state_deadline: "21 days (California)", deadline: "10 days", doc_date: "2026-09-14"
   }
 };
 function fillSample() {
@@ -8793,6 +8978,14 @@ renderCatalogPrices();
 initTilt();
 tagCatalogLangs();
 initCardReveal();
+// 딥링크: ?doc=<id>&lang=<lang> — 언어별 랜딩 페이지에서 진입
+const _q = new URLSearchParams(location.search);
+const _doc = _q.get("doc");
+if (_doc && DOC_TYPES.some(d => d.id === _doc)) {
+  const _l = _q.get("lang");
+  activeDoc = DOC_TYPES.find(d => d.id === _doc);
+  if (_l && activeDoc.langs.includes(_l)) curLang = _l;
+}
 selectDoc(activeDoc.id);
 </script>
 </body>
