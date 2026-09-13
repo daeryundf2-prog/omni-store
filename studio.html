@@ -532,6 +532,12 @@
         <div class="cat-price" data-doc="payment-order"></div>
         <button class="btn btn-ghost" onclick="selectDoc('payment-order');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
+      <article class="catalog-card" id="cat-small-claims">
+        <h3>소액사건심판 소장</h3>
+        <p>청구금액 3,000만원 이하의 소액사건 소장. 청구 취지·원인·입증방법을 법원 제출 구조로 정리합니다. 지급명령과 세트로 '돈 회수' 전 과정을 커버합니다.</p>
+        <div class="cat-price" data-doc="small-claims"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('small-claims');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
       <article class="catalog-card" id="cat-nda">
         <h3>비밀유지계약서 · NDA</h3>
         <p>협업·투자·외주 검토 전 필수인 상호 비밀유지계약서. 비밀정보 범위·유지 기간·준거법을 설정할 수 있으며 9개 언어로 출력됩니다.</p>
@@ -1006,14 +1012,29 @@ const DOC_TYPES = [
       { key: "t_phone", label: "연락처", type: "tel" },
       { section: "목적물" },
       { key: "prop_addr", label: "부동산 소재지", type: "text", required: true, hint: "등기부등본상 주소 그대로" },
-      { key: "prop_desc", label: "목적물 표시", type: "text", hint: "예: 아파트 ○○동 ○○호, 전용면적 59.9㎡" },
+      { key: "prop_land", label: "토지 (지목·면적)", type: "text", hint: "예: 대 450㎡ / 공동주택이면 비워도 됨" },
+      { key: "prop_bldg", label: "건물 (구조·용도·면적)", type: "text", hint: "예: 철근콘크리트조 아파트 84.9㎡" },
+      { key: "prop_desc", label: "임차 부분", type: "text", hint: "예: ○○동 ○○호 전부" },
       { section: "계약 조건" },
       { key: "deposit", label: "보증금 (숫자)", type: "text", required: true },
+      { key: "down_pay", label: "계약금 (숫자)", type: "text", hint: "통상 보증금의 10%" },
+      { key: "mid_pay", label: "중도금 (숫자)", type: "text", hint: "없으면 비움" },
+      { key: "mid_pay_when", label: "중도금 지급일", type: "text" },
+      { key: "balance_when", label: "잔금 지급일", type: "text", hint: "예: 입주일에 지급" },
       { key: "rent", label: "월 차임 (숫자, 전세면 0)", type: "text" },
       { key: "rent_day", label: "차임 지급일", type: "text", hint: "예: 매월 10일" },
       { key: "mgmt_fee", label: "관리비", type: "text", hint: "예: 월 150,000원 / 없으면 비움" },
       { key: "start_date", label: "임대차 시작일", type: "date" },
       { key: "end_date", label: "임대차 종료일", type: "date" },
+      { key: "move_in", label: "입주일", type: "text", hint: "비우면 임대차 시작일과 동일로 간주" },
+      { key: "prior_rights", label: "등기부 확인", type: "checks", options: [
+        { v: "clear", label: { ko: "임대인은 등기부등본상 선순위 저당권·가압류 등 권리가 없음을 확인하였고, 잔금 지급 전까지 설정하지 않는다" } }
+      ]},
+      { key: "repair_duty", label: "수리·원상복구 부담", type: "select", options: [
+        { v: "landlord", label: { ko: "통상 필요한 수선은 임대인이 부담한다" } },
+        { v: "tenant", label: { ko: "소모성 수선은 임차인이 부담한다" } },
+        { v: "statutory", label: { ko: "민법 및 관련 법령에 따른다" } }
+      ]},
       { key: "special", label: "특약 사항", type: "textarea", hint: "한 줄에 하나씩 — 반려동물, 수리 부담 등" },
       { key: "doc_date", label: "작성 일자", type: "date" }
     ],
@@ -1044,9 +1065,20 @@ const DOC_TYPES = [
       { key: "workplace", label: "근무 장소", type: "text" },
       { key: "scope", label: "업무 내용", type: "textarea", required: true },
       { key: "work_hours", label: "근로시간", type: "text", hint: "예: 주 5일, 09:00~18:00 (휴게 12:00~13:00)" },
+      { key: "probation", label: "수습기간", type: "text", hint: "예: 3개월 — 없으면 비움" },
+      { key: "wage_type", label: "임금 형태", type: "select", options: [
+        { v: "monthly", label: { ko: "월급제" } },
+        { v: "hourly", label: { ko: "시급제" } },
+        { v: "daily", label: { ko: "일급제" } },
+        { v: "annual", label: { ko: "연봉제" } }
+      ]},
       { key: "wage", label: "기본급 (월, 숫자)", type: "text", required: true },
       { key: "wage_extra", label: "수당·기타 임금", type: "text", hint: "예: 식대 100,000원 / 없으면 비움" },
       { key: "pay_day", label: "임금 지급일", type: "text", hint: "예: 매월 25일" },
+      { key: "pay_method", label: "임금 지급 방법", type: "select", options: [
+        { v: "bank", label: { ko: "근로자 명의 계좌이체" } },
+        { v: "cash", label: { ko: "현금 직접 지급" } }
+      ]},
       { key: "doc_date", label: "작성 일자", type: "date" }
     ],
     signers: [
@@ -1116,6 +1148,32 @@ const DOC_TYPES = [
       { key: "doc_date", label: "작성 일자", type: "date" }
     ],
     render: { ko: renderPayOrderKo }
+  },
+  {
+    id: "small-claims",
+    name: "소액사건심판 소장",
+    langs: ["ko"],
+    price: 12900,
+    usageNote: "청구금액 3,000만원 이하 사건 대상. 법원은 보통 이행권고결정을 먼저 내리고, 피고가 이의하면 소송으로 진행됩니다. 인지대·송달료가 별도 발생하며 전자소송(ecfs.scourt.go.kr)으로도 제출 가능합니다.",
+    fields: [
+      { section: "원고" },
+      { key: "pl_name", label: "성명·상호", type: "text", required: true },
+      { key: "pl_id", label: "주민등록번호·사업자번호", type: "text" },
+      { key: "pl_addr", label: "주소·송달장소", type: "text", required: true },
+      { key: "pl_phone", label: "연락처", type: "tel" },
+      { section: "피고" },
+      { key: "df_name", label: "성명·상호", type: "text", required: true },
+      { key: "df_id", label: "주민등록번호·사업자번호", type: "text", hint: "모르면 비움" },
+      { key: "df_addr", label: "주소", type: "text", required: true, hint: "송달 가능한 주소 필수" },
+      { section: "청구 내용" },
+      { key: "amount", label: "청구 금액 (숫자, 3천만원 이하)", type: "text", required: true },
+      { key: "interest", label: "지연손해금", type: "text", hint: "예: 연 12% 또는 소장 송달 다음날부터 법정이율" },
+      { key: "facts", label: "청구 원인", type: "textarea", required: true, hint: "채권 발생 경위를 시간 순서로" },
+      { key: "evidence", label: "입증방법 (증거 목록)", type: "textarea", hint: "한 줄에 하나씩 — 차용증, 계좌이체 내역, 문자 메시지 등" },
+      { key: "court", label: "관할 법원", type: "text", hint: "예: 서울중앙지방법원 — 피고 주소지 관할" },
+      { key: "doc_date", label: "작성 일자", type: "date" }
+    ],
+    render: { ko: renderSmallClaimsKo }
   },
   {
     id: "nda",
@@ -2713,11 +2771,21 @@ function renderPledgeEn() {
     </div>`;
 }
 
-/* --- 부동산 임대차계약서 KO --- */
+/* --- 부동산 임대차계약서 KO — 국토부 표준임대차계약서 구조 준용 --- */
 function renderLeaseKo() {
   const special = lines("special");
   const rent = val("rent");
   const rentText = !rent || rent === "0" ? "없음 (전세)" : `월 금 ${esc(rent)}원 — 지급일: ${valOr("rent_day")}`;
+  const down = val("down_pay");
+  const mid = val("mid_pay");
+  const payRows = [];
+  if (down) payRows.push(`계약금: 금 ${esc(down)}원은 계약 체결과 동시에 지급한다`);
+  if (mid) payRows.push(`중도금: 금 ${esc(mid)}원은 ${val("mid_pay_when") ? esc(val("mid_pay_when")) : BLANK}에 지급한다`);
+  const balance = val("deposit") && down
+    ? `잔금: 금 ${(Number(String(val("deposit")).replace(/,/g,"")) - Number(String(down).replace(/,/g,"")) - (mid ? Number(String(mid).replace(/,/g,"")) : 0)).toLocaleString("ko-KR")}원은 ${val("balance_when") ? esc(val("balance_when")) : "입주일"}에 지급한다`
+    : `잔금: 금 ${valOr("deposit")}원은 ${val("balance_when") ? esc(val("balance_when")) : "입주일"}에 지급한다`;
+  payRows.push(balance);
+  const clearChecked = checkedLabels("prior_rights", "ko").length > 0;
   return `
     <h1 class="doc-title">부동산임대차계약서</h1>
     <table class="parties">
@@ -2726,12 +2794,20 @@ function renderLeaseKo() {
     </table>
     <p class="body">임대인과 임차인은 아래 목적물에 관하여 다음과 같이 임대차계약을 체결한다.</p>
     <h2>제1조 (목적물의 표시)</h2>
-    <p class="body">소재지: ${valOr("prop_addr")}<br/>목적물: ${valOr("prop_desc")}</p>
+    <p class="body">소재지: ${valOr("prop_addr")}${val("prop_land") ? "<br/>토 지: " + esc(val("prop_land")) : ""}${val("prop_bldg") ? "<br/>건 물: " + esc(val("prop_bldg")) : ""}<br/>임차할 부분: ${valOr("prop_desc")}</p>
     <h2>제2조 (임대차 기간)</h2>
-    <p class="body">${esc(fmtDate(val("start_date"), "ko"))}부터 ${esc(fmtDate(val("end_date"), "ko"))}까지로 한다.</p>
-    <h2>제3조 (보증금 및 차임)</h2>
+    <p class="body">${esc(fmtDate(val("start_date"), "ko"))}부터 ${esc(fmtDate(val("end_date"), "ko"))}까지로 한다. 임차인의 입주일은 ${val("move_in") ? esc(val("move_in")) : "임대차 개시일"}로 한다.</p>
+    <h2>제3조 (보증금·차임 및 관리비)</h2>
     <p class="body">보증금: 금 ${valOr("deposit")}원<br/>차임: ${rentText}${val("mgmt_fee") ? "<br/>관리비: " + esc(val("mgmt_fee")) : ""}</p>
-    <h2>제4조 (특약 사항)</h2>
+    <h2>제4조 (보증금의 지급)</h2>
+    <ol class="evidence">${payRows.map(t => `<li>${t}</li>`).join("")}</ol>
+    <h2>제5조 (인도·수리 및 원상복구)</h2>
+    <p class="body">1. 임대인은 입주일까지 목적물을 사용·수익할 수 있는 상태로 인도한다.</p>
+    <p class="body">2. ${esc(optText("repair_duty", "ko") || "통상 필요한 수선은 임대인이 부담한다")}. 임차인의 고의·과실로 인한 파손은 임차인이 부담한다.</p>
+    <p class="body">3. 임차인은 계약 종료 시 목적물을 원상으로 회복하여 임대인에게 명도한다.</p>
+    <p class="body">4. 임대인의 동의 없이 목적물을 전대(전대차)하거나 용도를 변경할 수 없다.</p>
+    ${clearChecked ? `<h2>제6조 (등기사항 확인)</h2><p class="body">임대인은 등기부등본상 본건 부동산에 선순위 저당권·가압류 등 임차인의 보증금 반환을 해하는 권리가 없음을 확인하였고, 잔금 지급일까지 이를 설정하지 않는다.</p>` : ""}
+    <h2>${clearChecked ? "제7조" : "제6조"} (특약 사항)</h2>
     ${special.length ? `<ol class="evidence">${special.map(t => `<li>${esc(t)}</li>`).join("")}</ol>` : `<p class="body">특약 없음</p>`}
     <p class="body" style="margin-top:24px;">본 계약의 성립을 증명하기 위하여 계약서 2부를 작성하고 임대인과 임차인이 각각 서명·날인하여 1부씩 보관한다.</p>
     <div class="doc-foot">
@@ -2754,7 +2830,7 @@ function renderEmployKo() {
     </table>
     <p class="body">사용자와 근로자는 다음과 같이 근로계약을 체결한다.</p>
     <h2>1. 근로계약기간</h2>
-    <p class="body">${termText}</p>
+    <p class="body">${termText}${val("probation") ? "<br/>수습기간: 입사일로부터 " + esc(val("probation")) + " (수습기간 중에도 본 계약의 근로조건이 동일하게 적용된다)" : ""}</p>
     <h2>2. 근무 장소</h2>
     <p class="body">${valOr("workplace")}</p>
     <h2>3. 업무 내용</h2>
@@ -2764,7 +2840,9 @@ function renderEmployKo() {
     <h2>5. 휴일·휴가</h2>
     <p class="body">주휴일 및 연차유급휴가는 근로기준법에 따른다.</p>
     <h2>6. 임금</h2>
-    <p class="body">기본급: 월 금 ${valOr("wage")}원${val("wage_extra") ? "<br/>기타 수당: " + esc(val("wage_extra")) : ""}<br/>지급일: ${valOr("pay_day")} / 지급 방법: 근로자 명의 계좌이체</p>
+    <p class="body">임금 형태: ${esc(optText("wage_type", "ko") || "월급제")}<br/>기본급: 월 금 ${valOr("wage")}원${val("wage_extra") ? "<br/>기타 수당: " + esc(val("wage_extra")) : ""}<br/>지급일: ${valOr("pay_day")} / 지급 방법: ${esc(optText("pay_method", "ko") || "근로자 명의 계좌이체")}</p>
+    <h2>7. 사회보험 및 퇴직급여</h2>
+    <p class="body">사용자는 고용보험·산재보험·국민연금·건강보험에 관한 법령에 따라 가입하며, 근로자의 퇴직 시 근로자퇴직급여보장법에 따라 퇴직급여를 지급한다.</p>
     <p class="body" style="margin-top:24px;">본 계약의 체결을 증명하기 위하여 계약서 2부를 작성하고 사용자와 근로자가 각각 서명·날인하여 1부씩 보관한다.</p>
     <div class="doc-foot">
       <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
@@ -3110,6 +3188,33 @@ function renderInvoiceEn() {
     </div>`;
 }
 
+
+/* --- 소액사건심판 소장 KO --- */
+function renderSmallClaimsKo() {
+  const ev = lines("evidence");
+  return `
+    <h1 class="doc-title">소 장</h1>
+    <div class="doc-subtitle">소액사건심판 청구</div>
+    <table class="parties">
+      <tr><td class="lbl">원고</td><td>성명·상호: ${valOr("pl_name")}<br/>주민등록번호·사업자번호: ${valOr("pl_id")}<br/>주소·송달장소: ${valOr("pl_addr")}<br/>연락처: ${valOr("pl_phone")}</td></tr>
+      <tr><td class="lbl">피고</td><td>성명·상호: ${valOr("df_name")}<br/>주민등록번호·사업자번호: ${valOr("df_id")}<br/>주소: ${valOr("df_addr")}</td></tr>
+    </table>
+    <h2>청 구 취 지</h2>
+    <p class="body">1. 피고는 원고에게 금 ${valOr("amount")}원${val("interest") ? " 및 이에 대한 지연손해금(" + esc(val("interest")) + ")" : ""}을 지급하라.</p>
+    <p class="body">2. 소송비용은 피고의 부담으로 한다.</p>
+    <p class="body">라는 재판을 구합니다.</p>
+    <h2>청 구 원 인</h2>
+    <p class="body">${valOr("facts")}</p>
+    ${ev.length ? `<h2>입 증 방 법</h2><ol class="evidence">${ev.map(e => `<li>${esc(e)}</li>`).join("")}</ol>` : ""}
+    <h2>첨 부 서 류</h2>
+    <p class="body">1. 소장부본 1통　2. 입증서류 각 1통</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">원고 ${valOr("pl_name")} &nbsp;(인)</div>
+      <div class="recipient">${valOr("court")} 귀중</div>
+    </div>`;
+}
+
 /* ---------- 화면 상태 ---------- */
 function render() {
   const paper = document.getElementById("paper");
@@ -3427,6 +3532,13 @@ const SAMPLES = {
     amount: "5,000,000", claim_type: "loan",
     facts: "채권자는 2026년 3월 1일 채무자에게 금 5,000,000원을 무이자로 대여하였고, 변제기일인 2026년 9월 1일이 경과하였으나 채무자는 변제하지 않고 있습니다.",
     interest: "연 12%", court: "서울중앙지방법원"
+  },
+  "small-claims": {
+    pl_name: "김원고", pl_id: "900101-1******", pl_addr: "서울특별시 마포구 ○○로 45", pl_phone: "010-1234-5678",
+    df_name: "이피고", df_id: "", df_addr: "경기도 성남시 ○○동 67-8",
+    amount: "5,000,000", interest: "소장 송달일 다음날부터 다 갚는 날까지 연 12%",
+    facts: "원고는 2026년 3월 1일 피고에게 금 5,000,000원을 무이자로 대여하였고 변제기는 2026년 9월 1일입니다. 그러나 피고는 변제기가 지났음에도 이를 변제하지 않고 있습니다.",
+    evidence: "차용증 1통\n계좌이체 확인서 1통\n변제 독촉 문자메시지 출력물 1통", court: "서울중앙지방법원"
   },
   "nda": {
     a_name: "주식회사 ○○테크", a_addr: "서울특별시 서초구 ○○로 100",
