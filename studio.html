@@ -75,7 +75,9 @@
     .studio-head h1 { font-size: 2.1rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 10px; }
     .studio-head p { color: var(--text-secondary); max-width: 680px; margin: 0 auto; font-size: 1rem; }
 
-    .doc-tabs { display: flex; gap: 10px; justify-content: center; margin-bottom: 14px; flex-wrap: wrap; }
+    .doc-tabs { margin-bottom: 14px; }
+    .doc-filter { width: 100%; max-width: 420px; display: block; margin: 0 auto 10px; padding: 9px 14px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg-elevated, #1E2942); color: inherit; font-size: 14px; box-sizing: border-box; }
+    .doc-tab-grid { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; max-height: 220px; overflow-y: auto; }
     .doc-tab {
       background: var(--bg-surface); border: 1px solid var(--border-subtle); color: var(--text-secondary);
       padding: 10px 20px; border-radius: 10px; font-weight: 600; font-size: 0.95rem; cursor: pointer;
@@ -549,6 +551,156 @@
         <p>해외 거래 대금 청구용 인보이스. '품목명 | 수량 | 단가' 한 줄 입력으로 표와 합계가 자동 계산됩니다. 한·영 지원.</p>
         <div class="cat-price" data-doc="invoice"></div>
         <button class="btn btn-ghost" onclick="selectDoc('invoice');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-employment-cert">
+        <h3>재직·경력증명서 · Employment Certificate</h3>
+        <p>비자·대출·이직 제출용 재직/경력증명서. 재직기간·부서직위·제출 용도를 표기하며 퇴직자는 경력증명서로 자동 전환됩니다. 한·영 지원.</p>
+        <div class="cat-price" data-doc="employment-cert"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('employment-cert');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-resignation">
+        <h3>사직서 · Resignation Letter</h3>
+        <p>입사일·퇴직 예정일·사유를 명시한 사직서. 사유를 선택지로 정리해 어색한 표현 없이 바로 제출 가능한 형태로 완성됩니다.</p>
+        <div class="cat-price" data-doc="resignation"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('resignation');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-accusation">
+        <h3>고발장</h3>
+        <p>제3자 범죄를 수사기관에 신고하는 고발장. 표준서식(고발인→피고발인→고발취지→범죄사실→증거자료) 구조와 죄명 자동 표기를 지원합니다.</p>
+        <div class="cat-price" data-doc="accusation"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('accusation');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-inheritance-split">
+        <h3>상속재산 분할협의서</h3>
+        <p>공동상속인 전원 합의로 상속재산을 나눌 때 쓰는 분할협의서. 상속인 표·분할 내용 표·기타 약정까지 표준 구조로 정리됩니다.</p>
+        <div class="cat-price" data-doc="inheritance-split"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('inheritance-split');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-defect-claim">
+        <h3>하자보수 요구서</h3>
+        <p>분양·인테리어·건설 하자에 대한 보수 요구서. 하자 목록·보수 기한·법적 조치 예고를 포함해 내용증명 발송용으로 적합합니다.</p>
+        <div class="cat-price" data-doc="defect-claim"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('defect-claim');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-eviction-notice">
+        <h3>명도·퇴거 통지서</h3>
+        <p>차임 연체·계약 종료·무단 점유 시 임차인에게 보내는 명도 통지서. 미납 차임 청구와 법적 조치 예고를 포함합니다.</p>
+        <div class="cat-price" data-doc="eviction-notice"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('eviction-notice');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-deposit-return">
+        <h3>보증금 반환 요구서</h3>
+        <p>임대차 종료 후 보증금을 돌려받지 못할 때 임대인에게 보내는 반환 요구서. 임차권등기명령·지급명령 예고 문구 포함.</p>
+        <div class="cat-price" data-doc="deposit-return"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('deposit-return');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-privacy-consent">
+        <h3>개인정보 수집·이용 동의서</h3>
+        <p>개인정보보호법 필수 기재사항(항목·목적·보유기간·제3자 제공·거부권)을 갖춘 동의서. 서비스·행사·채용 등 수집 시 제출용.</p>
+        <div class="cat-price" data-doc="privacy-consent"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('privacy-consent');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-partnership">
+        <h3>동업계약서</h3>
+        <p>2인 이상 공동사업의 출자·손익분배·업무집행·지분양도를 규정하는 동업계약서. 지분 양도 제한과 청산 조항 포함.</p>
+        <div class="cat-price" data-doc="partnership"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('partnership');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-incident-report">
+        <h3>시말서·경위서</h3>
+        <p>직장 사고·규정 위반의 경위·원인·대책을 정리하는 시말서. 회사 제출용 표준 구조(경위→원인·결과→향후 대책)로 작성됩니다.</p>
+        <div class="cat-price" data-doc="incident-report"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('incident-report');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-wage-claim">
+        <h3>임금체불 진정서</h3>
+        <p>고용노동청 제출용 임금체불 진정서. 재직기간·체불 내역 표(기간·항목·금액·합계)·첨부자료를 표준 구조로 정리합니다.</p>
+        <div class="cat-price" data-doc="wage-claim"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('wage-claim');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-termination-notice">
+        <h3>계약 해지·해제 통보서</h3>
+        <p>채무불이행·기간만료·약정 사유로 계약을 해지·해제할 때 보내는 통보서. 해지 효력 발생일·추가 이행 요구 사항 포함.</p>
+        <div class="cat-price" data-doc="termination-notice"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('termination-notice');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-sublease">
+        <h3>전대차계약서</h3>
+        <p>임차인이 제3자에게 전대(재임대)할 때의 계약서. 원임대차 기간 제한·임대인 동의 조항을 명시해 분쟁을 예방합니다.</p>
+        <div class="cat-price" data-doc="sublease"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('sublease');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-divorce-agreement">
+        <h3>이혼 합의서</h3>
+        <p>협의이혼 시 위자료·재산분할·자녀 친권·양육비·면접교섭을 정리하는 합의서. 법원 제출 전 당사자 간 합의 내용 확정용.</p>
+        <div class="cat-price" data-doc="divorce-agreement"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('divorce-agreement');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-fact-statement">
+        <h3>사실확인서·진술서 · Statement of Facts</h3>
+        <p>목격 내용·사실 관계를 서면으로 진술하는 문서. 수사기관·회사·보험사 제출용으로 사용되며 영문 진술서도 지원합니다.</p>
+        <div class="cat-price" data-doc="fact-statement"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('fact-statement');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-meeting-minutes">
+        <h3>회의록 · Meeting Minutes</h3>
+        <p>참석자·안건·결정사항을 표로 정리하는 회의록. 주주총회·이사회·실무 회의록에 활용 가능하며 한·영 지원.</p>
+        <div class="cat-price" data-doc="meeting-minutes"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('meeting-minutes');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-recommendation">
+        <h3>추천서 · Letter of Recommendation</h3>
+        <p>입학·취업·수상 추천용 추천서. 추천인의 직위·관계·추천 사유를 설득력 있게 구성하는 표준 구조. 한·영 지원.</p>
+        <div class="cat-price" data-doc="recommendation"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('recommendation');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-invitation-letter">
+        <h3>초청장 · Letter of Invitation</h3>
+        <p>비자 신청용 초청장 — 초청인 신원·방문 목적·체류 기간·비용 부담 주체를 명시. 대사관 제출용 영문 초청장 지원.</p>
+        <div class="cat-price" data-doc="invitation-letter"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('invitation-letter');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-child-travel-consent">
+        <h3>미성년자 해외여행 동의서 · Child Travel Consent</h3>
+        <p>미성년자가 부모 없이(또는 한쪽만과) 해외여행 시 필요한 부모 동의서. 입국 심사·항공사 요구 서류 대응. 한·영 지원.</p>
+        <div class="cat-price" data-doc="child-travel-consent"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('child-travel-consent');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-vehicle-sale">
+        <h3>자동차 매매계약서 · Bill of Sale</h3>
+        <p>중고차 개인 거래용 매매계약서. 차대번호·주행거리·현상태(as-is) 명시·이전등록 책임을 정리해 사후 분쟁을 예방합니다. 한·영 지원.</p>
+        <div class="cat-price" data-doc="vehicle-sale"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('vehicle-sale');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-quotation">
+        <h3>견적서 · Quotation</h3>
+        <p>품목·수량·단가 입력으로 합계 자동 계산되는 견적서. 유효기간·부가세 별도/포함 선택 지원. 한·영 출력.</p>
+        <div class="cat-price" data-doc="quotation"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('quotation');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-purchase-order">
+        <h3>발주서 · Purchase Order</h3>
+        <p>납기일·납품지·결제조건을 명시한 발주서. 품목 표와 합계가 자동 계산되며 해외 발주용 영문 출력 지원.</p>
+        <div class="cat-price" data-doc="purchase-order"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('purchase-order');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-receipt">
+        <h3>영수증 · Receipt</h3>
+        <p>금전 수령 사실을 증명하는 영수증. 품목 표 또는 총액 단독 입력 모두 지원, 결제 수단 명시. 한·영 출력.</p>
+        <div class="cat-price" data-doc="receipt"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('receipt');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-mou">
+        <h3>양해각서 · MOU</h3>
+        <p>정식 계약 전 협력 의사를 문서화하는 양해각서. 목적·협력 사항·유효기간·법적 효력(비구속/일부구속)을 선택 가능. 한·영 지원.</p>
+        <div class="cat-price" data-doc="mou"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('mou');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-proforma-invoice">
+        <h3>프로포마 인보이스 · Proforma Invoice</h3>
+        <p>무역 거래의 견적 송장. 인코텀즈·유효기간·결제 정보를 명시하고 품목 합계를 자동 계산합니다. 한·영 지원.</p>
+        <div class="cat-price" data-doc="proforma-invoice"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('proforma-invoice');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
     </div>
   </section>
@@ -1148,6 +1300,672 @@ const DOC_TYPES = [
       { key: "doc_date", label: "작성 일자", type: "date" }
     ],
     render: { ko: renderPayOrderKo }
+  },
+  {
+    id: "employment-cert",
+    name: "재직증명서 · Certificate of Employment",
+    langs: ["ko", "en"],
+    price: STUDIO.priceKrw,
+    usageNote: "비자·대출·이직 제출용. 퇴사일을 입력하면 경력증명서로 전환됩니다. 회사 직인 날인이 필요한 곳이 대부분입니다.",
+    fields: [
+      { section: "회사" },
+      { key: "a_name", label: "회사명", type: "text", required: true },
+      { key: "a_addr", label: "회사 주소", type: "text" },
+      { key: "ceo_name", label: "대표자 성명", type: "text" },
+      { section: "직원" },
+      { key: "b_name", label: "성명", type: "text", required: true },
+      { key: "b_id", label: "생년월일", type: "text" },
+      { key: "dept", label: "부서·직위", type: "text", hint: "예: 개발팀 대리" },
+      { key: "start_date", label: "입사일", type: "date" },
+      { key: "end_date", label: "퇴사일 (재직 중이면 비움)", type: "date" },
+      { key: "purpose", label: "제출 용도", type: "text", hint: "예: 비자 신청용 / 대출 심사용" },
+      { key: "doc_date", label: "발급 일자", type: "date" }
+    ],
+    render: { ko: renderEmpCertKo, en: renderEmpCertEn }
+  },
+  {
+    id: "resignation",
+    name: "사직서",
+    langs: ["ko"],
+    price: STUDIO.priceKrw,
+    usageNote: "사직서는 상대방 승낙 없이도 통상 퇴직 의사표시로서 도달 후 일정 기간 경과 시 효력이 발생합니다 (민법 제660조, 도달 후 1개월).",
+    fields: [
+      { key: "b_name", label: "성명", type: "text", required: true },
+      { key: "dept", label: "부서·직위", type: "text" },
+      { key: "b_id", label: "사번·생년월일", type: "text" },
+      { key: "start_date", label: "입사일", type: "date" },
+      { key: "end_date", label: "퇴직 예정일", type: "date" },
+      { key: "reason", label: "사직 사유", type: "select", options: [
+        { v: "personal", label: { ko: "일신상의 사유" } },
+        { v: "career", label: { ko: "이직·진로 변경" } },
+        { v: "health", label: { ko: "건강상의 사유" } },
+        { v: "other", label: { ko: "기타" } }
+      ]},
+      { key: "facts", label: "상세 사유 (선택)", type: "textarea" },
+      { key: "a_name", label: "회사명", type: "text", required: true },
+      { key: "doc_date", label: "작성 일자", type: "date" }
+    ],
+    render: { ko: renderResignKo }
+  },
+  {
+    id: "accusation",
+    name: "고발장",
+    langs: ["ko"],
+    price: STUDIO.priceKrw,
+    usageNote: "고발은 피해자가 아닌 제3자가 범죄사실을 신고하는 것입니다. 자신이 피해자라면 고소장을 사용하세요.",
+    fields: [
+      { section: "1. 고발인" },
+      { key: "c_name", label: "성명", type: "text", required: true },
+      { key: "c_id", label: "주민등록번호", type: "text" },
+      { key: "c_addr", label: "주소", type: "text", required: true },
+      { key: "c_phone", label: "연락처", type: "tel", required: true },
+      { section: "2. 피고발인" },
+      { key: "d_name", label: "성명", type: "text", required: true, hint: "모르면 '불상' 표기됨" },
+      { key: "d_id", label: "주민등록번호", type: "text" },
+      { key: "d_addr", label: "주소·현거주지", type: "text" },
+      { section: "3. 범죄 사실" },
+      { key: "crime_type", label: "죄목", type: "select", options: [
+        { v: "fraud", label: { ko: "사기죄 (형법 제347조)" } },
+        { v: "embezzle", label: { ko: "횡령·배임죄 (형법 제355·356조)" } },
+        { v: "defamation", label: { ko: "명예훼손 (형법 제307조)" } },
+        { v: "assault", label: { ko: "폭행·상해 (형법 제257·260조)" } },
+        { v: "other", label: { ko: "기타 범죄" } }
+      ]},
+      { key: "facts", label: "범죄사실 (언제·어디서·무엇을)", type: "textarea", required: true },
+      { key: "reason", label: "고발 이유", type: "textarea", required: true },
+      { key: "evidence", label: "증거자료", type: "textarea", hint: "한 줄에 하나씩" },
+      { key: "police", label: "제출 기관", type: "text", hint: "예: ○○경찰서 — '장 귀중' 자동 표기" },
+      { key: "doc_date", label: "작성 일자", type: "date" }
+    ],
+    render: { ko: renderAccusationKo }
+  },
+  {
+    id: "inheritance-split",
+    name: "상속재산 분할협의서",
+    langs: ["ko"],
+    price: 12900,
+    usageNote: "공동상속인 전원의 합의·인감 날인이 필요합니다. 한 명이라도 빠지면 무효입니다. 상속등기·금융기관 절차에 인감증명서 첨부가 필요합니다.",
+    fields: [
+      { section: "피상속인 (망인)" },
+      { key: "dec_name", label: "성명", type: "text", required: true },
+      { key: "dec_date", label: "사망일", type: "date" },
+      { key: "dec_addr", label: "최후 주소", type: "text" },
+      { section: "공동상속인" },
+      { key: "heirs", label: "상속인 목록", type: "textarea", required: true, hint: "한 줄에 하나씩: 성명 | 관계 | 주민등록번호 | 주소" },
+      { section: "분할 내용" },
+      { key: "split", label: "재산 분할 내역", type: "textarea", required: true, hint: "한 줄에 하나씩: 재산 | 상속인 | 지분 또는 전부" },
+      { key: "special", label: "기타 약정", type: "textarea", hint: "한 줄에 하나씩" },
+      { key: "doc_date", label: "작성 일자", type: "date" }
+    ],
+    render: { ko: renderInheritKo }
+  },
+  {
+    id: "defect-claim",
+    name: "하자보수 요구서",
+    langs: ["ko"],
+    price: STUDIO.priceKrw,
+    usageNote: "내용증명 우편으로 발송해야 발송 사실·내용이 증명됩니다. 하자보수는 공사 종류별 담보책임기간 내에 청구해야 합니다 (공동주택관리법 별표 4).",
+    fields: [
+      { section: "발신인 (소유자·입주자)" },
+      { key: "s_name", label: "성명", type: "text", required: true },
+      { key: "s_addr", label: "주소", type: "text" },
+      { key: "s_phone", label: "연락처", type: "tel" },
+      { section: "수신인 (시공사·시행사)" },
+      { key: "r_name", label: "상호·성명", type: "text", required: true },
+      { key: "r_addr", label: "주소", type: "text" },
+      { section: "하자 내용" },
+      { key: "prop_addr", label: "건물 소재지", type: "text", required: true },
+      { key: "contract_info", label: "공사 계약 정보", type: "text", hint: "예: 2025. 3. 10. 건축공사 계약, 대금 1억" },
+      { key: "defects", label: "하자 내용", type: "textarea", required: true, hint: "한 줄에 하나씩 — 위치와 증상을 구체적으로" },
+      { key: "deadline", label: "보수 요구 기한", type: "text", hint: "예: 수신 후 14일 이내" },
+      { key: "doc_date", label: "작성 일자", type: "date" }
+    ],
+    render: { ko: renderDefectKo }
+  },
+  {
+    id: "eviction-notice",
+    name: "명도·퇴거 통지서",
+    langs: ["ko"],
+    price: STUDIO.priceKrw,
+    usageNote: "차임 연체 시 먼저 '연체 차임 지급 최고'를 내용증명으로 보내고, 그래도 불이행하면 계약 해지 + 명도 청구 순서가 안전합니다.",
+    fields: [
+      { section: "임대인 (발신인)" },
+      { key: "l_name", label: "성명·상호", type: "text", required: true },
+      { key: "l_addr", label: "주소", type: "text" },
+      { key: "l_phone", label: "연락처", type: "tel" },
+      { section: "임차인 (수신인)" },
+      { key: "t_name", label: "성명", type: "text", required: true },
+      { key: "t_addr", label: "주소 (목적물 주소)", type: "text", required: true },
+      { section: "통지 내용" },
+      { key: "prop_addr", label: "목적물 소재지", type: "text", required: true },
+      { key: "reason", label: "퇴거 사유", type: "select", options: [
+        { v: "expire", label: { ko: "임대차 기간 만료" } },
+        { v: "rent", label: { ko: "차임 연체로 인한 해지" } },
+        { v: "breach", label: { ko: "기타 계약 위반으로 인한 해지" } }
+      ]},
+      { key: "unpaid", label: "미납 차임 (있으면)", type: "text", hint: "예: 3개월분 1,500,000원" },
+      { key: "deadline", label: "명도 기한", type: "text", hint: "예: 본 통지 수령 후 30일 이내" },
+      { key: "doc_date", label: "작성 일자", type: "date" }
+    ],
+    render: { ko: renderEvictionKo }
+  },
+  {
+    id: "deposit-return",
+    name: "보증금 반환 요구서",
+    langs: ["ko"],
+    price: STUDIO.priceKrw,
+    usageNote: "퇴거 완료 후에도 보증금을 돌려받지 못할 때 사용합니다. 대항력 유지를 위해 전입신고는 임대차종료까지 유지하세요.",
+    fields: [
+      { section: "임차인 (발신인)" },
+      { key: "s_name", label: "성명", type: "text", required: true },
+      { key: "s_addr", label: "주소", type: "text" },
+      { key: "s_phone", label: "연락처", type: "tel" },
+      { section: "임대인 (수신인)" },
+      { key: "r_name", label: "성명", type: "text", required: true },
+      { key: "r_addr", label: "주소", type: "text", required: true },
+      { section: "요구 내용" },
+      { key: "prop_addr", label: "목적물 소재지", type: "text", required: true },
+      { key: "deposit", label: "보증금 (숫자)", type: "text", required: true },
+      { key: "end_date", label: "임대차 종료일", type: "date" },
+      { key: "move_out", label: "명도(퇴거) 완료일", type: "text" },
+      { key: "deadline", label: "반환 요구 기한", type: "text", hint: "예: 본 서신 수령 후 14일 이내" },
+      { key: "repay_account", label: "반환 계좌", type: "text" },
+      { key: "doc_date", label: "작성 일자", type: "date" }
+    ],
+    render: { ko: renderDepositKo }
+  },
+  {
+    id: "privacy-consent",
+    name: "개인정보 수집·이용 동의서",
+    langs: ["ko"],
+    price: STUDIO.priceKrw,
+    usageNote: "개인정보보호법 제15조에 따라 수집 항목·목적·보유기간·동의거부권을 명시해야 유효합니다. 민감정보·고유식별정보는 별도 동의가 필요합니다.",
+    fields: [
+      { section: "수집·이용자" },
+      { key: "a_name", label: "회사·기관명", type: "text", required: true },
+      { key: "a_addr", label: "주소", type: "text" },
+      { key: "a_contact", label: "연락처·개인정보 담당자", type: "text" },
+      { section: "정보 주체" },
+      { key: "b_name", label: "성명", type: "text", required: true },
+      { key: "b_id", label: "생년월일", type: "text" },
+      { key: "b_phone", label: "연락처", type: "tel" },
+      { section: "동의 내용" },
+      { key: "items", label: "수집 항목", type: "textarea", required: true, hint: "한 줄에 하나씩: 성명, 연락처, 이메일 등" },
+      { key: "purpose", label: "수집·이용 목적", type: "textarea", required: true },
+      { key: "term", label: "보유·이용 기간", type: "text", required: true, hint: "예: 목적 달성 시까지 / 수집일로부터 3년" },
+      { key: "third_party", label: "제3자 제공 여부", type: "select", options: [
+        { v: "no", label: { ko: "제3자 제공 없음" } },
+        { v: "yes", label: { ko: "제3자 제공 있음 (동의서에 제공처·목적 기재)" } }
+      ]},
+      { key: "third_detail", label: "제3자 제공 상세", type: "textarea", hint: "제공받는 자 | 목적 | 항목 | 기간 (선택)" },
+      { key: "doc_date", label: "작성 일자", type: "date" }
+    ],
+    signers: [{ key: "sig_b", label: "정보주체 서명", enLabel: "Data subject signature" }],
+    render: { ko: renderPrivacyKo }
+  },
+  {
+    id: "partnership",
+    name: "동업계약서",
+    langs: ["ko"],
+    price: 14900,
+    usageNote: "동업은 출자·손익분배·업무집행권·탈퇴 조항이 핵심입니다. 분쟁 예방을 위해 해산·청산 절차까지 정하는 것이 좋습니다.",
+    fields: [
+      { section: "동업자 갑" },
+      { key: "a_name", label: "성명", type: "text", required: true },
+      { key: "a_addr", label: "주소", type: "text" },
+      { key: "a_capital", label: "출자액 (숫자)", type: "text", required: true },
+      { section: "동업자 을" },
+      { key: "b_name", label: "성명", type: "text", required: true },
+      { key: "b_addr", label: "주소", type: "text" },
+      { key: "b_capital", label: "출자액 (숫자)", type: "text", required: true },
+      { section: "동업 내용" },
+      { key: "biz_name", label: "사업 명칭", type: "text" },
+      { key: "scope", label: "사업 목적·내용", type: "textarea", required: true },
+      { key: "profit_ratio", label: "손익 분배 비율", type: "text", hint: "예: 출자 비율에 따름 / 갑 60% 을 40%" },
+      { key: "manage", label: "업무 집행", type: "select", options: [
+        { v: "joint", label: { ko: "갑·을 공동 집행" } },
+        { v: "a", label: { ko: "갑이 대표하여 집행" } },
+        { v: "b", label: { ko: "을이 대표하여 집행" } }
+      ]},
+      { key: "special", label: "기타 약정 (탈퇴·청산 등)", type: "textarea" },
+      { key: "doc_date", label: "작성 일자", type: "date" }
+    ],
+    signers: [
+      { key: "sig_a", label: "갑 서명", enLabel: "Partner A signature" },
+      { key: "sig_b", label: "을 서명", enLabel: "Partner B signature" }
+    ],
+    render: { ko: renderPartnerKo }
+  },
+  {
+    id: "incident-report",
+    name: "시말서·경위서",
+    langs: ["ko"],
+    price: STUDIO.priceKrw,
+    usageNote: "직장·학교·사고 경위 제출용. 사실 관계를 시간 순서로, 감정 표현 없이 기재하는 것이 요령입니다.",
+    fields: [
+      { key: "c_name", label: "작성인 성명", type: "text", required: true },
+      { key: "dept", label: "소속·직위", type: "text" },
+      { key: "b_id", label: "사번·생년월일", type: "text" },
+      { key: "incident_date", label: "사건 일시·장소", type: "text", required: true },
+      { key: "facts", label: "경위 (사실 관계)", type: "textarea", required: true, hint: "육하원칙에 따라 시간 순서로" },
+      { key: "cause", label: "원인 및 결과", type: "textarea" },
+      { key: "plan", label: "향후 대책·재발 방지", type: "textarea" },
+      { key: "a_name", label: "제출처 (회사·기관)", type: "text" },
+      { key: "doc_date", label: "작성 일자", type: "date" }
+    ],
+    render: { ko: renderIncidentKo }
+  },
+  {
+    id: "wage-claim",
+    name: "임금체불 진정서",
+    langs: ["ko"],
+    price: STUDIO.priceKrw,
+    usageNote: "고용노동부 민원마당(moel.go.kr)에서도 온라인 진정이 가능합니다. 이 서식은 방문·우편 제출용입니다.",
+    fields: [
+      { section: "진정인 (근로자)" },
+      { key: "c_name", label: "성명", type: "text", required: true },
+      { key: "c_id", label: "주민등록번호", type: "text" },
+      { key: "c_addr", label: "주소", type: "text" },
+      { key: "c_phone", label: "연락처", type: "tel" },
+      { section: "피진정인 (사업주)" },
+      { key: "d_name", label: "회사명·사업주", type: "text", required: true },
+      { key: "d_addr", label: "사업장 주소", type: "text", required: true },
+      { key: "ceo_name", label: "대표자 성명", type: "text" },
+      { section: "체불 내용" },
+      { key: "start_date", label: "입사일", type: "date" },
+      { key: "end_date", label: "퇴사일 (재직 중이면 비움)", type: "date" },
+      { key: "unpaid", label: "체불 임금 내역", type: "textarea", required: true, hint: "한 줄에 하나씩: 기간 | 항목 | 금액" },
+      { key: "total", label: "체불 총액 (숫자)", type: "text", required: true },
+      { key: "purpose", label: "진정 요지", type: "textarea", required: true, hint: "예: 체불 임금을 지급받을 수 있도록 조사·지도하여 주시기 바랍니다" },
+      { key: "evidence", label: "첨부·참고자료", type: "textarea" },
+      { key: "police", label: "제출 노동청", type: "text", hint: "예: 서울지방고용노동청 — '장 귀중' 자동 표기" },
+      { key: "doc_date", label: "작성 일자", type: "date" }
+    ],
+    render: { ko: renderWageClaimKo }
+  },
+  {
+    id: "termination-notice",
+    name: "계약 해지·해제 통보서",
+    langs: ["ko"],
+    price: STUDIO.priceKrw,
+    usageNote: "계약서의 해지 조항(통보 기간·방법)을 먼저 확인하세요. 위반을 이유로 한 해제는 상대방의 채무불이행 사실을 구체적으로 적어야 합니다.",
+    fields: [
+      { section: "발신인" },
+      { key: "s_name", label: "성명·상호", type: "text", required: true },
+      { key: "s_addr", label: "주소", type: "text" },
+      { key: "s_phone", label: "연락처", type: "tel" },
+      { section: "수신인" },
+      { key: "r_name", label: "성명·상호", type: "text", required: true },
+      { key: "r_addr", label: "주소", type: "text" },
+      { section: "통보 내용" },
+      { key: "contract_name", label: "계약 명칭·체결일", type: "text", required: true, hint: "예: 2025. 6. 1. 체결 용역계약" },
+      { key: "reason_type", label: "해지·해제 사유", type: "select", options: [
+        { v: "breach", label: { ko: "상대방의 계약 위반 (해제)" } },
+        { v: "expire", label: { ko: "기간 만료에 따른 갱신 거절" } },
+        { v: "convenience", label: { ko: "약정 해지권 행사" } }
+      ]},
+      { key: "facts", label: "구체적 사유", type: "textarea", required: true },
+      { key: "eff_date", label: "효력 발생일", type: "text", hint: "예: 본 통보 도달일 / 2026. 11. 1." },
+      { key: "demands", label: "정산·반환 요구", type: "textarea", hint: "한 줄에 하나씩" },
+      { key: "doc_date", label: "작성 일자", type: "date" }
+    ],
+    render: { ko: renderTermKo }
+  },
+  {
+    id: "sublease",
+    name: "전대차계약서",
+    langs: ["ko"],
+    price: 12900,
+    usageNote: "전대차는 원칙적으로 임대인의 서면 동의가 필요합니다 (민법 제629조). 동의 없는 전대는 임대인의 해지 사유가 됩니다.",
+    fields: [
+      { section: "전대인 (임차인)" },
+      { key: "l_name", label: "성명", type: "text", required: true },
+      { key: "l_addr", label: "주소", type: "text" },
+      { key: "l_phone", label: "연락처", type: "tel" },
+      { section: "전차인" },
+      { key: "t_name", label: "성명", type: "text", required: true },
+      { key: "t_addr", label: "주소", type: "text" },
+      { key: "t_phone", label: "연락처", type: "tel" },
+      { section: "목적물·조건" },
+      { key: "prop_addr", label: "부동산 소재지", type: "text", required: true },
+      { key: "prop_desc", label: "전대 부분", type: "text" },
+      { key: "deposit", label: "전대 보증금 (숫자)", type: "text", required: true },
+      { key: "rent", label: "월 차임 (숫자)", type: "text" },
+      { key: "rent_day", label: "차임 지급일", type: "text" },
+      { key: "start_date", label: "전대차 시작일", type: "date" },
+      { key: "end_date", label: "전대차 종료일", type: "date", hint: "원임대차 기간을 넘을 수 없음" },
+      { key: "consent", label: "임대인 동의", type: "checks", options: [
+        { v: "yes", label: { ko: "원 임대인의 서면 동의를 받았다 (동의서 첨부)" } }
+      ]},
+      { key: "doc_date", label: "작성 일자", type: "date" }
+    ],
+    signers: [
+      { key: "sig_l", label: "전대인 서명", enLabel: "Sublessor signature" },
+      { key: "sig_t", label: "전차인 서명", enLabel: "Sublessee signature" }
+    ],
+    render: { ko: renderSubleaseKo }
+  },
+  {
+    id: "divorce-agreement",
+    name: "이혼 합의서",
+    langs: ["ko"],
+    price: 12900,
+    usageNote: "협의이혼은 법원에 협의이혼의사확인신청을 해야 성립합니다. 이 문서는 위자료·재산분할·양육에 관한 당사자 간 합의를 정리하는 서면입니다.",
+    fields: [
+      { section: "부 (甲)" },
+      { key: "a_name", label: "성명", type: "text", required: true },
+      { key: "a_id", label: "주민등록번호", type: "text" },
+      { key: "a_addr", label: "주소", type: "text" },
+      { section: "처 (乙)" },
+      { key: "b_name", label: "성명", type: "text", required: true },
+      { key: "b_id", label: "주민등록번호", type: "text" },
+      { key: "b_addr", label: "주소", type: "text" },
+      { section: "합의 내용" },
+      { key: "marriage_date", label: "혼인 신고일", type: "date" },
+      { key: "alimony", label: "위자료 (금액·지급방법)", type: "text", hint: "없으면 '없음' 기재" },
+      { key: "property", label: "재산분할 내용", type: "textarea", hint: "한 줄에 하나씩: 재산 | 귀속" },
+      { key: "custody", label: "자녀 친권·양육", type: "textarea", hint: "친권자·양육권자, 양육비, 면접교섭권" },
+      { key: "doc_date", label: "작성 일자", type: "date" }
+    ],
+    signers: [
+      { key: "sig_a", label: "갑 서명", enLabel: "Party A signature" },
+      { key: "sig_b", label: "을 서명", enLabel: "Party B signature" }
+    ],
+    render: { ko: renderDivorceKo }
+  },
+  {
+    id: "fact-statement",
+    name: "사실확인서·진술서",
+    langs: ["ko", "en"],
+    price: STUDIO.priceKrw,
+    usageNote: "증인 진술·사실 관계 확인용. 수사기관·법원 제출 시 진술인 인적사항과 날인이 필요합니다.",
+    fields: [
+      { key: "p_name", label: "진술인 성명", type: "text", required: true },
+      { key: "p_id", label: "생년월일·식별정보", type: "text" },
+      { key: "p_addr", label: "주소", type: "text" },
+      { key: "p_phone", label: "연락처", type: "tel" },
+      { key: "c_rel", label: "사건 관련인과의 관계", type: "text", hint: "예: 목격자, 직장동료" },
+      { key: "incident_date", label: "진술 대상 일시·장소", type: "text" },
+      { key: "facts", label: "진술 내용", type: "textarea", required: true },
+      { key: "police", label: "제출처", type: "text", hint: "예: ○○경찰서 / ○○지방법원" },
+      { key: "doc_date", label: "작성 일자", type: "date" }
+    ],
+    signers: [{ key: "sig_p", label: "진술인 서명", enLabel: "Declarant signature" }],
+    render: { ko: renderFactKo, en: renderFactEn }
+  },
+  {
+    id: "meeting-minutes",
+    name: "회의록 · Meeting Minutes",
+    langs: ["ko", "en"],
+    price: STUDIO.priceKrw,
+    usageNote: "의사록은 법인 의결의 증거가 됩니다. 주주총회·이사회 의사록은 공증이 필요한 경우가 있습니다.",
+    fields: [
+      { key: "meeting_name", label: "회의 명칭", type: "text", required: true },
+      { key: "meeting_date", label: "개최 일시", type: "text", required: true },
+      { key: "place", label: "장소", type: "text" },
+      { key: "attendees", label: "참석자", type: "textarea", hint: "한 줄에 하나씩: 성명 | 직위" },
+      { key: "agenda", label: "안건 및 결정 사항", type: "textarea", required: true, hint: "한 줄에 하나씩: 안건 | 결정 내용" },
+      { key: "notes", label: "기타 논의 사항", type: "textarea" },
+      { key: "recorder", label: "기록자", type: "text" },
+      { key: "doc_date", label: "작성 일자", type: "date" }
+    ],
+    render: { ko: renderMinutesKo, en: renderMinutesEn }
+  },
+  {
+    id: "recommendation",
+    name: "추천서 · Letter of Recommendation",
+    langs: ["ko", "en"],
+    price: STUDIO.priceKrw,
+    usageNote: "입사·입학·수상 후보 추천용. 추천인의 기관·직위와 관계 기간을 명시해야 신뢰도가 높아집니다.",
+    fields: [
+      { section: "추천인" },
+      { key: "p_name", label: "성명", type: "text", required: true },
+      { key: "p_title", label: "직위·소속 기관", type: "text", required: true },
+      { key: "p_contact", label: "연락처·이메일", type: "text" },
+      { section: "피추천인" },
+      { key: "r_name", label: "성명", type: "text", required: true },
+      { key: "c_rel", label: "관계·알고 지낸 기간", type: "text", hint: "예: 직속 상사로 3년간 지도" },
+      { section: "추천 내용" },
+      { key: "purpose", label: "추천 목적", type: "text", required: true, hint: "예: ○○대학원 입학 추천" },
+      { key: "facts", label: "추천 사유 (역량·성과)", type: "textarea", required: true },
+      { key: "doc_date", label: "작성 일자", type: "date" }
+    ],
+    render: { ko: renderRecommendKo, en: renderRecommendEn }
+  },
+  {
+    id: "invitation-letter",
+    name: "비자 초청장 · Invitation Letter",
+    langs: ["ko", "en"],
+    price: 12900,
+    usageNote: "비자 신청용 초청장. 초청인의 신원·재정 부담·귀국 보장을 명시하면 심사에 유리합니다. 국가별 요구 양식을 확인하세요.",
+    fields: [
+      { section: "초청인" },
+      { key: "p_name", label: "성명", type: "text", required: true },
+      { key: "p_id", label: "생년월일", type: "text" },
+      { key: "p_addr", label: "주소", type: "text", required: true },
+      { key: "p_phone", label: "연락처", type: "tel" },
+      { key: "p_job", label: "직업·소속", type: "text" },
+      { section: "피초청인 (방문자)" },
+      { key: "v_name", label: "성명 (여권과 동일)", type: "text", required: true },
+      { key: "v_id", label: "생년월일", type: "text" },
+      { key: "v_passport", label: "여권 번호·국적", type: "text" },
+      { key: "c_rel", label: "초청인과의 관계", type: "text", required: true },
+      { section: "방문 내용" },
+      { key: "purpose", label: "방문 목적", type: "text", required: true, hint: "예: 가족 방문 / 관광 / 업무 회의" },
+      { key: "visit_period", label: "체류 기간", type: "text", required: true },
+      { key: "stay_addr", label: "체류지 주소", type: "text" },
+      { key: "expense", label: "비용 부담", type: "select", options: [
+        { v: "host", label: { ko: "초청인이 체재비 전액 부담", en: "the inviter bears all expenses" } },
+        { v: "visitor", label: { ko: "방문자 본인 부담", en: "the visitor bears own expenses" } },
+        { v: "shared", label: { ko: "일부 초청인 부담", en: "partially covered by the inviter" } }
+      ]},
+      { key: "doc_date", label: "작성 일자", type: "date" }
+    ],
+    signers: [{ key: "sig_p", label: "초청인 서명", enLabel: "Inviter signature" }],
+    render: { ko: renderInvitationKo, en: renderInvitationEn }
+  },
+  {
+    id: "child-travel-consent",
+    name: "미성년자 해외여행 동의서 · Child Travel Consent",
+    langs: ["ko", "en"],
+    price: 12900,
+    usageNote: "미성년자가 부모 없이 해외여행 시 항공사·출입국에서 요구할 수 있습니다. 공증 요구 국가가 있으니 목적국 요건을 확인하세요.",
+    fields: [
+      { section: "미성년자" },
+      { key: "v_name", label: "성명 (여권과 동일)", type: "text", required: true },
+      { key: "v_id", label: "생년월일", type: "text" },
+      { key: "v_passport", label: "여권 번호", type: "text" },
+      { section: "부모·법정대리인" },
+      { key: "p_name", label: "부·모 성명 1", type: "text", required: true },
+      { key: "p_rel", label: "관계", type: "text", hint: "예: 부" },
+      { key: "p_phone", label: "연락처", type: "tel" },
+      { key: "p2_name", label: "부·모 성명 2 (선택)", type: "text" },
+      { section: "여행 내용" },
+      { key: "dest", label: "여행지", type: "text", required: true },
+      { key: "visit_period", label: "여행 기간", type: "text", required: true },
+      { key: "companion", label: "동행인 성명·관계", type: "text", hint: "없으면 비움" },
+      { key: "doc_date", label: "작성 일자", type: "date" }
+    ],
+    signers: [
+      { key: "sig_p", label: "부모·대리인 1 서명", enLabel: "Parent/Guardian 1 signature" },
+      { key: "sig_p2", label: "부모·대리인 2 서명 (선택)", enLabel: "Parent/Guardian 2 signature" }
+    ],
+    render: { ko: renderChildTravelKo, en: renderChildTravelEn }
+  },
+  {
+    id: "vehicle-sale",
+    name: "자동차 매매계약서 · Vehicle Bill of Sale",
+    langs: ["ko", "en"],
+    price: 12900,
+    usageNote: "개인 간 중고차 거래용. 관인 계약서는 관할구청·차량등록사업소에서 별도 발급됩니다. 이 문서는 매매 조건의 증거 확보용입니다.",
+    fields: [
+      { section: "매도인 (판매자)" },
+      { key: "a_name", label: "성명", type: "text", required: true },
+      { key: "a_id", label: "주민등록번호·식별정보", type: "text" },
+      { key: "a_addr", label: "주소", type: "text" },
+      { key: "a_phone", label: "연락처", type: "tel" },
+      { section: "매수인 (구매자)" },
+      { key: "b_name", label: "성명", type: "text", required: true },
+      { key: "b_id", label: "주민등록번호·식별정보", type: "text" },
+      { key: "b_addr", label: "주소", type: "text" },
+      { key: "b_phone", label: "연락처", type: "tel" },
+      { section: "차량 정보" },
+      { key: "car_model", label: "차종·모델명", type: "text", required: true },
+      { key: "car_no", label: "차량 번호", type: "text" },
+      { key: "vin", label: "차대번호 (VIN)", type: "text" },
+      { key: "car_year", label: "연식", type: "text" },
+      { key: "mileage", label: "주행거리 (km)", type: "text" },
+      { section: "매매 조건" },
+      { key: "amount", label: "매매 대금 (숫자)", type: "text", required: true },
+      { key: "pay_method", label: "대금 지급 방법", type: "text", hint: "예: 계좌이체 / 계약금+잔금" },
+      { key: "delivery_date", label: "인도 예정일", type: "text" },
+      { key: "transfer", label: "명의 이전", type: "select", options: [
+        { v: "days15", label: { ko: "인도 후 15일 이내 이전등록 (법정 기한)", en: "transfer within 15 days (statutory deadline)" } },
+        { v: "immediate", label: { ko: "인도와 동시에 이전등록", en: "transfer upon delivery" } }
+      ]},
+      { key: "as_is", label: "차량 상태", type: "select", options: [
+        { v: "as_is", label: { ko: "현 상태로 매매 (as-is)", en: "sold as-is" } },
+        { v: "warranty", label: { ko: "매도인이 주요 결함 보증", en: "seller warrants major components" } }
+      ]},
+      { key: "doc_date", label: "작성 일자", type: "date" }
+    ],
+    signers: [
+      { key: "sig_a", label: "매도인 서명", enLabel: "Seller signature" },
+      { key: "sig_b", label: "매수인 서명", enLabel: "Buyer signature" }
+    ],
+    render: { ko: renderVehicleKo, en: renderVehicleEn }
+  },
+  {
+    id: "quotation",
+    name: "견적서 · Quotation",
+    langs: ["ko", "en"],
+    price: STUDIO.priceKrw,
+    usageNote: "품목을 '품목명 | 수량 | 단가' 형식으로 입력하면 소계·부가세·합계가 자동 계산됩니다.",
+    fields: [
+      { section: "발행인 (공급자)" },
+      { key: "s_name", label: "상호·성명", type: "text", required: true },
+      { key: "s_addr", label: "주소", type: "text" },
+      { key: "s_email", label: "연락처·이메일", type: "text" },
+      { section: "수신인 (고객)" },
+      { key: "r_name", label: "상호·성명", type: "text", required: true },
+      { key: "r_addr", label: "주소", type: "text" },
+      { section: "견적 내용" },
+      { key: "inv_no", label: "견적 번호", type: "text" },
+      { key: "items", label: "견적 품목", type: "textarea", required: true, hint: "한 줄에 하나씩: 품목명 | 수량 | 단가" },
+      { key: "currency", label: "통화", type: "select", options: CURRENCIES },
+      { key: "vat", label: "부가가치세", type: "select", options: [
+        { v: "separate", label: { ko: "부가세 별도 (10% 가산)", en: "VAT 10% added" } },
+        { v: "included", label: { ko: "부가세 포함", en: "VAT included" } },
+        { v: "none", label: { ko: "부가세 해당 없음", en: "no VAT" } }
+      ]},
+      { key: "valid_until", label: "견적 유효기간", type: "text", hint: "예: 발행 후 30일" },
+      { key: "notes", label: "비고", type: "textarea" },
+      { key: "doc_date", label: "발행 일자", type: "date" }
+    ],
+    render: { ko: renderQuotationKo, en: renderQuotationEn }
+  },
+  {
+    id: "purchase-order",
+    name: "발주서 · Purchase Order",
+    langs: ["ko", "en"],
+    price: STUDIO.priceKrw,
+    usageNote: "발주서는 납품업체에 대한 공식 주문 문서입니다. 품목을 '품목명 | 수량 | 단가'로 입력하면 합계가 자동 계산됩니다.",
+    fields: [
+      { section: "발주자 (구매자)" },
+      { key: "s_name", label: "상호·성명", type: "text", required: true },
+      { key: "s_addr", label: "주소", type: "text" },
+      { key: "s_email", label: "연락처·이메일", type: "text" },
+      { section: "수급자 (공급자)" },
+      { key: "r_name", label: "상호·성명", type: "text", required: true },
+      { key: "r_addr", label: "주소", type: "text" },
+      { section: "주문 내용" },
+      { key: "inv_no", label: "발주 번호 (PO No.)", type: "text" },
+      { key: "items", label: "주문 품목", type: "textarea", required: true, hint: "한 줄에 하나씩: 품목명 | 수량 | 단가" },
+      { key: "currency", label: "통화", type: "select", options: CURRENCIES },
+      { key: "delivery_date", label: "납기일", type: "text" },
+      { key: "delivery_addr", label: "납품 장소", type: "text" },
+      { key: "pay_terms", label: "대금 지급 조건", type: "text", hint: "예: 납품 후 30일 이내 계좌이체" },
+      { key: "doc_date", label: "발행 일자", type: "date" }
+    ],
+    render: { ko: renderPoKo, en: renderPoEn }
+  },
+  {
+    id: "receipt",
+    name: "영수증 · Receipt",
+    langs: ["ko", "en"],
+    price: 4900,
+    usageNote: "금전 수령 확인용. 품목을 입력하면 합계가 자동 계산되고, 직접 금액만 입력해도 됩니다.",
+    fields: [
+      { key: "s_name", label: "영수인 (받은 사람)", type: "text", required: true },
+      { key: "s_addr", label: "주소·소속", type: "text" },
+      { key: "r_name", label: "지급인 (낸 사람)", type: "text", required: true },
+      { key: "items", label: "품목·내역", type: "textarea", hint: "한 줄에 하나씩: 품목명 | 수량 | 단가 — 비우면 총액만" },
+      { key: "amount", label: "총액 (품목 없이 직접 입력)", type: "text" },
+      { key: "currency", label: "통화", type: "select", options: CURRENCIES },
+      { key: "pay_method", label: "결제 수단", type: "select", options: [
+        { v: "cash", label: { ko: "현금", en: "Cash" } },
+        { v: "bank", label: { ko: "계좌이체", en: "Bank transfer" } },
+        { v: "card", label: { ko: "카드", en: "Card" } },
+        { v: "other", label: { ko: "기타", en: "Other" } }
+      ]},
+      { key: "purpose", label: "영수 사유", type: "text", hint: "예: 물품대금 / 보증금 / 회비" },
+      { key: "doc_date", label: "영수 일자", type: "date" }
+    ],
+    render: { ko: renderReceiptKo, en: renderReceiptEn }
+  },
+  {
+    id: "mou",
+    name: "양해각서 · MOU",
+    langs: ["ko", "en"],
+    price: 12900,
+    usageNote: "MOU는 원칙적으로 구속력 없는 의향서입니다. 비용 분담·배타권 등 구속 조항을 넣으면 해당 조항만 구속력이 생길 수 있습니다.",
+    fields: [
+      { section: "갑 / Party A" },
+      { key: "a_name", label: "성명·상호", type: "text", required: true },
+      { key: "a_addr", label: "주소", type: "text" },
+      { section: "을 / Party B" },
+      { key: "b_name", label: "성명·상호", type: "text", required: true },
+      { key: "b_addr", label: "주소", type: "text" },
+      { section: "협력 내용" },
+      { key: "purpose", label: "협력 목적", type: "text", required: true },
+      { key: "scope", label: "주요 협력 사항", type: "textarea", required: true, hint: "한 줄에 하나씩" },
+      { key: "term", label: "유효 기간", type: "text", hint: "예: 체결일로부터 1년" },
+      { key: "binding", label: "법적 구속력", type: "select", options: [
+        { v: "none", label: { ko: "구속력 없는 의향서 (일반)", en: "non-binding (standard)" } },
+        { v: "partial", label: { ko: "비밀유지·비용 조항만 구속", en: "only confidentiality/cost clauses bind" } }
+      ]},
+      { key: "doc_date", label: "작성 일자", type: "date" }
+    ],
+    signers: [
+      { key: "sig_a", label: "갑 서명", enLabel: "Party A signature" },
+      { key: "sig_b", label: "을 서명", enLabel: "Party B signature" }
+    ],
+    render: { ko: renderMouKo, en: renderMouEn }
+  },
+  {
+    id: "proforma-invoice",
+    name: "프로포마 인보이스 · Proforma Invoice",
+    langs: ["ko", "en"],
+    price: STUDIO.priceKrw,
+    usageNote: "선적·선금 청구용 견적 송장. 통관 신고의 기초 자료로도 쓰입니다. 품목을 '품목명 | 수량 | 단가'로 입력하면 합계 자동 계산.",
+    fields: [
+      { section: "발행인 (수출자) / Seller" },
+      { key: "s_name", label: "상호·성명", type: "text", required: true },
+      { key: "s_addr", label: "주소", type: "text" },
+      { key: "s_email", label: "연락처·이메일", type: "text" },
+      { section: "수신인 (수입자) / Buyer" },
+      { key: "r_name", label: "상호·성명", type: "text", required: true },
+      { key: "r_addr", label: "주소", type: "text" },
+      { section: "송장 내용" },
+      { key: "inv_no", label: "송장 번호", type: "text" },
+      { key: "items", label: "품목", type: "textarea", required: true, hint: "한 줄에 하나씩: 품목명 | 수량 | 단가" },
+      { key: "currency", label: "통화", type: "select", options: CURRENCIES },
+      { key: "incoterm", label: "인코텀즈·거래 조건", type: "text", hint: "예: FOB Incheon / CIF LA" },
+      { key: "valid_until", label: "유효기간", type: "text" },
+      { key: "repay_account", label: "입금 계좌·결제 방법", type: "text" },
+      { key: "doc_date", label: "발행 일자", type: "date" }
+    ],
+    render: { ko: renderProformaKo, en: renderProformaEn }
   },
   {
     id: "small-claims",
@@ -3215,6 +4033,782 @@ function renderSmallClaimsKo() {
     </div>`;
 }
 
+
+/* ================= 렌더러: 세계 양식 확장팩 ================= */
+
+/* --- 재직증명서/경력증명서 --- */
+function renderEmpCertKo() {
+  const retired = !!val("end_date");
+  return `
+    <h1 class="doc-title">${retired ? "경 력 증 명 서" : "재 직 증 명 서"}</h1>
+    <table class="parties">
+      <tr><td class="lbl">성 명</td><td>${valOr("b_name")}</td></tr>
+      <tr><td class="lbl">생년월일</td><td>${valOr("b_id")}</td></tr>
+      <tr><td class="lbl">부서·직위</td><td>${valOr("dept")}</td></tr>
+      <tr><td class="lbl">재직기간</td><td>${esc(fmtDate(val("start_date"), "ko"))} ~ ${retired ? esc(fmtDate(val("end_date"), "ko")) : "현재"}</td></tr>
+      ${val("purpose") ? `<tr><td class="lbl">제출 용도</td><td>${esc(val("purpose"))}</td></tr>` : ""}
+    </table>
+    <p class="body">위 사람은 상기와 같이 본 회사에 ${retired ? "재직하였" : "재직하고 있"}음을 증명합니다.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">${valOr("a_name")}${val("ceo_name") ? "<br/>대표이사 " + esc(val("ceo_name")) : ""} &nbsp;(인)</div>
+      ${val("a_addr") ? `<div class="signer" style="font-size:13px; font-weight:400;">${esc(val("a_addr"))}</div>` : ""}
+    </div>`;
+}
+function renderEmpCertEn() {
+  const retired = !!val("end_date");
+  return `
+    <h1 class="doc-title">CERTIFICATE OF EMPLOYMENT</h1>
+    <table class="parties">
+      <tr><td class="lbl">NAME</td><td>${valOr("b_name")}</td></tr>
+      <tr><td class="lbl">DATE OF BIRTH</td><td>${valOr("b_id")}</td></tr>
+      <tr><td class="lbl">DEPT / POSITION</td><td>${valOr("dept")}</td></tr>
+      <tr><td class="lbl">PERIOD</td><td>${esc(fmtDate(val("start_date"), "en"))} — ${retired ? esc(fmtDate(val("end_date"), "en")) : "present"}</td></tr>
+      ${val("purpose") ? `<tr><td class="lbl">PURPOSE</td><td>${esc(val("purpose"))}</td></tr>` : ""}
+    </table>
+    <p class="body">This is to certify that the above-named person ${retired ? "was employed" : "is employed"} by this company.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "en"))}</div>
+      <div class="signer">${valOr("a_name")}${val("ceo_name") ? "<br/>CEO " + esc(val("ceo_name")) : ""} &nbsp;(seal)</div>
+    </div>`;
+}
+
+/* --- 사직서 --- */
+function renderResignKo() {
+  return `
+    <h1 class="doc-title">사 직 서</h1>
+    <table class="parties">
+      <tr><td class="lbl">성 명</td><td>${valOr("b_name")}</td></tr>
+      <tr><td class="lbl">부서·직위</td><td>${valOr("dept")}</td></tr>
+      <tr><td class="lbl">사번·생년월일</td><td>${valOr("b_id")}</td></tr>
+      <tr><td class="lbl">입사일</td><td>${esc(fmtDate(val("start_date"), "ko"))}</td></tr>
+      <tr><td class="lbl">퇴직 예정일</td><td>${esc(fmtDate(val("end_date"), "ko"))}</td></tr>
+    </table>
+    <p class="body">본인은 ${esc(optText("reason", "ko") || "일신상의 사유")}로 인하여 ${esc(fmtDate(val("end_date"), "ko"))}부로 사직하고자 이에 사직서를 제출합니다.${val("facts") ? "<br/><br/>" + valOr("facts") : ""}</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">작성인 ${valOr("b_name")} &nbsp;(인)</div>
+      <div class="recipient">${valOr("a_name")} 귀중</div>
+    </div>`;
+}
+
+/* --- 고발장 --- */
+function renderAccusationKo() {
+  const evidence = lines("evidence");
+  return `
+    <h1 class="doc-title">고 발 장</h1>
+    <p class="body" style="font-size:12px; color:#555;">고발장 기재사항 중 * 표시된 항목은 반드시 기재하여야 합니다.</p>
+    <h2>1. 고발인*</h2>
+    <table class="parties"><tr><td class="lbl">고발인</td><td>성 명: ${valOr("c_name")}<br/>주민등록번호: ${valOr("c_id")}<br/>주 소: ${valOr("c_addr")}<br/>연 락 처: ${valOr("c_phone")}</td></tr></table>
+    <h2>2. 피고발인*</h2>
+    <table class="parties"><tr><td class="lbl">피고발인</td><td>성 명: ${val("d_name") ? esc(val("d_name")) : "불 상"}<br/>주민등록번호: ${val("d_id") ? esc(val("d_id")) : "불 상"}<br/>주 소: ${val("d_addr") ? esc(val("d_addr")) : "불 상"}</td></tr></table>
+    <h2>3. 고발취지*</h2>
+    <p class="body">고발인은 피고발인을 ${esc(optText("crime_type", "ko") || "사기죄")}로 고발하오니 엄중히 수사하여 처벌하여 주시기 바랍니다.</p>
+    <h2>4. 범죄사실*</h2>
+    <p class="body">${valOr("facts")}</p>
+    <h2>5. 고발이유</h2>
+    <p class="body">${valOr("reason")}</p>
+    ${evidence.length ? `<h2>6. 증거자료</h2><ol class="evidence">${evidence.map(e => `<li>${esc(e)}</li>`).join("")}</ol>` : ""}
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">고발인 ${valOr("c_name")} &nbsp;(인)</div>
+      <div class="recipient">${(() => { const pv = val("police"); return pv ? esc(/장$/.test(pv.trim()) ? pv : pv.trim() + "장") + " 귀중" : BLANK + " 귀중"; })()}</div>
+    </div>`;
+}
+
+/* --- 상속재산 분할협의서 --- */
+function renderInheritKo() {
+  const heirs = lines("heirs");
+  const split = lines("split");
+  const special = lines("special");
+  return `
+    <h1 class="doc-title">상속재산 분할협의서</h1>
+    <table class="parties">
+      <tr><td class="lbl">피상속인</td><td>성명: ${valOr("dec_name")}<br/>사망일: ${esc(fmtDate(val("dec_date"), "ko"))}<br/>최후 주소: ${valOr("dec_addr")}</td></tr>
+    </table>
+    <h2>공동상속인</h2>
+    <table class="parties">
+      <tr><td class="lbl">성명</td><td>관계</td><td>주민등록번호</td><td>주소</td></tr>
+      ${heirs.map(h => { const x = h.split("|").map(t=>t.trim()); return `<tr><td>${esc(x[0]||"")}</td><td>${esc(x[1]||"")}</td><td>${esc(x[2]||"")}</td><td>${esc(x[3]||"")}</td></tr>`; }).join("")}
+    </table>
+    <p class="body">공동상속인 전원은 피상속인 ${valOr("dec_name")}의 상속재산에 대하여 다음과 같이 분할하기로 협의하였다.</p>
+    <h2>분할 내용</h2>
+    <table class="parties">
+      <tr><td class="lbl">재산</td><td>상속인</td><td>지분·내용</td></tr>
+      ${split.map(h => { const x = h.split("|").map(t=>t.trim()); return `<tr><td>${esc(x[0]||"")}</td><td>${esc(x[1]||"")}</td><td>${esc(x[2]||"")}</td></tr>`; }).join("")}
+    </table>
+    ${special.length ? `<h2>기타 약정</h2><ol class="evidence">${special.map(t=>`<li>${esc(t)}</li>`).join("")}</ol>` : ""}
+    <p class="body" style="margin-top:24px;">본 협의서 작성을 증명하기 위하여 공동상속인 전원이 서명·날인하고 각 1부씩 보관한다.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      ${heirs.map(h => `<div class="signer">상속인 ${esc((h.split("|")[0]||"").trim())} &nbsp;(인)</div>`).join("")}
+    </div>`;
+}
+
+/* --- 하자보수 요구서 --- */
+function renderDefectKo() {
+  const defects = lines("defects");
+  return `
+    <h1 class="doc-title">하자보수 요구서</h1>
+    <table class="parties">
+      <tr><td class="lbl">수신인</td><td>상호·성명: ${valOr("r_name")}<br/>주소: ${valOr("r_addr")}</td></tr>
+      <tr><td class="lbl">발신인</td><td>성명: ${valOr("s_name")}<br/>주소: ${valOr("s_addr")}<br/>연락처: ${valOr("s_phone")}</td></tr>
+    </table>
+    <h2>제 목: 하자 보수 요구의 건</h2>
+    <p class="body">1. 발신인은 ${valOr("prop_addr")} 소재 건물에 관하여 수신인과 공사·분양 계약을 체결하였습니다.${val("contract_info") ? " (" + esc(val("contract_info")) + ")" : ""}</p>
+    <p class="body">2. 그런데 위 건물에는 다음과 같은 하자가 발견되었습니다.</p>
+    <ol class="evidence">${defects.map(d => `<li>${esc(d)}</li>`).join("")}</ol>
+    <p class="body">3. 이에 발신인은 수신인에게 ${valOr("deadline")} 내에 위 하자를 보수하여 줄 것을 요구합니다. 기한 내 보수가 이루어지지 않을 경우 잔금 지급 거절 및 손해배상 청구 등 법적 조치를 취할 수 있음을 알려드립니다.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">발신인 ${valOr("s_name")} &nbsp;(인)</div>
+    </div>`;
+}
+
+/* --- 명도·퇴거 통지서 --- */
+function renderEvictionKo() {
+  const reason = optText("reason", "ko");
+  return `
+    <h1 class="doc-title">명도(퇴거) 통지서</h1>
+    <table class="parties">
+      <tr><td class="lbl">수신인</td><td>성명: ${valOr("t_name")}<br/>주소: ${valOr("t_addr")}</td></tr>
+      <tr><td class="lbl">발신인</td><td>성명·상호: ${valOr("l_name")}<br/>주소: ${valOr("l_addr")}<br/>연락처: ${valOr("l_phone")}</td></tr>
+    </table>
+    <p class="body">발신인은 수신인에게 다음과 같이 통지합니다.</p>
+    <p class="body">1. 발신인은 ${valOr("prop_addr")} 소재 부동산의 임대인입니다.</p>
+    <p class="body">2. ${esc(reason)}으로 인하여, 수신인은 ${valOr("deadline")}까지 위 부동산을 명도(퇴거)하여 주시기 바랍니다.</p>
+    ${val("unpaid") ? `<p class="body">3. 아울러 미납 차임 ${esc(val("unpaid"))}을 지급하여 주시기 바랍니다.</p>` : ""}
+    <p class="body">기한 내에 명도가 이루어지지 않을 경우 명도소송 및 손해배상 청구 등 법적 조치를 취할 수 있음을 알려드립니다.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">임대인 ${valOr("l_name")} &nbsp;(인)</div>
+    </div>`;
+}
+
+/* --- 보증금 반환 요구서 --- */
+function renderDepositKo() {
+  return `
+    <h1 class="doc-title">보증금 반환 요구서</h1>
+    <table class="parties">
+      <tr><td class="lbl">수신인</td><td>성명 (임대인): ${valOr("r_name")}<br/>주소: ${valOr("r_addr")}</td></tr>
+      <tr><td class="lbl">발신인</td><td>성명 (임차인): ${valOr("s_name")}<br/>주소: ${valOr("s_addr")}<br/>연락처: ${valOr("s_phone")}</td></tr>
+    </table>
+    <p class="body">발신인은 수신인에게 다음과 같이 통지합니다.</p>
+    <p class="body">1. 발신인은 ${valOr("prop_addr")} 소재 부동산의 임차인으로서, 임대차가 ${esc(fmtDate(val("end_date"), "ko"))}에 종료되었고 ${val("move_out") ? esc(val("move_out")) + "에 " : ""}목적물을 명도(퇴거)하였습니다.</p>
+    <p class="body">2. 이에 수신인은 발신인에게 보증금 금 ${valOr("deposit")}원을 ${valOr("deadline")}까지 반환하여 주시기 바랍니다.${val("repay_account") ? " (반환 계좌: " + esc(val("repay_account")) + ")" : ""}</p>
+    <p class="body">3. 기한 내에 반환되지 않을 경우 임차권등기명령, 지급명령 또는 소송 등 법적 조치를 취할 수 있음을 알려드립니다.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">임차인 ${valOr("s_name")} &nbsp;(인)</div>
+    </div>`;
+}
+
+/* --- 개인정보 수집·이용 동의서 --- */
+function renderPrivacyKo() {
+  const items = lines("items");
+  const third = val("third_party") === "yes";
+  const thirdLines = lines("third_detail");
+  return `
+    <h1 class="doc-title">개인정보 수집·이용 동의서</h1>
+    <table class="parties">
+      <tr><td class="lbl">수집·이용자</td><td>${valOr("a_name")}<br/>${valOr("a_addr")}<br/>${valOr("a_contact")}</td></tr>
+      <tr><td class="lbl">정보 주체</td><td>성명: ${valOr("b_name")}<br/>생년월일: ${valOr("b_id")}<br/>연락처: ${valOr("b_phone")}</td></tr>
+    </table>
+    <h2>1. 수집하는 개인정보 항목</h2>
+    <ol class="evidence">${items.map(i => `<li>${esc(i)}</li>`).join("")}</ol>
+    <h2>2. 수집·이용 목적</h2>
+    <p class="body">${valOr("purpose")}</p>
+    <h2>3. 보유·이용 기간</h2>
+    <p class="body">${valOr("term")}</p>
+    <h2>4. 제3자 제공</h2>
+    ${third ? `<table class="parties"><tr><td class="lbl">제공받는 자</td><td>목적</td><td>항목</td><td>기간</td></tr>${thirdLines.map(t=>{const x=t.split("|").map(y=>y.trim());return `<tr><td>${esc(x[0]||"")}</td><td>${esc(x[1]||"")}</td><td>${esc(x[2]||"")}</td><td>${esc(x[3]||"")}</td></tr>`;}).join("")}</table>` : `<p class="body">수집된 개인정보는 제3자에게 제공되지 않습니다.</p>`}
+    <h2>5. 동의 거부권 및 불이익</h2>
+    <p class="body">정보 주체는 개인정보 수집·이용에 대한 동의를 거부할 권리가 있습니다. 다만 동의를 거부하는 경우 해당 서비스의 이용이 제한될 수 있습니다.</p>
+    <p class="body" style="margin-top:20px;">본인은 위 내용을 충분히 이해하고 개인정보의 수집·이용${third ? " 및 제3자 제공" : ""}에 동의합니다.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">정보 주체 ${valOr("b_name")} ${sig("sig_b")}</div>
+    </div>`;
+}
+
+/* --- 동업계약서 --- */
+function renderPartnerKo() {
+  const special = lines("special");
+  return `
+    <h1 class="doc-title">동 업 계 약 서</h1>
+    <table class="parties">
+      <tr><td class="lbl">갑</td><td>성명: ${valOr("a_name")}<br/>주소: ${valOr("a_addr")}<br/>출자액: 금 ${valOr("a_capital")}원</td></tr>
+      <tr><td class="lbl">을</td><td>성명: ${valOr("b_name")}<br/>주소: ${valOr("b_addr")}<br/>출자액: 금 ${valOr("b_capital")}원</td></tr>
+    </table>
+    <p class="body">갑과 을은 다음과 같이 동업계약을 체결한다.</p>
+    <h2>제1조 (사업의 목적)</h2>
+    <p class="body">${val("biz_name") ? "사업 명칭: " + esc(val("biz_name")) + "<br/>" : ""}사업 내용: ${valOr("scope")}</p>
+    <h2>제2조 (출자)</h2>
+    <p class="body">갑은 금 ${valOr("a_capital")}원, 을은 금 ${valOr("b_capital")}원을 출자한다.</p>
+    <h2>제3조 (손익의 분배)</h2>
+    <p class="body">사업에서 발생한 손익은 ${val("profit_ratio") ? esc(val("profit_ratio")) : "출자 비율에 따라"} 분배한다.</p>
+    <h2>제4조 (업무 집행)</h2>
+    <p class="body">동업의 업무는 ${esc(optText("manage", "ko") || "갑·을 공동 집행")}한다. 중요한 사항은 갑·을 합의로 정한다.</p>
+    <h2>제5조 (지분의 양도)</h2>
+    <p class="body">동업자의 지분은 상대방의 서면 동의 없이 제3자에게 양도할 수 없다.</p>
+    ${special.length ? `<h2>제6조 (기타 약정)</h2><ol class="evidence">${special.map(t=>`<li>${esc(t)}</li>`).join("")}</ol>` : ""}
+    <p class="body" style="margin-top:24px;">본 계약의 성립을 증명하기 위하여 2부를 작성하고 갑과 을이 각각 서명·날인하여 1부씩 보관한다.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">갑 ${valOr("a_name")} ${sig("sig_a")}</div>
+      <div class="signer">을 ${valOr("b_name")} ${sig("sig_b")}</div>
+    </div>`;
+}
+
+/* --- 시말서·경위서 --- */
+function renderIncidentKo() {
+  return `
+    <h1 class="doc-title">시 말 서</h1>
+    <table class="parties">
+      <tr><td class="lbl">작성인</td><td>성명: ${valOr("c_name")}<br/>소속·직위: ${valOr("dept")}<br/>사번·생년월일: ${valOr("b_id")}</td></tr>
+      <tr><td class="lbl">사건 일시·장소</td><td>${valOr("incident_date")}</td></tr>
+    </table>
+    <h2>1. 경위</h2>
+    <p class="body">${valOr("facts")}</p>
+    <h2>2. 원인 및 결과</h2>
+    <p class="body">${valOr("cause")}</p>
+    <h2>3. 향후 대책</h2>
+    <p class="body">${valOr("plan")}</p>
+    <p class="body" style="margin-top:24px;">상기 내용은 사실과 다름없음을 확인합니다.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">작성인 ${valOr("c_name")} &nbsp;(인)</div>
+      ${val("a_name") ? `<div class="recipient">${esc(val("a_name"))} 귀중</div>` : ""}
+    </div>`;
+}
+
+/* --- 임금체불 진정서 --- */
+function renderWageClaimKo() {
+  const unpaid = lines("unpaid");
+  const evidence = lines("evidence");
+  return `
+    <h1 class="doc-title">진 정 서</h1>
+    <div class="doc-subtitle">임금체불 진정</div>
+    <table class="parties">
+      <tr><td class="lbl">진정인<br/>(근로자)</td><td>성명: ${valOr("c_name")}<br/>주민등록번호: ${valOr("c_id")}<br/>주소: ${valOr("c_addr")}<br/>연락처: ${valOr("c_phone")}</td></tr>
+      <tr><td class="lbl">피진정인<br/>(사업주)</td><td>회사명·사업주: ${valOr("d_name")}<br/>사업장 주소: ${valOr("d_addr")}<br/>대표자: ${valOr("ceo_name")}</td></tr>
+    </table>
+    <h2>1. 진정의 취지</h2>
+    <p class="body">${valOr("purpose")}</p>
+    <h2>2. 재직 및 체불 내용</h2>
+    <p class="body">재직기간: ${esc(fmtDate(val("start_date"), "ko"))} ~ ${val("end_date") ? esc(fmtDate(val("end_date"), "ko")) : "현재 재직 중"}</p>
+    <table class="parties">
+      <tr><td class="lbl">기간</td><td>항목</td><td>금액</td></tr>
+      ${unpaid.map(u => { const x = u.split("|").map(t=>t.trim()); return `<tr><td>${esc(x[0]||"")}</td><td>${esc(x[1]||"")}</td><td>${esc(x[2]||"")}</td></tr>`; }).join("")}
+      <tr><td class="lbl">합계</td><td colspan="2"><strong>금 ${valOr("total")}원</strong></td></tr>
+    </table>
+    ${evidence.length ? `<h2>3. 첨부·참고자료</h2><ol class="evidence">${evidence.map(e => `<li>${esc(e)}</li>`).join("")}</ol>` : ""}
+    <p class="body" style="margin-top:24px;">이상과 같이 진정하오니 조사·지도하여 주시기 바랍니다.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">진정인 ${valOr("c_name")} &nbsp;(인)</div>
+      <div class="recipient">${(() => { const pv = val("police"); return pv ? esc(/장$/.test(pv.trim()) ? pv : pv.trim() + "장") + " 귀중" : BLANK + " 귀중"; })()}</div>
+    </div>`;
+}
+
+/* --- 계약 해지·해제 통보서 --- */
+function renderTermKo() {
+  const demands = lines("demands");
+  return `
+    <h1 class="doc-title">계약 해지·해제 통보서</h1>
+    <table class="parties">
+      <tr><td class="lbl">수신인</td><td>성명·상호: ${valOr("r_name")}<br/>주소: ${valOr("r_addr")}</td></tr>
+      <tr><td class="lbl">발신인</td><td>성명·상호: ${valOr("s_name")}<br/>주소: ${valOr("s_addr")}<br/>연락처: ${valOr("s_phone")}</td></tr>
+    </table>
+    <p class="body">1. 발신인과 수신인은 ${valOr("contract_name")}을(를) 체결한 바 있습니다.</p>
+    <p class="body">2. ${esc(optText("reason_type", "ko"))}의 사유로 인하여 발신인은 위 계약을 ${valOr("eff_date")}자로 해지·해제함을 통보합니다.</p>
+    <p class="body">3. 사유의 구체적 내용: ${valOr("facts")}</p>
+    ${demands.length ? `<p class="body">4. 아울러 다음 사항의 이행을 요구합니다.</p><ol class="evidence">${demands.map(d => `<li>${esc(d)}</li>`).join("")}</ol>` : ""}
+    <p class="body">본 통보는 서면으로 발송되며 도달 시 효력이 발생합니다.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">발신인 ${valOr("s_name")} &nbsp;(인)</div>
+    </div>`;
+}
+
+/* --- 전대차계약서 --- */
+function renderSubleaseKo() {
+  const consent = checkedLabels("consent", "ko").length > 0;
+  return `
+    <h1 class="doc-title">전대차계약서</h1>
+    <table class="parties">
+      <tr><td class="lbl">전대인<br/>(임차인)</td><td>성명: ${valOr("l_name")}<br/>주소: ${valOr("l_addr")}<br/>연락처: ${valOr("l_phone")}</td></tr>
+      <tr><td class="lbl">전차인</td><td>성명: ${valOr("t_name")}<br/>주소: ${valOr("t_addr")}<br/>연락처: ${valOr("t_phone")}</td></tr>
+    </table>
+    <p class="body">전대인과 전차인은 아래 목적물에 관하여 다음과 같이 전대차계약을 체결한다.</p>
+    <h2>제1조 (목적물)</h2>
+    <p class="body">소재지: ${valOr("prop_addr")}<br/>전대 부분: ${valOr("prop_desc")}</p>
+    <h2>제2조 (전대차 기간)</h2>
+    <p class="body">${esc(fmtDate(val("start_date"), "ko"))}부터 ${esc(fmtDate(val("end_date"), "ko"))}까지로 한다. 단, 원임대차 기간을 넘지 않는다.</p>
+    <h2>제3조 (보증금 및 차임)</h2>
+    <p class="body">보증금: 금 ${valOr("deposit")}원<br/>차임: 월 금 ${valOr("rent")}원 — 지급일: ${valOr("rent_day")}</p>
+    <h2>제4조 (임대인 동의)</h2>
+    <p class="body">${consent ? "전대인은 원 임대인의 서면 동의를 받았으며 그 동의서를 본 계약서에 첨부한다." : "전대인은 원 임대인의 동의를 얻을 책임을 지며, 동의를 얻지 못하여 발생하는 책임은 전대인이 부담한다."}</p>
+    <p class="body" style="margin-top:24px;">본 계약의 성립을 증명하기 위하여 계약서 2부를 작성하고 각자 서명·날인하여 1부씩 보관한다.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">전대인 ${valOr("l_name")} ${sig("sig_l")}</div>
+      <div class="signer">전차인 ${valOr("t_name")} ${sig("sig_t")}</div>
+    </div>`;
+}
+
+/* --- 이혼 합의서 --- */
+function renderDivorceKo() {
+  const prop = lines("property");
+  const cust = lines("custody");
+  return `
+    <h1 class="doc-title">이 혼 합 의 서</h1>
+    <table class="parties">
+      <tr><td class="lbl">갑 (부)</td><td>성명: ${valOr("a_name")}<br/>주민등록번호: ${valOr("a_id")}<br/>주소: ${valOr("a_addr")}</td></tr>
+      <tr><td class="lbl">을 (처)</td><td>성명: ${valOr("b_name")}<br/>주민등록번호: ${valOr("b_id")}<br/>주소: ${valOr("b_addr")}</td></tr>
+    </table>
+    <p class="body">갑과 을은 ${esc(fmtDate(val("marriage_date"), "ko"))} 혼인신고한 부부로서, 이혼에 관하여 다음과 같이 합의한다.</p>
+    <h2>제1조 (이혼)</h2>
+    <p class="body">갑과 을은 협의이혼하기로 합의한다.</p>
+    <h2>제2조 (위자료)</h2>
+    <p class="body">${valOr("alimony")}</p>
+    <h2>제3조 (재산분할)</h2>
+    ${prop.length ? `<ol class="evidence">${prop.map(t=>`<li>${esc(t)}</li>`).join("")}</ol>` : `<p class="body">재산분할 없음</p>`}
+    <h2>제4조 (자녀의 친권·양육)</h2>
+    ${cust.length ? `<ol class="evidence">${cust.map(t=>`<li>${esc(t)}</li>`).join("")}</ol>` : `<p class="body">해당 없음</p>`}
+    <p class="body" style="margin-top:24px;">본 합의의 성립을 증명하기 위하여 2부를 작성하고 갑과 을이 각각 서명·날인하여 1부씩 보관한다.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">갑 ${valOr("a_name")} ${sig("sig_a")}</div>
+      <div class="signer">을 ${valOr("b_name")} ${sig("sig_b")}</div>
+    </div>`;
+}
+
+/* --- 사실확인서·진술서 --- */
+function renderFactKo() {
+  return `
+    <h1 class="doc-title">진 술 서</h1>
+    <table class="parties">
+      <tr><td class="lbl">진술인</td><td>성명: ${valOr("p_name")}<br/>생년월일·식별정보: ${valOr("p_id")}<br/>주소: ${valOr("p_addr")}<br/>연락처: ${valOr("p_phone")}<br/>관련인과의 관계: ${valOr("c_rel")}</td></tr>
+      <tr><td class="lbl">진술 대상 일시·장소</td><td>${valOr("incident_date")}</td></tr>
+    </table>
+    <h2>진술 내용</h2>
+    <p class="body">${valOr("facts")}</p>
+    <p class="body" style="margin-top:24px;">상기 진술은 진술인이 직접 경험한 사실을 기재한 것으로 사실과 다름없음을 확인합니다.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">진술인 ${valOr("p_name")} ${sig("sig_p")}</div>
+      ${val("police") ? `<div class="recipient">${esc(val("police"))} 귀중</div>` : ""}
+    </div>`;
+}
+function renderFactEn() {
+  return `
+    <h1 class="doc-title">STATEMENT OF FACTS</h1>
+    <table class="parties">
+      <tr><td class="lbl">DECLARANT</td><td>Name: ${valOr("p_name")}<br/>ID / DOB: ${valOr("p_id")}<br/>Address: ${valOr("p_addr")}<br/>Contact: ${valOr("p_phone")}<br/>Relationship to case: ${valOr("c_rel")}</td></tr>
+      <tr><td class="lbl">DATE / PLACE</td><td>${valOr("incident_date")}</td></tr>
+    </table>
+    <h2>Statement</h2>
+    <p class="body">${valOr("facts")}</p>
+    <p class="body" style="margin-top:24px;">I declare that the foregoing is a true and accurate account of facts within my personal knowledge.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "en"))}</div>
+      <div class="signer">Declarant: ${valOr("p_name")} ${sig("sig_p", "________________")}</div>
+      ${val("police") ? `<div class="recipient">To: ${esc(val("police"))}</div>` : ""}
+    </div>`;
+}
+
+
+/* --- 회의록 --- */
+function renderMinutesKo() {
+  const att = lines("attendees");
+  const ag = lines("agenda");
+  return `
+    <h1 class="doc-title">회 의 록</h1>
+    <table class="parties">
+      <tr><td class="lbl">회의 명칭</td><td>${valOr("meeting_name")}</td></tr>
+      <tr><td class="lbl">일시·장소</td><td>${valOr("meeting_date")} / ${valOr("place")}</td></tr>
+      <tr><td class="lbl">참석자</td><td>${att.map(a=>esc(a)).join("<br/>") || BLANK}</td></tr>
+    </table>
+    <h2>안건 및 결정 사항</h2>
+    <table class="parties">
+      <tr><td class="lbl">안건</td><td>결정 내용</td></tr>
+      ${ag.map(a => { const x = a.split("|").map(t=>t.trim()); return `<tr><td>${esc(x[0]||"")}</td><td>${esc(x[1]||"")}</td></tr>`; }).join("")}
+    </table>
+    ${val("notes") ? `<h2>기타 논의 사항</h2><p class="body">${valOr("notes")}</p>` : ""}
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">기록자 ${valOr("recorder")} &nbsp;(인)</div>
+    </div>`;
+}
+function renderMinutesEn() {
+  const att = lines("attendees");
+  const ag = lines("agenda");
+  return `
+    <h1 class="doc-title">MEETING MINUTES</h1>
+    <table class="parties">
+      <tr><td class="lbl">MEETING</td><td>${valOr("meeting_name")}</td></tr>
+      <tr><td class="lbl">DATE / PLACE</td><td>${valOr("meeting_date")} / ${valOr("place")}</td></tr>
+      <tr><td class="lbl">ATTENDEES</td><td>${att.map(a=>esc(a)).join("<br/>") || BLANK}</td></tr>
+    </table>
+    <h2>Agenda &amp; Resolutions</h2>
+    <table class="parties">
+      <tr><td class="lbl">Item</td><td>Resolution</td></tr>
+      ${ag.map(a => { const x = a.split("|").map(t=>t.trim()); return `<tr><td>${esc(x[0]||"")}</td><td>${esc(x[1]||"")}</td></tr>`; }).join("")}
+    </table>
+    ${val("notes") ? `<h2>Other Discussion</h2><p class="body">${valOr("notes")}</p>` : ""}
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "en"))}</div>
+      <div class="signer">Recorded by: ${valOr("recorder")}</div>
+    </div>`;
+}
+
+/* --- 추천서 --- */
+function renderRecommendKo() {
+  return `
+    <h1 class="doc-title">추 천 서</h1>
+    <p class="body">피추천인: ${valOr("r_name")}</p>
+    <p class="body">추천 목적: ${valOr("purpose")}</p>
+    <p class="body">추천인과의 관계: ${valOr("c_rel")}</p>
+    <h2>추천 사유</h2>
+    <p class="body">${valOr("facts")}</p>
+    <p class="body" style="margin-top:24px;">이상과 같이 위 사람을 추천합니다.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">추천인 ${valOr("p_name")} &nbsp;(인)<br/><span style="font-size:13px; font-weight:400;">${valOr("p_title")} / ${valOr("p_contact")}</span></div>
+    </div>`;
+}
+function renderRecommendEn() {
+  return `
+    <h1 class="doc-title">LETTER OF RECOMMENDATION</h1>
+    <p class="body">To Whom It May Concern,</p>
+    <p class="body">I am writing to recommend ${valOr("r_name")} for ${valOr("purpose")}. My relationship with the candidate: ${valOr("c_rel")}.</p>
+    <h2>Reasons for Recommendation</h2>
+    <p class="body">${valOr("facts")}</p>
+    <p class="body" style="margin-top:24px;">I recommend the above-named person without reservation.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "en"))}</div>
+      <div class="signer">Sincerely,<br/>${valOr("p_name")}<br/><span style="font-size:13px; font-weight:400;">${valOr("p_title")} / ${valOr("p_contact")}</span></div>
+    </div>`;
+}
+
+/* --- 비자 초청장 --- */
+function renderInvitationKo() {
+  return `
+    <h1 class="doc-title">초 청 장</h1>
+    <table class="parties">
+      <tr><td class="lbl">초청인</td><td>성명: ${valOr("p_name")}<br/>생년월일: ${valOr("p_id")}<br/>주소: ${valOr("p_addr")}<br/>연락처: ${valOr("p_phone")}<br/>직업·소속: ${valOr("p_job")}</td></tr>
+      <tr><td class="lbl">피초청인</td><td>성명: ${valOr("v_name")}<br/>생년월일: ${valOr("v_id")}<br/>여권번호·국적: ${valOr("v_passport")}<br/>초청인과의 관계: ${valOr("c_rel")}</td></tr>
+    </table>
+    <h2>초청 내용</h2>
+    <p class="body">방문 목적: ${valOr("purpose")}<br/>체류 기간: ${valOr("visit_period")}<br/>체류지: ${valOr("stay_addr")}<br/>비용 부담: ${esc(optText("expense", "ko"))}</p>
+    <p class="body">초청인은 피초청인의 방문 기간 중 체류를 보장하며, 체류 기간 경과 후 귀국함을 확인합니다.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">초청인 ${valOr("p_name")} ${sig("sig_p")}</div>
+    </div>`;
+}
+function renderInvitationEn() {
+  return `
+    <h1 class="doc-title">LETTER OF INVITATION</h1>
+    <table class="parties">
+      <tr><td class="lbl">INVITER</td><td>Name: ${valOr("p_name")}<br/>Date of birth: ${valOr("p_id")}<br/>Address: ${valOr("p_addr")}<br/>Contact: ${valOr("p_phone")}<br/>Occupation: ${valOr("p_job")}</td></tr>
+      <tr><td class="lbl">VISITOR</td><td>Name (as in passport): ${valOr("v_name")}<br/>Date of birth: ${valOr("v_id")}<br/>Passport no. / Nationality: ${valOr("v_passport")}<br/>Relationship: ${valOr("c_rel")}</td></tr>
+    </table>
+    <h2>Visit Details</h2>
+    <p class="body">Purpose of visit: ${valOr("purpose")}<br/>Duration of stay: ${valOr("visit_period")}<br/>Address during stay: ${valOr("stay_addr")}<br/>Expenses: ${esc(optText("expense", "en"))}</p>
+    <p class="body">I guarantee the visitor's accommodation during the stay and confirm that the visitor will return home upon expiry of the permitted stay.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "en"))}</div>
+      <div class="signer">Inviter: ${valOr("p_name")} ${sig("sig_p", "________________")}</div>
+    </div>`;
+}
+
+/* --- 미성년자 해외여행 동의서 --- */
+function renderChildTravelKo() {
+  return `
+    <h1 class="doc-title">미성년자 해외여행 동의서</h1>
+    <table class="parties">
+      <tr><td class="lbl">미성년자</td><td>성명: ${valOr("v_name")}<br/>생년월일: ${valOr("v_id")}<br/>여권번호: ${valOr("v_passport")}</td></tr>
+      <tr><td class="lbl">부모·대리인</td><td>성명: ${valOr("p_name")} (${valOr("p_rel")})<br/>연락처: ${valOr("p_phone")}${val("p2_name") ? "<br/>성명 2: " + esc(val("p2_name")) : ""}</td></tr>
+      <tr><td class="lbl">여행 내용</td><td>여행지: ${valOr("dest")}<br/>기간: ${valOr("visit_period")}${val("companion") ? "<br/>동행인: " + esc(val("companion")) : ""}</td></tr>
+    </table>
+    <p class="body">본인(들)은 위 미성년자의 법정대리인으로서, 위 미성년자가 상기 기간 동안 ${valOr("dest")}에 여행하는 것에 동의합니다.${val("companion") ? " 동행인은 " + esc(val("companion")) + "입니다." : ""}</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">법정대리인 ${valOr("p_name")} ${sig("sig_p")}</div>
+      ${val("p2_name") ? `<div class="signer">법정대리인 ${valOr("p2_name")} ${sig("sig_p2")}</div>` : ""}
+    </div>`;
+}
+function renderChildTravelEn() {
+  return `
+    <h1 class="doc-title">CHILD TRAVEL CONSENT</h1>
+    <table class="parties">
+      <tr><td class="lbl">MINOR</td><td>Name (as in passport): ${valOr("v_name")}<br/>Date of birth: ${valOr("v_id")}<br/>Passport no.: ${valOr("v_passport")}</td></tr>
+      <tr><td class="lbl">PARENT(S)</td><td>Name: ${valOr("p_name")} (${valOr("p_rel")})<br/>Contact: ${valOr("p_phone")}${val("p2_name") ? "<br/>Name 2: " + esc(val("p2_name")) : ""}</td></tr>
+      <tr><td class="lbl">TRIP</td><td>Destination: ${valOr("dest")}<br/>Period: ${valOr("visit_period")}${val("companion") ? "<br/>Companion: " + esc(val("companion")) : ""}</td></tr>
+    </table>
+    <p class="body">I/We, the undersigned legal guardian(s) of the above-named minor, consent to the minor travelling to ${valOr("dest")} during the stated period.${val("companion") ? " The accompanying adult is " + esc(val("companion")) + "." : ""}</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "en"))}</div>
+      <div class="signer">Parent/Guardian: ${valOr("p_name")} ${sig("sig_p", "________________")}</div>
+      ${val("p2_name") ? `<div class="signer">Parent/Guardian: ${valOr("p2_name")} ${sig("sig_p2", "________________")}</div>` : ""}
+    </div>`;
+}
+
+/* --- 자동차 매매계약서 --- */
+function renderVehicleKo() {
+  return `
+    <h1 class="doc-title">자동차 매매계약서</h1>
+    <table class="parties">
+      <tr><td class="lbl">매도인</td><td>성명: ${valOr("a_name")}<br/>식별정보: ${valOr("a_id")}<br/>주소: ${valOr("a_addr")}<br/>연락처: ${valOr("a_phone")}</td></tr>
+      <tr><td class="lbl">매수인</td><td>성명: ${valOr("b_name")}<br/>식별정보: ${valOr("b_id")}<br/>주소: ${valOr("b_addr")}<br/>연락처: ${valOr("b_phone")}</td></tr>
+    </table>
+    <h2>제1조 (목적물 — 차량의 표시)</h2>
+    <p class="body">차종·모델: ${valOr("car_model")}<br/>차량 번호: ${valOr("car_no")}<br/>차대번호(VIN): ${valOr("vin")}<br/>연식: ${valOr("car_year")}<br/>주행거리: ${valOr("mileage")} km</p>
+    <h2>제2조 (매매 대금 및 지급)</h2>
+    <p class="body">매매 대금은 금 ${valOr("amount")}원으로 하며, ${valOr("pay_method")}로 지급한다.</p>
+    <h2>제3조 (인도 및 이전등록)</h2>
+    <p class="body">인도 예정일: ${valOr("delivery_date")}<br/>이전등록: ${esc(optText("transfer", "ko"))}</p>
+    <h2>제4조 (차량 상태)</h2>
+    <p class="body">${esc(optText("as_is", "ko"))}. 매수인은 차량을 확인하고 매수한다.</p>
+    <p class="body" style="margin-top:24px;">본 계약의 성립을 증명하기 위하여 2부를 작성하고 매도인과 매수인이 각각 서명·날인하여 1부씩 보관한다.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">매도인 ${valOr("a_name")} ${sig("sig_a")}</div>
+      <div class="signer">매수인 ${valOr("b_name")} ${sig("sig_b")}</div>
+    </div>`;
+}
+function renderVehicleEn() {
+  return `
+    <h1 class="doc-title">VEHICLE BILL OF SALE</h1>
+    <table class="parties">
+      <tr><td class="lbl">SELLER</td><td>Name: ${valOr("a_name")}<br/>ID: ${valOr("a_id")}<br/>Address: ${valOr("a_addr")}<br/>Contact: ${valOr("a_phone")}</td></tr>
+      <tr><td class="lbl">BUYER</td><td>Name: ${valOr("b_name")}<br/>ID: ${valOr("b_id")}<br/>Address: ${valOr("b_addr")}<br/>Contact: ${valOr("b_phone")}</td></tr>
+    </table>
+    <h2>1. Vehicle</h2>
+    <p class="body">Model: ${valOr("car_model")}<br/>Plate no.: ${valOr("car_no")}<br/>VIN: ${valOr("vin")}<br/>Year: ${valOr("car_year")}<br/>Mileage: ${valOr("mileage")} km</p>
+    <h2>2. Purchase Price</h2>
+    <p class="body">The purchase price is ${valOr("amount")}, payable by ${valOr("pay_method")}.</p>
+    <h2>3. Delivery &amp; Title Transfer</h2>
+    <p class="body">Delivery date: ${valOr("delivery_date")}<br/>Title transfer: ${esc(optText("transfer", "en"))}</p>
+    <h2>4. Condition</h2>
+    <p class="body">The vehicle is ${esc(optText("as_is", "en"))}. The Buyer has inspected and accepts the vehicle.</p>
+    <p class="body" style="margin-top:24px;">Executed in two counterparts, each party retaining one.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "en"))}</div>
+      <div class="signer">Seller: ${valOr("a_name")} ${sig("sig_a", "________________")}</div>
+      <div class="signer">Buyer: ${valOr("b_name")} ${sig("sig_b", "________________")}</div>
+    </div>`;
+}
+
+/* --- 품목 표 공통 (견적/발주/영수증/프로포마) --- */
+function itemsTableKo(items, cur, sub, tax, total) {
+  return `<table class="parties">
+    <tr><td class="lbl">품목</td><td>수량</td><td>단가</td><td>금액</td></tr>
+    ${items.map(r => `<tr><td>${esc(r.name)}</td><td>${r.qty}</td><td>${cur} ${r.unit.toLocaleString()}</td><td>${cur} ${r.amt.toLocaleString()}</td></tr>`).join("")}
+    ${tax !== null ? `<tr><td class="lbl">소계</td><td colspan="3">${cur} ${sub.toLocaleString()}</td></tr><tr><td class="lbl">부가세(10%)</td><td colspan="3">${cur} ${tax.toLocaleString()}</td></tr>` : ""}
+    <tr><td class="lbl">합계</td><td colspan="3"><strong>${cur} ${total.toLocaleString()}</strong></td></tr>
+  </table>`;
+}
+function itemsTableEn(items, cur, sub, tax, total) {
+  return `<table class="parties">
+    <tr><td class="lbl">Description</td><td>Qty</td><td>Unit Price</td><td>Amount</td></tr>
+    ${items.map(r => `<tr><td>${esc(r.name)}</td><td>${r.qty}</td><td>${cur} ${r.unit.toLocaleString()}</td><td>${cur} ${r.amt.toLocaleString()}</td></tr>`).join("")}
+    ${tax !== null ? `<tr><td class="lbl">Subtotal</td><td colspan="3">${cur} ${sub.toLocaleString()}</td></tr><tr><td class="lbl">VAT (10%)</td><td colspan="3">${cur} ${tax.toLocaleString()}</td></tr>` : ""}
+    <tr><td class="lbl">TOTAL</td><td colspan="3"><strong>${cur} ${total.toLocaleString()}</strong></td></tr>
+  </table>`;
+}
+
+/* --- 견적서 --- */
+function renderQuotationKo() {
+  const rows = parseInvoiceItems();
+  const sub = rows.reduce((a, r) => a + r.amt, 0);
+  const vat = val("vat") === "separate" ? Math.round(sub * 0.1) : null;
+  const total = sub + (vat || 0);
+  const cur = esc(val("currency"));
+  return `
+    <h1 class="doc-title">견 적 서</h1>
+    <div class="doc-subtitle">${valOr("inv_no")}</div>
+    <table class="parties">
+      <tr><td class="lbl">발행인</td><td>${valOr("s_name")}<br/>${valOr("s_addr")}<br/>${valOr("s_email")}</td></tr>
+      <tr><td class="lbl">수신인</td><td>${valOr("r_name")}<br/>${valOr("r_addr")}</td></tr>
+    </table>
+    <p class="body">견적일: ${esc(fmtDate(val("doc_date"), "ko"))}${val("valid_until") ? " · 유효기간: " + esc(val("valid_until")) : ""}</p>
+    ${itemsTableKo(rows, cur, sub, vat, total)}
+    ${val("notes") ? `<p class="body">비고: ${valOr("notes")}</p>` : ""}
+    <div class="doc-foot"><div class="signer">발행인 ${valOr("s_name")}</div></div>`;
+}
+function renderQuotationEn() {
+  const rows = parseInvoiceItems();
+  const sub = rows.reduce((a, r) => a + r.amt, 0);
+  const vat = val("vat") === "separate" ? Math.round(sub * 0.1) : null;
+  const total = sub + (vat || 0);
+  const cur = esc(val("currency"));
+  return `
+    <h1 class="doc-title">QUOTATION</h1>
+    <div class="doc-subtitle">${valOr("inv_no")}</div>
+    <table class="parties">
+      <tr><td class="lbl">FROM</td><td>${valOr("s_name")}<br/>${valOr("s_addr")}<br/>${valOr("s_email")}</td></tr>
+      <tr><td class="lbl">TO</td><td>${valOr("r_name")}<br/>${valOr("r_addr")}</td></tr>
+    </table>
+    <p class="body">Date: ${esc(fmtDate(val("doc_date"), "en"))}${val("valid_until") ? " · Valid until: " + esc(val("valid_until")) : ""}</p>
+    ${itemsTableEn(rows, cur, sub, vat, total)}
+    ${val("notes") ? `<p class="body">Notes: ${valOr("notes")}</p>` : ""}
+    <div class="doc-foot"><div class="signer">${valOr("s_name")}</div></div>`;
+}
+
+/* --- 발주서 --- */
+function renderPoKo() {
+  const rows = parseInvoiceItems();
+  const total = rows.reduce((a, r) => a + r.amt, 0);
+  const cur = esc(val("currency"));
+  return `
+    <h1 class="doc-title">발 주 서</h1>
+    <div class="doc-subtitle">PO No. ${valOr("inv_no")}</div>
+    <table class="parties">
+      <tr><td class="lbl">발주자</td><td>${valOr("s_name")}<br/>${valOr("s_addr")}<br/>${valOr("s_email")}</td></tr>
+      <tr><td class="lbl">수급자</td><td>${valOr("r_name")}<br/>${valOr("r_addr")}</td></tr>
+    </table>
+    <p class="body">납기일: ${valOr("delivery_date")} · 납품 장소: ${valOr("delivery_addr")}</p>
+    ${itemsTableKo(rows, cur, total, null, total)}
+    ${val("pay_terms") ? `<p class="body">대금 지급 조건: ${esc(val("pay_terms"))}</p>` : ""}
+    <div class="doc-foot"><div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div><div class="signer">발주자 ${valOr("s_name")} &nbsp;(인)</div></div>`;
+}
+function renderPoEn() {
+  const rows = parseInvoiceItems();
+  const total = rows.reduce((a, r) => a + r.amt, 0);
+  const cur = esc(val("currency"));
+  return `
+    <h1 class="doc-title">PURCHASE ORDER</h1>
+    <div class="doc-subtitle">PO No. ${valOr("inv_no")}</div>
+    <table class="parties">
+      <tr><td class="lbl">BUYER</td><td>${valOr("s_name")}<br/>${valOr("s_addr")}<br/>${valOr("s_email")}</td></tr>
+      <tr><td class="lbl">SUPPLIER</td><td>${valOr("r_name")}<br/>${valOr("r_addr")}</td></tr>
+    </table>
+    <p class="body">Delivery date: ${valOr("delivery_date")} · Ship to: ${valOr("delivery_addr")}</p>
+    ${itemsTableEn(rows, cur, total, null, total)}
+    ${val("pay_terms") ? `<p class="body">Payment terms: ${esc(val("pay_terms"))}</p>` : ""}
+    <div class="doc-foot"><div class="date">${esc(fmtDate(val("doc_date"), "en"))}</div><div class="signer">${valOr("s_name")}</div></div>`;
+}
+
+/* --- 영수증 --- */
+function renderReceiptKo() {
+  const rows = parseInvoiceItems();
+  const cur = esc(val("currency"));
+  const total = rows.length ? rows.reduce((a, r) => a + r.amt, 0) : Number(String(val("amount") || "0").replace(/,/g, "")) || 0;
+  return `
+    <h1 class="doc-title">영 수 증</h1>
+    <table class="parties">
+      <tr><td class="lbl">지급인</td><td>${valOr("r_name")}</td></tr>
+      <tr><td class="lbl">영수인</td><td>${valOr("s_name")}<br/>${valOr("s_addr")}</td></tr>
+    </table>
+    ${rows.length ? itemsTableKo(rows, cur, total, null, total) : `<p class="body" style="font-size:18px; text-align:center; margin:30px 0;">금 ${esc(val("amount")) || BLANK}원 (${cur})</p>`}
+    <p class="body">영수 사유: ${valOr("purpose")} · 결제 수단: ${esc(optText("pay_method", "ko"))}</p>
+    <p class="body">위 금액을 정히 영수합니다.</p>
+    <div class="doc-foot"><div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div><div class="signer">영수인 ${valOr("s_name")} &nbsp;(인)</div></div>`;
+}
+function renderReceiptEn() {
+  const rows = parseInvoiceItems();
+  const cur = esc(val("currency"));
+  const total = rows.length ? rows.reduce((a, r) => a + r.amt, 0) : Number(String(val("amount") || "0").replace(/,/g, "")) || 0;
+  return `
+    <h1 class="doc-title">RECEIPT</h1>
+    <table class="parties">
+      <tr><td class="lbl">RECEIVED FROM</td><td>${valOr("r_name")}</td></tr>
+      <tr><td class="lbl">RECEIVED BY</td><td>${valOr("s_name")}<br/>${valOr("s_addr")}</td></tr>
+    </table>
+    ${rows.length ? itemsTableEn(rows, cur, total, null, total) : `<p class="body" style="font-size:18px; text-align:center; margin:30px 0;">${cur} ${esc(val("amount")) || BLANK}</p>`}
+    <p class="body">For: ${valOr("purpose")} · Payment method: ${esc(optText("pay_method", "en"))}</p>
+    <p class="body">Received the above amount in full.</p>
+    <div class="doc-foot"><div class="date">${esc(fmtDate(val("doc_date"), "en"))}</div><div class="signer">${valOr("s_name")}</div></div>`;
+}
+
+/* --- 양해각서 MOU --- */
+function renderMouKo() {
+  const scope = lines("scope");
+  const partial = val("binding") === "partial";
+  return `
+    <h1 class="doc-title">양 해 각 서</h1>
+    <table class="parties">
+      <tr><td class="lbl">갑</td><td>${valOr("a_name")}<br/>${valOr("a_addr")}</td></tr>
+      <tr><td class="lbl">을</td><td>${valOr("b_name")}<br/>${valOr("b_addr")}</td></tr>
+    </table>
+    <p class="body">갑과 을은 다음 목적을 위한 협력에 관하여 양해각서를 체결한다.</p>
+    <h2>제1조 (목적)</h2>
+    <p class="body">${valOr("purpose")}</p>
+    <h2>제2조 (협력 사항)</h2>
+    <ol class="evidence">${scope.map(t => `<li>${esc(t)}</li>`).join("")}</ol>
+    <h2>제3조 (유효 기간)</h2>
+    <p class="body">${valOr("term")}</p>
+    <h2>제4조 (법적 효력)</h2>
+    <p class="body">${partial ? "본 각서는 원칙적으로 구속력이 없으나, 비밀유지 및 비용 부담에 관한 조항은 당사자를 구속한다." : "본 각서는 당사자의 상호 이해를 확인하는 의향서로서 법적 구속력이 없으며, 구체적인 권리·의무는 별도의 정식 계약으로 정한다."}</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">갑 ${valOr("a_name")} ${sig("sig_a")}</div>
+      <div class="signer">을 ${valOr("b_name")} ${sig("sig_b")}</div>
+    </div>`;
+}
+function renderMouEn() {
+  const scope = lines("scope");
+  const partial = val("binding") === "partial";
+  return `
+    <h1 class="doc-title">MEMORANDUM OF UNDERSTANDING</h1>
+    <table class="parties">
+      <tr><td class="lbl">PARTY A</td><td>${valOr("a_name")}<br/>${valOr("a_addr")}</td></tr>
+      <tr><td class="lbl">PARTY B</td><td>${valOr("b_name")}<br/>${valOr("b_addr")}</td></tr>
+    </table>
+    <h2>1. Purpose</h2>
+    <p class="body">${valOr("purpose")}</p>
+    <h2>2. Areas of Cooperation</h2>
+    <ol class="evidence">${scope.map(t => `<li>${esc(t)}</li>`).join("")}</ol>
+    <h2>3. Term</h2>
+    <p class="body">${valOr("term")}</p>
+    <h2>4. Legal Effect</h2>
+    <p class="body">${partial ? "This MOU is generally non-binding; however, the confidentiality and cost-sharing provisions shall bind the parties." : "This MOU is a non-binding statement of mutual understanding; specific rights and obligations shall be set out in a definitive agreement."}</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "en"))}</div>
+      <div class="signer">Party A: ${valOr("a_name")} ${sig("sig_a", "________________")}</div>
+      <div class="signer">Party B: ${valOr("b_name")} ${sig("sig_b", "________________")}</div>
+    </div>`;
+}
+
+/* --- 프로포마 인보이스 --- */
+function renderProformaKo() {
+  const rows = parseInvoiceItems();
+  const total = rows.reduce((a, r) => a + r.amt, 0);
+  const cur = esc(val("currency"));
+  return `
+    <h1 class="doc-title">프로포마 인보이스</h1>
+    <div class="doc-subtitle">PROFORMA INVOICE ${valOr("inv_no")}</div>
+    <table class="parties">
+      <tr><td class="lbl">수출자</td><td>${valOr("s_name")}<br/>${valOr("s_addr")}<br/>${valOr("s_email")}</td></tr>
+      <tr><td class="lbl">수입자</td><td>${valOr("r_name")}<br/>${valOr("r_addr")}</td></tr>
+    </table>
+    <p class="body">발행일: ${esc(fmtDate(val("doc_date"), "ko"))}${val("valid_until") ? " · 유효기간: " + esc(val("valid_until")) : ""}${val("incoterm") ? " · 거래조건: " + esc(val("incoterm")) : ""}</p>
+    ${itemsTableKo(rows, cur, total, null, total)}
+    ${val("repay_account") ? `<p class="body">결제 방법: ${esc(val("repay_account"))}</p>` : ""}
+    <p class="body">본 서류는 견적 송장으로 확정 청구서가 아닙니다.</p>
+    <div class="doc-foot"><div class="signer">${valOr("s_name")}</div></div>`;
+}
+function renderProformaEn() {
+  const rows = parseInvoiceItems();
+  const total = rows.reduce((a, r) => a + r.amt, 0);
+  const cur = esc(val("currency"));
+  return `
+    <h1 class="doc-title">PROFORMA INVOICE</h1>
+    <div class="doc-subtitle">${valOr("inv_no")}</div>
+    <table class="parties">
+      <tr><td class="lbl">SELLER</td><td>${valOr("s_name")}<br/>${valOr("s_addr")}<br/>${valOr("s_email")}</td></tr>
+      <tr><td class="lbl">BUYER</td><td>${valOr("r_name")}<br/>${valOr("r_addr")}</td></tr>
+    </table>
+    <p class="body">Date: ${esc(fmtDate(val("doc_date"), "en"))}${val("valid_until") ? " · Valid until: " + esc(val("valid_until")) : ""}${val("incoterm") ? " · Terms: " + esc(val("incoterm")) : ""}</p>
+    ${itemsTableEn(rows, cur, total, null, total)}
+    ${val("repay_account") ? `<p class="body">Payment: ${esc(val("repay_account"))}</p>` : ""}
+    <p class="body">This document is a proforma invoice and not a demand for payment.</p>
+    <div class="doc-foot"><div class="signer">${valOr("s_name")}</div></div>`;
+}
+
 /* ---------- 화면 상태 ---------- */
 function render() {
   const paper = document.getElementById("paper");
@@ -3401,10 +4995,20 @@ function buildWatermark() {
     pw.innerHTML = ps;
   }
 }
+let tabFilter = "";
 function buildTabs() {
-  document.getElementById("doc-tabs").innerHTML = DOC_TYPES.map(d =>
-    `<button class="doc-tab ${d.id === activeDoc.id ? "active" : ""}" onclick="selectDoc('${d.id}')">${esc(d.name)} · ${krw(docPrice(d))}<span class="langs">${d.langs.map(l => LANG_NAME[l]).join(" · ")}</span></button>`
-  ).join("");
+  document.getElementById("doc-tabs").innerHTML =
+    `<input id="doc-filter" class="doc-filter" type="search" placeholder="문서 검색… (예: 계약서, 고소, invoice)" oninput="filterTabs(this.value)" value="${esc(tabFilter)}" />` +
+    `<div class="doc-tab-grid">` + DOC_TYPES.map(d =>
+    `<button class="doc-tab ${d.id === activeDoc.id ? "active" : ""}" data-name="${esc(d.name.toLowerCase())}" onclick="selectDoc('${d.id}')">${esc(d.name)} · ${krw(docPrice(d))}<span class="langs">${d.langs.map(l => LANG_NAME[l]).join(" · ")}</span></button>`
+  ).join("") + `</div>`;
+  if (tabFilter) filterTabs(tabFilter);
+}
+function filterTabs(q) {
+  tabFilter = (q || "").trim().toLowerCase();
+  document.querySelectorAll("#doc-tabs .doc-tab").forEach(b => {
+    b.style.display = !tabFilter || (b.dataset.name || "").includes(tabFilter) ? "" : "none";
+  });
 }
 function buildLangRow() {
   document.getElementById("lang-row").innerHTML =
@@ -3552,6 +5156,176 @@ const SAMPLES = {
     items: "Backend API development | 1 | 2400\nUI design revision | 2 | 400\nProject management | 1 | 800",
     currency: "USD", due_date: "Net 30 (2026-10-12)",
     repay_account: "Kookmin Bank 000-000-000000 SWIFT: CZNBKRSE", notes: "All amounts in USD. Late payment accrues 1.5% monthly interest."
+  },
+  "employment-cert": {
+    a_name: "주식회사 ○○테크", a_addr: "서울특별시 서초구 ○○로 100", ceo_name: "홍길동",
+    b_name: "박근로", b_id: "1995.05.05", dept: "개발팀 대리", start_date: "2020-03-02", purpose: "비자 신청용"
+  },
+  "resignation": {
+    b_name: "박근로", dept: "개발팀 대리", b_id: "EMP-1024", start_date: "2020-03-02",
+    end_date: "2026-10-15", reason: "career", a_name: "주식회사 ○○테크"
+  },
+  "accusation": {
+    c_name: "홍길동", c_id: "900101-1******", c_addr: "서울특별시 강남구 ○○로 123", c_phone: "010-1234-5678",
+    d_name: "김피고", d_addr: "서울특별시 ○○구 ○○동 55",
+    crime_type: "fraud",
+    facts: "피고발인은 2026년 6월경 발신인에게 ○○ 투자 수익률을 보장한다며 금 3,000,000원을 편취하였습니다.",
+    reason: "동종 피해자가 다수 존재하는 것으로 보여 엄정한 수사가 필요합니다.",
+    evidence: "계좌이체 내역 1부\n대화 기록 출력물 1부", police: "서울강남경찰서"
+  },
+  "inheritance-split": {
+    dec_name: "홍망인", dec_date: "2026-05-20", dec_addr: "서울특별시 ○○구 ○○로 10",
+    heirs: "홍길동 | 장남 | 700101-1****** | 서울특별시 ○○구\n홍영희 | 장녀 | 730202-2****** | 경기도 ○○시",
+    split: "서울특별시 ○○구 ○○로 10 소재 아파트 전부 | 홍길동 | 단독 상속\n예금 50,000,000원 | 홍영희 | 단독 상속",
+    special: "상속세 및 등록 비용은 각자 부담한다"
+  },
+  "defect-claim": {
+    s_name: "홍길동", s_addr: "서울특별시 송파구 ○○동 505호", s_phone: "010-1234-5678",
+    r_name: "주식회사 ○○건설", r_addr: "서울특별시 강남구 ○○로 200",
+    prop_addr: "서울특별시 송파구 ○○동 505호", contract_info: "2025. 3. 10. 인테리어 공사 계약, 대금 30,000,000원",
+    defects: "욕실 천장 누수로 인한 도배 손상\n거실 창호 결로 및 실란트 박리\n현관 도어 개폐 불량",
+    deadline: "본 서신 수령 후 14일 이내"
+  },
+  "eviction-notice": {
+    l_name: "김임대", l_addr: "서울특별시 ○○구 ○○로 5", l_phone: "010-3333-4444",
+    t_name: "박임차", t_addr: "서울특별시 송파구 ○○로 77, 101동 505호",
+    prop_addr: "서울특별시 송파구 ○○로 77, 101동 505호", reason: "rent",
+    unpaid: "3개월분 금 1,500,000원", deadline: "본 통지 수령 후 30일 이내"
+  },
+  "deposit-return": {
+    s_name: "박임차", s_addr: "경기도 ○○시 ○○동 11", s_phone: "010-5555-6666",
+    r_name: "김임대", r_addr: "서울특별시 ○○구 ○○로 5",
+    prop_addr: "서울특별시 송파구 ○○로 77, 101동 505호", deposit: "100,000,000",
+    end_date: "2028-09-30", move_out: "2028. 10. 5.",
+    deadline: "본 서신 수령 후 14일 이내", repay_account: "카카오뱅크 000-00-000000 박임차"
+  },
+  "privacy-consent": {
+    a_name: "주식회사 ○○서비스", a_addr: "서울특별시 강남구 ○○로 50", a_contact: "개인정보보호 담당자 privacy@example.com",
+    b_name: "홍길동", b_id: "1990.01.01", b_phone: "010-1234-5678",
+    items: "성명\n연락처(휴대전화)\n이메일 주소",
+    purpose: "서비스 가입 및 본인 확인, 고객 문의 대응",
+    term: "회원 탈퇴 시까지", third_party: "no"
+  },
+  "partnership": {
+    a_name: "홍길동", a_addr: "서울특별시 ○○구 ○○로 1", a_capital: "30,000,000",
+    b_name: "김동업", b_addr: "경기도 ○○시 ○○동 2", b_capital: "20,000,000",
+    biz_name: "○○카페 공동운영", scope: "카페 운영 및 관련 부수 사업",
+    profit_ratio: "출자 비율에 따름 (갑 60% / 을 40%)", manage: "joint",
+    special: "일방이 탈퇴하고자 할 때는 60일 전 서면 통보한다\n청산은 출자 비율에 따라 잔여재산을 분배한다"
+  },
+  "incident-report": {
+    c_name: "박근로", dept: "생산팀 주임", b_id: "EMP-1024",
+    incident_date: "2026년 9월 10일 14시경 / 본사 2층 작업장",
+    facts: "작업 중 지게차와 충돌하여 제품 3박스가 파손되었습니다. 당시 안전 표지판이 제대로 부착되어 있지 않았습니다.",
+    cause: "안전 표지판 미비 및 작업 동선 혼재로 인한 사고",
+    plan: "안전 표지판 재부착, 지게차 동선 분리, 안전 교육 실시",
+    a_name: "주식회사 ○○테크"
+  },
+  "wage-claim": {
+    c_name: "박근로", c_id: "950505-1******", c_addr: "서울특별시 ○○구 ○○길 33", c_phone: "010-7777-8888",
+    d_name: "주식회사 ○○상사", d_addr: "서울특별시 중구 ○○로 10", ceo_name: "김사주",
+    start_date: "2025-01-02", end_date: "2026-08-31",
+    unpaid: "2026년 7월 | 기본급 | 2,500,000\n2026년 8월 | 기본급 | 2,500,000\n퇴직 시 | 퇴직금 | 4,100,000",
+    total: "9,100,000",
+    purpose: "체불된 임금 및 퇴직금을 지급받을 수 있도록 조사·지도하여 주시기 바랍니다.",
+    evidence: "근로계약서 사본 1부\n급여명세서 사본 1부", police: "서울지방고용노동청"
+  },
+  "termination-notice": {
+    s_name: "주식회사 ○○테크", s_addr: "서울특별시 서초구 ○○로 100", s_phone: "02-1234-5678",
+    r_name: "주식회사 ○○용역", r_addr: "서울특별시 강남구 ○○로 88",
+    contract_name: "2025. 6. 1. 체결 시스템 유지보수 용역계약", reason_type: "breach",
+    facts: "수신인은 계약상의 월 1회 정기점검 의무를 3개월 연속 이행하지 않았습니다.",
+    eff_date: "본 통보 도달일",
+    demands: "미이행 기간 용역비의 반환\n보유 중인 관리자 계정 인계"
+  },
+  "sublease": {
+    l_name: "박임차", l_addr: "서울특별시 송파구 ○○로 77, 101동 505호", l_phone: "010-5555-6666",
+    t_name: "최전차", t_addr: "경기도 ○○시 ○○동 9", t_phone: "010-9999-0000",
+    prop_addr: "서울특별시 송파구 ○○로 77, 101동 505호", prop_desc: "작은 방 1실",
+    deposit: "5,000,000", rent: "500,000", rent_day: "매월 5일",
+    start_date: "2026-10-01", end_date: "2028-09-30", consent: ["yes"]
+  },
+  "divorce-agreement": {
+    a_name: "홍길동", a_id: "800101-1******", a_addr: "서울특별시 ○○구 ○○로 1",
+    b_name: "김영희", b_id: "820202-2******", b_addr: "경기도 ○○시 ○○동 2",
+    marriage_date: "2015-05-20",
+    alimony: "없음",
+    property: "공동명의 아파트 처분 후 매각 대금을 5:5로 분배\n각자 명의 예금은 각자에게 귀속",
+    custody: "자녀 홍○○(2017년생)의 친권자 및 양육권자는 을로 한다\n갑은 매월 양육비 500,000원을 매월 말일까지 지급한다\n갑은 매월 2회 면접교섭권을 가진다"
+  },
+  "fact-statement": {
+    p_name: "김목격", p_id: "880303-1******", p_addr: "서울특별시 ○○구 ○○동 7", p_phone: "010-2222-3333",
+    c_rel: "목격자", incident_date: "2026년 9월 1일 22시경 / 강남구 ○○로 인도",
+    facts: "위 일시에 검은색 세단이 신호를 위반하여 횡단보도를 지나던 보행자를 충격한 후 그대로 도주하는 것을 목격하였습니다.",
+    police: "서울강남경찰서"
+  },
+  "meeting-minutes": {
+    meeting_name: "2026년 3분기 운영 회의", meeting_date: "2026. 9. 12. 14:00", place: "본사 3층 회의실",
+    attendees: "홍길동 | 대표이사\n김부장 | 경영지원\n이대리 | 개발팀",
+    agenda: "신규 서비스 출시 일정 | 2026년 11월 출시로 확정\n4분기 마케팅 예산 | 3,000만원 승인",
+    notes: "다음 회의는 10월 첫째 주로 결정", recorder: "이대리"
+  },
+  "recommendation": {
+    p_name: "김교수", p_title: "○○대학교 컴퓨터공학과 교수", p_contact: "prof.kim@univ.ac.kr",
+    r_name: "박학생", c_rel: "졸업연구 지도교수로 2년간 지도",
+    purpose: "○○대학원 박사과정 입학 추천",
+    facts: "박학생은 학부 연구생으로서 뛰어난 분석력과 성실성을 보였으며, 학부 수준을 넘는 연구 성과(국내 학회 게재 1편)를 달성하였습니다."
+  },
+  "invitation-letter": {
+    p_name: "홍길동", p_id: "1990.01.01", p_addr: "서울특별시 강남구 ○○로 123", p_phone: "010-1234-5678", p_job: "○○테크 재직",
+    v_name: "Hong Gilsoon", v_id: "1965.03.15", v_passport: "M12345678 / Republic of Korea", c_rel: "모친",
+    purpose: "가족 방문 (손주 돌잔치)", visit_period: "2026. 10. 1. ~ 2026. 10. 14. (2주)",
+    stay_addr: "초청인 주소지와 동일", expense: "host"
+  },
+  "child-travel-consent": {
+    v_name: "Hong Minsu", v_id: "2015.08.20", v_passport: "M87654321",
+    p_name: "홍길동", p_rel: "부", p_phone: "010-1234-5678", p2_name: "김영희",
+    dest: "일본 (도쿄·오사카)", visit_period: "2026. 10. 5. ~ 2026. 10. 12.",
+    companion: "김여행 (조모, 여권 M11223344)"
+  },
+  "vehicle-sale": {
+    a_name: "김매도", a_id: "850505-1******", a_addr: "경기도 ○○시 ○○동 1", a_phone: "010-1111-2222",
+    b_name: "박매수", b_id: "900909-1******", b_addr: "서울특별시 ○○구 ○○로 3", b_phone: "010-4444-5555",
+    car_model: "현대 아반떼 CN7", car_no: "12가3456", vin: "KMHDH41ABLU123456",
+    car_year: "2021", mileage: "48,000",
+    amount: "12,500,000", pay_method: "계약금 1,000,000원 계좌이체 + 인도 시 잔금",
+    delivery_date: "2026. 9. 20.", transfer: "days15", as_is: "as_is"
+  },
+  "quotation": {
+    s_name: "주식회사 ○○테크", s_addr: "서울특별시 서초구 ○○로 100", s_email: "sales@example.com",
+    r_name: "주식회사 ○○물산", r_addr: "서울특별시 강남구 ○○로 88",
+    inv_no: "QT-2026-015",
+    items: "웹사이트 리뉴얼 | 1 | 5,000,000\n로고 디자인 | 2 | 500,000\n연간 유지보수 | 12 | 300,000",
+    currency: "KRW", vat: "separate", valid_until: "발행 후 30일", notes: "계약 확정 후 착수금 30%"
+  },
+  "purchase-order": {
+    s_name: "주식회사 ○○물산", s_addr: "서울특별시 강남구 ○○로 88", s_email: "order@example.com",
+    r_name: "주식회사 ○○제조", r_addr: "경기도 ○○시 ○○로 12",
+    inv_no: "PO-2026-1024",
+    items: "부품 A-100 | 500 | 2,000\n부품 B-200 | 200 | 5,500",
+    currency: "KRW", delivery_date: "2026. 10. 31.", delivery_addr: "경기도 ○○시 물류센터",
+    pay_terms: "납품·검수 후 30일 이내 계좌이체"
+  },
+  "receipt": {
+    s_name: "홍길동", s_addr: "서울특별시 ○○구 ○○로 1",
+    r_name: "김지급",
+    items: "강연료 | 1 | 500,000", currency: "KRW", pay_method: "bank",
+    purpose: "9월 강연 대가"
+  },
+  "mou": {
+    a_name: "주식회사 ○○테크", a_addr: "서울특별시 서초구 ○○로 100",
+    b_name: "○○대학교 산학협력단", b_addr: "서울특별시 ○○구 ○○로 1",
+    purpose: "AI 기술 공동 연구 및 인력 교류",
+    scope: "공동 연구 과제 수행\n연구 시설·장비 상호 이용\n인턴십 프로그램 운영",
+    term: "체결일로부터 2년", binding: "none"
+  },
+  "proforma-invoice": {
+    s_name: "Korea Trading Co.", s_addr: "100 Teheran-ro, Seoul, Korea", s_email: "export@ktrade.kr",
+    r_name: "Acme Trading Co.", r_addr: "100 Market St, San Francisco, CA",
+    inv_no: "PI-2026-001",
+    items: "Steel parts A-100 | 1000 | 12\nAssembly fee | 1 | 800",
+    currency: "USD", incoterm: "FOB Incheon", valid_until: "30 days from issue",
+    repay_account: "Kookmin Bank 000-000-000000 SWIFT: CZNBKRSE"
   }
 };
 function fillSample() {
