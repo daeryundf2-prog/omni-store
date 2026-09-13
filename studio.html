@@ -78,6 +78,10 @@
     .doc-tabs { margin-bottom: 14px; }
     .doc-filter { width: 100%; max-width: 420px; display: block; margin: 0 auto 10px; padding: 9px 14px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg-elevated, #1E2942); color: inherit; font-size: 14px; box-sizing: border-box; }
     .doc-tab-grid { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; max-height: 220px; overflow-y: auto; }
+    .cat-chips { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-bottom: 10px; }
+    .cat-chip { padding: 7px 14px; border-radius: 999px; border: 1px solid var(--border); background: transparent; color: var(--text-secondary); font-size: 13px; font-weight: 600; cursor: pointer; transition: all .15s; }
+    .cat-chip:hover { border-color: var(--accent-crimson, #9F2F2D); color: inherit; }
+    .cat-chip.active { background: var(--accent-crimson, #9F2F2D); border-color: var(--accent-crimson, #9F2F2D); color: #fff; }
     .doc-tab {
       background: var(--bg-surface); border: 1px solid var(--border-subtle); color: var(--text-secondary);
       padding: 10px 20px; border-radius: 10px; font-weight: 600; font-size: 0.95rem; cursor: pointer;
@@ -449,258 +453,358 @@
   <section class="doc-catalog" id="catalog">
     <h2 style="font-size:1.15rem; font-weight:800; margin:36px 0 6px;">작성 가능한 문서</h2>
     <p style="color:var(--text-secondary); font-size:0.86rem; margin-bottom:16px;">모든 문서는 무료로 미리보기할 수 있으며, 원본 다운로드·인쇄만 유료입니다.</p>
+    <div class="cat-chips" id="catalog-chips" style="margin-bottom:18px;">
+      <button class="cat-chip active" data-cat="all" onclick="filterCatalog('all')">전체</button>
+      <button class="cat-chip" data-cat="contract" onclick="filterCatalog('contract')">계약·동의</button>
+      <button class="cat-chip" data-cat="notice" onclick="filterCatalog('notice')">통지·요구</button>
+      <button class="cat-chip" data-cat="litigation" onclick="filterCatalog('litigation')">소송·수사</button>
+      <button class="cat-chip" data-cat="realestate" onclick="filterCatalog('realestate')">부동산</button>
+      <button class="cat-chip" data-cat="labor" onclick="filterCatalog('labor')">직장·노동</button>
+      <button class="cat-chip" data-cat="family" onclick="filterCatalog('family')">가사·개인</button>
+      <button class="cat-chip" data-cat="business" onclick="filterCatalog('business')">비즈니스·무역</button>
+    </div>
     <div class="catalog-grid">
-      <article class="catalog-card" id="cat-defamation-complaint">
+      <article class="catalog-card" id="cat-defamation-complaint" data-cat="litigation">
         <h3>사이버 명예훼손·모욕 고소장</h3>
         <p>온라인 커뮤니티·SNS·메신저에서의 명예훼손(정보통신망법 제70조) 및 모욕(형법 제311조) 피해에 대한 수사기관 제출용 고소장. 피해 경위·증거 목록·처벌 의사 표시를 표준 양식으로 정리합니다.</p>
         <div class="cat-price" data-doc="defamation-complaint"></div>
         <button class="btn btn-ghost" onclick="selectDoc('defamation-complaint');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
-      <article class="catalog-card" id="cat-demand-notice">
+      <article class="catalog-card" id="cat-demand-notice" data-cat="notice">
         <h3>내용증명 · Demand Letter · 通知書 · 催告函</h3>
         <p>금전 지급·계약 이행·손해배상 요구 등을 상대방에게 공식 통보하는 문서. 한·영·일·중·독·불·서·베·태 9개 언어로 작성되어 해외 거래처에도 그 나라 언어로 발송할 수 있습니다. 기한 설정과 법적 조치 예고 문구를 포함합니다.</p>
         <div class="cat-price" data-doc="demand-notice"></div>
         <button class="btn btn-ghost" onclick="selectDoc('demand-notice');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
-      <article class="catalog-card" id="cat-cease-desist">
+      <article class="catalog-card" id="cat-cease-desist" data-cat="notice">
         <h3>경고장 · Cease &amp; Desist · 警告書 · 警告函</h3>
         <p>저작권 침해·상표 도용·영업방해 등 위법 행위의 즉시 중단을 요구하는 경고 문서. 9개 언어 지원으로 해외 플랫폼·판매자 대응에 활용할 수 있습니다.</p>
         <div class="cat-price" data-doc="cease-desist"></div>
         <button class="btn btn-ghost" onclick="selectDoc('cease-desist');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
-      <article class="catalog-card" id="cat-loan-agreement">
+      <article class="catalog-card" id="cat-loan-agreement" data-cat="contract">
         <h3>차용증 · Loan Agreement</h3>
         <p>개인 간 금전 대여의 금액·이자·변제일·변제 방법을 명확히 기록하는 차용증. 분쟁 예방과 소송 시 증거력 확보를 위한 필수 항목을 표준 구조로 정리합니다. 한·영·일·중·독·불·서·베·태 9개 언어 지원.</p>
         <div class="cat-price" data-doc="loan-agreement"></div>
         <button class="btn btn-ghost" onclick="selectDoc('loan-agreement');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
-      <article class="catalog-card" id="cat-freelance-contract">
+      <article class="catalog-card" id="cat-freelance-contract" data-cat="contract">
         <h3>프리랜서 용역계약서 · Services Agreement</h3>
         <p>외주 개발·디자인·콘텐츠 작업의 용역 범위·대금·납기·수정 횟수·지식재산권 귀속을 규정하는 계약서. 무상 수정 범위 한정과 대금 완납 시 IP 양도 조항 등 실무 분쟁 방지 장치를 포함합니다. 한·영·일·중·독·불·서·베·태 9개 언어 지원.</p>
         <div class="cat-price" data-doc="freelance-contract"></div>
         <button class="btn btn-ghost" onclick="selectDoc('freelance-contract');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
-      <article class="catalog-card" id="cat-settlement">
+      <article class="catalog-card" id="cat-settlement" data-cat="contract">
         <h3>합의서 · Settlement Agreement</h3>
         <p>분쟁 당사자 간 합의 내용·합의금·상호 면책·비밀유지 의무를 문서화하는 합의서. 형사·민사 분쟁 종결 시 재분쟁을 막는 상호 완전 해결 조항을 포함합니다. 한·영·일·중·독·불·서·베·태 9개 언어 지원.</p>
         <div class="cat-price" data-doc="settlement"></div>
         <button class="btn btn-ghost" onclick="selectDoc('settlement');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
-      <article class="catalog-card" id="cat-power-of-attorney">
+      <article class="catalog-card" id="cat-power-of-attorney" data-cat="contract">
         <h3>위임장 · Power of Attorney</h3>
         <p>부동산 계약·금융·행정 절차를 대리인에게 맡길 때의 위임장. 위임 사무 범위·기간을 명시하는 표준 양식으로, 영문 위임장도 지원합니다.</p>
         <div class="cat-price" data-doc="power-of-attorney"></div>
         <button class="btn btn-ghost" onclick="selectDoc('power-of-attorney');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
-      <article class="catalog-card" id="cat-petition">
+      <article class="catalog-card" id="cat-petition" data-cat="litigation">
         <h3>진정서</h3>
         <p>노동청·경찰서 등 행정기관에 조사·시정을 요청하는 진정서. 진정 취지·경위·첨부자료를 표준 구조로 정리합니다.</p>
         <div class="cat-price" data-doc="petition"></div>
         <button class="btn btn-ghost" onclick="selectDoc('petition');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
-      <article class="catalog-card" id="cat-appeal-mercy">
+      <article class="catalog-card" id="cat-appeal-mercy" data-cat="litigation">
         <h3>탄원서</h3>
         <p>수사·재판 중인 피고인·피의자의 선처를 구하는 탄원서. 사건번호와 탄원 취지를 명확히 기재하는 양식입니다.</p>
         <div class="cat-price" data-doc="appeal-mercy"></div>
         <button class="btn btn-ghost" onclick="selectDoc('appeal-mercy');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
-      <article class="catalog-card" id="cat-written-pledge">
+      <article class="catalog-card" id="cat-written-pledge" data-cat="contract">
         <h3>각서 · Written Pledge</h3>
         <p>변제 기일·품질 보장 등 일방적 확약을 문서화하는 각서. 위반 시 책임 조항(민·형사상 책임/위약금)을 선택할 수 있습니다.</p>
         <div class="cat-price" data-doc="written-pledge"></div>
         <button class="btn btn-ghost" onclick="selectDoc('written-pledge');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
-      <article class="catalog-card" id="cat-lease">
+      <article class="catalog-card" id="cat-lease" data-cat="realestate">
         <h3>부동산 임대차계약서</h3>
         <p>주택·상가 임대차의 보증금·차임·기간·특약을 정리하는 표준 계약서 구조. 확정일자 안내 포함.</p>
         <div class="cat-price" data-doc="lease"></div>
         <button class="btn btn-ghost" onclick="selectDoc('lease');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
-      <article class="catalog-card" id="cat-employment">
+      <article class="catalog-card" id="cat-employment" data-cat="labor">
         <h3>근로계약서</h3>
         <p>근로기준법 제17조 서면 작성 의무에 맞춘 표준 구조 — 계약기간·근무장소·업무·근로시간·임금·지급일을 모두 담습니다.</p>
         <div class="cat-price" data-doc="employment"></div>
         <button class="btn btn-ghost" onclick="selectDoc('employment');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
-      <article class="catalog-card" id="cat-severance">
+      <article class="catalog-card" id="cat-severance" data-cat="labor">
         <h3>퇴직금 정산 확인서</h3>
         <p>퇴직 시 퇴직금 총액·지급일·지급 방법을 확정하는 확인서. 지급 지연 시 지연이자(연 20%) 안내 포함.</p>
         <div class="cat-price" data-doc="severance"></div>
         <button class="btn btn-ghost" onclick="selectDoc('severance');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
-      <article class="catalog-card" id="cat-payment-order">
+      <article class="catalog-card" id="cat-payment-order" data-cat="litigation">
         <h3>지급명령 신청서 (독촉)</h3>
         <p>소송 없이 빠르게 집행권원을 얻는 지급명령(독촉절차) 신청서. 청구 취지·원인·지연손해금까지 표준 구조로 작성됩니다.</p>
         <div class="cat-price" data-doc="payment-order"></div>
         <button class="btn btn-ghost" onclick="selectDoc('payment-order');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
-      <article class="catalog-card" id="cat-small-claims">
+      <article class="catalog-card" id="cat-small-claims" data-cat="litigation">
         <h3>소액사건심판 소장</h3>
         <p>청구금액 3,000만원 이하의 소액사건 소장. 청구 취지·원인·입증방법을 법원 제출 구조로 정리합니다. 지급명령과 세트로 '돈 회수' 전 과정을 커버합니다.</p>
         <div class="cat-price" data-doc="small-claims"></div>
         <button class="btn btn-ghost" onclick="selectDoc('small-claims');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
-      <article class="catalog-card" id="cat-nda">
+      <article class="catalog-card" id="cat-nda" data-cat="contract">
         <h3>비밀유지계약서 · NDA</h3>
         <p>협업·투자·외주 검토 전 필수인 상호 비밀유지계약서. 비밀정보 범위·유지 기간·준거법을 설정할 수 있으며 9개 언어로 출력됩니다.</p>
         <div class="cat-price" data-doc="nda"></div>
         <button class="btn btn-ghost" onclick="selectDoc('nda');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
-      <article class="catalog-card" id="cat-invoice">
+      <article class="catalog-card" id="cat-invoice" data-cat="business">
         <h3>인보이스 · Invoice</h3>
         <p>해외 거래 대금 청구용 인보이스. '품목명 | 수량 | 단가' 한 줄 입력으로 표와 합계가 자동 계산됩니다. 한·영 지원.</p>
         <div class="cat-price" data-doc="invoice"></div>
         <button class="btn btn-ghost" onclick="selectDoc('invoice');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
-      <article class="catalog-card" id="cat-employment-cert">
+      <article class="catalog-card" id="cat-employment-cert" data-cat="labor">
         <h3>재직·경력증명서 · Employment Certificate</h3>
         <p>비자·대출·이직 제출용 재직/경력증명서. 재직기간·부서직위·제출 용도를 표기하며 퇴직자는 경력증명서로 자동 전환됩니다. 한·영 지원.</p>
         <div class="cat-price" data-doc="employment-cert"></div>
         <button class="btn btn-ghost" onclick="selectDoc('employment-cert');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
-      <article class="catalog-card" id="cat-resignation">
+      <article class="catalog-card" id="cat-resignation" data-cat="labor">
         <h3>사직서 · Resignation Letter</h3>
         <p>입사일·퇴직 예정일·사유를 명시한 사직서. 사유를 선택지로 정리해 어색한 표현 없이 바로 제출 가능한 형태로 완성됩니다.</p>
         <div class="cat-price" data-doc="resignation"></div>
         <button class="btn btn-ghost" onclick="selectDoc('resignation');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
-      <article class="catalog-card" id="cat-accusation">
+      <article class="catalog-card" id="cat-accusation" data-cat="litigation">
         <h3>고발장</h3>
         <p>제3자 범죄를 수사기관에 신고하는 고발장. 표준서식(고발인→피고발인→고발취지→범죄사실→증거자료) 구조와 죄명 자동 표기를 지원합니다.</p>
         <div class="cat-price" data-doc="accusation"></div>
         <button class="btn btn-ghost" onclick="selectDoc('accusation');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
-      <article class="catalog-card" id="cat-inheritance-split">
+      <article class="catalog-card" id="cat-inheritance-split" data-cat="family">
         <h3>상속재산 분할협의서</h3>
         <p>공동상속인 전원 합의로 상속재산을 나눌 때 쓰는 분할협의서. 상속인 표·분할 내용 표·기타 약정까지 표준 구조로 정리됩니다.</p>
         <div class="cat-price" data-doc="inheritance-split"></div>
         <button class="btn btn-ghost" onclick="selectDoc('inheritance-split');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
-      <article class="catalog-card" id="cat-defect-claim">
+      <article class="catalog-card" id="cat-defect-claim" data-cat="realestate">
         <h3>하자보수 요구서</h3>
         <p>분양·인테리어·건설 하자에 대한 보수 요구서. 하자 목록·보수 기한·법적 조치 예고를 포함해 내용증명 발송용으로 적합합니다.</p>
         <div class="cat-price" data-doc="defect-claim"></div>
         <button class="btn btn-ghost" onclick="selectDoc('defect-claim');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
-      <article class="catalog-card" id="cat-eviction-notice">
+      <article class="catalog-card" id="cat-eviction-notice" data-cat="realestate">
         <h3>명도·퇴거 통지서</h3>
         <p>차임 연체·계약 종료·무단 점유 시 임차인에게 보내는 명도 통지서. 미납 차임 청구와 법적 조치 예고를 포함합니다.</p>
         <div class="cat-price" data-doc="eviction-notice"></div>
         <button class="btn btn-ghost" onclick="selectDoc('eviction-notice');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
-      <article class="catalog-card" id="cat-deposit-return">
+      <article class="catalog-card" id="cat-deposit-return" data-cat="realestate">
         <h3>보증금 반환 요구서</h3>
         <p>임대차 종료 후 보증금을 돌려받지 못할 때 임대인에게 보내는 반환 요구서. 임차권등기명령·지급명령 예고 문구 포함.</p>
         <div class="cat-price" data-doc="deposit-return"></div>
         <button class="btn btn-ghost" onclick="selectDoc('deposit-return');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
-      <article class="catalog-card" id="cat-privacy-consent">
+      <article class="catalog-card" id="cat-privacy-consent" data-cat="contract">
         <h3>개인정보 수집·이용 동의서</h3>
         <p>개인정보보호법 필수 기재사항(항목·목적·보유기간·제3자 제공·거부권)을 갖춘 동의서. 서비스·행사·채용 등 수집 시 제출용.</p>
         <div class="cat-price" data-doc="privacy-consent"></div>
         <button class="btn btn-ghost" onclick="selectDoc('privacy-consent');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
-      <article class="catalog-card" id="cat-partnership">
+      <article class="catalog-card" id="cat-partnership" data-cat="contract">
         <h3>동업계약서</h3>
         <p>2인 이상 공동사업의 출자·손익분배·업무집행·지분양도를 규정하는 동업계약서. 지분 양도 제한과 청산 조항 포함.</p>
         <div class="cat-price" data-doc="partnership"></div>
         <button class="btn btn-ghost" onclick="selectDoc('partnership');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
-      <article class="catalog-card" id="cat-incident-report">
+      <article class="catalog-card" id="cat-incident-report" data-cat="labor">
         <h3>시말서·경위서</h3>
         <p>직장 사고·규정 위반의 경위·원인·대책을 정리하는 시말서. 회사 제출용 표준 구조(경위→원인·결과→향후 대책)로 작성됩니다.</p>
         <div class="cat-price" data-doc="incident-report"></div>
         <button class="btn btn-ghost" onclick="selectDoc('incident-report');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
-      <article class="catalog-card" id="cat-wage-claim">
+      <article class="catalog-card" id="cat-wage-claim" data-cat="labor">
         <h3>임금체불 진정서</h3>
         <p>고용노동청 제출용 임금체불 진정서. 재직기간·체불 내역 표(기간·항목·금액·합계)·첨부자료를 표준 구조로 정리합니다.</p>
         <div class="cat-price" data-doc="wage-claim"></div>
         <button class="btn btn-ghost" onclick="selectDoc('wage-claim');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
-      <article class="catalog-card" id="cat-termination-notice">
+      <article class="catalog-card" id="cat-termination-notice" data-cat="notice">
         <h3>계약 해지·해제 통보서</h3>
         <p>채무불이행·기간만료·약정 사유로 계약을 해지·해제할 때 보내는 통보서. 해지 효력 발생일·추가 이행 요구 사항 포함.</p>
         <div class="cat-price" data-doc="termination-notice"></div>
         <button class="btn btn-ghost" onclick="selectDoc('termination-notice');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
-      <article class="catalog-card" id="cat-sublease">
+      <article class="catalog-card" id="cat-sublease" data-cat="realestate">
         <h3>전대차계약서</h3>
         <p>임차인이 제3자에게 전대(재임대)할 때의 계약서. 원임대차 기간 제한·임대인 동의 조항을 명시해 분쟁을 예방합니다.</p>
         <div class="cat-price" data-doc="sublease"></div>
         <button class="btn btn-ghost" onclick="selectDoc('sublease');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
-      <article class="catalog-card" id="cat-divorce-agreement">
+      <article class="catalog-card" id="cat-divorce-agreement" data-cat="family">
         <h3>이혼 합의서</h3>
         <p>협의이혼 시 위자료·재산분할·자녀 친권·양육비·면접교섭을 정리하는 합의서. 법원 제출 전 당사자 간 합의 내용 확정용.</p>
         <div class="cat-price" data-doc="divorce-agreement"></div>
         <button class="btn btn-ghost" onclick="selectDoc('divorce-agreement');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
-      <article class="catalog-card" id="cat-fact-statement">
+      <article class="catalog-card" id="cat-fact-statement" data-cat="litigation">
         <h3>사실확인서·진술서 · Statement of Facts</h3>
         <p>목격 내용·사실 관계를 서면으로 진술하는 문서. 수사기관·회사·보험사 제출용으로 사용되며 영문 진술서도 지원합니다.</p>
         <div class="cat-price" data-doc="fact-statement"></div>
         <button class="btn btn-ghost" onclick="selectDoc('fact-statement');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
-      <article class="catalog-card" id="cat-meeting-minutes">
+      <article class="catalog-card" id="cat-meeting-minutes" data-cat="business">
         <h3>회의록 · Meeting Minutes</h3>
         <p>참석자·안건·결정사항을 표로 정리하는 회의록. 주주총회·이사회·실무 회의록에 활용 가능하며 한·영 지원.</p>
         <div class="cat-price" data-doc="meeting-minutes"></div>
         <button class="btn btn-ghost" onclick="selectDoc('meeting-minutes');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
-      <article class="catalog-card" id="cat-recommendation">
+      <article class="catalog-card" id="cat-recommendation" data-cat="labor">
         <h3>추천서 · Letter of Recommendation</h3>
         <p>입학·취업·수상 추천용 추천서. 추천인의 직위·관계·추천 사유를 설득력 있게 구성하는 표준 구조. 한·영 지원.</p>
         <div class="cat-price" data-doc="recommendation"></div>
         <button class="btn btn-ghost" onclick="selectDoc('recommendation');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
-      <article class="catalog-card" id="cat-invitation-letter">
+      <article class="catalog-card" id="cat-invitation-letter" data-cat="family">
         <h3>초청장 · Letter of Invitation</h3>
         <p>비자 신청용 초청장 — 초청인 신원·방문 목적·체류 기간·비용 부담 주체를 명시. 대사관 제출용 영문 초청장 지원.</p>
         <div class="cat-price" data-doc="invitation-letter"></div>
         <button class="btn btn-ghost" onclick="selectDoc('invitation-letter');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
-      <article class="catalog-card" id="cat-child-travel-consent">
+      <article class="catalog-card" id="cat-child-travel-consent" data-cat="family">
         <h3>미성년자 해외여행 동의서 · Child Travel Consent</h3>
         <p>미성년자가 부모 없이(또는 한쪽만과) 해외여행 시 필요한 부모 동의서. 입국 심사·항공사 요구 서류 대응. 한·영 지원.</p>
         <div class="cat-price" data-doc="child-travel-consent"></div>
         <button class="btn btn-ghost" onclick="selectDoc('child-travel-consent');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
-      <article class="catalog-card" id="cat-vehicle-sale">
+      <article class="catalog-card" id="cat-vehicle-sale" data-cat="contract">
         <h3>자동차 매매계약서 · Bill of Sale</h3>
         <p>중고차 개인 거래용 매매계약서. 차대번호·주행거리·현상태(as-is) 명시·이전등록 책임을 정리해 사후 분쟁을 예방합니다. 한·영 지원.</p>
         <div class="cat-price" data-doc="vehicle-sale"></div>
         <button class="btn btn-ghost" onclick="selectDoc('vehicle-sale');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
-      <article class="catalog-card" id="cat-quotation">
+      <article class="catalog-card" id="cat-quotation" data-cat="business">
         <h3>견적서 · Quotation</h3>
         <p>품목·수량·단가 입력으로 합계 자동 계산되는 견적서. 유효기간·부가세 별도/포함 선택 지원. 한·영 출력.</p>
         <div class="cat-price" data-doc="quotation"></div>
         <button class="btn btn-ghost" onclick="selectDoc('quotation');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
-      <article class="catalog-card" id="cat-purchase-order">
+      <article class="catalog-card" id="cat-purchase-order" data-cat="business">
         <h3>발주서 · Purchase Order</h3>
         <p>납기일·납품지·결제조건을 명시한 발주서. 품목 표와 합계가 자동 계산되며 해외 발주용 영문 출력 지원.</p>
         <div class="cat-price" data-doc="purchase-order"></div>
         <button class="btn btn-ghost" onclick="selectDoc('purchase-order');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
-      <article class="catalog-card" id="cat-receipt">
+      <article class="catalog-card" id="cat-receipt" data-cat="business">
         <h3>영수증 · Receipt</h3>
         <p>금전 수령 사실을 증명하는 영수증. 품목 표 또는 총액 단독 입력 모두 지원, 결제 수단 명시. 한·영 출력.</p>
         <div class="cat-price" data-doc="receipt"></div>
         <button class="btn btn-ghost" onclick="selectDoc('receipt');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
-      <article class="catalog-card" id="cat-mou">
+      <article class="catalog-card" id="cat-mou" data-cat="business">
         <h3>양해각서 · MOU</h3>
         <p>정식 계약 전 협력 의사를 문서화하는 양해각서. 목적·협력 사항·유효기간·법적 효력(비구속/일부구속)을 선택 가능. 한·영 지원.</p>
         <div class="cat-price" data-doc="mou"></div>
         <button class="btn btn-ghost" onclick="selectDoc('mou');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
-      <article class="catalog-card" id="cat-proforma-invoice">
+      <article class="catalog-card" id="cat-proforma-invoice" data-cat="business">
         <h3>프로포마 인보이스 · Proforma Invoice</h3>
         <p>무역 거래의 견적 송장. 인코텀즈·유효기간·결제 정보를 명시하고 품목 합계를 자동 계산합니다. 한·영 지원.</p>
         <div class="cat-price" data-doc="proforma-invoice"></div>
         <button class="btn btn-ghost" onclick="selectDoc('proforma-invoice');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-real-estate-sale" data-cat="realestate">
+        <h3>부동산 매매계약서</h3>
+        <p>토지·건물 매매의 계약금·중도금·잔금 일정과 인도·등기·하자 조항을 갖춘 매매계약서. 특약란 포함.</p>
+        <div class="cat-price" data-doc="real-estate-sale"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('real-estate-sale');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-goods-sale" data-cat="contract">
+        <h3>물품 매매계약서 · Sale of Goods</h3>
+        <p>물품 거래의 품목 표·대금 지급·인도·검수 조항을 갖춘 매매계약서. 품목 한 줄 입력으로 합계 자동 계산. 한·영 지원.</p>
+        <div class="cat-price" data-doc="goods-sale"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('goods-sale');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-model-release" data-cat="contract">
+        <h3>초상권 사용 동의서 · Model Release</h3>
+        <p>사진·영상 촬영물의 사용 목적·매체·기간·대가를 명시하는 초상권 동의서. 크리에이터·스튜디오 필수 서식. 한·영 지원.</p>
+        <div class="cat-price" data-doc="model-release"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('model-release');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-ip-license" data-cat="contract">
+        <h3>저작권 사용허락 계약서 · IP License</h3>
+        <p>사진·일러스트·음원 등 저작물의 사용 허락 범위(독점/비독점·기간·지역·사용료·저작자 표시)를 정하는 계약서. 한·영 지원.</p>
+        <div class="cat-price" data-doc="ip-license"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('ip-license');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-confidentiality-pledge" data-cat="labor">
+        <h3>비밀유지 서약서</h3>
+        <p>직원·외부 인력의 기밀정보 취급 서약. 비밀정보 범위·유지 기간·위반 시 책임(손해배상/위약금)을 선택할 수 있습니다.</p>
+        <div class="cat-price" data-doc="confidentiality-pledge"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('confidentiality-pledge');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-non-compete" data-cat="labor">
+        <h3>경업금지 서약서</h3>
+        <p>퇴직 후 동종업계 취업·창업을 제한하는 서약서. 금지 기간·지역·직종과 대가 조항을 명시해 무효 위험을 줄입니다.</p>
+        <div class="cat-price" data-doc="non-compete"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('non-compete');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-personal-guarantee" data-cat="contract">
+        <h3>신원보증서</h3>
+        <p>채용 시 요구되는 신원보증서. 보증 기간·한도액을 명시하는 표준 구조로, 보증인의 무제한 책임 위험을 줄입니다.</p>
+        <div class="cat-price" data-doc="personal-guarantee"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('personal-guarantee');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-dismissal-notice" data-cat="labor">
+        <h3>해고 예고 통지서</h3>
+        <p>근로기준법 제26조에 따른 해고 예고 통지. 사유 유형·구체적 내용·해고일·예고수당 처리 방식을 명시합니다.</p>
+        <div class="cat-price" data-doc="dismissal-notice"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('dismissal-notice');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-noise-notice" data-cat="realestate">
+        <h3>층간소음 경고장</h3>
+        <p>층간소음 피해 시 상대 세대에 전달하는 경고문. 소음 유형·시간대·요구 사항을 정리해 정식 민원 전 단계로 활용합니다.</p>
+        <div class="cat-price" data-doc="noise-notice"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('noise-notice');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-fine-objection" data-cat="litigation">
+        <h3>과태료 의견제출서</h3>
+        <p>과태료 사전통지에 대한 의견 제출서. 본인 행위 아님·정당 사유·감경 호소 유형과 첨부자료를 갖춥니다.</p>
+        <div class="cat-price" data-doc="fine-objection"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('fine-objection');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-official-letter" data-cat="business">
+        <h3>공문·협조요청서</h3>
+        <p>기관·기업 간 업무 공문. 문서번호·수신·참조·붙임 서류를 갖춘 공문서 형식으로 바로 출력 가능합니다.</p>
+        <div class="cat-price" data-doc="official-letter"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('official-letter');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-payslip" data-cat="business">
+        <h3>급여명세서 · Payslip</h3>
+        <p>지급·공제 항목 입력으로 실수령액이 자동 계산되는 급여명세서. 소상공인·프리랜서 고용 증빙용. 한·영 지원.</p>
+        <div class="cat-price" data-doc="payslip"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('payslip');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-lease-termination" data-cat="realestate">
+        <h3>임대차 합의해지서</h3>
+        <p>임대차 기간 중 쌍방 합의로 해지할 때의 해지서. 명도일·보증금 반환 계좌·정산 특약을 명시합니다.</p>
+        <div class="cat-price" data-doc="lease-termination"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('lease-termination');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-consumer-claim" data-cat="litigation">
+        <h3>소비자 피해구제 신청서</h3>
+        <p>한국소비자원(1372) 피해구제 접수용 신청서. 거래 내용·피해 경위·구제 요구(환불/교환/배상)를 표준 구조로 정리합니다.</p>
+        <div class="cat-price" data-doc="consumer-claim"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('consumer-claim');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-apology-letter" data-cat="family">
+        <h3>사과문·감사장</h3>
+        <p>서비스 장애·배송 지연 사과문이나 감사 표현을 격식 있게 작성하는 문서. 재발 방지 조항 포함. 한·영 지원.</p>
+        <div class="cat-price" data-doc="apology-letter"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('apology-letter');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
     </div>
   </section>
@@ -806,6 +910,16 @@ const LANGUAGES = [
   { id: "th", name: "ไทย", paperLang: "th" }
 ];
 const LANG_NAME = { ko: "한국어", en: "English", ja: "日本語", zh: "中文", de: "Deutsch", fr: "Français", es: "Español", vi: "Tiếng Việt", th: "ไทย" };
+const CATEGORIES = [
+  { id: "all", name: "전체" },
+  { id: "contract", name: "계약·동의" },
+  { id: "notice", name: "통지·요구" },
+  { id: "litigation", name: "소송·수사" },
+  { id: "realestate", name: "부동산" },
+  { id: "labor", name: "직장·노동" },
+  { id: "family", name: "가사·개인" },
+  { id: "business", name: "비즈니스·무역" }
+];
 const DATE_LOCALE = { ko: "ko-KR", en: "en-US", ja: "ja-JP", zh: "zh-CN", de: "de-DE", fr: "fr-FR", es: "es-ES", vi: "vi-VN", th: "th-TH-u-ca-gregory" };
 
 const CURRENCIES = ["KRW", "USD", "JPY", "CNY", "EUR"].map(c => ({ v: c, label: { ko: c } }));
@@ -814,6 +928,7 @@ const CURRENCIES = ["KRW", "USD", "JPY", "CNY", "EUR"].map(c => ({ v: c, label: 
 const DOC_TYPES = [
   {
     id: "defamation-complaint",
+    cat: "litigation",
     name: "사이버 명예훼손·모욕 고소장",
     langs: ["ko"],
     price: STUDIO.priceKrw,
@@ -870,6 +985,7 @@ const DOC_TYPES = [
   },
   {
     id: "demand-notice",
+    cat: "notice",
     name: "내용증명 · Demand Letter",
     langs: ["ko", "en", "ja", "zh", "de", "fr", "es", "vi", "th"],
     price: STUDIO.priceKrw,
@@ -902,6 +1018,7 @@ const DOC_TYPES = [
   },
   {
     id: "cease-desist",
+    cat: "notice",
     name: "경고장 · Cease & Desist",
     langs: ["ko", "en", "ja", "zh", "de", "fr", "es", "vi", "th"],
     price: STUDIO.priceKrw,
@@ -927,6 +1044,7 @@ const DOC_TYPES = [
   },
   {
     id: "loan-agreement",
+    cat: "contract",
     name: "차용증 · Loan Agreement",
     langs: ["ko", "en", "ja", "zh", "de", "fr", "es", "vi", "th"],
     price: STUDIO.priceKrw,
@@ -963,6 +1081,7 @@ const DOC_TYPES = [
   },
   {
     id: "freelance-contract",
+    cat: "contract",
     name: "프리랜서 용역계약서 · Services Agreement",
     langs: ["ko", "en", "ja", "zh", "de", "fr", "es", "vi", "th"],
     price: 14900,
@@ -1014,6 +1133,7 @@ const DOC_TYPES = [
   },
   {
     id: "settlement",
+    cat: "contract",
     name: "합의서 · Settlement Agreement",
     langs: ["ko", "en", "ja", "zh", "de", "fr", "es", "vi", "th"],
     price: 12900,
@@ -1049,6 +1169,7 @@ const DOC_TYPES = [
   },
   {
     id: "power-of-attorney",
+    cat: "contract",
     name: "위임장 · Power of Attorney",
     langs: ["ko", "en"],
     price: STUDIO.priceKrw,
@@ -1076,6 +1197,7 @@ const DOC_TYPES = [
   },
   {
     id: "petition",
+    cat: "litigation",
     name: "진정서",
     langs: ["ko"],
     price: STUDIO.priceKrw,
@@ -1100,6 +1222,7 @@ const DOC_TYPES = [
   },
   {
     id: "appeal-mercy",
+    cat: "litigation",
     name: "탄원서",
     langs: ["ko"],
     price: STUDIO.priceKrw,
@@ -1122,6 +1245,7 @@ const DOC_TYPES = [
   },
   {
     id: "written-pledge",
+    cat: "contract",
     name: "각서 · Memorandum",
     langs: ["ko", "en"],
     price: STUDIO.priceKrw,
@@ -1149,6 +1273,7 @@ const DOC_TYPES = [
   },
   {
     id: "lease",
+    cat: "realestate",
     name: "부동산 임대차계약서",
     langs: ["ko"],
     price: 12900,
@@ -1198,6 +1323,7 @@ const DOC_TYPES = [
   },
   {
     id: "employment",
+    cat: "labor",
     name: "근로계약서",
     langs: ["ko"],
     price: 12900,
@@ -1241,6 +1367,7 @@ const DOC_TYPES = [
   },
   {
     id: "severance",
+    cat: "labor",
     name: "퇴직금 정산 확인서",
     langs: ["ko"],
     price: STUDIO.priceKrw,
@@ -1271,6 +1398,7 @@ const DOC_TYPES = [
   },
   {
     id: "payment-order",
+    cat: "litigation",
     name: "지급명령 신청서 (독촉)",
     langs: ["ko"],
     price: STUDIO.priceKrw,
@@ -1303,6 +1431,7 @@ const DOC_TYPES = [
   },
   {
     id: "employment-cert",
+    cat: "labor",
     name: "재직증명서 · Certificate of Employment",
     langs: ["ko", "en"],
     price: STUDIO.priceKrw,
@@ -1325,6 +1454,7 @@ const DOC_TYPES = [
   },
   {
     id: "resignation",
+    cat: "labor",
     name: "사직서",
     langs: ["ko"],
     price: STUDIO.priceKrw,
@@ -1349,6 +1479,7 @@ const DOC_TYPES = [
   },
   {
     id: "accusation",
+    cat: "litigation",
     name: "고발장",
     langs: ["ko"],
     price: STUDIO.priceKrw,
@@ -1381,6 +1512,7 @@ const DOC_TYPES = [
   },
   {
     id: "inheritance-split",
+    cat: "family",
     name: "상속재산 분할협의서",
     langs: ["ko"],
     price: 12900,
@@ -1401,6 +1533,7 @@ const DOC_TYPES = [
   },
   {
     id: "defect-claim",
+    cat: "realestate",
     name: "하자보수 요구서",
     langs: ["ko"],
     price: STUDIO.priceKrw,
@@ -1424,6 +1557,7 @@ const DOC_TYPES = [
   },
   {
     id: "eviction-notice",
+    cat: "realestate",
     name: "명도·퇴거 통지서",
     langs: ["ko"],
     price: STUDIO.priceKrw,
@@ -1451,6 +1585,7 @@ const DOC_TYPES = [
   },
   {
     id: "deposit-return",
+    cat: "realestate",
     name: "보증금 반환 요구서",
     langs: ["ko"],
     price: STUDIO.priceKrw,
@@ -1476,6 +1611,7 @@ const DOC_TYPES = [
   },
   {
     id: "privacy-consent",
+    cat: "contract",
     name: "개인정보 수집·이용 동의서",
     langs: ["ko"],
     price: STUDIO.priceKrw,
@@ -1505,6 +1641,7 @@ const DOC_TYPES = [
   },
   {
     id: "partnership",
+    cat: "contract",
     name: "동업계약서",
     langs: ["ko"],
     price: 14900,
@@ -1538,6 +1675,7 @@ const DOC_TYPES = [
   },
   {
     id: "incident-report",
+    cat: "labor",
     name: "시말서·경위서",
     langs: ["ko"],
     price: STUDIO.priceKrw,
@@ -1557,6 +1695,7 @@ const DOC_TYPES = [
   },
   {
     id: "wage-claim",
+    cat: "labor",
     name: "임금체불 진정서",
     langs: ["ko"],
     price: STUDIO.priceKrw,
@@ -1585,6 +1724,7 @@ const DOC_TYPES = [
   },
   {
     id: "termination-notice",
+    cat: "notice",
     name: "계약 해지·해제 통보서",
     langs: ["ko"],
     price: STUDIO.priceKrw,
@@ -1613,6 +1753,7 @@ const DOC_TYPES = [
   },
   {
     id: "sublease",
+    cat: "realestate",
     name: "전대차계약서",
     langs: ["ko"],
     price: 12900,
@@ -1647,6 +1788,7 @@ const DOC_TYPES = [
   },
   {
     id: "divorce-agreement",
+    cat: "family",
     name: "이혼 합의서",
     langs: ["ko"],
     price: 12900,
@@ -1675,6 +1817,7 @@ const DOC_TYPES = [
   },
   {
     id: "fact-statement",
+    cat: "litigation",
     name: "사실확인서·진술서",
     langs: ["ko", "en"],
     price: STUDIO.priceKrw,
@@ -1695,6 +1838,7 @@ const DOC_TYPES = [
   },
   {
     id: "meeting-minutes",
+    cat: "business",
     name: "회의록 · Meeting Minutes",
     langs: ["ko", "en"],
     price: STUDIO.priceKrw,
@@ -1713,6 +1857,7 @@ const DOC_TYPES = [
   },
   {
     id: "recommendation",
+    cat: "labor",
     name: "추천서 · Letter of Recommendation",
     langs: ["ko", "en"],
     price: STUDIO.priceKrw,
@@ -1734,6 +1879,7 @@ const DOC_TYPES = [
   },
   {
     id: "invitation-letter",
+    cat: "family",
     name: "비자 초청장 · Invitation Letter",
     langs: ["ko", "en"],
     price: 12900,
@@ -1766,6 +1912,7 @@ const DOC_TYPES = [
   },
   {
     id: "child-travel-consent",
+    cat: "family",
     name: "미성년자 해외여행 동의서 · Child Travel Consent",
     langs: ["ko", "en"],
     price: 12900,
@@ -1794,6 +1941,7 @@ const DOC_TYPES = [
   },
   {
     id: "vehicle-sale",
+    cat: "contract",
     name: "자동차 매매계약서 · Vehicle Bill of Sale",
     langs: ["ko", "en"],
     price: 12900,
@@ -1837,6 +1985,7 @@ const DOC_TYPES = [
   },
   {
     id: "quotation",
+    cat: "business",
     name: "견적서 · Quotation",
     langs: ["ko", "en"],
     price: STUDIO.priceKrw,
@@ -1866,6 +2015,7 @@ const DOC_TYPES = [
   },
   {
     id: "purchase-order",
+    cat: "business",
     name: "발주서 · Purchase Order",
     langs: ["ko", "en"],
     price: STUDIO.priceKrw,
@@ -1891,6 +2041,7 @@ const DOC_TYPES = [
   },
   {
     id: "receipt",
+    cat: "business",
     name: "영수증 · Receipt",
     langs: ["ko", "en"],
     price: 4900,
@@ -1915,6 +2066,7 @@ const DOC_TYPES = [
   },
   {
     id: "mou",
+    cat: "business",
     name: "양해각서 · MOU",
     langs: ["ko", "en"],
     price: 12900,
@@ -1944,6 +2096,7 @@ const DOC_TYPES = [
   },
   {
     id: "proforma-invoice",
+    cat: "business",
     name: "프로포마 인보이스 · Proforma Invoice",
     langs: ["ko", "en"],
     price: STUDIO.priceKrw,
@@ -1969,6 +2122,7 @@ const DOC_TYPES = [
   },
   {
     id: "small-claims",
+    cat: "litigation",
     name: "소액사건심판 소장",
     langs: ["ko"],
     price: 12900,
@@ -1995,6 +2149,7 @@ const DOC_TYPES = [
   },
   {
     id: "nda",
+    cat: "contract",
     name: "비밀유지계약서 · NDA",
     langs: ["ko", "en", "ja", "zh", "de", "fr", "es", "vi", "th"],
     price: 14900,
@@ -2027,6 +2182,7 @@ const DOC_TYPES = [
   },
   {
     id: "invoice",
+    cat: "business",
     name: "인보이스 · Invoice",
     langs: ["ko", "en"],
     price: STUDIO.priceKrw,
@@ -2049,7 +2205,450 @@ const DOC_TYPES = [
       { key: "doc_date", label: "발행 일자", type: "date" }
     ],
     render: { ko: renderInvoiceKo, en: renderInvoiceEn }
-  }
+  },
+  {
+    id: "real-estate-sale",
+    cat: "realestate",
+    name: "부동산 매매계약서",
+    langs: ["ko"],
+    price: STUDIO.priceKrw,
+    usageNote: "등기부등본으로 소유권·근저당 등 선순위 권리를 반드시 확인하세요. 실제 계약은 공인중개사 중개 또는 법무사 검토를 권장합니다.",
+    fields: [
+      { section: "매도인·매수인" },
+      { key: "a_name", label: "매도인 성명 *", type: "text", required: true },
+      { key: "a_id", label: "매도인 주민등록번호", type: "text" },
+      { key: "a_addr", label: "매도인 주소", type: "text" },
+      { key: "a_phone", label: "매도인 연락처", type: "tel" },
+      { key: "b_name", label: "매수인 성명 *", type: "text", required: true },
+      { key: "b_id", label: "매수인 주민등록번호", type: "text" },
+      { key: "b_addr", label: "매수인 주소", type: "text" },
+      { key: "b_phone", label: "매수인 연락처", type: "tel" },
+      { section: "목적물" },
+      { key: "prop_addr", label: "부동산 소재지 *", type: "text", required: true },
+      { key: "prop_desc", label: "토지·건물 표시", type: "textarea", hint: "지목·면적·구조·용도·층수 등 등기부등본 기준으로 기재" },
+      { section: "매매 대금" },
+      { key: "price", label: "매매 대금 (원) *", type: "text", required: true, hint: "숫자만 입력" },
+      { key: "contract_fee", label: "계약금 (원)", type: "text", hint: "계약 시 지급" },
+      { key: "interim_fee", label: "중도금 (원)", type: "text", hint: "중도금 지급일도 함께 기재 가능 (예: 50,000,000 / 2026.11.1)" },
+      { key: "pay_method", label: "지급 방법", type: "text", hint: "예: 계좌이체 (계좌번호 기재 가능)" },
+      { section: "인도·등기" },
+      { key: "delivery_date", label: "인도·잔금일", type: "text", hint: "예: 2026. 12. 31." },
+      { key: "reg_duty", label: "소유권이전등기 비용 부담", type: "select", options: [
+        { v: "buyer", label: { ko: "매수인 부담" } },
+        { v: "seller", label: { ko: "매도인 부담" } },
+        { v: "shared", label: { ko: "각자 부담" } }
+      ]},
+      { key: "special", label: "특약 사항", type: "textarea", hint: "한 줄에 하나씩 (예: 잔금일까지 선순위 근저당 말소)" },
+      { key: "doc_date", label: "작성일", type: "date" }
+    ],
+    render: { ko: renderRealEstateSaleKo }
+  },
+  {
+    id: "goods-sale",
+    cat: "contract",
+    name: "물품 매매계약서 · Sale of Goods",
+    langs: ["ko", "en"],
+    price: STUDIO.priceKrw,
+    fields: [
+      { section: "당사자" },
+      { key: "a_name", label: "매도인 성명·상호 *", type: "text", required: true },
+      { key: "a_addr", label: "매도인 주소", type: "text" },
+      { key: "b_name", label: "매수인 성명·상호 *", type: "text", required: true },
+      { key: "b_addr", label: "매수인 주소", type: "text" },
+      { section: "거래 내용" },
+      { key: "items", label: "물품 내역 *", type: "textarea", required: true, hint: "한 줄에 하나씩: 품목 | 수량 | 단가" },
+      { key: "currency", label: "통화", type: "select", options: CURRENCIES },
+      { key: "pay_terms", label: "대금 지급 조건", type: "text", hint: "예: 인도 후 14일 이내 계좌이체" },
+      { key: "delivery_date", label: "인도일·납기", type: "text" },
+      { key: "delivery_addr", label: "인도 장소", type: "text" },
+      { key: "inspection", label: "검수 기간", type: "select", options: [
+        { v: "7", label: { ko: "인도 후 7일", en: "7 days after delivery" } },
+        { v: "14", label: { ko: "인도 후 14일", en: "14 days after delivery" } },
+        { v: "as_is", label: { ko: "현상태 인수 (검수 없음)", en: "Accepted as-is (no inspection)" } }
+      ]},
+      { key: "special", label: "특약 사항", type: "textarea", hint: "한 줄에 하나씩" },
+      { key: "doc_date", label: "작성일", type: "date" }
+    ],
+    render: { ko: renderGoodsSaleKo, en: renderGoodsSaleEn }
+  },
+  {
+    id: "model-release",
+    cat: "contract",
+    name: "초상권 사용 동의서 · Model Release",
+    langs: ["ko", "en"],
+    price: STUDIO.priceKrw,
+    fields: [
+      { section: "초상권자 (촬영 대상)" },
+      { key: "b_name", label: "성명 *", type: "text", required: true },
+      { key: "b_id", label: "생년월일", type: "text" },
+      { key: "b_phone", label: "연락처", type: "tel" },
+      { section: "사용자" },
+      { key: "a_name", label: "사용자(촬영자·기업) *", type: "text", required: true },
+      { key: "a_contact", label: "사용자 연락처", type: "text" },
+      { section: "사용 범위" },
+      { key: "work_desc", label: "촬영물 내용", type: "text", hint: "예: 2026. 9. 1. ○○ 광고 촬영 사진·영상" },
+      { key: "usage", label: "사용 목적", type: "text", hint: "예: 광고·SNS 홍보·웹사이트 게재" },
+      { key: "term", label: "사용 기간", type: "text", hint: "예: 무기한 / 계약일로부터 3년" },
+      { key: "media", label: "사용 매체", type: "checks", options: [
+        { v: "web", label: { ko: "웹사이트·SNS", en: "Website / social media" } },
+        { v: "print", label: { ko: "인쇄물", en: "Print" } },
+        { v: "video", label: { ko: "영상·방송", en: "Video / broadcast" } },
+        { v: "ad", label: { ko: "광고", en: "Advertising" } }
+      ]},
+      { key: "paid", label: "대가 지급 여부", type: "select", options: [
+        { v: "paid", label: { ko: "유상 (대가 지급)", en: "Paid (compensation)" } },
+        { v: "free", label: { ko: "무상", en: "Unpaid (gratuitous)" } }
+      ]},
+      { key: "amount", label: "대가 금액", type: "text", hint: "유상인 경우" },
+      { key: "doc_date", label: "작성일", type: "date" }
+    ],
+    render: { ko: renderModelReleaseKo, en: renderModelReleaseEn }
+  },
+  {
+    id: "ip-license",
+    cat: "contract",
+    name: "저작권 사용허락 계약서 · IP License",
+    langs: ["ko", "en"],
+    price: STUDIO.priceKrw,
+    fields: [
+      { section: "당사자" },
+      { key: "a_name", label: "저작권자 *", type: "text", required: true },
+      { key: "a_addr", label: "저작권자 주소·연락처", type: "text" },
+      { key: "b_name", label: "이용자 *", type: "text", required: true },
+      { key: "b_addr", label: "이용자 주소·연락처", type: "text" },
+      { section: "허락 내용" },
+      { key: "work_desc", label: "저작물 *", type: "text", required: true, hint: "예: 사진 '○○', 일러스트 10컷, 음원 '○○'" },
+      { key: "usage", label: "사용 목적·방법 *", type: "text", required: true },
+      { key: "scope", label: "허락 범위", type: "select", options: [
+        { v: "nonexclusive", label: { ko: "비독점 (제3자에게도 허락 가능)", en: "Non-exclusive" } },
+        { v: "exclusive", label: { ko: "독점 (제3자 이용 불가)", en: "Exclusive" } }
+      ]},
+      { key: "term", label: "사용 기간", type: "text", hint: "예: 계약일로부터 1년" },
+      { key: "territory", label: "사용 지역", type: "text", hint: "예: 대한민국 / 전 세계" },
+      { key: "amount", label: "사용료", type: "text", hint: "예: 금 500,000원 / 무료 / 매출의 5%" },
+      { key: "attribution", label: "저작자 표시", type: "select", options: [
+        { v: "required", label: { ko: "저작자명 표시 의무", en: "Attribution required" } },
+        { v: "optional", label: { ko: "표시 선택", en: "Attribution optional" } },
+        { v: "none", label: { ko: "표시 불요", en: "No attribution" } }
+      ]},
+      { key: "doc_date", label: "작성일", type: "date" }
+    ],
+    render: { ko: renderIpLicenseKo, en: renderIpLicenseEn }
+  },
+  {
+    id: "confidentiality-pledge",
+    cat: "labor",
+    name: "비밀유지 서약서",
+    langs: ["ko"],
+    price: STUDIO.priceKrw,
+    fields: [
+      { section: "서약인" },
+      { key: "b_name", label: "성명 *", type: "text", required: true },
+      { key: "b_id", label: "생년월일·사번", type: "text" },
+      { key: "dept", label: "소속·직위", type: "text" },
+      { section: "회사" },
+      { key: "a_name", label: "회사명 *", type: "text", required: true },
+      { key: "a_addr", label: "회사 주소", type: "text" },
+      { section: "서약 내용" },
+      { key: "scope", label: "비밀정보 범위", type: "textarea", hint: "예: 기술자료·고객정보·영업계획·소스코드 등 재직 중 알게 된 일체의 정보" },
+      { key: "term", label: "유지 기간", type: "select", options: [
+        { v: "3y", label: { ko: "퇴직 후 3년" } },
+        { v: "5y", label: { ko: "퇴직 후 5년" } },
+        { v: "indef", label: { ko: "기간 제한 없음" } }
+      ]},
+      { key: "penalty", label: "위반 시 책임", type: "select", options: [
+        { v: "civil", label: { ko: "손해배상 책임" } },
+        { v: "civil_amount", label: { ko: "위약금 + 손해배상" } },
+        { v: "strict", label: { ko: "민·형사상 책임 + 징계" } }
+      ]},
+      { key: "amount", label: "위약금액", type: "text", hint: "위약금 선택 시" },
+      { key: "doc_date", label: "작성일", type: "date" }
+    ],
+    render: { ko: renderConfPledgeKo }
+  },
+  {
+    id: "non-compete",
+    cat: "labor",
+    name: "경업금지 서약서",
+    langs: ["ko"],
+    price: STUDIO.priceKrw,
+    usageNote: "경업금지는 헌법상 직업선택의 자유와 충돌할 수 있어 법원이 기간·지역·직종을 과도하게 제한한 약정은 무효로 봅니다. 합리적 범위로 기재하세요.",
+    fields: [
+      { section: "서약인" },
+      { key: "b_name", label: "성명 *", type: "text", required: true },
+      { key: "b_id", label: "생년월일·사번", type: "text" },
+      { key: "dept", label: "소속·직위", type: "text" },
+      { section: "회사" },
+      { key: "a_name", label: "회사명 *", type: "text", required: true },
+      { key: "a_addr", label: "회사 주소", type: "text" },
+      { section: "금지 내용" },
+      { key: "scope", label: "금지 대상 업무·직종", type: "textarea", hint: "구체적으로 (예: ○○ 솔루션 개발직)" },
+      { key: "period", label: "금지 기간", type: "select", options: [
+        { v: "1y", label: { ko: "퇴직 후 1년" } },
+        { v: "2y", label: { ko: "퇴직 후 2년" } },
+        { v: "3y", label: { ko: "퇴직 후 3년" } }
+      ]},
+      { key: "region", label: "금지 지역", type: "text", hint: "예: 대한민국 / 수도권" },
+      { key: "compensation", label: "대가·보상", type: "text", hint: "경업금지의 대가로 지급되는 금액이 있다면 기재 — 대가 없는 과도한 금지는 무효 위험" },
+      { key: "penalty", label: "위반 시 책임", type: "select", options: [
+        { v: "civil", label: { ko: "손해배상 책임" } },
+        { v: "civil_amount", label: { ko: "위약금 + 손해배상" } }
+      ]},
+      { key: "amount", label: "위약금액", type: "text" },
+      { key: "doc_date", label: "작성일", type: "date" }
+    ],
+    render: { ko: renderNonCompeteKo }
+  },
+  {
+    id: "personal-guarantee",
+    cat: "contract",
+    name: "신원보증서",
+    langs: ["ko"],
+    price: STUDIO.priceKrw,
+    fields: [
+      { section: "피보증인 (근로자)" },
+      { key: "b_name", label: "성명 *", type: "text", required: true },
+      { key: "b_id", label: "주민등록번호", type: "text" },
+      { key: "b_addr", label: "주소", type: "text" },
+      { section: "보증인" },
+      { key: "g_name", label: "보증인 성명 *", type: "text", required: true },
+      { key: "g_id", label: "보증인 주민등록번호", type: "text" },
+      { key: "g_addr", label: "보증인 주소", type: "text" },
+      { key: "g_phone", label: "보증인 연락처", type: "tel" },
+      { key: "g_rel", label: "피보증인과의 관계", type: "text", hint: "예: 부, 형" },
+      { section: "사용자" },
+      { key: "a_name", label: "회사명·사업주 *", type: "text", required: true },
+      { section: "보증 내용" },
+      { key: "term", label: "보증 기간", type: "text", hint: "예: 재직 기간 및 퇴직 후 2년" },
+      { key: "limit", label: "보증 한도액", type: "text", hint: "예: 금 30,000,000원 — 한도 명시 권장" },
+      { key: "doc_date", label: "작성일", type: "date" }
+    ],
+    render: { ko: renderGuaranteeKo }
+  },
+  {
+    id: "dismissal-notice",
+    cat: "labor",
+    name: "해고 예고 통지서",
+    langs: ["ko"],
+    price: STUDIO.priceKrw,
+    usageNote: "근로기준법 제26조 — 해고는 30일 전 예고 또는 30일분 통상임금(해고예고수당) 지급 필요. 정당한 사유 없는 해고는 부당해고가 될 수 있습니다.",
+    fields: [
+      { section: "수신 근로자" },
+      { key: "b_name", label: "성명 *", type: "text", required: true },
+      { key: "dept", label: "소속·직위", type: "text" },
+      { key: "b_id", label: "사번·생년월일", type: "text" },
+      { section: "발신 사업주" },
+      { key: "a_name", label: "회사명 *", type: "text", required: true },
+      { key: "a_addr", label: "회사 주소", type: "text" },
+      { key: "ceo_name", label: "대표자 성명", type: "text" },
+      { section: "해고 내용" },
+      { key: "reason_type", label: "해고 사유", type: "select", options: [
+        { v: "management", label: { ko: "경영상 이유 (정리해고)" } },
+        { v: "conduct", label: { ko: "근로자 귀책사유 (징계해고)" } },
+        { v: "capacity", label: { ko: "업무 능력·근무 성적" } },
+        { v: "probation", label: { ko: "수습 기간 중 부적격" } }
+      ]},
+      { key: "facts", label: "사유의 구체적 내용 *", type: "textarea", required: true },
+      { key: "eff_date", label: "해고 예정일 *", type: "date", required: true },
+      { key: "notice_pay", label: "해고예고수당", type: "select", options: [
+        { v: "advance", label: { ko: "30일 전 예고로 갈음" } },
+        { v: "paid", label: { ko: "30일분 통상임금 지급" } }
+      ]},
+      { key: "doc_date", label: "작성일", type: "date" }
+    ],
+    render: { ko: renderDismissalKo }
+  },
+  {
+    id: "noise-notice",
+    cat: "realestate",
+    name: "층간소음 경고장",
+    langs: ["ko"],
+    price: STUDIO.priceKrw,
+    fields: [
+      { section: "발신인" },
+      { key: "s_name", label: "성명·호수 *", type: "text", required: true, hint: "예: 홍길동 (101동 505호)" },
+      { key: "s_phone", label: "연락처", type: "tel" },
+      { section: "수신인" },
+      { key: "r_name", label: "대상 호수 *", type: "text", required: true, hint: "예: 101동 605호 (성명 불상 시 호수만)" },
+      { section: "소음 내용" },
+      { key: "noise_type", label: "소음 유형", type: "checks", options: [
+        { v: "footstep", label: { ko: "발소리·뛰는 소리" } },
+        { v: "furniture", label: { ko: "가구 끄는 소리" } },
+        { v: "music", label: { ko: "음악·TV 소리" } },
+        { v: "pet", label: { ko: "반려동물 소리" } },
+        { v: "construction", label: { ko: "인테리어·공사 소리" } },
+        { v: "other", label: { ko: "기타" } }
+      ]},
+      { key: "times", label: "주요 발생 시간대", type: "text", hint: "예: 매일 밤 11시~새벽 2시" },
+      { key: "facts", label: "피해 경위", type: "textarea" },
+      { key: "demand", label: "요구 사항", type: "select", options: [
+        { v: "reduce", label: { ko: "소음 저감 조치 요청" } },
+        { v: "quiet_hours", label: { ko: "야간(22시~07시) 소음 중단 요청" } },
+        { v: "formal", label: { ko: "관리사무소·공동주택관리법상 중재 요청 예고" } }
+      ]},
+      { key: "doc_date", label: "작성일", type: "date" }
+    ],
+    render: { ko: renderNoiseKo }
+  },
+  {
+    id: "fine-objection",
+    cat: "litigation",
+    name: "과태료 의견제출서",
+    langs: ["ko"],
+    price: STUDIO.priceKrw,
+    usageNote: "과태료 사전통지서를 받은 날부터 통지서에 기재된 기간(통상 10~60일) 내에 행정청에 제출하세요.",
+    fields: [
+      { section: "제출인" },
+      { key: "c_name", label: "성명 *", type: "text", required: true },
+      { key: "c_id", label: "생년월일·식별번호", type: "text" },
+      { key: "c_addr", label: "주소", type: "text" },
+      { key: "c_phone", label: "연락처", type: "tel" },
+      { section: "위반 사건" },
+      { key: "notice_no", label: "통지서 번호·위반번호", type: "text" },
+      { key: "violation", label: "위반 내용 (통지서 기재대로)", type: "text" },
+      { key: "violation_date", label: "위반 일시·장소", type: "text" },
+      { section: "의견" },
+      { key: "opinion_type", label: "의견 유형", type: "select", options: [
+        { v: "not_mine", label: { ko: "본인 행위 아님" } },
+        { v: "excuse", label: { ko: "정당한 사유 있음" } },
+        { v: "reduce", label: { ko: "감경 사유 호소" } }
+      ]},
+      { key: "facts", label: "의견 내용 *", type: "textarea", required: true, hint: "구체적 사유와 정황을 기재" },
+      { key: "evidence", label: "첨부자료", type: "textarea", hint: "한 줄에 하나씩" },
+      { key: "police", label: "제출 기관 *", type: "text", required: true, hint: "예: 서울○○경찰서, ○○시청" },
+      { key: "doc_date", label: "작성일", type: "date" }
+    ],
+    render: { ko: renderFineObjKo }
+  },
+  {
+    id: "official-letter",
+    cat: "business",
+    name: "공문·협조요청서",
+    langs: ["ko"],
+    price: STUDIO.priceKrw,
+    fields: [
+      { section: "발신 기관·단체" },
+      { key: "a_name", label: "기관명·부서 *", type: "text", required: true },
+      { key: "a_addr", label: "주소", type: "text" },
+      { key: "a_contact", label: "담당자·연락처", type: "text" },
+      { key: "doc_no", label: "문서번호", type: "text", hint: "예: ○○ 제2026-15호" },
+      { section: "수신" },
+      { key: "r_name", label: "수신 기관·부서 *", type: "text", required: true },
+      { key: "ref", label: "참조", type: "text" },
+      { section: "내용" },
+      { key: "title", label: "제목 *", type: "text", required: true },
+      { key: "facts", label: "본문 *", type: "textarea", required: true, hint: "요청·통보 내용을 기재" },
+      { key: "deadline", label: "회신 기한", type: "text", hint: "필요 시" },
+      { key: "attachments", label: "붙임 서류", type: "textarea", hint: "한 줄에 하나씩" },
+      { key: "doc_date", label: "발신일", type: "date" }
+    ],
+    render: { ko: renderOfficialKo }
+  },
+  {
+    id: "payslip",
+    cat: "business",
+    name: "급여명세서 · Payslip",
+    langs: ["ko", "en"],
+    price: STUDIO.priceKrw,
+    fields: [
+      { section: "사업주·근로자" },
+      { key: "a_name", label: "회사명 *", type: "text", required: true },
+      { key: "b_name", label: "근로자 성명 *", type: "text", required: true },
+      { key: "dept", label: "부서·직위", type: "text" },
+      { key: "b_id", label: "사번", type: "text" },
+      { section: "지급 내역" },
+      { key: "pay_month", label: "지급 월 *", type: "text", required: true, hint: "예: 2026년 9월" },
+      { key: "pay_items", label: "지급 항목", type: "textarea", hint: "한 줄에 하나씩: 항목 | 금액 (예: 기본급 | 2,500,000)" },
+      { key: "deduct_items", label: "공제 항목", type: "textarea", hint: "한 줄에 하나씩: 항목 | 금액 (예: 국민연금 | 112,500)" },
+      { key: "pay_day", label: "지급일", type: "text" },
+      { key: "pay_method", label: "지급 방법", type: "select", options: [
+        { v: "bank", label: { ko: "계좌이체", en: "Bank transfer" } },
+        { v: "cash", label: { ko: "현금", en: "Cash" } }
+      ]},
+      { key: "doc_date", label: "발행일", type: "date" }
+    ],
+    render: { ko: renderPayslipKo, en: renderPayslipEn }
+  },
+  {
+    id: "lease-termination",
+    cat: "realestate",
+    name: "임대차 합의해지서",
+    langs: ["ko"],
+    price: STUDIO.priceKrw,
+    fields: [
+      { section: "당사자" },
+      { key: "l_name", label: "임대인 성명 *", type: "text", required: true },
+      { key: "l_addr", label: "임대인 주소", type: "text" },
+      { key: "l_phone", label: "임대인 연락처", type: "tel" },
+      { key: "t_name", label: "임차인 성명 *", type: "text", required: true },
+      { key: "t_addr", label: "임차인 주소", type: "text" },
+      { key: "t_phone", label: "임차인 연락처", type: "tel" },
+      { section: "해지 내용" },
+      { key: "prop_addr", label: "목적물 소재지 *", type: "text", required: true },
+      { key: "contract_info", label: "원 계약 정보", type: "text", hint: "예: 2025. 1. 1. 체결 임대차계약" },
+      { key: "eff_date", label: "해지일·명도일 *", type: "text", required: true },
+      { key: "deposit", label: "반환할 보증금 (원)", type: "text" },
+      { key: "repay_account", label: "보증금 반환 계좌", type: "text" },
+      { key: "settlement_note", label: "정산 특약", type: "textarea", hint: "예: 공과금 정산 후 보증금 반환" },
+      { key: "doc_date", label: "작성일", type: "date" }
+    ],
+    render: { ko: renderLeaseTermKo }
+  },
+  {
+    id: "consumer-claim",
+    cat: "litigation",
+    name: "소비자 피해구제 신청서",
+    langs: ["ko"],
+    price: STUDIO.priceKrw,
+    usageNote: "한국소비자원 피해구제(1372 소비자상담센터·consumer.go.kr) 접수용으로 활용 가능합니다.",
+    fields: [
+      { section: "신청인 (소비자)" },
+      { key: "c_name", label: "성명 *", type: "text", required: true },
+      { key: "c_addr", label: "주소", type: "text" },
+      { key: "c_phone", label: "연락처", type: "tel" },
+      { key: "c_email", label: "이메일", type: "email" },
+      { section: "피신청인 (사업자)" },
+      { key: "d_name", label: "사업자명·상호 *", type: "text", required: true },
+      { key: "d_addr", label: "사업자 주소", type: "text" },
+      { key: "d_phone", label: "사업자 연락처", type: "text" },
+      { section: "피해 내용" },
+      { key: "purchase", label: "구매 상품·서비스 *", type: "text", required: true, hint: "예: 2026. 8. 1. ○○몰에서 노트북 구매, 금액 1,200,000원" },
+      { key: "facts", label: "피해 경위 *", type: "textarea", required: true },
+      { key: "demand", label: "구제 요구 내용 *", type: "select", required: true, options: [
+        { v: "refund", label: { ko: "환불" } },
+        { v: "exchange", label: { ko: "교환" } },
+        { v: "repair", label: { ko: "수리" } },
+        { v: "damages", label: { ko: "손해배상" } },
+        { v: "cancel", label: { ko: "계약 해제" } }
+      ]},
+      { key: "evidence", label: "첨부자료", type: "textarea", hint: "한 줄에 하나씩 (영수증, 계약서, 사진 등)" },
+      { key: "doc_date", label: "작성일", type: "date" }
+    ],
+    render: { ko: renderConsumerClaimKo }
+  },
+  {
+    id: "apology-letter",
+    cat: "family",
+    name: "사과문·감사장 · Letter",
+    langs: ["ko", "en"],
+    price: STUDIO.priceKrw,
+    fields: [
+      { section: "작성인" },
+      { key: "s_name", label: "성명·소속 *", type: "text", required: true },
+      { section: "수신인" },
+      { key: "r_name", label: "수신인", type: "text", hint: "특정인이 없으면 비움 (예: 고객 여러분)" },
+      { section: "내용" },
+      { key: "letter_type", label: "문서 유형", type: "select", options: [
+        { v: "apology", label: { ko: "사과문", en: "Letter of Apology" } },
+        { v: "thanks", label: { ko: "감사장", en: "Letter of Appreciation" } }
+      ]},
+      { key: "subject", label: "사안·제목", type: "text", hint: "예: 제품 배송 지연에 대한 사과" },
+      { key: "facts", label: "경위·내용 *", type: "textarea", required: true },
+      { key: "plan", label: "재발 방지·후속 조치", type: "textarea", hint: "사과문인 경우" },
+      { key: "doc_date", label: "작성일", type: "date" }
+    ],
+    render: { ko: renderApologyKo, en: renderApologyEn }
+  },
 ];
 
 const BLANK = '<span class="blank">＿＿＿＿</span>';
@@ -4809,6 +5408,474 @@ function renderProformaEn() {
     <div class="doc-foot"><div class="signer">${valOr("s_name")}</div></div>`;
 }
 
+
+/* --- 부동산 매매계약서 --- */
+function renderRealEstateSaleKo() {
+  const special = lines("special");
+  return `
+    <h1 class="doc-title">부동산 매매계약서</h1>
+    <table class="parties">
+      <tr><td class="lbl">매도인</td><td>성명: ${valOr("a_name")}<br/>주민등록번호: ${valOr("a_id")}<br/>주소: ${valOr("a_addr")}<br/>연락처: ${valOr("a_phone")}</td></tr>
+      <tr><td class="lbl">매수인</td><td>성명: ${valOr("b_name")}<br/>주민등록번호: ${valOr("b_id")}<br/>주소: ${valOr("b_addr")}<br/>연락처: ${valOr("b_phone")}</td></tr>
+    </table>
+    <p class="body">매도인과 매수인은 아래 부동산의 매매에 관하여 다음과 같이 계약을 체결한다.</p>
+    <h2>제1조 (목적물의 표시)</h2>
+    <p class="body">소재지: ${valOr("prop_addr")}<br/>${valOr("prop_desc")}</p>
+    <h2>제2조 (매매 대금 및 지급)</h2>
+    <p class="body">매매 대금은 금 ${valOr("price")}원으로 하며, 매수인은 다음과 같이 지급한다.</p>
+    <table class="parties">
+      <tr><td class="lbl">계약금</td><td>금 ${valOr("contract_fee")}원 — 계약 체결 시 지급</td></tr>
+      ${val("interim_fee") ? `<tr><td class="lbl">중도금</td><td>금 ${esc(val("interim_fee"))}원</td></tr>` : ""}
+      <tr><td class="lbl">잔금</td><td>인도일(${valOr("delivery_date")})에 지급</td></tr>
+    </table>
+    ${val("pay_method") ? `<p class="body">지급 방법: ${esc(val("pay_method"))}</p>` : ""}
+    <h2>제3조 (인도 및 소유권이전)</h2>
+    <p class="body">매도인은 ${valOr("delivery_date")}까지 위 부동산을 인도하고, 소유권이전등기에 필요한 서류를 교부한다. 소유권이전등기 비용은 ${esc(optText("reg_duty", "ko") || "매수인 부담")}으로 한다.</p>
+    <h2>제4조 (하자 및 권리)</h2>
+    <p class="body">매도인은 인도일 현재 위 부동산에 계약에 저촉되는 권리(근저당권·임대차 등)가 없음을 보증하며, 매수인은 목적물을 확인한 후 매수한다.</p>
+    ${special.length ? `<h2>제5조 (특약)</h2><ol class="evidence">${special.map(t=>`<li>${esc(t)}</li>`).join("")}</ol>` : ""}
+    <p class="body" style="margin-top:24px;">본 계약의 성립을 증명하기 위하여 계약서 2부를 작성하고 매도인과 매수인이 각각 서명·날인하여 1부씩 보관한다.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">매도인 ${valOr("a_name")} ${sig("sig_a")}</div>
+      <div class="signer">매수인 ${valOr("b_name")} ${sig("sig_b")}</div>
+    </div>`;
+}
+
+/* --- 물품 매매계약서 --- */
+function renderGoodsSaleKo() {
+  const rows = parseInvoiceItems();
+  const total = rows.reduce((a, r) => a + r.amt, 0);
+  const cur = esc(val("currency"));
+  const special = lines("special");
+  return `
+    <h1 class="doc-title">물품 매매계약서</h1>
+    <table class="parties">
+      <tr><td class="lbl">매도인</td><td>${valOr("a_name")}<br/>${valOr("a_addr")}</td></tr>
+      <tr><td class="lbl">매수인</td><td>${valOr("b_name")}<br/>${valOr("b_addr")}</td></tr>
+    </table>
+    <h2>제1조 (목적물 및 대금)</h2>
+    ${itemsTableKo(rows, cur, total, null, total)}
+    <h2>제2조 (대금 지급)</h2>
+    <p class="body">${valOr("pay_terms")}</p>
+    <h2>제3조 (인도)</h2>
+    <p class="body">인도일: ${valOr("delivery_date")} · 인도 장소: ${valOr("delivery_addr")}</p>
+    <h2>제4조 (검수 및 하자)</h2>
+    <p class="body">검수: ${esc(optText("inspection", "ko") || "인도 후 7일")}. 검수 기간 내 이의가 없으면 수령한 것으로 본다.</p>
+    ${special.length ? `<h2>제5조 (특약)</h2><ol class="evidence">${special.map(t=>`<li>${esc(t)}</li>`).join("")}</ol>` : ""}
+    <p class="body" style="margin-top:24px;">본 계약의 성립을 증명하기 위하여 2부를 작성하고 각자 서명·날인하여 1부씩 보관한다.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">매도인 ${valOr("a_name")} ${sig("sig_a")}</div>
+      <div class="signer">매수인 ${valOr("b_name")} ${sig("sig_b")}</div>
+    </div>`;
+}
+function renderGoodsSaleEn() {
+  const rows = parseInvoiceItems();
+  const total = rows.reduce((a, r) => a + r.amt, 0);
+  const cur = esc(val("currency"));
+  const special = lines("special");
+  return `
+    <h1 class="doc-title">SALE OF GOODS AGREEMENT</h1>
+    <table class="parties">
+      <tr><td class="lbl">SELLER</td><td>${valOr("a_name")}<br/>${valOr("a_addr")}</td></tr>
+      <tr><td class="lbl">BUYER</td><td>${valOr("b_name")}<br/>${valOr("b_addr")}</td></tr>
+    </table>
+    <h2>1. Goods and Price</h2>
+    ${itemsTableEn(rows, cur, total, null, total)}
+    <h2>2. Payment</h2>
+    <p class="body">${valOr("pay_terms")}</p>
+    <h2>3. Delivery</h2>
+    <p class="body">Delivery date: ${valOr("delivery_date")} · Place: ${valOr("delivery_addr")}</p>
+    <h2>4. Inspection</h2>
+    <p class="body">Inspection: ${esc(optText("inspection", "en") || "7 days after delivery")}. Goods are deemed accepted if no objection is raised within the inspection period.</p>
+    ${special.length ? `<h2>5. Special Terms</h2><ol class="evidence">${special.map(t=>`<li>${esc(t)}</li>`).join("")}</ol>` : ""}
+    <p class="body" style="margin-top:24px;">Executed in two counterparts, each party retaining one.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "en"))}</div>
+      <div class="signer">Seller: ${valOr("a_name")} ${sig("sig_a", "________________")}</div>
+      <div class="signer">Buyer: ${valOr("b_name")} ${sig("sig_b", "________________")}</div>
+    </div>`;
+}
+
+/* --- 초상권 사용 동의서 --- */
+function renderModelReleaseKo() {
+  const media = checkedLabels("media", "ko");
+  const paid = val("paid") === "paid";
+  return `
+    <h1 class="doc-title">초상권 사용 동의서</h1>
+    <table class="parties">
+      <tr><td class="lbl">초상권자</td><td>성명: ${valOr("b_name")}<br/>생년월일: ${valOr("b_id")}<br/>연락처: ${valOr("b_phone")}</td></tr>
+      <tr><td class="lbl">사용자</td><td>${valOr("a_name")}<br/>${valOr("a_contact")}</td></tr>
+    </table>
+    <p class="body">초상권자는 사용자에게 다음과 같이 초상권 사용을 동의한다.</p>
+    <h2>1. 대상 촬영물</h2>
+    <p class="body">${valOr("work_desc")}</p>
+    <h2>2. 사용 목적</h2>
+    <p class="body">${valOr("usage")}</p>
+    <h2>3. 사용 매체·기간</h2>
+    <p class="body">매체: ${media.length ? media.map(m=>esc(m)).join(", ") : BLANK}<br/>기간: ${valOr("term")}</p>
+    <h2>4. 대가</h2>
+    <p class="body">${paid ? "사용자는 초상권 사용의 대가로 금 " + valOr("amount") + "원을 지급한다." : "본 동의는 무상으로 이루어진다."}</p>
+    <h2>5. 기타</h2>
+    <p class="body">본 동의는 명시된 목적·매체·기간에 한하여 유효하며, 사용자는 그 범위를 초과하여 초상을 이용할 수 없다.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">초상권자 ${valOr("b_name")} ${sig("sig_b")}</div>
+      <div class="signer">사용자 ${valOr("a_name")} ${sig("sig_a")}</div>
+    </div>`;
+}
+function renderModelReleaseEn() {
+  const media = checkedLabels("media", "en");
+  const paid = val("paid") === "paid";
+  return `
+    <h1 class="doc-title">MODEL RELEASE</h1>
+    <table class="parties">
+      <tr><td class="lbl">MODEL</td><td>Name: ${valOr("b_name")}<br/>Date of birth: ${valOr("b_id")}<br/>Contact: ${valOr("b_phone")}</td></tr>
+      <tr><td class="lbl">USER</td><td>${valOr("a_name")}<br/>${valOr("a_contact")}</td></tr>
+    </table>
+    <p class="body">The Model grants the User permission to use the Model's likeness as follows.</p>
+    <h2>1. Content</h2>
+    <p class="body">${valOr("work_desc")}</p>
+    <h2>2. Purpose</h2>
+    <p class="body">${valOr("usage")}</p>
+    <h2>3. Media &amp; Term</h2>
+    <p class="body">Media: ${media.length ? media.map(m=>esc(m)).join(", ") : BLANK}<br/>Term: ${valOr("term")}</p>
+    <h2>4. Consideration</h2>
+    <p class="body">${paid ? "The User shall pay " + valOr("amount") + " as consideration." : "This release is granted without compensation."}</p>
+    <h2>5. Limitations</h2>
+    <p class="body">This release is valid only for the stated purpose, media and term.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "en"))}</div>
+      <div class="signer">Model: ${valOr("b_name")} ${sig("sig_b", "________________")}</div>
+      <div class="signer">User: ${valOr("a_name")} ${sig("sig_a", "________________")}</div>
+    </div>`;
+}
+
+/* --- 저작권 사용허락 계약서 --- */
+function renderIpLicenseKo() {
+  return `
+    <h1 class="doc-title">저작권 사용허락 계약서</h1>
+    <table class="parties">
+      <tr><td class="lbl">저작권자 (갑)</td><td>${valOr("a_name")}<br/>${valOr("a_addr")}</td></tr>
+      <tr><td class="lbl">이용자 (을)</td><td>${valOr("b_name")}<br/>${valOr("b_addr")}</td></tr>
+    </table>
+    <h2>제1조 (저작물)</h2>
+    <p class="body">${valOr("work_desc")}</p>
+    <h2>제2조 (허락 범위)</h2>
+    <p class="body">사용 목적·방법: ${valOr("usage")}<br/>허락 성격: ${esc(optText("scope", "ko") || "비독점")}<br/>사용 기간: ${valOr("term")}<br/>사용 지역: ${valOr("territory")}</p>
+    <h2>제3조 (사용료)</h2>
+    <p class="body">${valOr("amount")}</p>
+    <h2>제4조 (저작자 표시)</h2>
+    <p class="body">${esc(optText("attribution", "ko") || "저작자명 표시 의무")}</p>
+    <h2>제5조 (권리 유보)</h2>
+    <p class="body">본 계약은 저작재산권의 양도가 아니며, 명시되지 않은 권리는 갑에게 유보된다.</p>
+    <p class="body" style="margin-top:24px;">본 계약의 성립을 증명하기 위하여 2부를 작성하고 각자 서명·날인하여 1부씩 보관한다.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">갑 ${valOr("a_name")} ${sig("sig_a")}</div>
+      <div class="signer">을 ${valOr("b_name")} ${sig("sig_b")}</div>
+    </div>`;
+}
+function renderIpLicenseEn() {
+  return `
+    <h1 class="doc-title">COPYRIGHT LICENSE AGREEMENT</h1>
+    <table class="parties">
+      <tr><td class="lbl">LICENSOR</td><td>${valOr("a_name")}<br/>${valOr("a_addr")}</td></tr>
+      <tr><td class="lbl">LICENSEE</td><td>${valOr("b_name")}<br/>${valOr("b_addr")}</td></tr>
+    </table>
+    <h2>1. Work</h2>
+    <p class="body">${valOr("work_desc")}</p>
+    <h2>2. Grant</h2>
+    <p class="body">Purpose / method: ${valOr("usage")}<br/>Nature: ${esc(optText("scope", "en") || "Non-exclusive")}<br/>Term: ${valOr("term")}<br/>Territory: ${valOr("territory")}</p>
+    <h2>3. License Fee</h2>
+    <p class="body">${valOr("amount")}</p>
+    <h2>4. Attribution</h2>
+    <p class="body">${esc(optText("attribution", "en") || "Attribution required")}</p>
+    <h2>5. Reservation of Rights</h2>
+    <p class="body">This Agreement is a license, not an assignment; all rights not expressly granted are reserved to the Licensor.</p>
+    <p class="body" style="margin-top:24px;">Executed in two counterparts, each party retaining one.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "en"))}</div>
+      <div class="signer">Licensor: ${valOr("a_name")} ${sig("sig_a", "________________")}</div>
+      <div class="signer">Licensee: ${valOr("b_name")} ${sig("sig_b", "________________")}</div>
+    </div>`;
+}
+
+/* --- 비밀유지 서약서 --- */
+function renderConfPledgeKo() {
+  const pen = { civil: "비밀유지 의무 위반으로 회사에 손해를 입힌 경우 민사상 손해배상 책임을 진다.",
+    civil_amount: "위반 시 위약금 금 " + valOr("amount") + "원 및 별도의 손해배상 책임을 진다.",
+    strict: "위반 시 민·형사상 책임 및 사규에 따른 징계 책임을 진다." };
+  return `
+    <h1 class="doc-title">비밀유지 서약서</h1>
+    <table class="parties">
+      <tr><td class="lbl">서약인</td><td>성명: ${valOr("b_name")}<br/>생년월일·사번: ${valOr("b_id")}<br/>소속·직위: ${valOr("dept")}</td></tr>
+      <tr><td class="lbl">회사</td><td>${valOr("a_name")}<br/>${valOr("a_addr")}</td></tr>
+    </table>
+    <p class="body">본인은 ${valOr("a_name")}에 재직함에 있어 다음과 같이 서약한다.</p>
+    <h2>1. 비밀정보의 범위</h2>
+    <p class="body">${valOr("scope")}</p>
+    <h2>2. 비밀유지 의무</h2>
+    <p class="body">본인은 재직 중은 물론 퇴직 후에도 위 비밀정보를 제3자에게 누설하지 않고 업무 목적 외에 사용하지 않는다.</p>
+    <h2>3. 유지 기간</h2>
+    <p class="body">${esc(optText("term", "ko") || "퇴직 후 3년")}</p>
+    <h2>4. 위반 시 책임</h2>
+    <p class="body">${esc(pen[val("penalty")] || pen.civil)}</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">서약인 ${valOr("b_name")} ${sig("sig_b")}</div>
+      <div class="recipient">${valOr("a_name")} 귀중</div>
+    </div>`;
+}
+
+/* --- 경업금지 서약서 --- */
+function renderNonCompeteKo() {
+  const pen = val("penalty") === "civil_amount"
+    ? "위반 시 위약금 금 " + valOr("amount") + "원 및 별도의 손해배상 책임을 진다."
+    : "위반으로 회사에 손해를 입힌 경우 민사상 손해배상 책임을 진다.";
+  return `
+    <h1 class="doc-title">경업금지 서약서</h1>
+    <table class="parties">
+      <tr><td class="lbl">서약인</td><td>성명: ${valOr("b_name")}<br/>생년월일·사번: ${valOr("b_id")}<br/>소속·직위: ${valOr("dept")}</td></tr>
+      <tr><td class="lbl">회사</td><td>${valOr("a_name")}<br/>${valOr("a_addr")}</td></tr>
+    </table>
+    <p class="body">본인은 ${valOr("a_name")} 퇴직 후에도 다음과 같이 경업을 금지할 것을 서약한다.</p>
+    <h2>1. 금지 대상</h2>
+    <p class="body">금지 업무·직종: ${valOr("scope")}<br/>금지 지역: ${valOr("region")}<br/>금지 기간: ${esc(optText("period", "ko") || "퇴직 후 1년")}</p>
+    <h2>2. 대가</h2>
+    <p class="body">${val("compensation") ? "회사는 본 서약의 대가로 " + esc(val("compensation")) + "을(를) 지급한다." : "본 서약은 근로관계의 부수 의무로서 별도 대가 없이 체결된다."}</p>
+    <h2>3. 위반 시 책임</h2>
+    <p class="body">${esc(pen)}</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">서약인 ${valOr("b_name")} ${sig("sig_b")}</div>
+      <div class="recipient">${valOr("a_name")} 귀중</div>
+    </div>`;
+}
+
+/* --- 신원보증서 --- */
+function renderGuaranteeKo() {
+  return `
+    <h1 class="doc-title">신 원 보 증 서</h1>
+    <table class="parties">
+      <tr><td class="lbl">피보증인</td><td>성명: ${valOr("b_name")}<br/>주민등록번호: ${valOr("b_id")}<br/>주소: ${valOr("b_addr")}</td></tr>
+      <tr><td class="lbl">보증인</td><td>성명: ${valOr("g_name")}<br/>주민등록번호: ${valOr("g_id")}<br/>주소: ${valOr("g_addr")}<br/>연락처: ${valOr("g_phone")}<br/>관계: ${valOr("g_rel")}</td></tr>
+    </table>
+    <p class="body">보증인은 피보증인 ${valOr("b_name")}이(가) ${valOr("a_name")}에 재직하는 동안 또는 그와 관련하여 귀사에 끼친 일체의 손해에 대하여 연대하여 보증한다.</p>
+    <p class="body">보증 기간: ${valOr("term")}<br/>보증 한도: 금 ${valOr("limit")}원</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">보증인 ${valOr("g_name")} ${sig("sig_p")}</div>
+      <div class="recipient">${valOr("a_name")} 귀중</div>
+    </div>`;
+}
+
+/* --- 해고 예고 통지서 --- */
+function renderDismissalKo() {
+  return `
+    <h1 class="doc-title">해고 예고 통지서</h1>
+    <table class="parties">
+      <tr><td class="lbl">수신인</td><td>성명: ${valOr("b_name")}<br/>소속·직위: ${valOr("dept")}<br/>사번·생년월일: ${valOr("b_id")}</td></tr>
+      <tr><td class="lbl">발신인</td><td>${valOr("a_name")}<br/>${valOr("a_addr")}<br/>대표자: ${valOr("ceo_name")}</td></tr>
+    </table>
+    <p class="body">1. 발신인은 수신인에게 다음과 같이 해고를 예고합니다.</p>
+    <p class="body">2. 해고 사유: ${esc(optText("reason_type", "ko"))}<br/>구체적 내용: ${valOr("facts")}</p>
+    <p class="body">3. 해고 예정일: ${esc(fmtDate(val("eff_date"), "ko"))}</p>
+    <p class="body">4. 해고예고수당: ${esc(optText("notice_pay", "ko") || "30일 전 예고로 갈음")}</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">${valOr("a_name")}${val("ceo_name") ? " 대표 " + esc(val("ceo_name")) : ""} &nbsp;(인)</div>
+    </div>`;
+}
+
+/* --- 층간소음 경고장 --- */
+function renderNoiseKo() {
+  const types = checkedLabels("noise_type", "ko");
+  return `
+    <h1 class="doc-title">층간소음 경고장</h1>
+    <table class="parties">
+      <tr><td class="lbl">수신인</td><td>${valOr("r_name")}</td></tr>
+      <tr><td class="lbl">발신인</td><td>${valOr("s_name")}<br/>${valOr("s_phone")}</td></tr>
+    </table>
+    <p class="body">안녕하세요. 아래층 거주자입니다.</p>
+    <p class="body">최근 귀 세대에서 발생하는 ${types.length ? types.map(t=>esc(t)).join(", ") : "소음"}이 지속되어 일상생활에 큰 불편을 겪고 있습니다. 주요 발생 시간대: ${valOr("times")}.</p>
+    ${val("facts") ? `<p class="body">피해 경위: ${valOr("facts")}</p>` : ""}
+    <p class="body">부탁드립니다: ${esc(optText("demand", "ko") || "소음 저감 조치 요청")}. 공동주택에서의 층간소음은 공동주택관리법상 이웃 간 배려 의무가 있습니다. 지속될 경우 관리사무소 중재·층간소음 이웃사이센터 상담 등 정식 절차를 밟을 수밖에 없음을 양해 바랍니다.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">${valOr("s_name")}</div>
+    </div>`;
+}
+
+/* --- 과태료 의견제출서 --- */
+function renderFineObjKo() {
+  const evidence = lines("evidence");
+  return `
+    <h1 class="doc-title">과태료 의견제출서</h1>
+    <table class="parties">
+      <tr><td class="lbl">제출인</td><td>성명: ${valOr("c_name")}<br/>생년월일: ${valOr("c_id")}<br/>주소: ${valOr("c_addr")}<br/>연락처: ${valOr("c_phone")}</td></tr>
+      <tr><td class="lbl">위반 사건</td><td>통지서 번호: ${valOr("notice_no")}<br/>위반 내용: ${valOr("violation")}<br/>위반 일시·장소: ${valOr("violation_date")}</td></tr>
+    </table>
+    <h2>의견 (${esc(optText("opinion_type", "ko"))})</h2>
+    <p class="body">${valOr("facts")}</p>
+    ${evidence.length ? `<h2>첨부자료</h2><ol class="evidence">${evidence.map(e => `<li>${esc(e)}</li>`).join("")}</ol>` : ""}
+    <p class="body" style="margin-top:20px;">위와 같이 의견을 제출하오니 참고하여 주시기 바랍니다.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">제출인 ${valOr("c_name")} &nbsp;(인)</div>
+      <div class="recipient">${valOr("police")} 귀중</div>
+    </div>`;
+}
+
+/* --- 공문 --- */
+function renderOfficialKo() {
+  const att = lines("attachments");
+  return `
+    <div class="doc-subtitle" style="text-align:left;">문서번호: ${valOr("doc_no")}</div>
+    <h1 class="doc-title">${esc(val("title") || "공 문")}</h1>
+    <table class="parties">
+      <tr><td class="lbl">수신</td><td>${valOr("r_name")}</td></tr>
+      ${val("ref") ? `<tr><td class="lbl">참조</td><td>${esc(val("ref"))}</td></tr>` : ""}
+      <tr><td class="lbl">발신</td><td>${valOr("a_name")}<br/>${valOr("a_addr")}<br/>${valOr("a_contact")}</td></tr>
+    </table>
+    <p class="body">${valOr("facts")}</p>
+    ${val("deadline") ? `<p class="body">회신 기한: ${esc(val("deadline"))}</p>` : ""}
+    ${att.length ? `<p class="body">붙임: ${att.map(a=>esc(a)).join(" · ")}</p>` : ""}
+    <p class="body" style="margin-top:20px;">끝.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">${valOr("a_name")} &nbsp;(인)</div>
+    </div>`;
+}
+
+/* --- 급여명세서 --- */
+function parsePayRows(key) {
+  return lines(key).map(l => { const x = l.split("|").map(t => t.trim()); const n = Number(String(x[1]||"0").replace(/,/g, "")) || 0; return { name: x[0]||"", amt: n }; });
+}
+function renderPayslipKo() {
+  const pay = parsePayRows("pay_items");
+  const ded = parsePayRows("deduct_items");
+  const payTotal = pay.reduce((a,r)=>a+r.amt,0);
+  const dedTotal = ded.reduce((a,r)=>a+r.amt,0);
+  return `
+    <h1 class="doc-title">급여 명세서</h1>
+    <table class="parties">
+      <tr><td class="lbl">회사</td><td>${valOr("a_name")}</td></tr>
+      <tr><td class="lbl">근로자</td><td>${valOr("b_name")} ${val("dept") ? "(" + esc(val("dept")) + ")" : ""} ${val("b_id") ? "사번: " + esc(val("b_id")) : ""}</td></tr>
+      <tr><td class="lbl">지급 월</td><td>${valOr("pay_month")}</td></tr>
+    </table>
+    <h2>지급 내역</h2>
+    <table class="parties">
+      <tr><td class="lbl">항목</td><td>금액</td></tr>
+      ${pay.map(r=>`<tr><td>${esc(r.name)}</td><td>${r.amt.toLocaleString()}원</td></tr>`).join("")}
+      <tr><td class="lbl">지급 합계</td><td><strong>${payTotal.toLocaleString()}원</strong></td></tr>
+    </table>
+    ${ded.length ? `<h2>공제 내역</h2><table class="parties"><tr><td class="lbl">항목</td><td>금액</td></tr>${ded.map(r=>`<tr><td>${esc(r.name)}</td><td>${r.amt.toLocaleString()}원</td></tr>`).join("")}<tr><td class="lbl">공제 합계</td><td><strong>${dedTotal.toLocaleString()}원</strong></td></tr></table>` : ""}
+    <p class="body" style="font-size:17px; text-align:center; margin:20px 0;">실수령액: <strong>${(payTotal - dedTotal).toLocaleString()}원</strong></p>
+    <p class="body">지급일: ${valOr("pay_day")} · 지급 방법: ${esc(optText("pay_method", "ko") || "계좌이체")}</p>
+    <div class="doc-foot"><div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div><div class="signer">${valOr("a_name")} &nbsp;(인)</div></div>`;
+}
+function renderPayslipEn() {
+  const pay = parsePayRows("pay_items");
+  const ded = parsePayRows("deduct_items");
+  const payTotal = pay.reduce((a,r)=>a+r.amt,0);
+  const dedTotal = ded.reduce((a,r)=>a+r.amt,0);
+  return `
+    <h1 class="doc-title">PAYSLIP</h1>
+    <table class="parties">
+      <tr><td class="lbl">EMPLOYER</td><td>${valOr("a_name")}</td></tr>
+      <tr><td class="lbl">EMPLOYEE</td><td>${valOr("b_name")} ${val("dept") ? "(" + esc(val("dept")) + ")" : ""} ${val("b_id") ? "ID: " + esc(val("b_id")) : ""}</td></tr>
+      <tr><td class="lbl">PERIOD</td><td>${valOr("pay_month")}</td></tr>
+    </table>
+    <h2>Earnings</h2>
+    <table class="parties">
+      <tr><td class="lbl">Item</td><td>Amount</td></tr>
+      ${pay.map(r=>`<tr><td>${esc(r.name)}</td><td>${r.amt.toLocaleString()}</td></tr>`).join("")}
+      <tr><td class="lbl">Gross pay</td><td><strong>${payTotal.toLocaleString()}</strong></td></tr>
+    </table>
+    ${ded.length ? `<h2>Deductions</h2><table class="parties"><tr><td class="lbl">Item</td><td>Amount</td></tr>${ded.map(r=>`<tr><td>${esc(r.name)}</td><td>${r.amt.toLocaleString()}</td></tr>`).join("")}<tr><td class="lbl">Total deductions</td><td><strong>${dedTotal.toLocaleString()}</strong></td></tr></table>` : ""}
+    <p class="body" style="font-size:17px; text-align:center; margin:20px 0;">Net pay: <strong>${(payTotal - dedTotal).toLocaleString()}</strong></p>
+    <p class="body">Pay date: ${valOr("pay_day")} · Method: ${esc(optText("pay_method", "en") || "Bank transfer")}</p>
+    <div class="doc-foot"><div class="date">${esc(fmtDate(val("doc_date"), "en"))}</div><div class="signer">${valOr("a_name")}</div></div>`;
+}
+
+/* --- 임대차 합의해지서 --- */
+function renderLeaseTermKo() {
+  return `
+    <h1 class="doc-title">임대차 합의해지서</h1>
+    <table class="parties">
+      <tr><td class="lbl">임대인</td><td>성명: ${valOr("l_name")}<br/>주소: ${valOr("l_addr")}<br/>연락처: ${valOr("l_phone")}</td></tr>
+      <tr><td class="lbl">임차인</td><td>성명: ${valOr("t_name")}<br/>주소: ${valOr("t_addr")}<br/>연락처: ${valOr("t_phone")}</td></tr>
+    </table>
+    <p class="body">임대인과 임차인은 ${valOr("prop_addr")} 소재 부동산에 관한 ${valOr("contract_info")}을(를) 다음과 같이 합의 해지한다.</p>
+    <h2>제1조 (합의 해지)</h2>
+    <p class="body">위 임대차계약은 ${valOr("eff_date")}자로 합의 해지하고, 임차인은 같은 날까지 목적물을 명도한다.</p>
+    <h2>제2조 (보증금 반환)</h2>
+    <p class="body">임대인은 목적물 명도 확인 후 임차인에게 보증금 금 ${valOr("deposit")}원을 반환한다.${val("repay_account") ? " 반환 계좌: " + esc(val("repay_account")) : ""}</p>
+    ${val("settlement_note") ? `<h2>제3조 (정산)</h2><p class="body">${valOr("settlement_note")}</p>` : ""}
+    <p class="body" style="margin-top:24px;">본 해지 합의를 증명하기 위하여 2부를 작성하고 각자 서명·날인하여 1부씩 보관한다.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">임대인 ${valOr("l_name")} ${sig("sig_l")}</div>
+      <div class="signer">임차인 ${valOr("t_name")} ${sig("sig_t")}</div>
+    </div>`;
+}
+
+/* --- 소비자 피해구제 신청서 --- */
+function renderConsumerClaimKo() {
+  const evidence = lines("evidence");
+  return `
+    <h1 class="doc-title">소비자 피해구제 신청서</h1>
+    <table class="parties">
+      <tr><td class="lbl">신청인<br/>(소비자)</td><td>성명: ${valOr("c_name")}<br/>주소: ${valOr("c_addr")}<br/>연락처: ${valOr("c_phone")}<br/>이메일: ${valOr("c_email")}</td></tr>
+      <tr><td class="lbl">피신청인<br/>(사업자)</td><td>상호: ${valOr("d_name")}<br/>주소: ${valOr("d_addr")}<br/>연락처: ${valOr("d_phone")}</td></tr>
+    </table>
+    <h2>1. 거래 내용</h2>
+    <p class="body">${valOr("purchase")}</p>
+    <h2>2. 피해 경위</h2>
+    <p class="body">${valOr("facts")}</p>
+    <h2>3. 구제 요구 내용</h2>
+    <p class="body">${esc(optText("demand", "ko"))}</p>
+    ${evidence.length ? `<h2>4. 첨부자료</h2><ol class="evidence">${evidence.map(e => `<li>${esc(e)}</li>`).join("")}</ol>` : ""}
+    <p class="body" style="margin-top:20px;">위와 같이 피해구제를 신청합니다.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">신청인 ${valOr("c_name")} &nbsp;(인)</div>
+      <div class="recipient">한국소비자원 귀중</div>
+    </div>`;
+}
+
+/* --- 사과문·감사장 --- */
+function renderApologyKo() {
+  const apology = val("letter_type") !== "thanks";
+  return `
+    <h1 class="doc-title">${apology ? "사 과 문" : "감 사 장"}</h1>
+    ${val("subject") ? `<div class="doc-subtitle">${esc(val("subject"))}</div>` : ""}
+    ${val("r_name") ? `<p class="body">${esc(val("r_name"))} 귀하께,</p>` : ""}
+    <p class="body">${valOr("facts")}</p>
+    ${apology && val("plan") ? `<h2>재발 방지 및 후속 조치</h2><p class="body">${valOr("plan")}</p>` : ""}
+    <p class="body" style="margin-top:24px;">${apology ? "다시 한번 깊이 사과드립니다." : "다시 한번 깊은 감사를 드립니다."}</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">${valOr("s_name")} &nbsp;(인)</div>
+    </div>`;
+}
+function renderApologyEn() {
+  const apology = val("letter_type") !== "thanks";
+  return `
+    <h1 class="doc-title">${apology ? "LETTER OF APOLOGY" : "LETTER OF APPRECIATION"}</h1>
+    ${val("subject") ? `<div class="doc-subtitle">${esc(val("subject"))}</div>` : ""}
+    ${val("r_name") ? `<p class="body">Dear ${esc(val("r_name"))},</p>` : ""}
+    <p class="body">${valOr("facts")}</p>
+    ${apology && val("plan") ? `<h2>Corrective Measures</h2><p class="body">${valOr("plan")}</p>` : ""}
+    <p class="body" style="margin-top:24px;">${apology ? "We sincerely apologize once again." : "With sincere gratitude."}</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "en"))}</div>
+      <div class="signer">${valOr("s_name")}</div>
+    </div>`;
+}
+
 /* ---------- 화면 상태 ---------- */
 function render() {
   const paper = document.getElementById("paper");
@@ -4995,20 +6062,36 @@ function buildWatermark() {
     pw.innerHTML = ps;
   }
 }
-let tabFilter = "";
+let tabFilter = "", tabCat = "all";
 function buildTabs() {
   document.getElementById("doc-tabs").innerHTML =
+    `<div class="cat-chips">` + CATEGORIES.map(c =>
+      `<button class="cat-chip ${tabCat === c.id ? "active" : ""}" onclick="setCat('${c.id}')">${c.name}</button>`
+    ).join("") + `</div>` +
     `<input id="doc-filter" class="doc-filter" type="search" placeholder="문서 검색… (예: 계약서, 고소, invoice)" oninput="filterTabs(this.value)" value="${esc(tabFilter)}" />` +
     `<div class="doc-tab-grid">` + DOC_TYPES.map(d =>
-    `<button class="doc-tab ${d.id === activeDoc.id ? "active" : ""}" data-name="${esc(d.name.toLowerCase())}" onclick="selectDoc('${d.id}')">${esc(d.name)} · ${krw(docPrice(d))}<span class="langs">${d.langs.map(l => LANG_NAME[l]).join(" · ")}</span></button>`
+    `<button class="doc-tab ${d.id === activeDoc.id ? "active" : ""}" data-name="${esc(d.name.toLowerCase())}" data-cat="${d.cat}" onclick="selectDoc('${d.id}')">${esc(d.name)} · ${krw(docPrice(d))}<span class="langs">${d.langs.map(l => LANG_NAME[l]).join(" · ")}</span></button>`
   ).join("") + `</div>`;
-  if (tabFilter) filterTabs(tabFilter);
+  applyTabFilter();
 }
-function filterTabs(q) {
-  tabFilter = (q || "").trim().toLowerCase();
+function setCat(c) {
+  tabCat = c;
+  document.querySelectorAll("#doc-tabs .cat-chip").forEach((b, i) => b.classList.toggle("active", CATEGORIES[i].id === c));
+  applyTabFilter();
+}
+function filterTabs(q) { tabFilter = (q || "").trim().toLowerCase(); applyTabFilter(); }
+function applyTabFilter() {
   document.querySelectorAll("#doc-tabs .doc-tab").forEach(b => {
-    b.style.display = !tabFilter || (b.dataset.name || "").includes(tabFilter) ? "" : "none";
+    const okCat = tabCat === "all" || b.dataset.cat === tabCat;
+    const okQ = !tabFilter || (b.dataset.name || "").includes(tabFilter);
+    b.style.display = okCat && okQ ? "" : "none";
   });
+}
+function filterCatalog(c) {
+  document.querySelectorAll(".catalog-card").forEach(card => {
+    card.style.display = c === "all" || card.dataset.cat === c ? "" : "none";
+  });
+  document.querySelectorAll("#catalog-chips .cat-chip").forEach(b => b.classList.toggle("active", b.dataset.cat === c));
 }
 function buildLangRow() {
   document.getElementById("lang-row").innerHTML =
@@ -5326,6 +6409,109 @@ const SAMPLES = {
     items: "Steel parts A-100 | 1000 | 12\nAssembly fee | 1 | 800",
     currency: "USD", incoterm: "FOB Incheon", valid_until: "30 days from issue",
     repay_account: "Kookmin Bank 000-000-000000 SWIFT: CZNBKRSE"
+  },
+  "real-estate-sale": {
+    a_name: "김매도", a_id: "600101-1******", a_addr: "서울특별시 ○○구 ○○로 1", a_phone: "010-1111-2222",
+    b_name: "박매수", b_id: "880808-1******", b_addr: "경기도 ○○시 ○○동 3", b_phone: "010-3333-4444",
+    prop_addr: "서울특별시 송파구 ○○로 77, 101동 505호", prop_desc: "대지권 및 전유부분 84.5㎡, 철근콘크리트조 아파트",
+    price: "700,000,000", contract_fee: "70,000,000", interim_fee: "210,000,000 / 2026. 11. 30.",
+    pay_method: "계좌이체", delivery_date: "2026. 12. 31.", reg_duty: "buyer",
+    special: "매도인은 잔금일까지 근저당권을 말소한다\\n첨부 시설물(붙박이장·시스템에어컨)은 매매 대금에 포함한다"
+  },
+  "goods-sale": {
+    a_name: "주식회사 ○○제조", a_addr: "경기도 ○○시 ○○로 12",
+    b_name: "주식회사 ○○물산", b_addr: "서울특별시 강남구 ○○로 88",
+    items: "부품 A-100 | 500 | 2,000\\n부품 B-200 | 200 | 5,500",
+    currency: "KRW", pay_terms: "검수 완료 후 30일 이내 계좌이체",
+    delivery_date: "2026. 10. 31.", delivery_addr: "경기도 ○○시 물류센터", inspection: "7"
+  },
+  "model-release": {
+    b_name: "김모델", b_id: "1998.04.12", b_phone: "010-8888-9999",
+    a_name: "주식회사 ○○스튜디오", a_contact: "photo@studio.example",
+    work_desc: "2026. 9. 1. ○○ 브랜드 룩북 촬영 사진 및 영상",
+    usage: "브랜드 웹사이트·SNS 홍보 및 온라인 광고",
+    term: "계약일로부터 2년", media: ["web", "ad"], paid: "paid", amount: "1,000,000"
+  },
+  "ip-license": {
+    a_name: "이작가", a_addr: "서울특별시 ○○구 ○○동 5 / lee@art.example",
+    b_name: "주식회사 ○○미디어", b_addr: "서울특별시 마포구 ○○로 9",
+    work_desc: "일러스트 '달빛 고래' 시리즈 5컷",
+    usage: "회사 웹사이트 및 마케팅 자료 게재", scope: "nonexclusive",
+    term: "계약일로부터 1년", territory: "대한민국", amount: "금 500,000원", attribution: "required"
+  },
+  "confidentiality-pledge": {
+    b_name: "박근로", b_id: "950505 / EMP-1024", dept: "개발팀 대리",
+    a_name: "주식회사 ○○테크", a_addr: "서울특별시 서초구 ○○로 100",
+    scope: "기술자료·소스코드·고객정보·영업계획 등 재직 중 알게 된 일체의 영업비밀 및 기밀 정보",
+    term: "3y", penalty: "civil_amount", amount: "50,000,000"
+  },
+  "non-compete": {
+    b_name: "박근로", b_id: "950505 / EMP-1024", dept: "개발팀 대리",
+    a_name: "주식회사 ○○테크", a_addr: "서울특별시 서초구 ○○로 100",
+    scope: "회사와 동종의 ○○ 솔루션 개발·판매 업무",
+    period: "1y", region: "대한민국",
+    compensation: "퇴직 시 금 10,000,000원", penalty: "civil"
+  },
+  "personal-guarantee": {
+    b_name: "박근로", b_id: "950505-1******", b_addr: "서울특별시 ○○구 ○○길 33",
+    g_name: "박보증", g_id: "600606-1******", g_addr: "서울특별시 ○○구 ○○길 33", g_phone: "010-6666-7777", g_rel: "부",
+    a_name: "주식회사 ○○테크", term: "재직 기간 및 퇴직 후 2년", limit: "30,000,000"
+  },
+  "dismissal-notice": {
+    b_name: "김근로", dept: "영업팀 사원", b_id: "EMP-2048",
+    a_name: "주식회사 ○○상사", a_addr: "서울특별시 중구 ○○로 10", ceo_name: "최대표",
+    reason_type: "management", facts: "지속적 매출 감소로 인한 인력 구조조정",
+    eff_date: "2026-10-31", notice_pay: "advance"
+  },
+  "noise-notice": {
+    s_name: "홍길동 (101동 505호)", s_phone: "010-1234-5678",
+    r_name: "101동 605호",
+    noise_type: ["footstep", "furniture"], times: "매일 밤 11시~새벽 1시",
+    facts: "약 한 달간 심야 시간대 발소리와 가구 소리가 지속되어 수면 장애를 겪고 있습니다.",
+    demand: "quiet_hours"
+  },
+  "fine-objection": {
+    c_name: "홍길동", c_id: "900101", c_addr: "서울특별시 ○○구 ○○로 1", c_phone: "010-1234-5678",
+    notice_no: "2026-서울○○-12345", violation: "도로교통법 위반 (불법 주정차)", violation_date: "2026. 8. 15. 14:20 / ○○로 인도",
+    opinion_type: "excuse",
+    facts: "당시 차량 고장으로 비상등을 켜고 갓길에 정차한 상태였으며, 견인차 호출 기록과 수리 영수증으로 확인 가능합니다.",
+    evidence: "견인차 호출 내역 1부\\n정비소 수리 영수증 1부", police: "서울○○경찰서"
+  },
+  "official-letter": {
+    a_name: "주식회사 ○○테크 경영지원팀", a_addr: "서울특별시 서초구 ○○로 100", a_contact: "김대리 02-1234-5678",
+    doc_no: "○○테크 제2026-15호",
+    r_name: "○○세무서 법인납세과", ref: "김○○ 조사관",
+    title: "법인세 신고 관련 자료 제출 협조 요청",
+    facts: "귀 기관의 자료 제출 요청(○○ 제2026-○호)과 관련하여 첨부 서류를 제출하오니 확인하여 주시기 바랍니다.",
+    deadline: "2026. 9. 30.", attachments: "법인등기부등본 1부\\n재무제표 1부"
+  },
+  "payslip": {
+    a_name: "주식회사 ○○테크", b_name: "박근로", dept: "개발팀 대리", b_id: "EMP-1024",
+    pay_month: "2026년 9월",
+    pay_items: "기본급 | 2,500,000\\n직책수당 | 200,000\\n식대 | 100,000",
+    deduct_items: "국민연금 | 126,000\\n건강보험 | 99,400\\n고용보험 | 25,200\\n소득세 등 | 68,000",
+    pay_day: "매월 25일", pay_method: "bank"
+  },
+  "lease-termination": {
+    l_name: "김임대", l_addr: "서울특별시 ○○구 ○○로 5", l_phone: "010-3333-4444",
+    t_name: "박임차", t_addr: "서울특별시 송파구 ○○로 77, 101동 505호", t_phone: "010-5555-6666",
+    prop_addr: "서울특별시 송파구 ○○로 77, 101동 505호", contract_info: "2025. 1. 1. 체결 임대차계약 (보증금 100,000,000원)",
+    eff_date: "2026. 10. 31.", deposit: "100,000,000", repay_account: "카카오뱅크 000-00-000000 박임차",
+    settlement_note: "관리비·공과금 정산 완료 후 3영업일 내 보증금 반환"
+  },
+  "consumer-claim": {
+    c_name: "홍길동", c_addr: "서울특별시 ○○구 ○○로 1", c_phone: "010-1234-5678", c_email: "hong@example.com",
+    d_name: "○○전자 온라인몰", d_addr: "경기도 ○○시 ○○로 100", d_phone: "1588-0000",
+    purchase: "2026. 8. 1. ○○몰에서 노트북 '○○ Pro 14' 구매, 결제금액 1,200,000원",
+    facts: "수령 후 3일 만에 화면에 멍이 나타났으나 판매자는 초기불량이 아니라며 교환·환불을 거부하고 있습니다.",
+    demand: "refund", evidence: "주문 내역 캡처 1부\\n제품 사진 2부\\n판매자 상담 내역 1부"
+  },
+  "apology-letter": {
+    s_name: "주식회사 ○○테크 고객서비스팀",
+    r_name: "고객 여러분",
+    letter_type: "apology", subject: "서비스 장애에 대한 사과",
+    facts: "2026년 9월 10일 14시부터 약 3시간 동안 당사 서비스 접속 장애가 발생하여 이용에 큰 불편을 드렸습니다. 이는 서버 점검 과정의 작업 실수로 인한 것으로, 고객 여러분께 깊이 사과드립니다.",
+    plan: "동일 장애 방지를 위해 배포 절차를 이중 검증 체계로 개편하고, 모니터링 알림을 강화하겠습니다."
   }
 };
 function fillSample() {
