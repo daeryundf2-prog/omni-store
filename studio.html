@@ -158,8 +158,12 @@
     .paper[lang="ko"] { font-family: '함초롬바탕', '휴먼명조', 'HY헤드라인M', 'Nanum Myeongjo', 'AppleMyungjo', 'Batang', serif; }
     .paper[lang="ja"] { font-family: 'Noto Serif JP', 'MS Mincho', serif; }
     .paper[lang="zh-CN"] { font-family: 'Noto Serif SC', 'Songti SC', serif; }
-    .paper[lang="de"], .paper[lang="fr"], .paper[lang="es"], .paper[lang="vi"] {
+    .paper[lang="de"], .paper[lang="fr"], .paper[lang="es"], .paper[lang="vi"], .paper[lang="pt"], .paper[lang="id"], .paper[lang="it"] {
       font-family: Georgia, 'Times New Roman', 'Times', serif;
+    }
+    .paper[lang="ru"] { font-family: Georgia, 'Times New Roman', 'PT Serif', serif; }
+    .paper[lang="ar"] { font-family: 'Noto Naskh Arabic', 'Amiri', 'Traditional Arabic', Georgia, serif; direction: rtl; text-align: right; }
+    .paper[lang="ar"] h1.doc-title, .paper[lang="ar"] h2, .paper[lang="ar"] .parties { direction: rtl; }
     }
     .paper[lang="th"] { font-family: 'Noto Serif Thai', Georgia, serif; }
     .paper h1.doc-title { text-align: center; font-size: 26px; font-weight: 800; letter-spacing: 0.35em; margin-bottom: 6px; }
@@ -393,7 +397,7 @@
 <main class="container">
   <div class="studio-head">
     <h1>다국어 법률 문서 자동 작성기</h1>
-    <p>폼을 채우면 표준 법률 문서가 즉시 완성됩니다. 한·영·일·중·독·불·서·베·태 최대 9개 언어 출력 지원. 미리보기는 무료이며, 워터마크 없는 원본 출력·다운로드는 건별 결제 후 해제됩니다.</p>
+    <p>폼을 채우면 표준 법률 문서가 즉시 완성됩니다. 한·영·일·중·독·불·서·베·태 최대 14개 언어 출력 지원. 미리보기는 무료이며, 워터마크 없는 원본 출력·다운로드는 건별 결제 후 해제됩니다.</p>
   </div>
 
   <div class="doc-tabs" id="doc-tabs"></div>
@@ -472,31 +476,31 @@
       </article>
       <article class="catalog-card" id="cat-demand-notice" data-cat="notice">
         <h3>내용증명 · Demand Letter · 通知書 · 催告函</h3>
-        <p>금전 지급·계약 이행·손해배상 요구 등을 상대방에게 공식 통보하는 문서. 한·영·일·중·독·불·서·베·태 9개 언어로 작성되어 해외 거래처에도 그 나라 언어로 발송할 수 있습니다. 기한 설정과 법적 조치 예고 문구를 포함합니다.</p>
+        <p>금전 지급·계약 이행·손해배상 요구 등을 상대방에게 공식 통보하는 문서. 한·영·일·중·독·불·서·베·태 14개 언어로 작성되어 해외 거래처에도 그 나라 언어로 발송할 수 있습니다. 기한 설정과 법적 조치 예고 문구를 포함합니다.</p>
         <div class="cat-price" data-doc="demand-notice"></div>
         <button class="btn btn-ghost" onclick="selectDoc('demand-notice');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
       <article class="catalog-card" id="cat-cease-desist" data-cat="notice">
         <h3>경고장 · Cease &amp; Desist · 警告書 · 警告函</h3>
-        <p>저작권 침해·상표 도용·영업방해 등 위법 행위의 즉시 중단을 요구하는 경고 문서. 9개 언어 지원으로 해외 플랫폼·판매자 대응에 활용할 수 있습니다.</p>
+        <p>저작권 침해·상표 도용·영업방해 등 위법 행위의 즉시 중단을 요구하는 경고 문서. 14개 언어 지원으로 해외 플랫폼·판매자 대응에 활용할 수 있습니다.</p>
         <div class="cat-price" data-doc="cease-desist"></div>
         <button class="btn btn-ghost" onclick="selectDoc('cease-desist');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
       <article class="catalog-card" id="cat-loan-agreement" data-cat="contract">
         <h3>차용증 · Loan Agreement</h3>
-        <p>개인 간 금전 대여의 금액·이자·변제일·변제 방법을 명확히 기록하는 차용증. 분쟁 예방과 소송 시 증거력 확보를 위한 필수 항목을 표준 구조로 정리합니다. 한·영·일·중·독·불·서·베·태 9개 언어 지원.</p>
+        <p>개인 간 금전 대여의 금액·이자·변제일·변제 방법을 명확히 기록하는 차용증. 분쟁 예방과 소송 시 증거력 확보를 위한 필수 항목을 표준 구조로 정리합니다. 한·영·일·중·독·불·서·베·태 14개 언어 지원.</p>
         <div class="cat-price" data-doc="loan-agreement"></div>
         <button class="btn btn-ghost" onclick="selectDoc('loan-agreement');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
       <article class="catalog-card" id="cat-freelance-contract" data-cat="contract">
         <h3>프리랜서 용역계약서 · Services Agreement</h3>
-        <p>외주 개발·디자인·콘텐츠 작업의 용역 범위·대금·납기·수정 횟수·지식재산권 귀속을 규정하는 계약서. 무상 수정 범위 한정과 대금 완납 시 IP 양도 조항 등 실무 분쟁 방지 장치를 포함합니다. 한·영·일·중·독·불·서·베·태 9개 언어 지원.</p>
+        <p>외주 개발·디자인·콘텐츠 작업의 용역 범위·대금·납기·수정 횟수·지식재산권 귀속을 규정하는 계약서. 무상 수정 범위 한정과 대금 완납 시 IP 양도 조항 등 실무 분쟁 방지 장치를 포함합니다. 한·영·일·중·독·불·서·베·태 14개 언어 지원.</p>
         <div class="cat-price" data-doc="freelance-contract"></div>
         <button class="btn btn-ghost" onclick="selectDoc('freelance-contract');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
       <article class="catalog-card" id="cat-settlement" data-cat="contract">
         <h3>합의서 · Settlement Agreement</h3>
-        <p>분쟁 당사자 간 합의 내용·합의금·상호 면책·비밀유지 의무를 문서화하는 합의서. 형사·민사 분쟁 종결 시 재분쟁을 막는 상호 완전 해결 조항을 포함합니다. 한·영·일·중·독·불·서·베·태 9개 언어 지원.</p>
+        <p>분쟁 당사자 간 합의 내용·합의금·상호 면책·비밀유지 의무를 문서화하는 합의서. 형사·민사 분쟁 종결 시 재분쟁을 막는 상호 완전 해결 조항을 포함합니다. 한·영·일·중·독·불·서·베·태 14개 언어 지원.</p>
         <div class="cat-price" data-doc="settlement"></div>
         <button class="btn btn-ghost" onclick="selectDoc('settlement');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
@@ -556,7 +560,7 @@
       </article>
       <article class="catalog-card" id="cat-nda" data-cat="contract">
         <h3>비밀유지계약서 · NDA</h3>
-        <p>협업·투자·외주 검토 전 필수인 상호 비밀유지계약서. 비밀정보 범위·유지 기간·준거법을 설정할 수 있으며 9개 언어로 출력됩니다.</p>
+        <p>협업·투자·외주 검토 전 필수인 상호 비밀유지계약서. 비밀정보 범위·유지 기간·준거법을 설정할 수 있으며 14개 언어로 출력됩니다.</p>
         <div class="cat-price" data-doc="nda"></div>
         <button class="btn btn-ghost" onclick="selectDoc('nda');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
@@ -806,6 +810,90 @@
         <div class="cat-price" data-doc="apology-letter"></div>
         <button class="btn btn-ghost" onclick="selectDoc('apology-letter');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
+      <article class="catalog-card" id="cat-kuendigung-de" data-cat="notice">
+        <h3>Kündigung — 독일 계약해지 통지서</h3>
+        <p>독일에서 직장·임대차·구독·보험 해지 시 쓰는 표준 Kündigung 서신. ordentlich/fristlos 구분, 서면 확인 요구 문구 포함.</p>
+        <div class="cat-price" data-doc="kuendigung-de"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('kuendigung-de');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-mahnung-de" data-cat="notice">
+        <h3>Mahnung — 독일 지급독촉장</h3>
+        <p>미수금 독촉의 독일식 표준 절차 — 청구서 번호·지연이자(§288 BGB)·최후 기한을 명시한 Mahnung.</p>
+        <div class="cat-price" data-doc="mahnung-de"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('mahnung-de');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-vollmacht-de" data-cat="contract">
+        <h3>Vollmacht — 독일 위임장</h3>
+        <p>관공서 업무·서류 수령 등을 대리인에게 맡기는 독일식 위임장. 위임 범위·유효기간 명시.</p>
+        <div class="cat-price" data-doc="vollmacht-de"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('vollmacht-de');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-resiliation-fr" data-cat="notice">
+        <h3>Lettre de résiliation — 프랑스 해지 서신</h3>
+        <p>프랑스에서 통신·보험·구독 계약 해지 시 보내는 표준 résiliation 서신. 서면 확인 요구 문구 포함.</p>
+        <div class="cat-price" data-doc="resiliation-fr"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('resiliation-fr');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-demission-fr" data-cat="labor">
+        <h3>Lettre de démission — 프랑스 사임 서신</h3>
+        <p>프랑스식 정중한 사임 서신 — préavis(예고기간) 이행/면제 선택 포함.</p>
+        <div class="cat-price" data-doc="demission-fr"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('demission-fr');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-taishoku-ja" data-cat="labor">
+        <h3>退職願 — 일본 퇴직 신청서</h3>
+        <p>일본식 퇴직 '신청' 양식(退職願). 一身上の都合 등 관용 사유 선택, 인수인계 문구 포함.</p>
+        <div class="cat-price" data-doc="taishoku-ja"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('taishoku-ja');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-nensho-ja" data-cat="contract">
+        <h3>念書 — 일본 각서·확약서</h3>
+        <p>변제 기일·약속 사항을 일방적으로 확약하는 일본식 念書. 위반 시 책임 조항 선택 가능.</p>
+        <div class="cat-price" data-doc="nensho-ja"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('nensho-ja');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-jidansho-ja" data-cat="contract">
+        <h3>示談書 — 일본 합의서</h3>
+        <p>교통사고·손해배상 화해용 일본식 示談書. 示談金·清算条項(향후 일체 청구 포기) 포함.</p>
+        <div class="cat-price" data-doc="jidansho-ja"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('jidansho-ja');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-renuncia-es" data-cat="labor">
+        <h3>Carta de renuncia — 스페인어권 사직서</h3>
+        <p>스페인·중남미용 정중한 사직 서신 형식.</p>
+        <div class="cat-price" data-doc="renuncia-es"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('renuncia-es');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-finiquito-es" data-cat="labor">
+        <h3>Finiquito — 스페인어권 퇴직정산서</h3>
+        <p>퇴직 시 정산 내역(미지급 급여·휴가수당 등)을 정리하는 finiquito. 합계 자동 계산.</p>
+        <div class="cat-price" data-doc="finiquito-es"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('finiquito-es');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-demissao-pt" data-cat="labor">
+        <h3>Carta de demissão — 포르투갈어 사직서</h3>
+        <p>브라질·포르투갈용 정중한 사직 서신 형식.</p>
+        <div class="cat-price" data-doc="demissao-pt"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('demissao-pt');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-procuracao-pt" data-cat="contract">
+        <h3>Procuração — 브라질 위임장</h3>
+        <p>관공서 업무·서류 수령 등 대리 권한을 위임하는 브라질식 procuração.</p>
+        <div class="cat-price" data-doc="procuracao-pt"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('procuracao-pt');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-pengunduran-id" data-cat="labor">
+        <h3>Surat pengunduran diri — 인니 사직서</h3>
+        <p>인도네시아식 사직서 — 사유 선택과 인수인계 문구 포함.</p>
+        <div class="cat-price" data-doc="pengunduran-id"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('pengunduran-id');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-pretenziya-ru" data-cat="notice">
+        <h3>Претензия — 러시아어권 사전청구서</h3>
+        <p>소송 전 의무 절차인 러시아어권 претензия(청구서). 사실 경위·요구·이행 기한 구조.</p>
+        <div class="cat-price" data-doc="pretenziya-ru"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('pretenziya-ru');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
     </div>
   </section>
 
@@ -907,9 +995,14 @@ const LANGUAGES = [
   { id: "fr", name: "Français", paperLang: "fr" },
   { id: "es", name: "Español", paperLang: "es" },
   { id: "vi", name: "Tiếng Việt", paperLang: "vi" },
-  { id: "th", name: "ไทย", paperLang: "th" }
+  { id: "th", name: "ไทย", paperLang: "th" },
+  { id: "pt", name: "Português", paperLang: "pt" },
+  { id: "id", name: "Bahasa Indonesia", paperLang: "id" },
+  { id: "ru", name: "Русский", paperLang: "ru" },
+  { id: "ar", name: "العربية", paperLang: "ar" },
+  { id: "it", name: "Italiano", paperLang: "it" }
 ];
-const LANG_NAME = { ko: "한국어", en: "English", ja: "日本語", zh: "中文", de: "Deutsch", fr: "Français", es: "Español", vi: "Tiếng Việt", th: "ไทย" };
+const LANG_NAME = { ko: "한국어", en: "English", ja: "日本語", zh: "中文", de: "Deutsch", fr: "Français", es: "Español", vi: "Tiếng Việt", th: "ไทย", pt: "Português", id: "Bahasa Indonesia", ru: "Русский", ar: "العربية", it: "Italiano" };
 const CATEGORIES = [
   { id: "all", name: "전체" },
   { id: "contract", name: "계약·동의" },
@@ -920,7 +1013,7 @@ const CATEGORIES = [
   { id: "family", name: "가사·개인" },
   { id: "business", name: "비즈니스·무역" }
 ];
-const DATE_LOCALE = { ko: "ko-KR", en: "en-US", ja: "ja-JP", zh: "zh-CN", de: "de-DE", fr: "fr-FR", es: "es-ES", vi: "vi-VN", th: "th-TH-u-ca-gregory" };
+const DATE_LOCALE = { ko: "ko-KR", en: "en-US", ja: "ja-JP", zh: "zh-CN", de: "de-DE", fr: "fr-FR", es: "es-ES", vi: "vi-VN", th: "th-TH-u-ca-gregory", pt: "pt-BR", id: "id-ID", ru: "ru-RU", ar: "ar-EG-u-ca-gregory", it: "it-IT" };
 
 const CURRENCIES = ["KRW", "USD", "JPY", "CNY", "EUR"].map(c => ({ v: c, label: { ko: c } }));
 
@@ -987,7 +1080,7 @@ const DOC_TYPES = [
     id: "demand-notice",
     cat: "notice",
     name: "내용증명 · Demand Letter",
-    langs: ["ko", "en", "ja", "zh", "de", "fr", "es", "vi", "th"],
+    langs: ["ko", "en", "ja", "zh", "de", "fr", "es", "vi", "th", "pt", "id", "ru", "ar", "it"],
     price: STUDIO.priceKrw,
     usageNote: "우체국에서 ‘내용증명 우편’으로 발송하면 발송 사실·내용이 공식적으로 증명됩니다 (3년 보관, 재발급 가능). 일반 우편·이메일로도 발송 가능하나 증거력이 약합니다.",
     fields: [
@@ -1014,13 +1107,14 @@ const DOC_TYPES = [
       { key: "doc_date", label: "작성 일자", type: "date" }
     ],
     render: { ko: renderDemandKo, en: renderDemandEn, ja: renderDemandJa, zh: renderDemandZh,
-      de: renderDemandDe, fr: renderDemandFr, es: renderDemandEs, vi: renderDemandVi, th: renderDemandTh }
+      de: renderDemandDe, fr: renderDemandFr, es: renderDemandEs, vi: renderDemandVi, th: renderDemandTh,
+      pt: renderDemandPt, id: renderDemandId, ru: renderDemandRu, ar: renderDemandAr, it: renderDemandIt }
   },
   {
     id: "cease-desist",
     cat: "notice",
     name: "경고장 · Cease & Desist",
-    langs: ["ko", "en", "ja", "zh", "de", "fr", "es", "vi", "th"],
+    langs: ["ko", "en", "ja", "zh", "de", "fr", "es", "vi", "th", "pt", "id", "ru", "ar", "it"],
     price: STUDIO.priceKrw,
     usageNote: "발송 경로를 남겨두세요 — 내용증명 우편, 이메일(수신확인 포함), 또는 플랫폼 신고 채널. 상대방이 해외면 해당 국가 언어로 발송하는 것이 효과적입니다.",
     fields: [
@@ -1040,13 +1134,14 @@ const DOC_TYPES = [
       { key: "doc_date", label: "작성 일자", type: "date" }
     ],
     render: { ko: renderCndKo, en: renderCndEn, ja: renderCndJa, zh: renderCndZh,
-      de: renderCndDe, fr: renderCndFr, es: renderCndEs, vi: renderCndVi, th: renderCndTh }
+      de: renderCndDe, fr: renderCndFr, es: renderCndEs, vi: renderCndVi, th: renderCndTh,
+      pt: renderCndPt, id: renderCndId, ru: renderCndRu, ar: renderCndAr, it: renderCndIt }
   },
   {
     id: "loan-agreement",
     cat: "contract",
     name: "차용증 · Loan Agreement",
-    langs: ["ko", "en", "ja", "zh", "de", "fr", "es", "vi", "th"],
+    langs: ["ko", "en", "ja", "zh", "de", "fr", "es", "vi", "th", "pt", "id", "ru", "ar", "it"],
     price: STUDIO.priceKrw,
     usageNote: "공증(공증인사무소)을 받으면 소송 없이 강제집행이 가능해집니다. 금액이 크면 공증을 권장합니다.",
     fields: [
@@ -1077,7 +1172,8 @@ const DOC_TYPES = [
       { key: "sig_b", label: "채무자 서명", enLabel: "Borrower signature" }
     ],
     render: { ko: renderLoanKo, en: renderLoanEn, ja: renderLoanJa, zh: renderLoanZh,
-      de: renderLoanDe, fr: renderLoanFr, es: renderLoanEs, vi: renderLoanVi, th: renderLoanTh }
+      de: renderLoanDe, fr: renderLoanFr, es: renderLoanEs, vi: renderLoanVi, th: renderLoanTh,
+      pt: renderLoanPt, id: renderLoanId, ru: renderLoanRu, ar: renderLoanAr, it: renderLoanIt }
   },
   {
     id: "freelance-contract",
@@ -2151,7 +2247,7 @@ const DOC_TYPES = [
     id: "nda",
     cat: "contract",
     name: "비밀유지계약서 · NDA",
-    langs: ["ko", "en", "ja", "zh", "de", "fr", "es", "vi", "th"],
+    langs: ["ko", "en", "ja", "zh", "de", "fr", "es", "vi", "th", "pt", "id", "ru", "ar", "it"],
     price: 14900,
     usageNote: "비밀정보의 범위와 유지 기간을 구체적으로 정하는 것이 핵심입니다. 일방향(한쪽만 공개)이면 상대방 서명만으로도 됩니다.",
     fields: [
@@ -2178,7 +2274,8 @@ const DOC_TYPES = [
       { key: "sig_b", label: "을 서명", enLabel: "Party B signature" }
     ],
     render: { ko: renderNdaKo, en: renderNdaEn, ja: renderNdaJa, zh: renderNdaZh,
-      de: renderNdaDe, fr: renderNdaFr, es: renderNdaEs, vi: renderNdaVi, th: renderNdaTh }
+      de: renderNdaDe, fr: renderNdaFr, es: renderNdaEs, vi: renderNdaVi, th: renderNdaTh,
+      pt: renderNdaPt, id: renderNdaId, ru: renderNdaRu, ar: renderNdaAr, it: renderNdaIt }
   },
   {
     id: "invoice",
@@ -2649,6 +2746,345 @@ const DOC_TYPES = [
     ],
     render: { ko: renderApologyKo, en: renderApologyEn }
   },
+  {
+    id: "kuendigung-de",
+    cat: "notice",
+    name: "Kündigung — 독일 계약해지 통지서",
+    langs: ["de"],
+    price: STUDIO.priceKrw,
+    usageNote: "독일에서 계약·직장·임대 해지는 서면(Original unterschrift) 요구가 일반적입니다. 인쇄 후 서명하여 등기우편(Einschreiben)으로 보내세요.",
+    fields: [
+      { section: "Absender (발신인)" },
+      { key: "s_name", label: "이름 *", type: "text", required: true },
+      { key: "s_addr", label: "주소 *", type: "text", required: true },
+      { section: "Empfänger (수신인)" },
+      { key: "r_name", label: "계약 상대방 *", type: "text", required: true, hint: "회사명·집주인·고용주" },
+      { key: "r_addr", label: "주소", type: "text" },
+      { section: "Kündigung" },
+      { key: "contract_type", label: "계약 유형", type: "select", options: [
+        { v: "work", label: { de: "Arbeitsvertrag (근로계약)" } },
+        { v: "rent", label: { de: "Mietvertrag (임대차)" } },
+        { v: "subscription", label: { de: "Abo / Vertrag (구독·계약)" } },
+        { v: "insurance", label: { de: "Versicherung (보험)" } },
+        { v: "other", label: { de: "Sonstiges" } }
+      ]},
+      { key: "contract_no", label: "계약·고객 번호", type: "text" },
+      { key: "eff_date", label: "해지일", type: "text", hint: "예: zum nächstmöglichen Zeitpunkt / 31.12.2026" },
+      { key: "frist", label: "기한 준수 문구", type: "select", options: [
+        { v: "fristgerecht", label: { de: "fristgerecht (정해지 기한 내)" } },
+        { v: "fristlos", label: { de: "fristlos aus wichtigem Grund (중대한 사유로 즉시)" } }
+      ]},
+      { key: "reason", label: "사유 (선택)", type: "textarea", hint: "fristlos 해지 시 사유 기재" },
+      { key: "doc_date", label: "날짜", type: "date" }
+    ],
+    render: { de: renderKuendigungDe }
+  },
+  {
+    id: "mahnung-de",
+    cat: "notice",
+    name: "Mahnung — 독일 지급독촉장",
+    langs: ["de"],
+    price: STUDIO.priceKrw,
+    fields: [
+      { section: "Gläubiger (채권자)" },
+      { key: "s_name", label: "이름·상호 *", type: "text", required: true },
+      { key: "s_addr", label: "주소", type: "text" },
+      { section: "Schuldner (채무자)" },
+      { key: "r_name", label: "이름·상호 *", type: "text", required: true },
+      { key: "r_addr", label: "주소", type: "text" },
+      { section: "Forderung (청구)" },
+      { key: "inv_no", label: "청구서 번호", type: "text" },
+      { key: "amount", label: "청구 금액 (EUR) *", type: "text", required: true },
+      { key: "due_date", label: "원래 지급 기한", type: "text" },
+      { key: "deadline", label: "새 지급 기한 *", type: "text", required: true, hint: "예: 14 Tage ab Zugang" },
+      { key: "verzugszinsen", label: "지연이자 청구", type: "checkbox", options: [{ v: "yes", label: { de: "Verzugszinsen geltend machen" } }] },
+      { key: "repay_account", label: "입금 계좌 (IBAN)", type: "text" },
+      { key: "doc_date", label: "날짜", type: "date" }
+    ],
+    render: { de: renderMahnungDe }
+  },
+  {
+    id: "vollmacht-de",
+    cat: "contract",
+    name: "Vollmacht — 독일 위임장",
+    langs: ["de"],
+    price: STUDIO.priceKrw,
+    usageNote: "일부 절차(부동산·혼인 등)는 공증(notarielle Beurkundung) 필요. 일반 행정·수령 대리에는 본 위임장으로 충분한 경우가 많습니다.",
+    fields: [
+      { section: "Vollmachtgeber (위임인)" },
+      { key: "p_name", label: "이름 *", type: "text", required: true },
+      { key: "p_id", label: "생년월일", type: "text" },
+      { key: "p_addr", label: "주소 *", type: "text", required: true },
+      { section: "Bevollmächtigter (수임인)" },
+      { key: "a_name", label: "이름 *", type: "text", required: true },
+      { key: "a_id", label: "생년월일", type: "text" },
+      { key: "a_addr", label: "주소", type: "text" },
+      { section: "Umfang (위임 범위)" },
+      { key: "scope", label: "위임 사무 *", type: "textarea", required: true, hint: "예: Behördengänge, Abholung von Dokumenten" },
+      { key: "term", label: "유효 기간", type: "text", hint: "예: bis zum 31.12.2026 / bis auf Widerruf" },
+      { key: "doc_date", label: "날짜", type: "date" }
+    ],
+    render: { de: renderVollmachtDe }
+  },
+  {
+    id: "resiliation-fr",
+    cat: "notice",
+    name: "Lettre de résiliation — 프랑스 해지 서신",
+    langs: ["fr"],
+    price: STUDIO.priceKrw,
+    usageNote: "프랑스에서 계약 해지는 lettre recommandée avec accusé de réception(내용증명 등기) 발송이 관행입니다.",
+    fields: [
+      { section: "Expéditeur (발신인)" },
+      { key: "s_name", label: "성명 *", type: "text", required: true },
+      { key: "s_addr", label: "주소 *", type: "text", required: true },
+      { section: "Destinataire (수신인)" },
+      { key: "r_name", label: "사업자·기관명 *", type: "text", required: true },
+      { key: "r_addr", label: "주소", type: "text" },
+      { section: "Résiliation (해지)" },
+      { key: "contract_type", label: "계약 유형", type: "select", options: [
+        { v: "subscription", label: { fr: "Abonnement (구독)" } },
+        { v: "insurance", label: { fr: "Assurance (보험)" } },
+        { v: "telecom", label: { fr: "Téléphonie / Internet" } },
+        { v: "gym", label: { fr: "Salle de sport" } },
+        { v: "other", label: { fr: "Autre" } }
+      ]},
+      { key: "contract_no", label: "계약·고객 번호", type: "text" },
+      { key: "eff_date", label: "해지 희망일", type: "text", hint: "예: à l'échéance du contrat / immédiatement" },
+      { key: "reason", label: "사유 (선택)", type: "textarea" },
+      { key: "doc_date", label: "날짜", type: "date" }
+    ],
+    render: { fr: renderResiliationFr }
+  },
+  {
+    id: "demission-fr",
+    cat: "labor",
+    name: "Lettre de démission — 프랑스 사임 서신",
+    langs: ["fr"],
+    price: STUDIO.priceKrw,
+    fields: [
+      { section: "Salarié (근로자)" },
+      { key: "b_name", label: "성명 *", type: "text", required: true },
+      { key: "b_addr", label: "주소", type: "text" },
+      { key: "dept", label: "직위·부서", type: "text" },
+      { section: "Employeur (고용주)" },
+      { key: "a_name", label: "회사명 *", type: "text", required: true },
+      { key: "a_addr", label: "회사 주소", type: "text" },
+      { section: "Démission" },
+      { key: "eff_date", label: "퇴직 예정일 *", type: "text", required: true, hint: "통상 préavis(예고기간) 고려" },
+      { key: "notice", label: "예고기간 이행 여부", type: "select", options: [
+        { v: "full", label: { fr: "Préavis complet (예고기간 전부 이행)" } },
+        { v: "dispense", label: { fr: "Dispense de préavis demandée (예고기간 면제 요청)" } }
+      ]},
+      { key: "reason", label: "사유 (선택)", type: "textarea" },
+      { key: "doc_date", label: "날짜", type: "date" }
+    ],
+    render: { fr: renderDemissionFr }
+  },
+  {
+    id: "taishoku-ja",
+    cat: "labor",
+    name: "退職願 — 일본 퇴직 신청서",
+    langs: ["ja"],
+    price: STUDIO.priceKrw,
+    usageNote: "退職願은 승인 전 철회 가능한 '신청'입니다. 확정적 통보는 退職届를 사용하세요 (본 양식은 願 형식).",
+    fields: [
+      { section: "申請人 (신청인)" },
+      { key: "b_name", label: "氏名 *", type: "text", required: true },
+      { key: "dept", label: "所属・職位", type: "text" },
+      { key: "b_id", label: "社員番号", type: "text" },
+      { section: "退職" },
+      { key: "end_date", label: "退職希望日 *", type: "date", required: true },
+      { key: "reason", label: "退職理由", type: "select", options: [
+        { v: "private", label: { ja: "一身上の都合 (일신상 사정)" } },
+        { v: "career", label: { ja: "キャリアアップのため (커리어)" } },
+        { v: "health", label: { ja: "健康上の理由 (건강)" } },
+        { v: "family", label: { ja: "家庭の事情 (가정 사정)" } }
+      ]},
+      { key: "a_name", label: "회사명·제출처 *", type: "text", required: true },
+      { key: "doc_date", label: "작성일", type: "date" }
+    ],
+    render: { ja: renderTaishokuJa }
+  },
+  {
+    id: "nensho-ja",
+    cat: "contract",
+    name: "念書 — 일본 각서·확약서",
+    langs: ["ja"],
+    price: STUDIO.priceKrw,
+    fields: [
+      { section: "差出人 (서약인)" },
+      { key: "b_name", label: "氏名 *", type: "text", required: true },
+      { key: "b_addr", label: "住所", type: "text" },
+      { section: "宛先" },
+      { key: "a_name", label: "상대방 *", type: "text", required: true },
+      { section: "内容" },
+      { key: "pledge", label: "확약 사항 *", type: "textarea", required: true, hint: "줄마다 하나씩" },
+      { key: "penalty", label: "위반 시 책임", type: "select", options: [
+        { v: "general", label: { ja: "いかなる処分にも服する (일체 처분 감수)" } },
+        { v: "civil", label: { ja: "損害賠償責任を負う (손해배상)" } },
+        { v: "none", label: { ja: "記載しない" } }
+      ]},
+      { key: "doc_date", label: "작성일", type: "date" }
+    ],
+    render: { ja: renderNenshoJa }
+  },
+  {
+    id: "jidansho-ja",
+    cat: "contract",
+    name: "示談書 — 일본 합의서",
+    langs: ["ja"],
+    price: STUDIO.priceKrw,
+    usageNote: "교통사고 등 손해배상 화해용 표준 형식. 서명 후 원칙적으로 번복 불가(화해의 효력).",
+    fields: [
+      { section: "甲·乙 (당사자)" },
+      { key: "a_name", label: "甲 (가해·지급측) *", type: "text", required: true },
+      { key: "a_addr", label: "甲 주소", type: "text" },
+      { key: "b_name", label: "乙 (피해·수령측) *", type: "text", required: true },
+      { key: "b_addr", label: "乙 주소", type: "text" },
+      { section: "示談内容" },
+      { key: "incident", label: "사건 개요 *", type: "textarea", required: true, hint: "일시·장소·사고 내용" },
+      { key: "amount", label: "示談金 (합의금) *", type: "text", required: true },
+      { key: "pay_terms", label: "지급 방법", type: "text", hint: "예: 本書締結時現金手渡し / 振込" },
+      { key: "settlement", label: "청구 포기 조항", type: "checkbox", options: [{ v: "yes", label: { ja: "本件に関し今後一切請求しない (향후 일체 청구 포기)" } }] },
+      { key: "doc_date", label: "작성일", type: "date" }
+    ],
+    render: { ja: renderJidanshoJa }
+  },
+  {
+    id: "renuncia-es",
+    cat: "labor",
+    name: "Carta de renuncia — 스페인어권 사직서",
+    langs: ["es"],
+    price: STUDIO.priceKrw,
+    fields: [
+      { section: "Trabajador/a" },
+      { key: "b_name", label: "이름 *", type: "text", required: true },
+      { key: "dept", label: "직위·부서", type: "text" },
+      { key: "b_id", label: "ID·사번", type: "text" },
+      { section: "Empresa" },
+      { key: "a_name", label: "회사명 *", type: "text", required: true },
+      { section: "Renuncia" },
+      { key: "eff_date", label: "퇴직 예정일 *", type: "text", required: true },
+      { key: "reason", label: "사유 (선택)", type: "textarea" },
+      { key: "doc_date", label: "날짜", type: "date" }
+    ],
+    render: { es: renderRenunciaEs }
+  },
+  {
+    id: "finiquito-es",
+    cat: "labor",
+    name: "Finiquito — 스페인어권 퇴직정산 확인서",
+    langs: ["es"],
+    price: STUDIO.priceKrw,
+    fields: [
+      { section: "Empresa" },
+      { key: "a_name", label: "회사명 *", type: "text", required: true },
+      { key: "a_addr", label: "주소", type: "text" },
+      { section: "Trabajador/a" },
+      { key: "b_name", label: "이름 *", type: "text", required: true },
+      { key: "b_id", label: "ID (DNI/NIE 등)", type: "text" },
+      { section: "Liquidación" },
+      { key: "start_date", label: "입사일", type: "date" },
+      { key: "end_date", label: "퇴직일 *", type: "date", required: true },
+      { key: "pay_items", label: "정산 항목", type: "textarea", hint: "줄마다 하나씩: 항목 | 금액 (예: Salarios pendientes | 1,500)" },
+      { key: "currency", label: "통화", type: "select", options: CURRENCIES },
+      { key: "doc_date", label: "날짜", type: "date" }
+    ],
+    render: { es: renderFiniquitoEs }
+  },
+  {
+    id: "demissao-pt",
+    cat: "labor",
+    name: "Carta de demissão — 포르투갈어 사직서",
+    langs: ["pt"],
+    price: STUDIO.priceKrw,
+    fields: [
+      { section: "Empregado/a" },
+      { key: "b_name", label: "이름 *", type: "text", required: true },
+      { key: "dept", label: "직위·부서", type: "text" },
+      { key: "b_id", label: "ID·사번", type: "text" },
+      { section: "Empregador" },
+      { key: "a_name", label: "회사명 *", type: "text", required: true },
+      { section: "Demissão" },
+      { key: "eff_date", label: "퇴직 예정일 *", type: "text", required: true, hint: "aviso prévio(예고기간) 고려" },
+      { key: "reason", label: "사유 (선택)", type: "textarea" },
+      { key: "doc_date", label: "날짜", type: "date" }
+    ],
+    render: { pt: renderDemissaoPt }
+  },
+  {
+    id: "procuracao-pt",
+    cat: "contract",
+    name: "Procuração — 브라질 위임장",
+    langs: ["pt"],
+    price: STUDIO.priceKrw,
+    usageNote: "일부 절차는 공증(reconhecimento de firma) 필요. 일반 수령·행정 대리에는 본 위임장으로 충분한 경우가 많습니다.",
+    fields: [
+      { section: "Outorgante (위임인)" },
+      { key: "p_name", label: "이름 *", type: "text", required: true },
+      { key: "p_id", label: "CPF·신분증", type: "text" },
+      { key: "p_addr", label: "주소", type: "text" },
+      { section: "Outorgado (수임인)" },
+      { key: "a_name", label: "이름 *", type: "text", required: true },
+      { key: "a_id", label: "CPF·신분증", type: "text" },
+      { section: "Poderes (권한)" },
+      { key: "scope", label: "위임 사무 *", type: "textarea", required: true },
+      { key: "term", label: "유효 기간", type: "text", hint: "예: até 31/12/2026" },
+      { key: "doc_date", label: "날짜", type: "date" }
+    ],
+    render: { pt: renderProcuracaoPt }
+  },
+  {
+    id: "pengunduran-id",
+    cat: "labor",
+    name: "Surat pengunduran diri — 인니 사직서",
+    langs: ["id"],
+    price: STUDIO.priceKrw,
+    fields: [
+      { section: "Karyawan" },
+      { key: "b_name", label: "이름 *", type: "text", required: true },
+      { key: "dept", label: "직위·부서", type: "text" },
+      { key: "b_id", label: "NIK·사번", type: "text" },
+      { section: "Perusahaan" },
+      { key: "a_name", label: "회사명 *", type: "text", required: true },
+      { section: "Pengunduran diri" },
+      { key: "eff_date", label: "퇴직 예정일 *", type: "text", required: true },
+      { key: "reason", label: "사유", type: "select", options: [
+        { v: "private", label: { id: "Alasan pribadi" } },
+        { v: "career", label: { id: "Pengembangan karier" } },
+        { v: "health", label: { id: "Alasan kesehatan" } },
+        { v: "family", label: { id: "Alasan keluarga" } }
+      ]},
+      { key: "doc_date", label: "날짜", type: "date" }
+    ],
+    render: { id: renderPengunduranId }
+  },
+  {
+    id: "pretenziya-ru",
+    cat: "notice",
+    name: "Претензия — 러시아어권 사전청구서",
+    langs: ["ru"],
+    price: STUDIO.priceKrw,
+    usageNote: "претензия(사전 이의제기서)는 소송 전 필수 절차인 경우가 많습니다. 발송 증빙(등기우편)을 보관하세요.",
+    fields: [
+      { section: "Отправитель (발신인)" },
+      { key: "s_name", label: "ФИО·이름 *", type: "text", required: true },
+      { key: "s_addr", label: "주소", type: "text" },
+      { key: "s_phone", label: "연락처", type: "text" },
+      { section: "Получатель (수신인)" },
+      { key: "r_name", label: "이름·조직명 *", type: "text", required: true },
+      { key: "r_addr", label: "주소", type: "text" },
+      { section: "Претензия" },
+      { key: "facts", label: "사실 경위 *", type: "textarea", required: true },
+      { key: "demands", label: "요구 사항 *", type: "textarea", required: true, hint: "줄마다 하나씩" },
+      { key: "amount", label: "청구 금액 (RUB)", type: "text" },
+      { key: "deadline", label: "이행 기한", type: "text", hint: "예: 10 дней с момента получения" },
+      { key: "evidence", label: "첨부 서류", type: "textarea", hint: "줄마다 하나씩" },
+      { key: "doc_date", label: "날짜", type: "date" }
+    ],
+    render: { ru: renderPretenziyaRu }
+  },
+
 ];
 
 const BLANK = '<span class="blank">＿＿＿＿</span>';
@@ -4311,7 +4747,7 @@ function renderPayOrderKo() {
 }
 
 
-/* --- NDA 9개 언어 --- */
+/* --- NDA 14개 언어 --- */
 function ndaScope(lang) {
   const v = val("scope");
   if (v) return valOr("scope");
@@ -4324,9 +4760,14 @@ function ndaScope(lang) {
     fr: "toutes les informations techniques, commerciales et financières communiquées par une partie à l'autre dans le cadre de l'Objet, sous forme de documents, de données électroniques ou oralement",
     es: "toda la información técnica, comercial y financiera que una parte revele a la otra en relación con el Objeto, ya sea en documentos, datos electrónicos u oralmente",
     vi: "toàn bộ thông tin kỹ thuật, kinh doanh và tài chính mà một bên cung cấp cho bên kia liên quan đến Mục đích, dù dưới dạng tài liệu, dữ liệu điện tử hay bằng miệng",
-    th: "ข้อมูลทางเทคนิค ธุรกิจ และการเงินทั้งหมดที่ฝ่ายหนึ่งเปิดเผยแก่อีกฝ่ายเกี่ยวกับวัตถุประสงค์ ไม่ว่าในรูปเอกสาร ข้อมูลอิเล็กทรอนิกส์ หรือด้วยวาจา"
+    th: "ข้อมูลทางเทคนิค ธุรกิจ และการเงินทั้งหมดที่ฝ่ายหนึ่งเปิดเผยแก่อีกฝ่ายเกี่ยวกับวัตถุประสงค์ ไม่ว่าในรูปเอกสาร ข้อมูลอิเล็กทรอนิกส์ หรือด้วยวาจา",
+    pt: "todas as informações técnicas, comerciais e financeiras divulgadas por uma parte à outra em conexão com o Objeto, seja em documentos, dados eletrônicos ou verbalmente",
+    id: "seluruh informasi teknis, bisnis, dan keuangan yang diungkapkan satu pihak kepada pihak lain sehubungan dengan Tujuan, baik dalam dokumen, data elektronik, maupun lisan",
+    ru: "вся техническая, деловая и финансовая информация, раскрываемая одной стороной другой в связи с Целью, будь то в документах, электронных данных или устно",
+    ar: "جميع المعلومات التقنية والتجارية والمالية التي تفصح عنها جهة للأخرى فيما يتعلق بالغرض، سواء كانت في مستندات أو بيانات إلكترونية أو شفهياً",
+    it: "tutte le informazioni tecniche, commerciali e finanziarie divulgate da una parte all'altra in relazione allo Scopo, siano esse in documenti, dati elettronici o orali"
   };
-  return esc(D[lang] || D.ko);
+  return esc(D[lang] || D.en);
 }
 function renderNdaKo() {
   return `
@@ -5876,12 +6317,797 @@ function renderApologyEn() {
     </div>`;
 }
 
+
+/* ================= 렌더러: PT·ID·RU·AR·IT 확장 ================= */
+
+/* --- 내용증명/Demand: PT --- */
+function renderDemandPt() {
+  const demands = lines("demands");
+  const title = val("title") || ("Notificação Extrajudicial — " + optText("purpose", "pt"));
+  return `
+    <h1 class="doc-title">NOTIFICAÇÃO EXTRAJUDICIAL</h1>
+    <div class="doc-subtitle">${esc(title)}</div>
+    <table class="parties">
+      <tr><td class="lbl">REMITENTE</td><td>Nome: ${valOr("s_name")}<br/>Endereço: ${valOr("s_addr")}<br/>Contato: ${valOr("s_phone")}${val("s_email") ? "<br/>E-mail: " + esc(val("s_email")) : ""}</td></tr>
+      <tr><td class="lbl">DESTINATÁRIO</td><td>Nome: ${valOr("r_name")}<br/>Endereço: ${valOr("r_addr")}</td></tr>
+    </table>
+    <p class="body"><strong>Data:</strong> ${esc(fmtDate(val("doc_date"), "pt"))}</p>
+    <h2>1. Objeto</h2>
+    <p class="body">Pela presente, notificamos formalmente V. Sa. em relação a ${esc(optText("purpose", "pt"))}.</p>
+    <h2>2. Exposição dos fatos</h2>
+    <p class="body">${valOr("facts")}</p>
+    <h2>3. Exigência</h2>
+    <p class="body">Fica V. Sa. notificado(a) a cumprir o seguinte:</p>
+    <ol class="evidence">${(demands.length ? demands : ["＿＿＿＿"]).map(d => `<li>${esc(d)}</li>`).join("")}</ol>
+    <p class="body">As medidas acima deverão ser cumpridas até ${valOr("deadline")}. Em caso de descumprimento, serão adotadas todas as medidas legais cabíveis, sem novo aviso.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "pt"))}</div>
+      <div class="signer">Atenciosamente,<br/>${valOr("s_name")}</div>
+    </div>`;
+}
+function renderDemandId() {
+  const demands = lines("demands");
+  const title = val("title") || ("Somasi — " + optText("purpose", "id"));
+  return `
+    <h1 class="doc-title">SOMASI (SURAT TEGURAN)</h1>
+    <div class="doc-subtitle">${esc(title)}</div>
+    <table class="parties">
+      <tr><td class="lbl">PENGIRIM</td><td>Nama: ${valOr("s_name")}<br/>Alamat: ${valOr("s_addr")}<br/>Kontak: ${valOr("s_phone")}${val("s_email") ? "<br/>Email: " + esc(val("s_email")) : ""}</td></tr>
+      <tr><td class="lbl">PENERIMA</td><td>Nama: ${valOr("r_name")}<br/>Alamat: ${valOr("r_addr")}</td></tr>
+    </table>
+    <p class="body"><strong>Tanggal:</strong> ${esc(fmtDate(val("doc_date"), "id"))}</p>
+    <h2>1. Perihal</h2>
+    <p class="body">Dengan surat ini kami menegur Saudara secara resmi terkait ${esc(optText("purpose", "id"))}.</p>
+    <h2>2. Uraian Fakta</h2>
+    <p class="body">${valOr("facts")}</p>
+    <h2>3. Tuntutan</h2>
+    <p class="body">Saudara wajib melaksanakan hal-hal berikut:</p>
+    <ol class="evidence">${(demands.length ? demands : ["＿＿＿＿"]).map(d => `<li>${esc(d)}</li>`).join("")}</ol>
+    <p class="body">Hal-hal di atas wajib dilaksanakan paling lambat ${valOr("deadline")}. Apabila tidak dipenuhi, kami akan menempuh seluruh upaya hukum yang tersedia tanpa pemberitahuan lebih lanjut.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "id"))}</div>
+      <div class="signer">Hormat kami,<br/>${valOr("s_name")}</div>
+    </div>`;
+}
+function renderDemandRu() {
+  const demands = lines("demands");
+  const title = val("title") || ("Претензия — " + optText("purpose", "ru"));
+  return `
+    <h1 class="doc-title">ПРЕТЕНЗИЯ</h1>
+    <div class="doc-subtitle">${esc(title)}</div>
+    <table class="parties">
+      <tr><td class="lbl">ОТПРАВИТЕЛЬ</td><td>ФИО: ${valOr("s_name")}<br/>Адрес: ${valOr("s_addr")}<br/>Контакт: ${valOr("s_phone")}${val("s_email") ? "<br/>E-mail: " + esc(val("s_email")) : ""}</td></tr>
+      <tr><td class="lbl">ПОЛУЧАТЕЛЬ</td><td>ФИО: ${valOr("r_name")}<br/>Адрес: ${valOr("r_addr")}</td></tr>
+    </table>
+    <p class="body"><strong>Дата:</strong> ${esc(fmtDate(val("doc_date"), "ru"))}</p>
+    <h2>1. Предмет</h2>
+    <p class="body">Настоящим заявляем Вам официальную претензию в связи с ${esc(optText("purpose", "ru"))}.</p>
+    <h2>2. Изложение фактов</h2>
+    <p class="body">${valOr("facts")}</p>
+    <h2>3. Требование</h2>
+    <p class="body">Вам предписывается выполнить следующее:</p>
+    <ol class="evidence">${(demands.length ? demands : ["＿＿＿＿"]).map(d => `<li>${esc(d)}</li>`).join("")}</ol>
+    <p class="body">Указанные требования подлежат исполнению не позднее ${valOr("deadline")}. В случае неисполнения будут предприняты все предусмотренные законом меры без дополнительного уведомления.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ru"))}</div>
+      <div class="signer">С уважением,<br/>${valOr("s_name")}</div>
+    </div>`;
+}
+function renderDemandAr() {
+  const demands = lines("demands");
+  const title = val("title") || ("إشعار مطالبة — " + optText("purpose", "ar"));
+  return `
+    <h1 class="doc-title">إشعار مطالبة</h1>
+    <div class="doc-subtitle">${esc(title)}</div>
+    <table class="parties">
+      <tr><td class="lbl">المُرسل</td><td>الاسم: ${valOr("s_name")}<br/>العنوان: ${valOr("s_addr")}<br/>الاتصال: ${valOr("s_phone")}${val("s_email") ? "<br/>البريد: " + esc(val("s_email")) : ""}</td></tr>
+      <tr><td class="lbl">المُرسل إليه</td><td>الاسم: ${valOr("r_name")}<br/>العنوان: ${valOr("r_addr")}</td></tr>
+    </table>
+    <p class="body"><strong>التاريخ:</strong> ${esc(fmtDate(val("doc_date"), "ar"))}</p>
+    <h2>1. الموضوع</h2>
+    <p class="body">بموجب هذا الإشعار نطالبكم رسمياً بشأن ${esc(optText("purpose", "ar"))}.</p>
+    <h2>2. بيان الوقائع</h2>
+    <p class="body">${valOr("facts")}</p>
+    <h2>3. المطالبة</h2>
+    <p class="body">يُطلب إليكم تنفيذ ما يلي:</p>
+    <ol class="evidence">${(demands.length ? demands : ["＿＿＿＿"]).map(d => `<li>${esc(d)}</li>`).join("")}</ol>
+    <p class="body">يجب تنفيذ ما سبق في موعد أقصاه ${valOr("deadline")}. وفي حال عدم التنفيذ سنتخذ جميع الإجراءات القانونية المتاحة دون إشعار إضافي.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ar"))}</div>
+      <div class="signer">مع خالص التحية<br/>${valOr("s_name")}</div>
+    </div>`;
+}
+function renderDemandIt() {
+  const demands = lines("demands");
+  const title = val("title") || ("Diffida — " + optText("purpose", "it"));
+  return `
+    <h1 class="doc-title">DIFFIDA E MESSA IN MORA</h1>
+    <div class="doc-subtitle">${esc(title)}</div>
+    <table class="parties">
+      <tr><td class="lbl">MITTENTE</td><td>Nome: ${valOr("s_name")}<br/>Indirizzo: ${valOr("s_addr")}<br/>Contatto: ${valOr("s_phone")}${val("s_email") ? "<br/>E-mail: " + esc(val("s_email")) : ""}</td></tr>
+      <tr><td class="lbl">DESTINATARIO</td><td>Nome: ${valOr("r_name")}<br/>Indirizzo: ${valOr("r_addr")}</td></tr>
+    </table>
+    <p class="body"><strong>Data:</strong> ${esc(fmtDate(val("doc_date"), "it"))}</p>
+    <h2>1. Oggetto</h2>
+    <p class="body">Con la presente Vi si diffida formalmente in relazione a ${esc(optText("purpose", "it"))}.</p>
+    <h2>2. Esposizione dei fatti</h2>
+    <p class="body">${valOr("facts")}</p>
+    <h2>3. Diffida</h2>
+    <p class="body">Siete tenuti ad adempiere a quanto segue:</p>
+    <ol class="evidence">${(demands.length ? demands : ["＿＿＿＿"]).map(d => `<li>${esc(d)}</li>`).join("")}</ol>
+    <p class="body">Quanto sopra dovrà essere eseguito entro e non oltre ${valOr("deadline")}. In caso di inadempimento, saranno intraprese tutte le azioni legali disponibili senza ulteriore preavviso.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "it"))}</div>
+      <div class="signer">Distinti saluti,<br/>${valOr("s_name")}</div>
+    </div>`;
+}
+
+/* --- 경고장/C&D: 5개 언어 --- */
+function renderCndPt() {
+  const demands = lines("demands");
+  const title = val("subject") || "Notificação de Cessação";
+  return `
+    <h1 class="doc-title">NOTIFICAÇÃO DE CESSAÇÃO</h1>
+    <div class="doc-subtitle">${esc(title)}</div>
+    <table class="parties">
+      <tr><td class="lbl">DE</td><td>Nome: ${valOr("s_name")}<br/>Endereço: ${valOr("s_addr")}<br/>E-mail: ${valOr("s_email")}</td></tr>
+      <tr><td class="lbl">PARA</td><td>Nome/Conta: ${valOr("r_name")}<br/>Endereço/Identificador: ${valOr("r_addr")}</td></tr>
+    </table>
+    <p class="body"><strong>Data:</strong> ${esc(fmtDate(val("doc_date"), "pt"))}</p>
+    <h2>1. Declaração da Violação</h2>
+    <p class="body">${valOr("violation")}</p>
+    ${val("platform_url") ? `<p class="body">Local do material: ${esc(val("platform_url"))}</p>` : ""}
+    <h2>2. Exigência de Cessação</h2>
+    <p class="body">Fica V. Sa. notificado(a) a cessar imediatamente:</p>
+    <ol class="evidence">${(demands.length ? demands : ["＿＿＿＿"]).map(d => `<li>${esc(d)}</li>`).join("")}</ol>
+    <p class="body">O cumprimento deverá ocorrer até ${valOr("deadline")}. O descumprimento ensejará todas as medidas legais cabíveis sem novo aviso.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "pt"))}</div>
+      <div class="signer">Atenciosamente,<br/>${valOr("s_name")}</div>
+    </div>`;
+}
+function renderCndId() {
+  const demands = lines("demands");
+  const title = val("subject") || "Surat Peringatan Penghentian";
+  return `
+    <h1 class="doc-title">SURAT PERINGATAN PENGHENTIAN</h1>
+    <div class="doc-subtitle">${esc(title)}</div>
+    <table class="parties">
+      <tr><td class="lbl">DARI</td><td>Nama: ${valOr("s_name")}<br/>Alamat: ${valOr("s_addr")}<br/>Email: ${valOr("s_email")}</td></tr>
+      <tr><td class="lbl">KEPADA</td><td>Nama/Akun: ${valOr("r_name")}<br/>Alamat/Identitas: ${valOr("r_addr")}</td></tr>
+    </table>
+    <p class="body"><strong>Tanggal:</strong> ${esc(fmtDate(val("doc_date"), "id"))}</p>
+    <h2>1. Pernyataan Pelanggaran</h2>
+    <p class="body">${valOr("violation")}</p>
+    ${val("platform_url") ? `<p class="body">Lokasi materi: ${esc(val("platform_url"))}</p>` : ""}
+    <h2>2. Tuntutan Penghentian</h2>
+    <p class="body">Saudara diwajibkan untuk segera:</p>
+    <ol class="evidence">${(demands.length ? demands : ["＿＿＿＿"]).map(d => `<li>${esc(d)}</li>`).join("")}</ol>
+    <p class="body">Kewajiban di atas harus dipenuhi paling lambat ${valOr("deadline")}. Kegagalan memenuhi akan berakibat pada seluruh upaya hukum tanpa pemberitahuan lebih lanjut.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "id"))}</div>
+      <div class="signer">Hormat kami,<br/>${valOr("s_name")}</div>
+    </div>`;
+}
+function renderCndRu() {
+  const demands = lines("demands");
+  const title = val("subject") || "Требование о прекращении";
+  return `
+    <h1 class="doc-title">ТРЕБОВАНИЕ О ПРЕКРАЩЕНИИ НАРУШЕНИЯ</h1>
+    <div class="doc-subtitle">${esc(title)}</div>
+    <table class="parties">
+      <tr><td class="lbl">ОТ</td><td>ФИО: ${valOr("s_name")}<br/>Адрес: ${valOr("s_addr")}<br/>E-mail: ${valOr("s_email")}</td></tr>
+      <tr><td class="lbl">КОМУ</td><td>Имя/Аккаунт: ${valOr("r_name")}<br/>Адрес/Идентификатор: ${valOr("r_addr")}</td></tr>
+    </table>
+    <p class="body"><strong>Дата:</strong> ${esc(fmtDate(val("doc_date"), "ru"))}</p>
+    <h2>1. Изложение нарушения</h2>
+    <p class="body">${valOr("violation")}</p>
+    ${val("platform_url") ? `<p class="body">Место размещения материала: ${esc(val("platform_url"))}</p>` : ""}
+    <h2>2. Требование о прекращении</h2>
+    <p class="body">Вам предписывается незамедлительно:</p>
+    <ol class="evidence">${(demands.length ? demands : ["＿＿＿＿"]).map(d => `<li>${esc(d)}</li>`).join("")}</ol>
+    <p class="body">Требования подлежат исполнению не позднее ${valOr("deadline")}. В случае неисполнения будут предприняты все предусмотренные законом меры без дополнительного уведомления.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ru"))}</div>
+      <div class="signer">С уважением,<br/>${valOr("s_name")}</div>
+    </div>`;
+}
+function renderCndAr() {
+  const demands = lines("demands");
+  const title = val("subject") || "إشعار بالتوقف والكف";
+  return `
+    <h1 class="doc-title">إشعار بالتوقف والكف</h1>
+    <div class="doc-subtitle">${esc(title)}</div>
+    <table class="parties">
+      <tr><td class="lbl">من</td><td>الاسم: ${valOr("s_name")}<br/>العنوان: ${valOr("s_addr")}<br/>البريد: ${valOr("s_email")}</td></tr>
+      <tr><td class="lbl">إلى</td><td>الاسم/الحساب: ${valOr("r_name")}<br/>العنوان/المعرّف: ${valOr("r_addr")}</td></tr>
+    </table>
+    <p class="body"><strong>التاريخ:</strong> ${esc(fmtDate(val("doc_date"), "ar"))}</p>
+    <h2>1. بيان المخالفة</h2>
+    <p class="body">${valOr("violation")}</p>
+    ${val("platform_url") ? `<p class="body">موضع المادة: ${esc(val("platform_url"))}</p>` : ""}
+    <h2>2. مطالبة بالتوقف</h2>
+    <p class="body">يُطلب إليكم التوقف فوراً عما يلي:</p>
+    <ol class="evidence">${(demands.length ? demands : ["＿＿＿＿"]).map(d => `<li>${esc(d)}</li>`).join("")}</ol>
+    <p class="body">يجب الامتثال في موعد أقصاه ${valOr("deadline")}. وإلا فسنتخذ جميع الإجراءات القانونية دون إشعار إضافي.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ar"))}</div>
+      <div class="signer">مع خالص التحية<br/>${valOr("s_name")}</div>
+    </div>`;
+}
+function renderCndIt() {
+  const demands = lines("demands");
+  const title = val("subject") || "Diffida";
+  return `
+    <h1 class="doc-title">DIFFIDA A CESSARE LA CONDOTTA</h1>
+    <div class="doc-subtitle">${esc(title)}</div>
+    <table class="parties">
+      <tr><td class="lbl">DA</td><td>Nome: ${valOr("s_name")}<br/>Indirizzo: ${valOr("s_addr")}<br/>E-mail: ${valOr("s_email")}</td></tr>
+      <tr><td class="lbl">A</td><td>Nome/Account: ${valOr("r_name")}<br/>Indirizzo/Identificativo: ${valOr("r_addr")}</td></tr>
+    </table>
+    <p class="body"><strong>Data:</strong> ${esc(fmtDate(val("doc_date"), "it"))}</p>
+    <h2>1. Esposizione della violazione</h2>
+    <p class="body">${valOr("violation")}</p>
+    ${val("platform_url") ? `<p class="body">Posizione del materiale: ${esc(val("platform_url"))}</p>` : ""}
+    <h2>2. Diffida a cessare</h2>
+    <p class="body">Siete tenuti a cessare immediatamente:</p>
+    <ol class="evidence">${(demands.length ? demands : ["＿＿＿＿"]).map(d => `<li>${esc(d)}</li>`).join("")}</ol>
+    <p class="body">L'adempimento dovrà avvenire entro ${valOr("deadline")}. In caso di inadempimento saranno intraprese tutte le azioni legali senza ulteriore preavviso.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "it"))}</div>
+      <div class="signer">Distinti saluti,<br/>${valOr("s_name")}</div>
+    </div>`;
+}
+
+
+/* --- 차용증/Loan: PT·ID·RU·AR·IT --- */
+function renderLoanPt() {
+  const interest = val("interest");
+  const interestText = !interest || interest === "0" ? "sem juros" : `${esc(interest)}% ao ano`;
+  return `
+    <h1 class="doc-title">CONTRATO DE EMPRÉSTIMO</h1>
+    <div class="doc-subtitle">Confissão de Dívida</div>
+    <table class="parties">
+      <tr><td class="lbl">MUTUANTE</td><td>Nome: ${valOr("l_name")}<br/>Endereço: ${valOr("l_addr")}</td></tr>
+      <tr><td class="lbl">MUTUÁRIO</td><td>Nome: ${valOr("b_name")}<br/>Endereço: ${valOr("b_addr")}<br/>ID/Nasc.: ${valOr("b_id")}</td></tr>
+    </table>
+    <h2>1. Principal</h2>
+    <p class="body">${esc(val("currency"))} ${valOr("amount")}</p>
+    <h2>2. Data do Empréstimo e Vencimento</h2>
+    <p class="body">Data do empréstimo: ${esc(fmtDate(val("loan_date"), "pt"))} &nbsp;·&nbsp; Vencimento: ${esc(fmtDate(val("repay_date"), "pt"))}</p>
+    <h2>3. Juros</h2>
+    <p class="body">${interestText}</p>
+    ${parseFloat(interest) > 20 ? `<p class="body" style="color:#9f2f2d;">Observação: limites legais de juros podem aplicar-se — verifique se a taxa é exigível.</p>` : ""}
+    <h2>4. Forma de Pagamento</h2>
+    <p class="body">${esc(optText("repay_method", "pt"))}${val("repay_account") ? " — para a conta: " + esc(val("repay_account")) : ""}</p>
+    ${val("special") ? `<h2>5. Cláusulas Especiais</h2><p class="body">${valOr("special")}</p>` : ""}
+    <p class="body" style="margin-top:24px;">O Mutuário declara ter recebido o Principal e obriga-se a pagá-lo integralmente ao Mutuante até a data de vencimento.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "pt"))}</div>
+      <div class="signer">Mutuário: ${valOr("b_name")} ${sig("sig_b", "________________")}</div>
+      <div class="signer">Mutuante: ${valOr("l_name")} ${sig("sig_l", "________________")}</div>
+    </div>`;
+}
+function renderLoanId() {
+  const interest = val("interest");
+  const interestText = !interest || interest === "0" ? "tanpa bunga" : `${esc(interest)}% per tahun`;
+  return `
+    <h1 class="doc-title">PERJANJIAN PINJAMAN</h1>
+    <div class="doc-subtitle">Surat Pengakuan Utang</div>
+    <table class="parties">
+      <tr><td class="lbl">PEMBERI PINJAMAN</td><td>Nama: ${valOr("l_name")}<br/>Alamat: ${valOr("l_addr")}</td></tr>
+      <tr><td class="lbl">PENERIMA PINJAMAN</td><td>Nama: ${valOr("b_name")}<br/>Alamat: ${valOr("b_addr")}<br/>Identitas: ${valOr("b_id")}</td></tr>
+    </table>
+    <h2>1. Pokok Pinjaman</h2>
+    <p class="body">${esc(val("currency"))} ${valOr("amount")}</p>
+    <h2>2. Tanggal Pinjaman dan Jatuh Tempo</h2>
+    <p class="body">Tanggal pinjaman: ${esc(fmtDate(val("loan_date"), "id"))} &nbsp;·&nbsp; Jatuh tempo: ${esc(fmtDate(val("repay_date"), "id"))}</p>
+    <h2>3. Bunga</h2>
+    <p class="body">${interestText}</p>
+    ${parseFloat(interest) > 20 ? `<p class="body" style="color:#9f2f2d;">Catatan: batas suku bunga yang diatur undang-undang dapat berlaku — pastikan tingkat bunga dapat ditagih.</p>` : ""}
+    <h2>4. Cara Pembayaran</h2>
+    <p class="body">${esc(optText("repay_method", "id"))}${val("repay_account") ? " — ke rekening: " + esc(val("repay_account")) : ""}</p>
+    ${val("special") ? `<h2>5. Ketentuan Khusus</h2><p class="body">${valOr("special")}</p>` : ""}
+    <p class="body" style="margin-top:24px;">Penerima Pinjaman mengakui telah menerima Pokok Pinjaman dan berkewajiban melunasinya kepada Pemberi Pinjaman selambat-lambatnya pada tanggal jatuh tempo.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "id"))}</div>
+      <div class="signer">Penerima Pinjaman: ${valOr("b_name")} ${sig("sig_b", "________________")}</div>
+      <div class="signer">Pemberi Pinjaman: ${valOr("l_name")} ${sig("sig_l", "________________")}</div>
+    </div>`;
+}
+function renderLoanRu() {
+  const interest = val("interest");
+  const interestText = !interest || interest === "0" ? "беспроцентный" : `${esc(interest)}% годовых`;
+  return `
+    <h1 class="doc-title">ДОГОВОР ЗАЙМА</h1>
+    <div class="doc-subtitle">Расписка о получении займа</div>
+    <table class="parties">
+      <tr><td class="lbl">ЗАЙМОДАВЕЦ</td><td>ФИО: ${valOr("l_name")}<br/>Адрес: ${valOr("l_addr")}</td></tr>
+      <tr><td class="lbl">ЗАЁМЩИК</td><td>ФИО: ${valOr("b_name")}<br/>Адрес: ${valOr("b_addr")}<br/>Документ: ${valOr("b_id")}</td></tr>
+    </table>
+    <h2>1. Сумма займа</h2>
+    <p class="body">${esc(val("currency"))} ${valOr("amount")}</p>
+    <h2>2. Дата займа и срок возврата</h2>
+    <p class="body">Дата займа: ${esc(fmtDate(val("loan_date"), "ru"))} &nbsp;·&nbsp; Срок возврата: ${esc(fmtDate(val("repay_date"), "ru"))}</p>
+    <h2>3. Проценты</h2>
+    <p class="body">${interestText}</p>
+    ${parseFloat(interest) > 20 ? `<p class="body" style="color:#9f2f2d;">Примечание: законодательные ограничения процентной ставки могут применяться — проверьте взыскиваемость ставки.</p>` : ""}
+    <h2>4. Способ возврата</h2>
+    <p class="body">${esc(optText("repay_method", "ru"))}${val("repay_account") ? " — на счёт: " + esc(val("repay_account")) : ""}</p>
+    ${val("special") ? `<h2>5. Особые условия</h2><p class="body">${valOr("special")}</p>` : ""}
+    <p class="body" style="margin-top:24px;">Заёмщик подтверждает получение суммы займа и обязуется возвратить её Займодавцу в полном объёме в срок возврата.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ru"))}</div>
+      <div class="signer">Заёмщик: ${valOr("b_name")} ${sig("sig_b", "________________")}</div>
+      <div class="signer">Займодавец: ${valOr("l_name")} ${sig("sig_l", "________________")}</div>
+    </div>`;
+}
+function renderLoanAr() {
+  const interest = val("interest");
+  const interestText = !interest || interest === "0" ? "بدون فائدة" : `${esc(interest)}% سنوياً`;
+  return `
+    <h1 class="doc-title">عقد قرض</h1>
+    <div class="doc-subtitle">إقرار بالدين</div>
+    <table class="parties">
+      <tr><td class="lbl">المُقرِض</td><td>الاسم: ${valOr("l_name")}<br/>العنوان: ${valOr("l_addr")}</td></tr>
+      <tr><td class="lbl">المُقتَرِض</td><td>الاسم: ${valOr("b_name")}<br/>العنوان: ${valOr("b_addr")}<br/>الهوية: ${valOr("b_id")}</td></tr>
+    </table>
+    <h2>1. أصل القرض</h2>
+    <p class="body">${esc(val("currency"))} ${valOr("amount")}</p>
+    <h2>2. تاريخ القرض وتاريخ السداد</h2>
+    <p class="body">تاريخ القرض: ${esc(fmtDate(val("loan_date"), "ar"))} &nbsp;·&nbsp; تاريخ السداد: ${esc(fmtDate(val("repay_date"), "ar"))}</p>
+    <h2>3. الفائدة</h2>
+    <p class="body">${interestText}</p>
+    ${parseFloat(interest) > 20 ? `<p class="body" style="color:#9f2f2d;">ملاحظة: قد تنطبق حدود قانونية على سعر الفائدة — تحقق من قابلية التنفيذ.</p>` : ""}
+    <h2>4. طريقة السداد</h2>
+    <p class="body">${esc(optText("repay_method", "ar"))}${val("repay_account") ? " — إلى الحساب: " + esc(val("repay_account")) : ""}</p>
+    ${val("special") ? `<h2>5. شروط خاصة</h2><p class="body">${valOr("special")}</p>` : ""}
+    <p class="body" style="margin-top:24px;">يُقرّ المُقتَرِض باستلام أصل القرض ويتعهد بسداده كاملاً للمُقرِض في تاريخ الاستحقاق.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ar"))}</div>
+      <div class="signer">المُقتَرِض: ${valOr("b_name")} ${sig("sig_b", "________________")}</div>
+      <div class="signer">المُقرِض: ${valOr("l_name")} ${sig("sig_l", "________________")}</div>
+    </div>`;
+}
+function renderLoanIt() {
+  const interest = val("interest");
+  const interestText = !interest || interest === "0" ? "senza interessi" : `${esc(interest)}% annuo`;
+  return `
+    <h1 class="doc-title">CONTRATTO DI PRESTITO</h1>
+    <div class="doc-subtitle">Riconoscimento di Debito</div>
+    <table class="parties">
+      <tr><td class="lbl">MUTUANTE</td><td>Nome: ${valOr("l_name")}<br/>Indirizzo: ${valOr("l_addr")}</td></tr>
+      <tr><td class="lbl">MUTUATARIO</td><td>Nome: ${valOr("b_name")}<br/>Indirizzo: ${valOr("b_addr")}<br/>Doc. identità: ${valOr("b_id")}</td></tr>
+    </table>
+    <h2>1. Capitale</h2>
+    <p class="body">${esc(val("currency"))} ${valOr("amount")}</p>
+    <h2>2. Data del prestito e scadenza</h2>
+    <p class="body">Data del prestito: ${esc(fmtDate(val("loan_date"), "it"))} &nbsp;·&nbsp; Scadenza: ${esc(fmtDate(val("repay_date"), "it"))}</p>
+    <h2>3. Interessi</h2>
+    <p class="body">${interestText}</p>
+    ${parseFloat(interest) > 20 ? `<p class="body" style="color:#9f2f2d;">Nota: possono applicarsi i limiti legali al tasso di interesse — verificare l'esigibilità del tasso.</p>` : ""}
+    <h2>4. Modalità di rimborso</h2>
+    <p class="body">${esc(optText("repay_method", "it"))}${val("repay_account") ? " — sul conto: " + esc(val("repay_account")) : ""}</p>
+    ${val("special") ? `<h2>5. Clausole particolari</h2><p class="body">${valOr("special")}</p>` : ""}
+    <p class="body" style="margin-top:24px;">Il Mutuatario dichiara di aver ricevuto il Capitale e si obbliga a rimborsarlo integralmente al Mutuante entro la scadenza.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "it"))}</div>
+      <div class="signer">Mutuatario: ${valOr("b_name")} ${sig("sig_b", "________________")}</div>
+      <div class="signer">Mutuante: ${valOr("l_name")} ${sig("sig_l", "________________")}</div>
+    </div>`;
+}
+
+/* --- NDA: PT·ID·RU·AR·IT --- */
+function renderNdaPt() {
+  return `
+    <h1 class="doc-title">ACORDO DE CONFIDENCIALIDADE (NDA)</h1>
+    <table class="parties">
+      <tr><td class="lbl">PARTE A</td><td>Nome: ${valOr("a_name")}<br/>Endereço: ${valOr("a_addr")}</td></tr>
+      <tr><td class="lbl">PARTE B</td><td>Nome: ${valOr("b_name")}<br/>Endereço: ${valOr("b_addr")}</td></tr>
+    </table>
+    <h2>1. Objeto</h2>
+    <p class="body">Este Acordo protege as Informações Confidenciais trocadas entre as partes em conexão com: ${valOr("purpose")} (o "Objeto").</p>
+    <h2>2. Informações Confidenciais</h2>
+    <p class="body">"Informações Confidenciais" significam ${ndaScope("pt")}.</p>
+    <h2>3. Obrigações</h2>
+    <p class="body">Nenhuma parte poderá divulgar Informações Confidenciais a terceiros sem o consentimento prévio por escrito da outra parte, nem utilizá-las para fins diversos do Objeto.</p>
+    <h2>4. Prazo</h2>
+    <p class="body">As obrigações de confidencialidade permanecem vigentes por ${val("term_years") ? esc(val("term_years")) : "3"} ano(s) a partir da data deste Acordo.</p>
+    <h2>5. Lei Aplicável</h2>
+    <p class="body">Este Acordo é regido por ${esc(optText("gov_law", "pt"))}.</p>
+    <p class="body" style="margin-top:24px;">Lavrado em duas vias, cada parte conservando uma.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "pt"))}</div>
+      <div class="signer">Parte A: ${valOr("a_name")} ${sig("sig_a", "________________")}</div>
+      <div class="signer">Parte B: ${valOr("b_name")} ${sig("sig_b", "________________")}</div>
+    </div>`;
+}
+function renderNdaId() {
+  return `
+    <h1 class="doc-title">PERJANJIAN KERAHASIAAN (NDA)</h1>
+    <table class="parties">
+      <tr><td class="lbl">PIHAK A</td><td>Nama: ${valOr("a_name")}<br/>Alamat: ${valOr("a_addr")}</td></tr>
+      <tr><td class="lbl">PIHAK B</td><td>Nama: ${valOr("b_name")}<br/>Alamat: ${valOr("b_addr")}</td></tr>
+    </table>
+    <h2>1. Tujuan</h2>
+    <p class="body">Perjanjian ini melindungi Informasi Rahasia yang dipertukarkan antar para pihak sehubungan dengan: ${valOr("purpose")} ("Tujuan").</p>
+    <h2>2. Informasi Rahasia</h2>
+    <p class="body">"Informasi Rahasia" berarti ${ndaScope("id")}.</p>
+    <h2>3. Kewajiban</h2>
+    <p class="body">Kedua pihak dilarang mengungkapkan Informasi Rahasia kepada pihak ketiga tanpa persetujuan tertulis terlebih dahulu, maupun menggunakannya untuk tujuan selain Tujuan.</p>
+    <h2>4. Jangka Waktu</h2>
+    <p class="body">Kewajiban kerahasiaan berlaku selama ${val("term_years") ? esc(val("term_years")) : "3"} tahun sejak tanggal Perjanjian ini.</p>
+    <h2>5. Hukum yang Berlaku</h2>
+    <p class="body">Perjanjian ini diatur oleh ${esc(optText("gov_law", "id"))}.</p>
+    <p class="body" style="margin-top:24px;">Dibuat dalam dua rangkap, masing-masing pihak menyimpan satu.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "id"))}</div>
+      <div class="signer">Pihak A: ${valOr("a_name")} ${sig("sig_a", "________________")}</div>
+      <div class="signer">Pihak B: ${valOr("b_name")} ${sig("sig_b", "________________")}</div>
+    </div>`;
+}
+function renderNdaRu() {
+  return `
+    <h1 class="doc-title">СОГЛАШЕНИЕ О КОНФИДЕНЦИАЛЬНОСТИ</h1>
+    <table class="parties">
+      <tr><td class="lbl">СТОРОНА А</td><td>ФИО/Наименование: ${valOr("a_name")}<br/>Адрес: ${valOr("a_addr")}</td></tr>
+      <tr><td class="lbl">СТОРОНА Б</td><td>ФИО/Наименование: ${valOr("b_name")}<br/>Адрес: ${valOr("b_addr")}</td></tr>
+    </table>
+    <h2>1. Цель</h2>
+    <p class="body">Настоящее Соглашение защищает Конфиденциальную информацию, которой стороны обмениваются в связи с: ${valOr("purpose")} («Цель»).</p>
+    <h2>2. Конфиденциальная информация</h2>
+    <p class="body">«Конфиденциальная информация» означает ${ndaScope("ru")}.</p>
+    <h2>3. Обязательства</h2>
+    <p class="body">Стороны не вправе раскрывать Конфиденциальную информацию третьим лицам без предварительного письменного согласия другой стороны, а также использовать её в целях, отличных от Цели.</p>
+    <h2>4. Срок</h2>
+    <p class="body">Обязательства по конфиденциальности действуют в течение ${val("term_years") ? esc(val("term_years")) : "3"} лет с даты настоящего Соглашения.</p>
+    <h2>5. Применимое право</h2>
+    <p class="body">Настоящее Соглашение регулируется ${esc(optText("gov_law", "ru"))}.</p>
+    <p class="body" style="margin-top:24px;">Составлено в двух экземплярах, по одному для каждой из сторон.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ru"))}</div>
+      <div class="signer">Сторона А: ${valOr("a_name")} ${sig("sig_a", "________________")}</div>
+      <div class="signer">Сторона Б: ${valOr("b_name")} ${sig("sig_b", "________________")}</div>
+    </div>`;
+}
+function renderNdaAr() {
+  return `
+    <h1 class="doc-title">اتفاقية عدم الإفصاح (NDA)</h1>
+    <table class="parties">
+      <tr><td class="lbl">الطرف الأول</td><td>الاسم: ${valOr("a_name")}<br/>العنوان: ${valOr("a_addr")}</td></tr>
+      <tr><td class="lbl">الطرف الثاني</td><td>الاسم: ${valOr("b_name")}<br/>العنوان: ${valOr("b_addr")}</td></tr>
+    </table>
+    <h2>1. الغرض</h2>
+    <p class="body">تحمي هذه الاتفاقية المعلومات السرية المتبادلة بين الطرفين فيما يتعلق بـ: ${valOr("purpose")} («الغرض»).</p>
+    <h2>2. المعلومات السرية</h2>
+    <p class="body">تعني «المعلومات السرية» ${ndaScope("ar")}.</p>
+    <h2>3. الالتزامات</h2>
+    <p class="body">لا يجوز لأي طرف إفشاء المعلومات السرية لأي طرف ثالث دون موافقة كتابية مسبقة من الطرف الآخر، ولا استخدامها لأي غرض سوى الغرض.</p>
+    <h2>4. المدة</h2>
+    <p class="body">تظل التزامات السرية سارية لمدة ${val("term_years") ? esc(val("term_years")) : "3"} سنة/سنوات من تاريخ هذه الاتفاقية.</p>
+    <h2>5. القانون الواجب التطبيق</h2>
+    <p class="body">تخضع هذه الاتفاقية لـ ${esc(optText("gov_law", "ar"))}.</p>
+    <p class="body" style="margin-top:24px;">حُررت من نسختين، يحتفظ كل طرف بنسخة.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ar"))}</div>
+      <div class="signer">الطرف الأول: ${valOr("a_name")} ${sig("sig_a", "________________")}</div>
+      <div class="signer">الطرف الثاني: ${valOr("b_name")} ${sig("sig_b", "________________")}</div>
+    </div>`;
+}
+function renderNdaIt() {
+  return `
+    <h1 class="doc-title">ACCORDO DI RISERVATEZZA (NDA)</h1>
+    <table class="parties">
+      <tr><td class="lbl">PARTE A</td><td>Nome: ${valOr("a_name")}<br/>Indirizzo: ${valOr("a_addr")}</td></tr>
+      <tr><td class="lbl">PARTE B</td><td>Nome: ${valOr("b_name")}<br/>Indirizzo: ${valOr("b_addr")}</td></tr>
+    </table>
+    <h2>1. Scopo</h2>
+    <p class="body">Il presente Accordo tutela le Informazioni Riservate scambiate tra le parti in relazione a: ${valOr("purpose")} (lo "Scopo").</p>
+    <h2>2. Informazioni Riservate</h2>
+    <p class="body">Per "Informazioni Riservate" si intendono ${ndaScope("it")}.</p>
+    <h2>3. Obblighi</h2>
+    <p class="body">Ciascuna parte non potrà divulgare le Informazioni Riservate a terzi senza il previo consenso scritto dell'altra parte, né utilizzarle per finalità diverse dallo Scopo.</p>
+    <h2>4. Durata</h2>
+    <p class="body">Gli obblighi di riservatezza restano in vigore per ${val("term_years") ? esc(val("term_years")) : "3"} anno/i dalla data del presente Accordo.</p>
+    <h2>5. Legge applicabile</h2>
+    <p class="body">Il presente Accordo è regolato da ${esc(optText("gov_law", "it"))}.</p>
+    <p class="body" style="margin-top:24px;">Redatto in due copie, una per ciascuna parte.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "it"))}</div>
+      <div class="signer">Parte A: ${valOr("a_name")} ${sig("sig_a", "________________")}</div>
+      <div class="signer">Parte B: ${valOr("b_name")} ${sig("sig_b", "________________")}</div>
+    </div>`;
+}
+
+
+/* ================= 렌더러: 국가 특화 양식 ================= */
+
+/* --- DE: Kündigung --- */
+function renderKuendigungDe() {
+  return `
+    <table class="parties">
+      <tr><td class="lbl">ABSENDER</td><td>${valOr("s_name")}<br/>${valOr("s_addr")}</td></tr>
+      <tr><td class="lbl">EMPFÄNGER</td><td>${valOr("r_name")}<br/>${valOr("r_addr")}</td></tr>
+    </table>
+    <p class="body" style="text-align:right;">${esc(fmtDate(val("doc_date"), "de"))}</p>
+    <h1 class="doc-title" style="font-size:19px;">Kündigung — ${esc(optText("contract_type", "de") || "Vertrag")}</h1>
+    <p class="body">Sehr geehrte Damen und Herren,</p>
+    <p class="body">hiermit kündige ich den mit Ihnen bestehenden Vertrag${val("contract_no") ? " (" + esc(val("contract_no")) + ")" : ""} ${val("frist") === "fristlos" ? "fristlos aus wichtigem Grund" : "ordentlich und fristgerecht"}${val("eff_date") ? " zum " + esc(val("eff_date")) : ", zum nächstmöglichen Zeitpunkt"}.</p>
+    ${val("reason") ? `<p class="body">Begründung: ${valOr("reason")}</p>` : ""}
+    <p class="body">Ich bitte Sie, mir die Kündigung sowie das Vertragsende schriftlich zu bestätigen.</p>
+    <div class="doc-foot">
+      <div class="signer">Mit freundlichen Grüßen<br/>${valOr("s_name")} ${sig("sig_a", "________________")}</div>
+    </div>`;
+}
+
+/* --- DE: Mahnung --- */
+function renderMahnungDe() {
+  const zinsen = checkedLabels("verzugszinsen", "de").length > 0;
+  return `
+    <table class="parties">
+      <tr><td class="lbl">GLÄUBIGER</td><td>${valOr("s_name")}<br/>${valOr("s_addr")}</td></tr>
+      <tr><td class="lbl">SCHULDNER</td><td>${valOr("r_name")}<br/>${valOr("r_addr")}</td></tr>
+    </table>
+    <p class="body" style="text-align:right;">${esc(fmtDate(val("doc_date"), "de"))}</p>
+    <h1 class="doc-title" style="font-size:19px;">Mahnung${val("inv_no") ? " — Rechnung " + esc(val("inv_no")) : ""}</h1>
+    <p class="body">Sehr geehrte Damen und Herren,</p>
+    <p class="body">trotz Fälligkeit${val("due_date") ? " am " + esc(val("due_date")) : ""} ist die Zahlung von <strong>${esc(val("amount"))} EUR</strong>${val("inv_no") ? " zur Rechnung " + esc(val("inv_no")) : ""} bislang nicht eingegangen.</p>
+    <p class="body">Hiermit fordere ich Sie letztmalig auf, den Betrag bis spätestens <strong>${valOr("deadline")}</strong> zu begleichen.${val("repay_account") ? "<br/>Zahlungskonto (IBAN): " + esc(val("repay_account")) : ""}</p>
+    ${zinsen ? `<p class="body">Ab Verzugseintritt werden gesetzliche Verzugszinsen (§ 288 BGB) geltend gemacht.</p>` : ""}
+    <p class="body">Bei Nichtzahlung werde ich ohne weitere Ankündigung gerichtliche Schritte (u. a. Mahnverfahren) einleiten.</p>
+    <div class="doc-foot">
+      <div class="signer">Mit freundlichen Grüßen<br/>${valOr("s_name")} ${sig("sig_a", "________________")}</div>
+    </div>`;
+}
+
+/* --- DE: Vollmacht --- */
+function renderVollmachtDe() {
+  return `
+    <h1 class="doc-title">VOLLMACHT</h1>
+    <table class="parties">
+      <tr><td class="lbl">VOLLMACHTGEBER</td><td>Name: ${valOr("p_name")}<br/>Geboren: ${valOr("p_id")}<br/>Anschrift: ${valOr("p_addr")}</td></tr>
+      <tr><td class="lbl">BEVOLLMÄCHTIGTER</td><td>Name: ${valOr("a_name")}<br/>Geboren: ${valOr("a_id")}<br/>Anschrift: ${valOr("a_addr")}</td></tr>
+    </table>
+    <p class="body">Hiermit bevollmächtige ich die oben genannte Person, mich in folgenden Angelegenheiten zu vertreten:</p>
+    <p class="body" style="border:1px solid #ccc; padding:14px; border-radius:6px;">${valOr("scope")}</p>
+    <p class="body">Gültigkeitsdauer: ${valOr("term")}</p>
+    <p class="body">Die Vollmacht kann jederzeit widerrufen werden.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "de"))}</div>
+      <div class="signer">${valOr("p_name")} ${sig("sig_p", "________________")}</div>
+    </div>`;
+}
+
+/* --- FR: Lettre de résiliation --- */
+function renderResiliationFr() {
+  return `
+    <table class="parties">
+      <tr><td class="lbl">EXPÉDITEUR</td><td>${valOr("s_name")}<br/>${valOr("s_addr")}</td></tr>
+      <tr><td class="lbl">DESTINATAIRE</td><td>${valOr("r_name")}<br/>${valOr("r_addr")}</td></tr>
+    </table>
+    <p class="body" style="text-align:right;">Fait le ${esc(fmtDate(val("doc_date"), "fr"))}</p>
+    <h1 class="doc-title" style="font-size:19px;">Lettre de résiliation — ${esc(optText("contract_type", "fr") || "contrat")}</h1>
+    <p class="body">Madame, Monsieur,</p>
+    <p class="body">Par la présente, je vous informe de ma décision de résilier le contrat${val("contract_no") ? " n° " + esc(val("contract_no")) : ""} me liant à votre organisme${val("eff_date") ? ", avec effet au " + esc(val("eff_date")) : ""}.</p>
+    ${val("reason") ? `<p class="body">Motif : ${valOr("reason")}</p>` : ""}
+    <p class="body">Je vous prie de bien vouloir me confirmer par écrit la prise en compte de cette résiliation et la date d'effet.</p>
+    <p class="body">Veuillez agréer, Madame, Monsieur, l'expression de mes salutations distinguées.</p>
+    <div class="doc-foot">
+      <div class="signer">${valOr("s_name")} ${sig("sig_a", "________________")}</div>
+    </div>`;
+}
+
+/* --- FR: Lettre de démission --- */
+function renderDemissionFr() {
+  return `
+    <table class="parties">
+      <tr><td class="lbl">SALARIÉ(E)</td><td>${valOr("b_name")}<br/>${valOr("b_addr")}<br/>${valOr("dept")}</td></tr>
+      <tr><td class="lbl">EMPLOYEUR</td><td>${valOr("a_name")}<br/>${valOr("a_addr")}</td></tr>
+    </table>
+    <p class="body" style="text-align:right;">Fait le ${esc(fmtDate(val("doc_date"), "fr"))}</p>
+    <h1 class="doc-title" style="font-size:19px;">Lettre de démission</h1>
+    <p class="body">Madame, Monsieur,</p>
+    <p class="body">Par la présente, je vous informe de ma décision de démissionner de mes fonctions au sein de ${valOr("a_name")}, avec effet au ${valOr("eff_date")}.</p>
+    <p class="body">${val("notice") === "dispense" ? "Je sollicite par ailleurs une dispense de préavis." : "J'effectuerai mon préavis conformément aux dispositions applicables."}</p>
+    ${val("reason") ? `<p class="body">Motif : ${valOr("reason")}</p>` : ""}
+    <p class="body">Je vous remercie de l'expérience acquise au sein de votre entreprise et reste à votre disposition pour organiser la passation de mes dossiers.</p>
+    <p class="body">Veuillez agréer, Madame, Monsieur, l'expression de mes salutations distinguées.</p>
+    <div class="doc-foot">
+      <div class="signer">${valOr("b_name")} ${sig("sig_b", "________________")}</div>
+    </div>`;
+}
+
+/* --- JA: 退職願 --- */
+function renderTaishokuJa() {
+  return `
+    <h1 class="doc-title">退 職 願</h1>
+    <table class="parties">
+      <tr><td class="lbl">申請人</td><td>氏名: ${valOr("b_name")}<br/>所属・職位: ${valOr("dept")}<br/>社員番号: ${valOr("b_id")}</td></tr>
+    </table>
+    <p class="body">私事、${esc(optText("reason", "ja") || "一身上の都合")}により、${esc(fmtDate(val("end_date"), "ja"))}をもって退職したく、ここにお願い申し上げます。</p>
+    <p class="body">業務の引継ぎ等については、誠意をもって対応いたします。</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ja"))}</div>
+      <div class="signer">${valOr("b_name")}　${sig("sig_b", "印")}</div>
+      <div class="recipient">${valOr("a_name")} 御中</div>
+    </div>`;
+}
+
+/* --- JA: 念書 --- */
+function renderNenshoJa() {
+  const pledge = lines("pledge");
+  const pen = { general: "万一、本件に違反した場合には、いかなる処分を受けても異議を申し立てません。",
+    civil: "万一、本件に違反した場合には、損害賠償責任を負います。", none: "" };
+  return `
+    <h1 class="doc-title">念 書</h1>
+    <table class="parties">
+      <tr><td class="lbl">差出人</td><td>氏名: ${valOr("b_name")}<br/>住所: ${valOr("b_addr")}</td></tr>
+      <tr><td class="lbl">宛先</td><td>${valOr("a_name")}</td></tr>
+    </table>
+    <p class="body">私は、以下の事項を確約いたします。</p>
+    <ol class="evidence">${(pledge.length ? pledge : ["＿＿＿＿"]).map(t => `<li>${esc(t)}</li>`).join("")}</ol>
+    ${pen[val("penalty")] ? `<p class="body">${esc(pen[val("penalty")])}</p>` : ""}
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ja"))}</div>
+      <div class="signer">${valOr("b_name")}　${sig("sig_b", "印")}</div>
+      <div class="recipient">${valOr("a_name")} 殿</div>
+    </div>`;
+}
+
+/* --- JA: 示談書 --- */
+function renderJidanshoJa() {
+  const settle = checkedLabels("settlement", "ja").length > 0;
+  return `
+    <h1 class="doc-title">示 談 書</h1>
+    <table class="parties">
+      <tr><td class="lbl">甲</td><td>氏名: ${valOr("a_name")}<br/>住所: ${valOr("a_addr")}</td></tr>
+      <tr><td class="lbl">乙</td><td>氏名: ${valOr("b_name")}<br/>住所: ${valOr("b_addr")}</td></tr>
+    </table>
+    <h2>第1条（事故の概要）</h2>
+    <p class="body">${valOr("incident")}</p>
+    <h2>第2条（示談金）</h2>
+    <p class="body">甲は乙に対し、示談金として金 ${valOr("amount")} を支払う。${val("pay_terms") ? "支払方法: " + esc(val("pay_terms")) : ""}</p>
+    ${settle ? `<h2>第3条（清算条項）</h2><p class="body">甲乙は、本件に関し、本書に定めるもののほか何らの債権債務がないことを相互に確認し、今後一切請求を行わない。</p>` : ""}
+    <p class="body" style="margin-top:24px;">本示談成立の証として、本書2通を作成し、甲乙署名押印のうえ各1通を保管する。</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ja"))}</div>
+      <div class="signer">甲　${valOr("a_name")}　${sig("sig_a", "印")}</div>
+      <div class="signer">乙　${valOr("b_name")}　${sig("sig_b", "印")}</div>
+    </div>`;
+}
+
+/* --- ES: Carta de renuncia --- */
+function renderRenunciaEs() {
+  return `
+    <table class="parties">
+      <tr><td class="lbl">TRABAJADOR/A</td><td>${valOr("b_name")}<br/>${valOr("dept")}<br/>${valOr("b_id")}</td></tr>
+      <tr><td class="lbl">EMPRESA</td><td>${valOr("a_name")}</td></tr>
+    </table>
+    <p class="body" style="text-align:right;">${esc(fmtDate(val("doc_date"), "es"))}</p>
+    <h1 class="doc-title" style="font-size:19px;">Carta de renuncia</h1>
+    <p class="body">Estimados señores:</p>
+    <p class="body">Por medio de la presente, comunico mi decisión de renunciar a mi puesto en ${valOr("a_name")}, con efectos a partir del ${valOr("eff_date")}.</p>
+    ${val("reason") ? `<p class="body">Motivo: ${valOr("reason")}</p>` : ""}
+    <p class="body">Agradezco la oportunidad brindada y quedo a disposición para facilitar la transición de mis responsabilidades.</p>
+    <p class="body">Atentamente,</p>
+    <div class="doc-foot">
+      <div class="signer">${valOr("b_name")} ${sig("sig_b", "________________")}</div>
+    </div>`;
+}
+
+/* --- ES: Finiquito --- */
+function renderFiniquitoEs() {
+  const rows = parsePayRows("pay_items");
+  const total = rows.reduce((a, r) => a + r.amt, 0);
+  const cur = esc(val("currency"));
+  return `
+    <h1 class="doc-title">FINIQUITO</h1>
+    <table class="parties">
+      <tr><td class="lbl">EMPRESA</td><td>${valOr("a_name")}<br/>${valOr("a_addr")}</td></tr>
+      <tr><td class="lbl">TRABAJADOR/A</td><td>${valOr("b_name")}<br/>${valOr("b_id")}</td></tr>
+      <tr><td class="lbl">RELACIÓN</td><td>${esc(fmtDate(val("start_date"), "es"))} — ${esc(fmtDate(val("end_date"), "es"))}</td></tr>
+    </table>
+    <h2>Liquidación</h2>
+    <table class="parties">
+      <tr><td class="lbl">Concepto</td><td>Importe</td></tr>
+      ${rows.map(r => `<tr><td>${esc(r.name)}</td><td>${cur} ${r.amt.toLocaleString()}</td></tr>`).join("")}
+      <tr><td class="lbl">TOTAL</td><td><strong>${cur} ${total.toLocaleString()}</strong></td></tr>
+    </table>
+    <p class="body">El/La trabajador/a declara recibir las cantidades arriba indicadas como finiquito por la terminación de la relación laboral, quedando la empresa liberada de toda obligación derivada de la misma.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "es"))}</div>
+      <div class="signer">Empresa: ${valOr("a_name")} ${sig("sig_a", "________________")}</div>
+      <div class="signer">Trabajador/a: ${valOr("b_name")} ${sig("sig_b", "________________")}</div>
+    </div>`;
+}
+
+/* --- PT: Carta de demissão --- */
+function renderDemissaoPt() {
+  return `
+    <table class="parties">
+      <tr><td class="lbl">EMPREGADO/A</td><td>${valOr("b_name")}<br/>${valOr("dept")}<br/>${valOr("b_id")}</td></tr>
+      <tr><td class="lbl">EMPREGADOR</td><td>${valOr("a_name")}</td></tr>
+    </table>
+    <p class="body" style="text-align:right;">${esc(fmtDate(val("doc_date"), "pt"))}</p>
+    <h1 class="doc-title" style="font-size:19px;">Carta de demissão</h1>
+    <p class="body">Prezados(as),</p>
+    <p class="body">Venho, por meio desta, comunicar meu pedido de demissão do cargo que ocupo na ${valOr("a_name")}, com efeitos a partir de ${valOr("eff_date")}.</p>
+    ${val("reason") ? `<p class="body">Motivo: ${valOr("reason")}</p>` : ""}
+    <p class="body">Agradeço pela oportunidade e me coloco à disposição para a transição das minhas atividades.</p>
+    <p class="body">Atenciosamente,</p>
+    <div class="doc-foot">
+      <div class="signer">${valOr("b_name")} ${sig("sig_b", "________________")}</div>
+    </div>`;
+}
+
+/* --- PT: Procuração --- */
+function renderProcuracaoPt() {
+  return `
+    <h1 class="doc-title">PROCURAÇÃO</h1>
+    <table class="parties">
+      <tr><td class="lbl">OUTORGANTE</td><td>Nome: ${valOr("p_name")}<br/>CPF/Doc.: ${valOr("p_id")}<br/>Endereço: ${valOr("p_addr")}</td></tr>
+      <tr><td class="lbl">OUTORGADO</td><td>Nome: ${valOr("a_name")}<br/>CPF/Doc.: ${valOr("a_id")}</td></tr>
+    </table>
+    <p class="body">Por meio da presente, o(a) outorgante nomeia e constitui o(a) outorgado(a) acima como seu(sua) procurador(a), conferindo-lhe poderes para:</p>
+    <p class="body" style="border:1px solid #ccc; padding:14px; border-radius:6px;">${valOr("scope")}</p>
+    <p class="body">Validade: ${valOr("term")}</p>
+    <p class="body">Esta procuração pode ser revogada a qualquer tempo.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "pt"))}</div>
+      <div class="signer">${valOr("p_name")} ${sig("sig_p", "________________")}</div>
+    </div>`;
+}
+
+/* --- ID: Surat pengunduran diri --- */
+function renderPengunduranId() {
+  return `
+    <table class="parties">
+      <tr><td class="lbl">KARYAWAN</td><td>${valOr("b_name")}<br/>${valOr("dept")}<br/>${valOr("b_id")}</td></tr>
+      <tr><td class="lbl">PERUSAHAAN</td><td>${valOr("a_name")}</td></tr>
+    </table>
+    <p class="body" style="text-align:right;">${esc(fmtDate(val("doc_date"), "id"))}</p>
+    <h1 class="doc-title" style="font-size:19px;">Surat Pengunduran Diri</h1>
+    <p class="body">Kepada Yth. Pimpinan ${valOr("a_name")},</p>
+    <p class="body">Dengan hormat, melalui surat ini saya mengajukan pengunduran diri dari jabatan saya di ${valOr("a_name")}, terhitung mulai ${valOr("eff_date")}, dengan alasan: ${esc(optText("reason", "id") || "alasan pribadi")}.</p>
+    <p class="body">Saya mengucapkan terima kasih atas kesempatan dan bimbingan yang diberikan selama masa kerja, serta bersedia membantu proses serah terima tugas.</p>
+    <p class="body">Hormat saya,</p>
+    <div class="doc-foot">
+      <div class="signer">${valOr("b_name")} ${sig("sig_b", "________________")}</div>
+    </div>`;
+}
+
+/* --- RU: Претензия --- */
+function renderPretenziyaRu() {
+  const demands = lines("demands");
+  const evidence = lines("evidence");
+  return `
+    <table class="parties">
+      <tr><td class="lbl">ОТПРАВИТЕЛЬ</td><td>${valOr("s_name")}<br/>${valOr("s_addr")}<br/>${valOr("s_phone")}</td></tr>
+      <tr><td class="lbl">ПОЛУЧАТЕЛЬ</td><td>${valOr("r_name")}<br/>${valOr("r_addr")}</td></tr>
+    </table>
+    <h1 class="doc-title" style="font-size:19px;">ПРЕТЕНЗИЯ</h1>
+    <h2>1. Обстоятельства</h2>
+    <p class="body">${valOr("facts")}</p>
+    <h2>2. Требования</h2>
+    <ol class="evidence">${(demands.length ? demands : ["＿＿＿＿"]).map(d => `<li>${esc(d)}</li>`).join("")}</ol>
+    ${val("amount") ? `<p class="body">Сумма требования: <strong>${esc(val("amount"))} руб.</strong></p>` : ""}
+    <p class="body">Требования подлежат исполнению в срок: ${valOr("deadline")}.</p>
+    <p class="body">В случае неисполнения требований в указанный срок я буду вынужден(а) обратиться в суд и иные уполномоченные органы для защиты своих прав.</p>
+    ${evidence.length ? `<p class="body">Приложения: ${evidence.map(e => esc(e)).join("; ")}</p>` : ""}
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ru"))}</div>
+      <div class="signer">${valOr("s_name")} ${sig("sig_a", "________________")}</div>
+    </div>`;
+}
+
 /* ---------- 화면 상태 ---------- */
 function render() {
   const paper = document.getElementById("paper");
   const renderer = activeDoc.render[curLang] || activeDoc.render[activeDoc.langs[0]];
   paper.innerHTML = renderer() + `<div class="doc-hash" id="doc-hash"></div>`;
-  paper.lang = (LANGUAGES.find(l => l.id === curLang) || LANGUAGES[0]).paperLang;
+  const _pl = (LANGUAGES.find(l => l.id === curLang) || LANGUAGES[0]).paperLang;
+  paper.lang = _pl;
+  paper.dir = _pl === "ar" ? "rtl" : "ltr";
   stampDocHash();
   markMissing();
   updateProgress();
@@ -6512,6 +7738,87 @@ const SAMPLES = {
     letter_type: "apology", subject: "서비스 장애에 대한 사과",
     facts: "2026년 9월 10일 14시부터 약 3시간 동안 당사 서비스 접속 장애가 발생하여 이용에 큰 불편을 드렸습니다. 이는 서버 점검 과정의 작업 실수로 인한 것으로, 고객 여러분께 깊이 사과드립니다.",
     plan: "동일 장애 방지를 위해 배포 절차를 이중 검증 체계로 개편하고, 모니터링 알림을 강화하겠습니다."
+  },
+  "kuendigung-de": {
+    s_name: "Max Mustermann", s_addr: "Musterstraße 1, 10115 Berlin",
+    r_name: "Muster GmbH", r_addr: "Hauptstraße 10, 10115 Berlin",
+    contract_type: "subscription", contract_no: "Kunde-Nr. 123456",
+    eff_date: "zum nächstmöglichen Zeitpunkt", frist: "fristgerecht"
+  },
+  "mahnung-de": {
+    s_name: "Muster GmbH", s_addr: "Hauptstraße 10, 10115 Berlin",
+    r_name: "Kunde AG", r_addr: "Beispielweg 5, 80331 München",
+    inv_no: "RE-2026-042", amount: "1.250,00", due_date: "15.08.2026",
+    deadline: "14 Tage ab Zugang dieses Schreibens", verzugszinsen: ["yes"],
+    repay_account: "DE89 3704 0044 0532 0130 00"
+  },
+  "vollmacht-de": {
+    p_name: "Max Mustermann", p_id: "01.01.1980", p_addr: "Musterstraße 1, 10115 Berlin",
+    a_name: "Erika Mustermann", a_id: "05.05.1985", a_addr: "Musterstraße 1, 10115 Berlin",
+    scope: "Abholung meines Führungszeugnisses beim Bürgeramt und Empfang der zugehörigen Dokumente",
+    term: "bis zum 31.12.2026"
+  },
+  "resiliation-fr": {
+    s_name: "Jean Dupont", s_addr: "12 rue de la Paix, 75002 Paris",
+    r_name: "Opérateur S.A.", r_addr: "Service résiliation, 75000 Paris",
+    contract_type: "telecom", contract_no: "Contrat n° 789456",
+    eff_date: "à l'échéance du contrat"
+  },
+  "demission-fr": {
+    b_name: "Jean Dupont", b_addr: "12 rue de la Paix, 75002 Paris", dept: "Chef de projet",
+    a_name: "Société Exemple SARL", a_addr: "30 avenue des Champs, 75008 Paris",
+    eff_date: "30 novembre 2026", notice: "full"
+  },
+  "taishoku-ja": {
+    b_name: "山田太郎", dept: "開発部 課長", b_id: "EMP-1024",
+    end_date: "2026-10-31", reason: "private", a_name: "株式会社サンプル"
+  },
+  "nensho-ja": {
+    b_name: "山田太郎", b_addr: "東京都渋谷区○○1-2-3",
+    a_name: "株式会社サンプル",
+    pledge: "借入金 金1,000,000円を2026年12月31日までに返済いたします\n期日に遅延した場合には遅延損害金をお支払いいたします",
+    penalty: "civil"
+  },
+  "jidansho-ja": {
+    a_name: "加藤一郎", a_addr: "東京都新宿区○○4-5-6",
+    b_name: "山田花子", b_addr: "東京都渋谷区○○1-2-3",
+    incident: "2026年8月15日、東京都新宿区○○交差点において、甲運転の車両が乙運転の車両に衝突し、乙の車両に損傷が生じた。",
+    amount: "500,000円", pay_terms: "本書締結時現金手渡し", settlement: ["yes"]
+  },
+  "renuncia-es": {
+    b_name: "María García", dept: "Analista de marketing", b_id: "12345678A",
+    a_name: "Empresa Ejemplo S.L.", eff_date: "30 de noviembre de 2026",
+    reason: "Motivos personales"
+  },
+  "finiquito-es": {
+    a_name: "Empresa Ejemplo S.L.", a_addr: "Calle Mayor 10, 28013 Madrid",
+    b_name: "María García", b_id: "12345678A",
+    start_date: "2020-03-02", end_date: "2026-11-30",
+    pay_items: "Salarios pendientes | 1,500\nVacaciones no disfrutadas | 800\nParte proporcional pagas extra | 420",
+    currency: "EUR"
+  },
+  "demissao-pt": {
+    b_name: "João Silva", dept: "Analista de TI", b_id: "123.456.789-00",
+    a_name: "Empresa Exemplo Ltda.", eff_date: "30 de novembro de 2026",
+    reason: "Motivos pessoais"
+  },
+  "procuracao-pt": {
+    p_name: "João Silva", p_id: "123.456.789-00", p_addr: "Rua das Flores, 100, São Paulo/SP",
+    a_name: "Maria Santos", a_id: "987.654.321-00",
+    scope: "Retirar documentos junto a órgãos públicos e assinar os respectivos recibos em meu nome",
+    term: "até 31/12/2026"
+  },
+  "pengunduran-id": {
+    b_name: "Budi Santoso", dept: "Staf pemasaran", b_id: "KRY-2048",
+    a_name: "PT Contoh Indonesia", eff_date: "30 November 2026", reason: "private"
+  },
+  "pretenziya-ru": {
+    s_name: "Иванов Иван Иванович", s_addr: "г. Москва, ул. Примерная, д. 1", s_phone: "+7 900 000-00-00",
+    r_name: "ООО «Пример»", r_addr: "г. Москва, ул. Образцовая, д. 5",
+    facts: "15.08.2026 я приобрёл в вашем магазине товар (ноутбук) стоимостью 60 000 руб. При эксплуатации выявлен недостаток — неисправен экран.",
+    demands: "Возвратить уплаченную сумму\nПринять товар ненадлежащего качества",
+    amount: "60 000", deadline: "10 дней с момента получения претензии",
+    evidence: "Копия чека\nФото недостатка"
   }
 };
 function fillSample() {
