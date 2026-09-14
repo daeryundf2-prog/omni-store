@@ -4,6 +4,8 @@
  * docs/{lang}/{docId}.html 로 생성한다. */
 const FS = require('fs');
 const PATH = require('path');
+const GUIDES = require('./doc_guides.js');
+const CAT_GUIDE = GUIDES.CAT_GUIDE;
 
 global.window = { OMNI_SETTLEMENT: null };
 eval(FS.readFileSync('settlement_config.js', 'utf8'));
@@ -70,7 +72,7 @@ for (const d of DOC_TYPES) {
     }
     const text = html.replace(/<br\\s*\\/?>/g, "\\n").replace(/<\\/(p|tr|h[12]|li|div)>/g, "\\n").replace(/<[^>]+>/g, " ").replace(/[ \\t]+/g, " ").replace(/\\n\\s+/g, "\\n").replace(/\\n{3,}/g, "\\n\\n").trim();
     const fieldLabels = d.fields.filter(f => f.key).map(f => f.label.replace(/\\s*\\*\\s*$/, "").replace(/\\s*\\(.*$/, ""));
-    __OUT.pages.push({ id: d.id, cat: d.cat, koName: d.name, lang: l, nativeTitle, text: text.slice(0, 3500), fieldLabels, usage: d.usageNote || "", price: docPrice(d) });
+    __OUT.pages.push({ id: d.id, cat: d.cat, koName: d.name, lang: l, nativeTitle, text: text.slice(0, 3500), fieldLabels, usage: d.usageNote || "", price: docPrice(d), free: (STUDIO.freeDocs || []).includes(d.id) });
   }
 }
 console.log("collected", __OUT.pages.length);
@@ -101,6 +103,17 @@ const css = `
   html[dir="rtl"] main { direction: rtl; }
 `;
 
+/* 카테고리 기본 EN 가이드 (전용 가이드 없는 영문 페이지용) */
+const CAT_GUIDE_EN = {
+  contract: { when: ["When parties need to fix rights and obligations in writing"], tips: ["Make key terms (amount, deadline, scope) measurable", "Review all clauses with the counterparty before signing"], caution: "Changes after signing require mutual consent — review thoroughly at drafting." },
+  notice: { when: ["When you need a documented formal demand or notice"], tips: ["Send by a method that preserves proof of delivery", "State demands and deadlines specifically"], caution: "Notice documents become key evidence in later disputes — keep statements factual." },
+  legal: { when: ["When you need documents for official proceedings"], tips: ["Confirm the competent authority before filing", "State facts chronologically and objectively"], caution: "False statements in official filings can have consequences — consider professional review for significant matters." },
+  realestate: { when: ["When fixing rights in a property transaction or lease"], tips: ["Check the title register before signing", "Be explicit about amounts, payment dates and handover date"], caution: "For high-value deals, use the official standard contract and get professional review." },
+  work: { when: ["When you need written documents in an employment relationship"], tips: ["Don't omit statutorily required items", "Each party keeps a signed counterpart"], caution: "Mandatory labor law overrides contract terms that fall below legal minimums." },
+  personal: { when: ["When recording personal rights and obligations in writing"], tips: ["Record party details and dates accurately", "Keep signed originals safe"], caution: "For sensitive family or inheritance matters, professional advice is recommended." },
+  business: { when: ["When issuing business, accounting or trade documents"], tips: ["Double-check amounts and quantities", "Record issue date and party details correctly"], caution: "Documents used for tax or accounting must meet statutory requirements." }
+};
+
 let count = 0;
 const urls = [];
 for (const p of pages) {
@@ -115,6 +128,18 @@ for (const p of pages) {
   const rel = pages.filter(q => q.cat === p.cat && q.lang === p.lang && q.id !== p.id).slice(0, 8);
   const alternates = pages.filter(q => q.id === p.id).map(q =>
     `<link rel="alternate" hreflang="${q.lang}" href="${BASE}/docs/${q.lang}/${q.id}.html"/>`).join("\n  ");
+  /* 편집 가이드 — 전용 가이드 > 카테고리 가이드 (ko/en만) */
+  const g = (GUIDES[p.id] && (GUIDES[p.id][p.lang] || (p.lang !== "ko" && p.lang !== "en" ? null : GUIDES[p.id].en)))
+    || (p.lang === "ko" ? CAT_GUIDE[p.cat] : p.lang === "en" ? CAT_GUIDE_EN[p.cat] : null);
+  const guideHtml = g ? `
+  <h2>${t.what}</h2>
+  <ul>${(g.when || []).map(w => `<li>${escHtml(w)}</li>`).join("")}</ul>
+  ${(g.tips || []).length ? `<h2>${p.lang === "ko" ? "작성 포인트" : "Drafting tips"}</h2><ul>${g.tips.map(w => `<li>${escHtml(w)}</li>`).join("")}</ul>` : ""}
+  ${g.caution ? `<div class="disc" style="margin-top:18px">⚠️ ${escHtml(g.caution)}</div>` : ""}
+  ${g.law ? `<p style="font-size:0.85rem;color:#8A90A6">📚 ${escHtml(g.law)}</p>` : ""}` : "";
+  const faq = g && g.faq ? g.faq : [];
+  const faqHtml = faq.length ? `<h2>${p.lang === "ko" ? "자주 묻는 질문" : "FAQ"}</h2>${faq.map(([q, a]) => `<h3 style="font-size:0.98rem;margin:16px 0 4px">${escHtml(q)}</h3><p style="color:#B8BDD0;margin:0 0 8px;font-size:0.92rem">${escHtml(a)}</p>`).join("")}` : "";
+  const faqLd = faq.length ? `<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[${faq.map(([q, a]) => `{"@type":"Question","name":${JSON.stringify(q)},"acceptedAnswer":{"@type":"Answer","text":${JSON.stringify(a)}}}`).join(",")}]}]}</script>` : "";
   const html = `<!DOCTYPE html>
 <html lang="${p.lang}"${dir}>
 <head>
@@ -130,6 +155,7 @@ ${alternates}
 {"@context":"https://schema.org","@type":"HowTo","name":"${p.nativeTitle}","step":[
 {"@type":"HowToStep","text":"${t.how1}"},{"@type":"HowToStep","text":"${t.how2}"},{"@type":"HowToStep","text":"${t.how3}"}]}
 </script>
+${faqLd}
 <style>${css}</style>
 </head>
 <body>
@@ -138,13 +164,15 @@ ${alternates}
   <h1>${p.nativeTitle}</h1>
   <div class="langtag">${p.koName} · ${p.lang.toUpperCase()}</div>
   <p class="lead">${p.lang === "ko" && p.usage ? escHtml(p.usage) : t.need}</p>
-  <div class="cta"><a href="${studioUrl}">${t.cta} →</a><div class="price">${t.unlock} · ₩${p.price.toLocaleString("en-US")} ≈ $${Math.ceil(p.price / 1300)}</div></div>
+  <div class="cta"><a href="${studioUrl}">${t.cta} →</a><div class="price">${p.free ? (p.lang === "ko" ? "무료 — 잠금 없이 바로 다운로드" : "Free — no unlock needed") : `${t.unlock} · ₩${p.price.toLocaleString("en-US")} ≈ $${Math.ceil(p.price / 1300)}`}</div></div>
   <h2>${t.preview}</h2>
   <div class="preview">${escHtml(p.text)}</div>
+  ${guideHtml}
   <h2>${t.how}</h2>
   <ol class="how"><li>${t.how1}</li><li>${t.how2}</li><li>${t.how3}</li></ol>
   ${p.fieldLabels.length && (p.lang === "ko" || p.lang === "en") ? `<h2>${t.fields}</h2><div class="fields">${p.fieldLabels.map(f => `<span>${escHtml(f)}</span>`).join("")}</div>` : ""}
   ${rel.length ? `<h2>${t.rel}</h2><div class="rel">${rel.map(q => `<a href="${BASE}/docs/${p.lang}/${q.id}.html">${q.nativeTitle}</a>`).join("")}</div>` : ""}
+  ${faqHtml}
   <div class="disc">${t.disc}</div>
   <footer>© OmniLegal Document Studio — <a href="${BASE}/legal.html" style="color:#5A6078">Legal</a></footer>
 </main>

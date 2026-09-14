@@ -1130,7 +1130,8 @@ const STUDIO_DEFAULTS = {
   gumroadDocProductIds: {},
   gumroadProductId: "",
   gumroadUrl: "",
-  prices: {}
+  prices: {},
+  freeDocs: []
 };
 const STUDIO = Object.assign({}, STUDIO_DEFAULTS,
   (window.OMNI_SETTLEMENT && window.OMNI_SETTLEMENT.studio) || {});
@@ -3779,7 +3780,11 @@ let activeDoc = DOC_TYPES[0];
 let curLang = "ko";
 let unlockedAll = localStorage.getItem("omni_studio_unlocked_all") === "1" || localStorage.getItem("omni_studio_unlocked") === "1";
 let unlockedDocs = new Set(JSON.parse(localStorage.getItem("omni_studio_unlocked_docs") || "[]"));
-function isUnlocked() { return unlockedAll || unlockedDocs.has(activeDoc.id); }
+function isUnlocked() {
+  return unlockedAll || unlockedDocs.has(activeDoc.id) ||
+    (STUDIO.freeDocs || []).includes(activeDoc.id);
+}
+function isFree() { return (STUDIO.freeDocs || []).includes(activeDoc.id); }
 let currentOrderId = "";
 const formState = {};
 
@@ -8850,7 +8855,8 @@ function updateStatus() {
   const unl = isUnlocked();
   document.body.classList.toggle("locked", !unl);
   if (unl) {
-    status.innerHTML = `<span class="unlock-badge">✓ 원본 잠금 해제됨</span>${langTag}${missTag}`;
+    const badge = isFree() ? "✓ 무료 문서 — 워터마크 없음" : "✓ 원본 잠금 해제됨";
+    status.innerHTML = `<span class="unlock-badge">${badge}</span>${langTag}${missTag}`;
     btn.textContent = "⬇ 원본 다운로드";
     btn.classList.add("unlocked");
     wm.classList.remove("on");
@@ -9727,7 +9733,10 @@ window.OmniStudio = { mintCode, digestFor, checkConfig, stats: statsSummary };
 function renderCatalogPrices() {
   document.querySelectorAll(".cat-price").forEach(elm => {
     const d = DOC_TYPES.find(x => x.id === elm.dataset.doc);
-    if (d) elm.innerHTML = `원본 ${krw(docPrice(d))} <span class="free">· 미리보기 무료</span>`;
+    if (!d) return;
+    elm.innerHTML = (STUDIO.freeDocs || []).includes(d.id)
+      ? `<span style="color:var(--accent-green,#34D399)">무료 다운로드</span>`
+      : `원본 ${krw(docPrice(d))} <span class="free">· 미리보기 무료</span>`;
   });
 }
 

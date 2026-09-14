@@ -102,6 +102,9 @@ window.OMNI_SETTLEMENT = {
     gumroadUrl: "",
     /* 문서별 Gumroad 상품 (선택): 해당 문서만 해제
      *   gumroadDocProductIds: { "lease": "prod_id_lease", "nda": "prod_id_nda" } */
-    gumroadDocProductIds: {}
+    gumroadDocProductIds: {},
+    /* 무료 공개 문서 — 워터마크·잠금 없이 바로 다운로드 (리드마그넷/링크 유인용)
+     *   freeDocs: ["written-pledge", "apology-letter"] */
+    freeDocs: ["written-pledge"]
   }
 };
