@@ -1044,6 +1044,66 @@
         <div class="cat-price" data-doc="residential-lease-en"></div>
         <button class="btn btn-ghost" onclick="selectDoc('residential-lease-en');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
+      <article class="catalog-card" id="cat-traffic-settlement" data-cat="family">
+        <h3>교통사고 합의서</h3>
+        <p>사고 개요·합의금·청구 포기 조항. 접촉사고 당사자 합의용.</p>
+        <div class="cat-price" data-doc="traffic-settlement"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('traffic-settlement');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-parental-leave" data-cat="labor">
+        <h3>육아휴직 신청서</h3>
+        <p>남녀고용평등법 제19조 근거 문구 포함. 자녀 정보·기간·인수인계.</p>
+        <div class="cat-price" data-doc="parental-leave"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('parental-leave');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-parttime-employment" data-cat="labor">
+        <h3>시간제(파트타임) 근로계약서</h3>
+        <p>시급·근무요일·주휴수당 적용 여부. 주 15시간 기준 안내 포함.</p>
+        <div class="cat-price" data-doc="parttime-employment"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('parttime-employment');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-separation-cert" data-cat="labor">
+        <h3>이직확인서</h3>
+        <p>실업급여용 이직 사유·재직기간 확인. 사업주 발급 양식.</p>
+        <div class="cat-price" data-doc="separation-cert"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('separation-cert');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-lease-renewal" data-cat="realestate">
+        <h3>임대차 갱신요구·해지 통지서</h3>
+        <p>계약갱신요구권(6~2개월 전) 행사 또는 갱신거절 통지. 차임조정 요구 포함.</p>
+        <div class="cat-price" data-doc="lease-renewal"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('lease-renewal');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-inspection-cert" data-cat="business">
+        <h3>검수·인수 확인서</h3>
+        <p>납품·용역 완료 검수 결과 확정. 합격·조건부·불합격 + 보완 기한.</p>
+        <div class="cat-price" data-doc="inspection-cert"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('inspection-cert');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-business-transfer" data-cat="business">
+        <h3>사업 양수도 계약서</h3>
+        <p>영업권·시설·재고 양도. 채무승계·경업금지·인도일 조항.</p>
+        <div class="cat-price" data-doc="business-transfer"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('business-transfer');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-copyright-assignment" data-cat="contract">
+        <h3>저작권 양도 계약서</h3>
+        <p>저작재산권 양도 범위·인격권 약정·대가. KO·EN 이중 언어.</p>
+        <div class="cat-price" data-doc="copyright-assignment"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('copyright-assignment');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-pet-care" data-cat="family">
+        <h3>반려동물 위탁 계약서</h3>
+        <p>돌봄 내용·응급 진료 동의 한도·책임 조항. 펫시터·지인 위탁용.</p>
+        <div class="cat-price" data-doc="pet-care"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('pet-care');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-board-minutes" data-cat="business">
+        <h3>이사회·주주총회 의사록</h3>
+        <p>안건·결의 표 자동 생성. 출석자·의장 기재.</p>
+        <div class="cat-price" data-doc="board-minutes"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('board-minutes');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
     </div>
   </section>
 
@@ -3772,6 +3832,299 @@ const DOC_TYPES = [
     ],
     render: { en: renderLeaseEn }
   },
+  {
+    id: "traffic-settlement",
+    cat: "family",
+    name: "교통사고 합의서 · Traffic Accident Settlement",
+    langs: ["ko"],
+    price: STUDIO.priceKrw,
+    usageNote: "경미한 접촉사고 등 당사자 간 합의 시 사용합니다. 인명피해가 있는 사고는 합의 전 반드시 보험사·전문가 상담을 받으세요. 합의 후 추가 청구는 원칙적으로 제한됩니다.",
+    fields: [
+      { section: "당사자" },
+      { key: "a_name", label: "갑(가해측) 성명 *", type: "text", required: true },
+      { key: "a_phone", label: "갑 연락처", type: "tel" },
+      { key: "a_vehicle", label: "갑 차량 (차종·번호)", type: "text" },
+      { key: "b_name", label: "을(피해측) 성명 *", type: "text", required: true },
+      { key: "b_phone", label: "을 연락처", type: "tel" },
+      { key: "b_vehicle", label: "을 차량 (차종·번호)", type: "text" },
+      { section: "사고 및 합의 내용" },
+      { key: "acc_date", label: "사고 일시 *", type: "text", required: true, hint: "예: 2026. 9. 10. 14시경" },
+      { key: "acc_place", label: "사고 장소", type: "text" },
+      { key: "acc_summary", label: "사고 개요", type: "textarea" },
+      { key: "amount", label: "합의금 (숫자)", type: "text", hint: "금전 합의가 없으면 비움" },
+      { key: "pay_how", label: "지급 방법", type: "text", hint: "예: 현장에서 현금으로 / 계좌이체로" },
+      { key: "terms", label: "기타 합의 조항", type: "textarea", hint: "한 줄에 하나씩 — 치료비 별도 정산 등" },
+      { key: "doc_date", label: "작성 일자", type: "date" }
+    ],
+    signers: [
+      { key: "sig_a", label: "갑 서명" },
+      { key: "sig_b", label: "을 서명" }
+    ],
+    render: { ko: renderTrafficSettlementKo }
+  },
+  {
+    id: "parental-leave",
+    cat: "labor",
+    name: "육아휴직 신청서 · Parental Leave Request",
+    langs: ["ko"],
+    price: STUDIO.priceKrw,
+    usageNote: "남녀고용평등법상 육아휴직 신청용 — 만 8세 이하(초등 2학년 이하) 자녀 대상, 신청일 30일 전 제출이 원칙입니다. 회사 지정 양식이 있으면 그 양식을 우선 사용하세요.",
+    fields: [
+      { key: "name", label: "성명 *", type: "text", required: true },
+      { key: "dept", label: "부서·직위", type: "text" },
+      { key: "emp_id", label: "사번", type: "text" },
+      { key: "child_name", label: "자녀 성명·생년월일 *", type: "text", required: true, hint: "예: 김○○ (2024. 3. 5.생)" },
+      { key: "start_date", label: "휴직 시작일 *", type: "date", required: true },
+      { key: "end_date", label: "휴직 종료일 *", type: "date", required: true },
+      { key: "reason", label: "신청 사유", type: "select", options: [
+        { v: "care", label: { ko: "만 8세 이하 또는 초등학교 2학년 이하 자녀의 양육" } },
+        { v: "pregnancy", label: { ko: "임신 중인 여성 근로자의 모성 보호" } },
+        { v: "other", label: { ko: "기타" } }
+      ]},
+      { key: "handover", label: "업무 인수인계자", type: "text" },
+      { key: "a_name", label: "회사명 (수신) *", type: "text", required: true },
+      { key: "doc_date", label: "신청일", type: "date" }
+    ],
+    signers: [{ key: "sig_b", label: "신청인 서명" }],
+    render: { ko: renderParentalLeaveKo }
+  },
+  {
+    id: "parttime-employment",
+    cat: "labor",
+    name: "시간제(파트타임) 근로계약서 · Part-time Contract",
+    langs: ["ko"],
+    price: STUDIO.priceKrw,
+    usageNote: "단시간 근로자 채용용 — 소정근로시간이 주 15시간 이상이면 주휴수당·연차·퇴직금 대상이 됩니다. 근로기준법 제17조 기재사항을 갖춘 양식입니다.",
+    fields: [
+      { section: "사용자·근로자" },
+      { key: "a_name", label: "사업체명·대표 *", type: "text", required: true },
+      { key: "a_addr", label: "사업장 주소", type: "text" },
+      { key: "b_name", label: "근로자 성명 *", type: "text", required: true },
+      { key: "b_id", label: "생년월일", type: "text" },
+      { key: "b_addr", label: "근로자 주소", type: "text" },
+      { section: "근로 조건" },
+      { key: "start_date", label: "근로 시작일 *", type: "date", required: true },
+      { key: "end_date", label: "계약 종료일 (무기한이면 비움)", type: "date" },
+      { key: "workplace", label: "근무 장소", type: "text" },
+      { key: "scope", label: "업무 내용 *", type: "textarea", required: true },
+      { key: "work_days", label: "근무 요일·시간 *", type: "text", required: true, hint: "예: 주 3일(월·수·금) 13:00~18:00" },
+      { key: "wage", label: "시급 (숫자) *", type: "text", required: true, hint: "예: 10,030" },
+      { key: "weekly_holiday", label: "주휴수당 적용", type: "select", options: [
+        { v: "yes", label: { ko: "주 15시간 이상 — 주휴수당 별도 지급" } },
+        { v: "no", label: { ko: "주 15시간 미만 — 주휴수당 미적용" } }
+      ]},
+      { key: "pay_day", label: "임금 지급일", type: "text", hint: "예: 매월 10일" },
+      { key: "pay_method", label: "지급 방법", type: "select", options: [
+        { v: "bank", label: { ko: "근로자 명의 계좌이체" } },
+        { v: "cash", label: { ko: "현금 직접 지급" } }
+      ]},
+      { key: "doc_date", label: "작성 일자", type: "date" }
+    ],
+    signers: [
+      { key: "sig_a", label: "사용자 서명" },
+      { key: "sig_b", label: "근로자 서명" }
+    ],
+    render: { ko: renderParttimeKo }
+  },
+  {
+    id: "separation-cert",
+    cat: "labor",
+    name: "이직확인서 · Separation Certificate",
+    langs: ["ko"],
+    price: STUDIO.priceKrw,
+    usageNote: "실업급여 수급을 위해 사업주가 발급하는 확인서. 실제 제출은 고용보험 전산 신고(근로복지공단)로 이루어지며, 이 서면 양식은 기록·확인용입니다. 피보험기간·평균임금 산정 기초가 됩니다.",
+    fields: [
+      { key: "a_name", label: "사업체명·대표 *", type: "text", required: true },
+      { key: "a_addr", label: "사업장 주소", type: "text" },
+      { key: "b_name", label: "근로자 성명 *", type: "text", required: true },
+      { key: "b_id", label: "생년월일·주민번호", type: "text" },
+      { key: "start_date", label: "입사일 *", type: "date", required: true },
+      { key: "end_date", label: "퇴직일 *", type: "date", required: true },
+      { key: "reason", label: "이직 사유", type: "select", options: [
+        { v: "expire", label: { ko: "계약기간 만료" } },
+        { v: "voluntary", label: { ko: "자발적 퇴사" } },
+        { v: "involuntary", label: { ko: "회사 사정에 의한 퇴사 (권고사직 등)" } },
+        { v: "dismissal", label: { ko: "해고" } }
+      ]},
+      { key: "reason_detail", label: "이직 사유 상세", type: "textarea" },
+      { key: "doc_date", label: "작성 일자", type: "date" }
+    ],
+    signers: [{ key: "sig_a", label: "사업주 서명" }],
+    render: { ko: renderSeparationCertKo }
+  },
+  {
+    id: "lease-renewal",
+    cat: "realestate",
+    name: "임대차 갱신요구·해지 통지서 · Lease Renewal Notice",
+    langs: ["ko"],
+    price: STUDIO.priceKrw,
+    usageNote: "주택임대차보호법상 계약갱신요구권(임차인→임대인, 만료 6~2개월 전) 또는 갱신 거절·해지 통지용. 내용증명으로 보내 도달 시기를 남기세요.",
+    fields: [
+      { key: "notice_type", label: "통지 종류 *", type: "select", required: true, options: [
+        { v: "renew", label: { ko: "임차인 → 임대인 : 계약 갱신 요구" } },
+        { v: "reject", label: { ko: "임대인 → 임차인 : 갱신 거절·해지 통지" } },
+        { v: "adjust", label: { ko: "임차인 → 임대인 : 갱신 + 차임 조정 요구" } }
+      ]},
+      { key: "s_name", label: "발신인 성명 *", type: "text", required: true },
+      { key: "s_addr", label: "발신인 주소", type: "text" },
+      { key: "r_name", label: "수신인 성명 *", type: "text", required: true },
+      { key: "r_addr", label: "수신인 주소", type: "text" },
+      { key: "property", label: "목적물 *", type: "text", required: true, hint: "임대차 목적물 소재지·호수" },
+      { key: "end_date", label: "현 계약 만료일 *", type: "date", required: true },
+      { key: "new_rent", label: "요구 차임 (갱신+조정 시)", type: "text", hint: "예: 보증금 현행, 월차임 5% 인하 요구" },
+      { key: "reason", label: "사유 (갱신거절 시)", type: "textarea", hint: "실거주 예정 등 법정 거절 사유" },
+      { key: "doc_date", label: "작성 일자", type: "date" }
+    ],
+    signers: [{ key: "sig_a", label: "발신인 서명" }],
+    render: { ko: renderLeaseRenewalKo }
+  },
+  {
+    id: "inspection-cert",
+    cat: "business",
+    name: "검수·인수 확인서 · Acceptance Certificate",
+    langs: ["ko", "en"],
+    price: STUDIO.priceKrw,
+    usageNote: "납품·용역 완료 후 검수 결과를 문서로 확정할 때 — 대금 지급 조건(검수 후 지급)과 연동됩니다. 하자가 있으면 조건부 검수로 기재하세요.",
+    fields: [
+      { section: "당사자" },
+      { key: "a_name", label: "발주자 (갑) *", type: "text", required: true },
+      { key: "b_name", label: "납품자 (을) *", type: "text", required: true },
+      { section: "검수 내용" },
+      { key: "order_ref", label: "계약·발주 번호", type: "text" },
+      { key: "items", label: "검수 대상 (품목·용역) *", type: "textarea", required: true, hint: "한 줄에 하나씩" },
+      { key: "result", label: "검수 결과", type: "select", options: [
+        { v: "pass", label: { ko: "합격 — 정상 인수", en: "accepted" } },
+        { v: "conditional", label: { ko: "조건부 합격 — 하자 보완 후 최종 인수", en: "conditionally accepted" } },
+        { v: "fail", label: { ko: "불합격 — 재납품 요구", en: "rejected" } }
+      ]},
+      { key: "defects", label: "하자·보완 사항", type: "textarea", hint: "조건부·불합격 시 기재" },
+      { key: "fix_until", label: "보완 기한", type: "text" },
+      { key: "doc_date", label: "검수일", type: "date" }
+    ],
+    signers: [
+      { key: "sig_a", label: "발주자 서명", enLabel: "Buyer signature" },
+      { key: "sig_b", label: "납품자 서명", enLabel: "Supplier signature" }
+    ],
+    render: { ko: renderInspectionKo, en: renderInspectionEn }
+  },
+  {
+    id: "business-transfer",
+    cat: "business",
+    name: "사업 양수도 계약서 · Business Transfer Agreement",
+    langs: ["ko"],
+    price: 14900,
+    usageNote: "점포·온라인몰·사업 전체의 양도 시 사용. 채무·직원·고객 승계 범위를 반드시 명시하세요 — 기재 없으면 채무는 원칙적으로 승계되지 않지만 분쟁 소지가 있습니다.",
+    fields: [
+      { section: "당사자" },
+      { key: "a_name", label: "양도인 (갑) *", type: "text", required: true },
+      { key: "a_addr", label: "갑 주소", type: "text" },
+      { key: "b_name", label: "양수인 (을) *", type: "text", required: true },
+      { key: "b_addr", label: "을 주소", type: "text" },
+      { section: "양수도 내용" },
+      { key: "biz_name", label: "사업 명칭·소재지 *", type: "text", required: true },
+      { key: "scope", label: "양수도 대상 범위 *", type: "textarea", required: true, hint: "영업권·시설·재고·상호 사용권·고객 데이터 등" },
+      { key: "price", label: "양수도 대금 (숫자) *", type: "text", required: true },
+      { key: "pay_terms", label: "대금 지급 조건", type: "text", hint: "예: 계약금 10%, 잔금 인도일" },
+      { key: "handover_date", label: "인도(승계)일", type: "text" },
+      { key: "liabilities", label: "채무 승계 여부", type: "select", options: [
+        { v: "none", label: { ko: "인도일 이전 채무는 양도인 부담 — 양수인 승계 없음" } },
+        { v: "listed", label: { ko: "별첨 목록의 채무만 승계" } },
+        { v: "all", label: { ko: "채무 일체 승계" } }
+      ]},
+      { key: "noncompete", label: "경업금지 기간·범위", type: "text", hint: "예: 양도일로부터 2년간 반경 1km 이내에서" },
+      { key: "special", label: "특약 사항", type: "textarea" },
+      { key: "doc_date", label: "작성 일자", type: "date" }
+    ],
+    signers: [
+      { key: "sig_a", label: "양도인 서명" },
+      { key: "sig_b", label: "양수인 서명" }
+    ],
+    render: { ko: renderBizTransferKo }
+  },
+  {
+    id: "copyright-assignment",
+    cat: "contract",
+    name: "저작권 양도 계약서 · Copyright Assignment",
+    langs: ["ko", "en"],
+    price: STUDIO.priceKrw,
+    usageNote: "저작물의 재산권 전부를 양도하는 계약 — 저작인격권(성명표시권·동일성유지권)은 법상 양도 불가하므로 '행사하지 않는다'는 약정으로 처리합니다.",
+    fields: [
+      { section: "당사자" },
+      { key: "a_name", label: "양도인 (저작자) *", type: "text", required: true },
+      { key: "b_name", label: "양수인 *", type: "text", required: true },
+      { section: "양도 내용" },
+      { key: "work", label: "저작물 *", type: "textarea", required: true, hint: "제목·형태·제작 연월일 등 특정 가능하게" },
+      { key: "scope", label: "양도 권리 범위", type: "checks", options: [
+        { v: "repro", label: { ko: "복제권·배포권·공중송신권", en: "reproduction, distribution, communication" } },
+        { v: "derivative", label: { ko: "2차적 저작물 작성권", en: "derivative works" } },
+        { v: "all", label: { ko: "저작재산권 일체", en: "all economic rights" } }
+      ]},
+      { key: "price", label: "양도 대가 (숫자)", type: "text", hint: "무상이면 비움" },
+      { key: "moral", label: "저작인격권 약정", type: "select", options: [
+        { v: "waive", label: { ko: "저작자는 인격권을 행사하지 않는다", en: "author agrees not to exercise moral rights" } },
+        { v: "keep", label: { ko: "인격권 행사 유지 (수정 시 협의)", en: "moral rights retained" } }
+      ]},
+      { key: "doc_date", label: "작성 일자", type: "date" }
+    ],
+    signers: [
+      { key: "sig_a", label: "양도인 서명", enLabel: "Assignor signature" },
+      { key: "sig_b", label: "양수인 서명", enLabel: "Assignee signature" }
+    ],
+    render: { ko: renderCopyrightKo, en: renderCopyrightEn }
+  },
+  {
+    id: "pet-care",
+    cat: "family",
+    name: "반려동물 위탁 계약서 · Pet Care Agreement",
+    langs: ["ko"],
+    price: STUDIO.priceKrw,
+    usageNote: "펫시터·지인에게 반려동물을 맡길 때 — 위탁 기간·돌봄 내용·응급 시 수의사 진료 동의 범위를 정합니다.",
+    fields: [
+      { section: "당사자" },
+      { key: "a_name", label: "위탁인 (보호자) *", type: "text", required: true },
+      { key: "a_phone", label: "위탁인 연락처 *", type: "tel", required: true },
+      { key: "b_name", label: "수탁인 (돌봄 담당) *", type: "text", required: true },
+      { key: "b_phone", label: "수탁인 연락처", type: "tel" },
+      { section: "동물 정보·위탁 내용" },
+      { key: "pet_info", label: "동물 정보 *", type: "text", required: true, hint: "예: 말티즈 · 3세 · 중성화 완료 · 예방접종 완료" },
+      { key: "health", label: "건강·주의 사항", type: "textarea", hint: "복용약·알레르기·습성 등" },
+      { key: "start_date", label: "위탁 시작일 *", type: "date", required: true },
+      { key: "end_date", label: "위탁 종료일 *", type: "date", required: true },
+      { key: "fee", label: "위탁 비용", type: "text", hint: "예: 1일 30,000원 / 무상" },
+      { key: "vet_limit", label: "응급 진료 동의 한도", type: "text", hint: "숫자만 — 예: 300,000" },
+      { key: "duties", label: "돌봄 내용", type: "textarea", hint: "한 줄에 하나씩 — 사료·산책·투약 등" },
+      { key: "doc_date", label: "작성 일자", type: "date" }
+    ],
+    signers: [
+      { key: "sig_a", label: "위탁인 서명" },
+      { key: "sig_b", label: "수탁인 서명" }
+    ],
+    render: { ko: renderPetCareKo }
+  },
+  {
+    id: "board-minutes",
+    cat: "business",
+    name: "이사회·주주총회 의사록 · Board/Shareholder Minutes",
+    langs: ["ko"],
+    price: STUDIO.priceKrw,
+    usageNote: "법인의 의사록 작성용 — 의사록은 등기·세무·내부 기록의 근거가 됩니다. 주주총회는 의장이, 이사회는 출석 이사들이 서명합니다.",
+    fields: [
+      { key: "meeting_type", label: "회의 종류", type: "select", options: [
+        { v: "board", label: { ko: "이사회" } },
+        { v: "shareholder", label: { ko: "주주총회 (정기)" } },
+        { v: "special", label: { ko: "주주총회 (임시)" } }
+      ]},
+      { key: "co_name", label: "회사명 *", type: "text", required: true },
+      { key: "meet_date", label: "일시 *", type: "text", required: true, hint: "예: 2026. 9. 14. 14:00" },
+      { key: "meet_place", label: "장소", type: "text" },
+      { key: "chair", label: "의장", type: "text" },
+      { key: "attendees", label: "출석자 (한 줄에 하나씩)", type: "textarea", hint: "이사 홍길동 / 주주 김철수 (지분 60%)" },
+      { key: "agenda", label: "안건 및 결의 내용 *", type: "textarea", required: true, hint: "한 줄에 하나씩: 안건명 | 결의 내용" },
+      { key: "doc_date", label: "작성 일자", type: "date" }
+    ],
+    signers: [{ key: "sig_a", label: "의장 서명" }],
+    render: { ko: renderBoardMinutesKo }
+  },
 
 ];
 
@@ -3816,9 +4169,13 @@ function optText(key, lang) {
   return opt ? (opt.label[lang] || opt.label.en || opt.label.ko || "") : "";
 }
 function checkedLabels(key, lang) {
-  return [...document.querySelectorAll(`[data-key="${key}"]`)]
-    .filter(el => el.type === "checkbox" && el.checked)
-    .map(el => { const o = fieldDef(key).options.find(x => x.v === el.dataset.opt); return o ? (o.label[lang] || o.label.en || o.label.ko) : ""; });
+  const f = fieldDef(key);
+  if (!f || !f.options) return [];
+  const lbl = o => o ? (o.label[lang] || o.label.en || o.label.ko || "") : "";
+  const dom = [...document.querySelectorAll(`[data-key="${key}"]`)].filter(el => el.type === "checkbox" && el.checked);
+  if (dom.length) return dom.map(el => lbl(f.options.find(x => x.v === el.dataset.opt)));
+  const vs = Array.isArray(formState[key]) ? formState[key] : (formState[key] ? [formState[key]] : []);
+  return vs.map(v => lbl(f.options.find(x => x.v === v))).filter(Boolean);
 }
 function lines(key) { return val(key).split("\n").map(s => s.trim()).filter(Boolean); }
 function sig(key, fallback) {
@@ -8974,7 +9331,335 @@ function selectDoc(id) {
 }
 
 /* ---------- 출력 ---------- */
+function renderTrafficSettlementKo() {
+  const terms = lines("terms");
+  return `
+    <h1 class="doc-title">교 통 사 고 합 의 서</h1>
+    <table class="parties">
+      <tr><td class="lbl">갑 (가해측)</td><td>${valOr("a_name")}<br/>${val("a_phone") ? esc(val("a_phone")) + "<br/>" : ""}차량: ${valOr("a_vehicle")}</td></tr>
+      <tr><td class="lbl">을 (피해측)</td><td>${valOr("b_name")}<br/>${val("b_phone") ? esc(val("b_phone")) + "<br/>" : ""}차량: ${valOr("b_vehicle")}</td></tr>
+    </table>
+    <p class="body">갑과 을은 아래 교통사고에 관하여 다음과 같이 합의한다.</p>
+    <h2>1. 사고의 개요</h2>
+    <p class="body">일시: ${valOr("acc_date")} · 장소: ${valOr("acc_place")}<br/>${valOr("acc_summary")}</p>
+    <h2>2. 합의 내용</h2>
+    <p class="body">${val("amount") ? `갑은 을에게 합의금으로 금 ${esc(val("amount"))}원을 ${val("pay_how") ? esc(val("pay_how")) : "현장에서"} 지급하기로 한다.<br/>` : ""}${terms.map(t => esc(t)).join("<br/>")}${terms.length ? "<br/>" : ""}을은 본 합의금 수령 후 위 사고에 관하여 갑에 대하여 민·형사상 일체의 청구·이의를 제기하지 아니한다.</p>
+    <p class="body" style="margin-top:24px;">본 합의서는 2부를 작성하여 갑과 을이 각 1부씩 보관한다.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">갑 ${valOr("a_name")} ${sig("sig_a")}</div>
+      <div class="signer">을 ${valOr("b_name")} ${sig("sig_b")}</div>
+    </div>`;
+}
+function renderParentalLeaveKo() {
+  return `
+    <h1 class="doc-title">육 아 휴 직 신 청 서</h1>
+    <table class="parties">
+      <tr><td class="lbl">성명</td><td>${valOr("name")}</td><td class="lbl">부서·직위</td><td>${valOr("dept")}</td></tr>
+      <tr><td class="lbl">사번</td><td>${valOr("emp_id")}</td><td class="lbl">자녀</td><td>${valOr("child_name")}</td></tr>
+      <tr><td class="lbl">휴직 기간</td><td colspan="3">${esc(fmtDate(val("start_date"), "ko"))} ~ ${esc(fmtDate(val("end_date"), "ko"))}</td></tr>
+      <tr><td class="lbl">신청 사유</td><td colspan="3">${esc(optText("reason", "ko"))}</td></tr>
+      <tr><td class="lbl">인수인계</td><td colspan="3">${valOr("handover")}</td></tr>
+    </table>
+    <p class="body">본인은 남녀고용평등과 일·가정 양립 지원에 관한 법률 제19조에 따라 상기와 같이 육아휴직을 신청하오니 승인하여 주시기 바랍니다.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">신청인 ${valOr("name")} ${sig("sig_b")}</div>
+      <div class="recipient">${valOr("a_name")} 귀중</div>
+    </div>`;
+}
+function renderParttimeKo() {
+  return `
+    <h1 class="doc-title">시 간 제 근 로 계 약 서</h1>
+    <table class="parties">
+      <tr><td class="lbl">사용자</td><td>${valOr("a_name")}<br/>${valOr("a_addr")}</td></tr>
+      <tr><td class="lbl">근로자</td><td>${valOr("b_name")}<br/>${val("b_id") ? esc(val("b_id")) + "<br/>" : ""}${valOr("b_addr")}</td></tr>
+    </table>
+    <p class="body">사용자와 근로자는 다음과 같이 시간제 근로계약을 체결한다.</p>
+    <h2>1. 계약 기간 및 근무 장소</h2>
+    <p class="body">근로 시작일: ${esc(fmtDate(val("start_date"), "ko"))}${val("end_date") ? " ~ 계약 종료일: " + esc(fmtDate(val("end_date"), "ko")) : " (기간의 정함 없음)"}<br/>근무 장소: ${valOr("workplace")}</p>
+    <h2>2. 업무 내용</h2>
+    <p class="body">${valOr("scope")}</p>
+    <h2>3. 근로시간</h2>
+    <p class="body">${valOr("work_days")}</p>
+    <h2>4. 임금</h2>
+    <p class="body">시급: 금 ${valOr("wage")}원<br/>주휴수당: ${esc(optText("weekly_holiday", "ko"))}<br/>지급일: ${valOr("pay_day")} / 지급 방법: ${esc(optText("pay_method", "ko") || "계좌이체")}</p>
+    <h2>5. 기타</h2>
+    <p class="body">본 계약에 정하지 않은 사항은 근로기준법 및 관련 법령에 따른다. 소정근로시간이 주 15시간 이상인 경우 주휴수당·연차유급휴가·퇴직급여 대상이 된다.</p>
+    <p class="body" style="margin-top:24px;">본 계약의 체결을 증명하기 위하여 계약서 2부를 작성하고 사용자와 근로자가 각각 서명·날인하여 1부씩 보관한다. (근로계약서는 근로자에게 반드시 교부 — 근로기준법 제17조의2)</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">사용자 ${valOr("a_name")} ${sig("sig_a")}</div>
+      <div class="signer">근로자 ${valOr("b_name")} ${sig("sig_b")}</div>
+    </div>`;
+}
+function renderSeparationCertKo() {
+  return `
+    <h1 class="doc-title">이 직 확 인 서</h1>
+    <table class="parties">
+      <tr><td class="lbl">근로자</td><td>${valOr("b_name")}</td><td class="lbl">생년월일</td><td>${valOr("b_id")}</td></tr>
+      <tr><td class="lbl">재직 기간</td><td colspan="3">${esc(fmtDate(val("start_date"), "ko"))} ~ ${esc(fmtDate(val("end_date"), "ko"))}</td></tr>
+      <tr><td class="lbl">이직 사유</td><td colspan="3">${esc(optText("reason", "ko"))}${val("reason_detail") ? "<br/>" + valOr("reason_detail") : ""}</td></tr>
+    </table>
+    <p class="body">위 근로자가 위 기간 동안 당사에 재직 후 위 사유로 이직하였음을 확인합니다.</p>
+    <p class="body" style="font-size:0.85em;color:#555;">※ 실업급여 수급용 이직확인서는 고용보험법에 따라 사업주가 근로복지공단에 전산 신고합니다. 본 서면은 기록 확인용입니다.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">사업주 ${valOr("a_name")} ${sig("sig_a")}</div>
+      <div class="body" style="text-indent:0;margin-top:4px;">${valOr("a_addr")}</div>
+    </div>`;
+}
+function renderLeaseRenewalKo() {
+  const t = val("notice_type");
+  const head = t === "reject" ? "임 대 차 계 약 갱 신 거 절 통 지 서" : t === "adjust" ? "임 대 차 계 약 갱 신 요 구 통 지 서" : "임 대 차 계 약 갱 신 요 구 서";
+  const body = t === "reject"
+    ? `발신인(임대인)은 수신인(임차인)에게 위 임대차계약의 기간 만료일인 ${esc(fmtDate(val("end_date"), "ko"))}자로 계약을 갱신하지 않을 것을 통지합니다.${val("reason") ? "<br/><br/>사유: " + valOr("reason") : ""}`
+    : t === "adjust"
+    ? `발신인(임차인)은 주택임대차보호법 제6조에 따라 위 임대차계약의 갱신을 요구하며, 차임을 다음과 같이 조정하여 주실 것을 요청합니다.<br/><br/>요구 내용: ${valOr("new_rent")}`
+    : `발신인(임차인)은 주택임대차보호법 제6조에 따라 위 임대차계약의 기간 만료일인 ${esc(fmtDate(val("end_date"), "ko"))} 이후에도 동일한 조건으로 계약 갱신을 요구합니다.`;
+  return `
+    <h1 class="doc-title">${head}</h1>
+    <table class="parties">
+      <tr><td class="lbl">발신인</td><td>${valOr("s_name")}<br/>${valOr("s_addr")}</td></tr>
+      <tr><td class="lbl">수신인</td><td>${valOr("r_name")}<br/>${valOr("r_addr")}</td></tr>
+      <tr><td class="lbl">목적물</td><td>${valOr("property")}</td></tr>
+      <tr><td class="lbl">현 계약 만료일</td><td>${esc(fmtDate(val("end_date"), "ko"))}</td></tr>
+    </table>
+    <p class="body">${body}</p>
+    <p class="body" style="font-size:0.85em;color:#555;">※ 본 통지는 내용증명 우편 등 발송·도달 기록이 남는 방법으로 보내는 것을 권합니다.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">발신인 ${valOr("s_name")} ${sig("sig_a")}</div>
+      <div class="recipient">${valOr("r_name")} 귀중</div>
+    </div>`;
+}
+function renderInspectionKo() {
+  const items = lines("items");
+  return `
+    <h1 class="doc-title">검 수 확 인 서</h1>
+    <table class="parties">
+      <tr><td class="lbl">발주자 (갑)</td><td>${valOr("a_name")}</td></tr>
+      <tr><td class="lbl">납품자 (을)</td><td>${valOr("b_name")}</td></tr>
+      <tr><td class="lbl">계약·발주 번호</td><td>${valOr("order_ref")}</td></tr>
+    </table>
+    <h2>검수 대상</h2>
+    <ol class="evidence">${items.map(i => `<li>${esc(i)}</li>`).join("")}</ol>
+    <h2>검수 결과</h2>
+    <p class="body"><strong>${esc(optText("result", "ko"))}</strong>${val("defects") ? "<br/><br/>하자·보완 사항: " + valOr("defects") : ""}${val("fix_until") ? "<br/>보완 기한: " + valOr("fix_until") : ""}</p>
+    <p class="body">갑은 위 검수 결과를 확인하고 이에 합의한다.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">갑 ${valOr("a_name")} ${sig("sig_a")}</div>
+      <div class="signer">을 ${valOr("b_name")} ${sig("sig_b")}</div>
+    </div>`;
+}
+function renderInspectionEn() {
+  const items = lines("items");
+  return `
+    <h1 class="doc-title">ACCEPTANCE CERTIFICATE</h1>
+    <table class="parties">
+      <tr><td class="lbl">BUYER</td><td>${valOr("a_name")}</td></tr>
+      <tr><td class="lbl">SUPPLIER</td><td>${valOr("b_name")}</td></tr>
+      <tr><td class="lbl">Contract / PO ref</td><td>${valOr("order_ref")}</td></tr>
+    </table>
+    <h2>Items inspected</h2>
+    <ol class="evidence">${items.map(i => `<li>${esc(i)}</li>`).join("")}</ol>
+    <h2>Inspection result</h2>
+    <p class="body"><strong>${esc(optText("result", "en"))}</strong>${val("defects") ? "<br/><br/>Defects / required corrections: " + valOr("defects") : ""}${val("fix_until") ? "<br/>Correction deadline: " + valOr("fix_until") : ""}</p>
+    <p class="body">The Buyer confirms the inspection result stated above.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "en"))}</div>
+      <div class="signer">Buyer: ${valOr("a_name")} ${sig("sig_a", "________________")}</div>
+      <div class="signer">Supplier: ${valOr("b_name")} ${sig("sig_b", "________________")}</div>
+    </div>`;
+}
+function renderBizTransferKo() {
+  return `
+    <h1 class="doc-title">사 업 양 수 도 계 약 서</h1>
+    <table class="parties">
+      <tr><td class="lbl">양도인 (갑)</td><td>${valOr("a_name")}<br/>${valOr("a_addr")}</td></tr>
+      <tr><td class="lbl">양수인 (을)</td><td>${valOr("b_name")}<br/>${valOr("b_addr")}</td></tr>
+    </table>
+    <p class="body">갑과 을은 아래 사업의 양수도에 관하여 다음과 같이 계약을 체결한다.</p>
+    <h2>제1조 (목적)</h2>
+    <p class="body">갑이 운영하는 사업 「<strong>${valOr("biz_name")}</strong>」을 을에게 양도하고 을은 이를 양수한다.</p>
+    <h2>제2조 (양수도 대상)</h2>
+    <p class="body">${valOr("scope")}</p>
+    <h2>제3조 (대금 및 지급)</h2>
+    <p class="body">양수도 대금은 금 ${valOr("price")}원으로 하며, 을은 다음과 같이 지급한다: ${valOr("pay_terms")}<br/>인도(승계)일: ${valOr("handover_date")}</p>
+    <h2>제4조 (채무의 승계)</h2>
+    <p class="body">${esc(optText("liabilities", "ko"))}</p>
+    ${val("noncompete") ? `<h2>제5조 (경업금지)</h2><p class="body">갑은 ${valOr("noncompete")} 동일 업종의 영업을 하지 아니한다.</p>` : ""}
+    ${val("special") ? `<h2>제6조 (특약)</h2><p class="body">${lines("special").map(t => esc(t)).join("<br/>")}</p>` : ""}
+    <p class="body" style="margin-top:24px;">본 계약의 성립을 증명하기 위하여 계약서 2부를 작성하고 각자 서명·날인하여 1부씩 보관한다.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">양도인 ${valOr("a_name")} ${sig("sig_a")}</div>
+      <div class="signer">양수인 ${valOr("b_name")} ${sig("sig_b")}</div>
+    </div>`;
+}
+function renderCopyrightKo() {
+  return `
+    <h1 class="doc-title">저 작 권 양 도 계 약 서</h1>
+    <table class="parties">
+      <tr><td class="lbl">양도인 (저작자)</td><td>${valOr("a_name")}</td></tr>
+      <tr><td class="lbl">양수인</td><td>${valOr("b_name")}</td></tr>
+    </table>
+    <h2>제1조 (저작물)</h2>
+    <p class="body">${valOr("work")}</p>
+    <h2>제2조 (양도 권리의 범위)</h2>
+    <p class="body">갑은 위 저작물에 관한 다음 권리를 을에게 양도한다: ${checkedLabels("scope", "ko").map(esc).join(" · ") || BLANK}</p>
+    <h2>제3조 (대가)</h2>
+    <p class="body">${val("price") ? `양도 대가는 금 ${esc(val("price"))}원으로 한다.` : "본 양도는 무상으로 한다."}</p>
+    <h2>제4조 (저작인격권)</h2>
+    <p class="body">${esc(optText("moral", "ko"))}. 저작인격권은 저작권법상 양도할 수 없으므로 본 조항은 행사 여부에 관한 약정이다.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">양도인 ${valOr("a_name")} ${sig("sig_a")}</div>
+      <div class="signer">양수인 ${valOr("b_name")} ${sig("sig_b")}</div>
+    </div>`;
+}
+function renderCopyrightEn() {
+  return `
+    <h1 class="doc-title">COPYRIGHT ASSIGNMENT</h1>
+    <table class="parties">
+      <tr><td class="lbl">ASSIGNOR (author)</td><td>${valOr("a_name")}</td></tr>
+      <tr><td class="lbl">ASSIGNEE</td><td>${valOr("b_name")}</td></tr>
+    </table>
+    <h2>1. Work</h2>
+    <p class="body">${valOr("work")}</p>
+    <h2>2. Rights assigned</h2>
+    <p class="body">The Assignor assigns to the Assignee: ${checkedLabels("scope", "en").map(esc).join(" · ") || BLANK}.</p>
+    <h2>3. Consideration</h2>
+    <p class="body">${val("price") ? "The assignment price is KRW " + esc(val("price")) + "." : "This assignment is made without consideration."}</p>
+    <h2>4. Moral rights</h2>
+    <p class="body">${esc(optText("moral", "en"))}. To the extent moral rights cannot be assigned by law, this clause is a covenant not to exercise them.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "en"))}</div>
+      <div class="signer">Assignor: ${valOr("a_name")} ${sig("sig_a", "________________")}</div>
+      <div class="signer">Assignee: ${valOr("b_name")} ${sig("sig_b", "________________")}</div>
+    </div>`;
+}
+function renderPetCareKo() {
+  const duties = lines("duties");
+  return `
+    <h1 class="doc-title">반 려 동 물 위 탁 계 약 서</h1>
+    <table class="parties">
+      <tr><td class="lbl">위탁인 (보호자)</td><td>${valOr("a_name")}<br/>${valOr("a_phone")}</td></tr>
+      <tr><td class="lbl">수탁인 (돌봄 담당)</td><td>${valOr("b_name")}<br/>${valOr("b_phone")}</td></tr>
+      <tr><td class="lbl">동물 정보</td><td>${valOr("pet_info")}</td></tr>
+      <tr><td class="lbl">건강·주의 사항</td><td>${valOr("health")}</td></tr>
+    </table>
+    <p class="body">갑과 을은 위 동물의 위탁 돌봄에 관하여 다음과 같이 계약한다.</p>
+    <h2>1. 위탁 기간 및 비용</h2>
+    <p class="body">기간: ${esc(fmtDate(val("start_date"), "ko"))} ~ ${esc(fmtDate(val("end_date"), "ko"))}<br/>위탁 비용: ${valOr("fee")}</p>
+    <h2>2. 돌봄 내용</h2>
+    <p class="body">${duties.map(t => esc(t)).join("<br/>") || BLANK}</p>
+    <h2>3. 응급 조치</h2>
+    <p class="body">돌봄 중 동물의 긴급한 상태가 발생하면 을은 즉시 갑에게 연락하며, 연락이 닿지 않는 긴급한 경우 ${val("vet_limit") ? `금 ${esc(val("vet_limit"))}원 범위 내에서` : ""} 수의사 진료를 받게 할 수 있고 그 비용은 갑이 부담한다.</p>
+    <h2>4. 책임</h2>
+    <p class="body">을은 선량한 관리자의 주의로 돌봄 의무를 이행하며, 을의 고의·과실로 발생한 손해는 을이 배상한다.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">위탁인 ${valOr("a_name")} ${sig("sig_a")}</div>
+      <div class="signer">수탁인 ${valOr("b_name")} ${sig("sig_b")}</div>
+    </div>`;
+}
+function renderBoardMinutesKo() {
+  const attendees = lines("attendees");
+  const agenda = lines("agenda").map(l => l.split("|").map(x => x.trim()));
+  return `
+    <h1 class="doc-title">${esc(optText("meeting_type", "ko"))} 의 사 록</h1>
+    <table class="parties">
+      <tr><td class="lbl">회사명</td><td>${valOr("co_name")}</td></tr>
+      <tr><td class="lbl">일시·장소</td><td>${valOr("meet_date")} / ${valOr("meet_place")}</td></tr>
+      <tr><td class="lbl">의장</td><td>${valOr("chair")}</td></tr>
+      <tr><td class="lbl">출석자</td><td>${attendees.map(a => esc(a)).join("<br/>") || BLANK}</td></tr>
+    </table>
+    <h2>안건 및 결의 사항</h2>
+    <table class="parties">
+      <tr><th class="lbl" style="width:40%">안건</th><th class="lbl">결의 내용</th></tr>
+      ${agenda.map(r => `<tr><td>${esc(r[0] || "")}</td><td>${esc(r[1] || "")}</td></tr>`).join("")}
+    </table>
+    <p class="body">위 의사록은 ${esc(optText("meeting_type", "ko"))}의 진행 내용을 사실대로 기록한 것이다.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">의장 ${valOr("chair")} ${sig("sig_a")}</div>
+    </div>`;
+}
+
 const SAMPLES = {
+  "traffic-settlement": {
+    a_name: "김가해", a_phone: "010-1111-2222", a_vehicle: "쏘나타 12가 3456",
+    b_name: "박피해", b_phone: "010-3333-4444", b_vehicle: "아반떼 56나 7890",
+    acc_date: "2026. 9. 10. 14시경", acc_place: "서울특별시 강남구 ○○로 교차로",
+    acc_summary: "갑의 차량이 신호 대기 중인 을의 차량 후방을 추돌하여 을의 차량 범퍼가 파손된 사고",
+    amount: "800,000", pay_how: "현장에서 계좌이체로 즉시",
+    terms: "차량 수리는 을이 지정하는 정비소에서 진행한다"
+  },
+  "parental-leave": {
+    name: "박근로", dept: "개발팀 대리", emp_id: "EMP-1024",
+    child_name: "박○○ (2024. 3. 5.생)",
+    start_date: "2026-10-01", end_date: "2027-09-30", reason: "care",
+    handover: "김대리", a_name: "주식회사 ○○테크"
+  },
+  "parttime-employment": {
+    a_name: "○○카페 대표 김사장", a_addr: "서울특별시 마포구 ○○로 20",
+    b_name: "이알바", b_id: "2002.08.15", b_addr: "서울특별시 ○○구 ○○동 5",
+    start_date: "2026-10-01", end_date: "", workplace: "○○카페 본점",
+    scope: "매장 서빙 및 음료 제조, 마감 청소",
+    work_days: "주 3일(월·수·금) 13:00~18:00 (일 5시간, 주 15시간)",
+    wage: "10,500", weekly_holiday: "yes", pay_day: "매월 10일", pay_method: "bank"
+  },
+  "separation-cert": {
+    a_name: "주식회사 ○○테크 대표 김대표", a_addr: "서울특별시 서초구 ○○로 100",
+    b_name: "박근로", b_id: "1995.05.05",
+    start_date: "2023-03-02", end_date: "2026-09-30", reason: "expire",
+    reason_detail: "계약기간(2년 6개월) 만료에 따른 자연 퇴직"
+  },
+  "lease-renewal": {
+    notice_type: "renew", s_name: "박임차", s_addr: "경기도 ○○시 ○○동 11",
+    r_name: "김임대", r_addr: "서울특별시 ○○구 ○○로 5",
+    property: "서울특별시 송파구 ○○로 77, ○○아파트 101동 505호",
+    end_date: "2026-12-31", new_rent: "", reason: ""
+  },
+  "inspection-cert": {
+    a_name: "주식회사 ○○테크", b_name: "○○시스템 개발",
+    order_ref: "PO-2026-081", items: "모바일 앱 백엔드 API 개발 산출물\n관리자 페이지 소스코드\nAPI 명세서 1부",
+    result: "conditional", defects: "관리자 페이지 검색 필터 오류 — 보완 필요",
+    fix_until: "2026. 9. 30."
+  },
+  "business-transfer": {
+    a_name: "김양도", a_addr: "서울특별시 ○○구 ○○로 1",
+    b_name: "박양수", b_addr: "서울특별시 ○○구 ○○동 2",
+    biz_name: "○○카페 (서울특별시 마포구 ○○로 20)",
+    scope: "영업 시설 일체, 재고, 상호 사용권, 단골 고객 명단",
+    price: "50,000,000", pay_terms: "계약금 5,000,000원(계약일), 잔금 45,000,000원(인도일)",
+    handover_date: "2026. 10. 31.", liabilities: "none",
+    noncompete: "양도일로부터 2년간 반경 1km 이내에서",
+    special: "기존 직원 2명은 양수인이 고용 승계한다"
+  },
+  "copyright-assignment": {
+    a_name: "최작가", b_name: "주식회사 ○○게임즈",
+    work: "모바일 게임 '○○' 캐릭터 일러스트 10종 (2026년 8월 제작)",
+    scope: ["all"], price: "5,000,000", moral: "waive"
+  },
+  "pet-care": {
+    a_name: "김보호", a_phone: "010-1234-5678",
+    b_name: "이시터", b_phone: "010-8765-4321",
+    pet_info: "말티즈 · 3세 · 중성화 완료 · 예방접종 완료",
+    health: "닭고기 알레르기 — 닭고기 간식 금지. 낯선 개에게 짖는 습성 있음",
+    start_date: "2026-10-03", end_date: "2026-10-07",
+    fee: "1일 30,000원", vet_limit: "300,000",
+    duties: "1일 2회 사료 급여 (오전 8시, 오후 6시)\n1일 1회 30분 산책\n관절약 1일 1회 투여"
+  },
+  "board-minutes": {
+    meeting_type: "board", co_name: "주식회사 ○○테크",
+    meet_date: "2026. 9. 14. 14:00", meet_place: "본사 3층 회의실",
+    chair: "대표이사 홍길동",
+    attendees: "이사 홍길동\n이사 김부장\n이사 이대리\n감사 박감사",
+    agenda: "2026년 하반기 사업계획 승인의 건 | 원안대로 가결\n신규 지점 개설의 건 | 서울 송파 지점 개설 승인"
+  },
   "defamation-complaint": {
     c_name: "홍길동", c_phone: "010-1234-5678", c_addr: "서울특별시 강남구 ○○로 123", c_email: "hong@example.com",
     d_name: "baduser123", d_info: "디시인사이드 갤러리 고정닉",

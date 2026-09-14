@@ -30,23 +30,23 @@ const escHtml = s => String(s || "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<
 
 /* 언어별 페이지 메타 — 제목·설명·UI 문자열은 해당 언어로 */
 const META = {
-  en: { title: "Document Templates in English", desc: "Fill in a guided form and generate demand letters, NDAs, contracts and more — clean originals, watermark-free.", h1: "English Document Templates", sub: "Guided form → instant document. Free watermarked preview, pay only for the clean original.", open: "Open form →" },
-  ko: { title: "한국어 문서 양식 모음", desc: "고소장·내용증명·계약서 등 표준 서식을 폼 입력만으로 즉시 생성.", h1: "한국어 문서 양식", sub: "폼 입력만으로 문서 즉시 생성. 미리보기 무료, 원본 출력만 유료.", open: "작성하기 →" },
-  ja: { title: "日本語ドキュメントテンプレート", desc: "退職願・念書・示談書・通知書など、フォーム入力で即時生成。", h1: "日本語ドキュメント", sub: "ガイド付きフォーム → 即時ドキュメント。プレビューは無料。", open: "作成する →" },
-  zh: { title: "中文文书模板", desc: "辞职信·授权委托书·催告函等，填表即生成。", h1: "中文文书模板", sub: "引导式表单 → 即时生成。预览免费，原件输出付费。", open: "开始填写 →" },
-  de: { title: "Deutsche Dokumentvorlagen", desc: "Kündigung, Mahnung, Vollmacht, Abmahnung u.v.m. — Formular ausfüllen, Dokument erhalten.", h1: "Deutsche Dokumente", sub: "Geführtes Formular → sofortiges Dokument. Vorschau kostenlos.", open: "Formular öffnen →" },
-  fr: { title: "Modèles de documents en français", desc: "Mise en demeure, lettre de résiliation, démission — formulaire guidé, document immédiat.", h1: "Documents en français", sub: "Formulaire guidé → document instantané. Aperçu gratuit.", open: "Ouvrir →" },
-  es: { title: "Plantillas de documentos en español", desc: "Carta de renuncia, finiquito, requerimiento — formulario guiado.", h1: "Documentos en español", sub: "Formulario guiado → documento inmediato. Vista previa gratuita.", open: "Abrir →" },
-  pt: { title: "Modelos de documentos em português", desc: "Carta de demissão, procuração, notificação extrajudicial — formulário guiado.", h1: "Documentos em português", sub: "Formulário guiado → documento imediato. Prévia gratuita.", open: "Abrir →" },
-  id: { title: "Template dokumen Bahasa Indonesia", desc: "Surat pengunduran diri, somasi, perjanjian — formulir terpandu.", h1: "Dokumen Bahasa Indonesia", sub: "Formulir terpandu → dokumen instan. Pratinjau gratis.", open: "Buka →" },
-  ru: { title: "Шаблоны документов на русском", desc: "Претензия, договор займа, NDA — заполните форму и получите документ.", h1: "Документы на русском", sub: "Форма → мгновенный документ. Предпросмотр бесплатно.", open: "Открыть →" },
-  ar: { title: "نماذج مستندات بالعربية", desc: "إشعار مطالبة، عقد قرض، اتفاقية عدم إفصاح — نموذج إرشادي.", h1: "مستندات بالعربية", sub: "نموذج إرشادي → مستند فوري. المعاينة مجانية.", open: "افتح النموذج ←" },
-  it: { title: "Modelli di documenti in italiano", desc: "Diffida e messa in mora, contratto di prestito, NDA — modulo guidato.", h1: "Documenti in italiano", sub: "Modulo guidato → documento immediato. Anteprima gratuita.", open: "Apri →" },
-  tr: { title: "Türkçe belge şablonları", desc: "İhtarname, sözleşme, talep mektubu — yönlendirmeli form.", h1: "Türkçe belgeler", sub: "Yönlendirmeli form → anında belge. Önizleme ücretsiz.", open: "Formu aç →" },
-  pl: { title: "Szablony dokumentów po polsku", desc: "Wypowiedzenie, umowa, wezwanie — formularz prowadzący.", h1: "Dokumenty po polsku", sub: "Formularz prowadzący → natychmiastowy dokument. Podgląd bezpłatny.", open: "Otwórz →" },
-  nl: { title: "Nederlandse documentsjablonen", desc: "Opzeggingsbrief, contract, aanmaning — begeleid formulier.", h1: "Nederlandse documenten", sub: "Begeleid formulier → direct document. Preview gratis.", open: "Openen →" },
-  vi: { title: "Mẫu tài liệu tiếng Việt", desc: "Đơn xin nghỉ việc, thư yêu cầu, hợp đồng — biểu mẫu có hướng dẫn.", h1: "Tài liệu tiếng Việt", sub: "Biểu mẫu hướng dẫn → tài liệu ngay. Xem trước miễn phí.", open: "Mở →" },
-  th: { title: "แม่แบบเอกสารภาษาไทย", desc: "หนังสือลาออก หนังสือแจ้งเตือน สัญญา — แบบฟอร์มนำทาง", h1: "เอกสารภาษาไทย", sub: "แบบฟอร์มนำทาง → เอกสารทันที ดูตัวอย่างฟรี", open: "เปิดแบบฟอร์ม →" },
+  en: { title: "Document Templates in English", desc: "Fill in a guided form and generate demand letters, NDAs, contracts and more — clean originals, watermark-free.", h1: "English Document Templates", sub: "Guided form → instant document. Free watermarked preview, pay only for the clean original.", open: "Open form →", view: "Details" },
+  ko: { title: "한국어 문서 양식 모음", desc: "고소장·내용증명·계약서 등 표준 서식을 폼 입력만으로 즉시 생성.", h1: "한국어 문서 양식", sub: "폼 입력만으로 문서 즉시 생성. 미리보기 무료, 원본 출력만 유료.", open: "작성하기 →", view: "자세히" },
+  ja: { title: "日本語ドキュメントテンプレート", desc: "退職願・念書・示談書・通知書など、フォーム入力で即時生成。", h1: "日本語ドキュメント", sub: "ガイド付きフォーム → 即時ドキュメント。プレビューは無料。", open: "作成する →", view: "詳細" },
+  zh: { title: "中文文书模板", desc: "辞职信·授权委托书·催告函等，填表即生成。", h1: "中文文书模板", sub: "引导式表单 → 即时生成。预览免费，原件输出付费。", open: "开始填写 →", view: "详情" },
+  de: { title: "Deutsche Dokumentvorlagen", desc: "Kündigung, Mahnung, Vollmacht, Abmahnung u.v.m. — Formular ausfüllen, Dokument erhalten.", h1: "Deutsche Dokumente", sub: "Geführtes Formular → sofortiges Dokument. Vorschau kostenlos.", open: "Formular öffnen →", view: "Details" },
+  fr: { title: "Modèles de documents en français", desc: "Mise en demeure, lettre de résiliation, démission — formulaire guidé, document immédiat.", h1: "Documents en français", sub: "Formulaire guidé → document instantané. Aperçu gratuit.", open: "Ouvrir →", view: "Détails" },
+  es: { title: "Plantillas de documentos en español", desc: "Carta de renuncia, finiquito, requerimiento — formulario guiado.", h1: "Documentos en español", sub: "Formulario guiado → documento inmediato. Vista previa gratuita.", open: "Abrir →", view: "Detalles" },
+  pt: { title: "Modelos de documentos em português", desc: "Carta de demissão, procuração, notificação extrajudicial — formulário guiado.", h1: "Documentos em português", sub: "Formulário guiado → documento imediato. Prévia gratuita.", open: "Abrir →", view: "Detalhes" },
+  id: { title: "Template dokumen Bahasa Indonesia", desc: "Surat pengunduran diri, somasi, perjanjian — formulir terpandu.", h1: "Dokumen Bahasa Indonesia", sub: "Formulir terpandu → dokumen instan. Pratinjau gratis.", open: "Buka →", view: "Detail" },
+  ru: { title: "Шаблоны документов на русском", desc: "Претензия, договор займа, NDA — заполните форму и получите документ.", h1: "Документы на русском", sub: "Форма → мгновенный документ. Предпросмотр бесплатно.", open: "Открыть →", view: "Подробнее" },
+  ar: { title: "نماذج مستندات بالعربية", desc: "إشعار مطالبة، عقد قرض، اتفاقية عدم إفصاح — نموذج إرشادي.", h1: "مستندات بالعربية", sub: "نموذج إرشادي → مستند فوري. المعاينة مجانية.", open: "افتح النموذج ←", view: "التفاصيل" },
+  it: { title: "Modelli di documenti in italiano", desc: "Diffida e messa in mora, contratto di prestito, NDA — modulo guidato.", h1: "Documenti in italiano", sub: "Modulo guidato → documento immediato. Anteprima gratuita.", open: "Apri →", view: "Dettagli" },
+  tr: { title: "Türkçe belge şablonları", desc: "İhtarname, sözleşme, talep mektubu — yönlendirmeli form.", h1: "Türkçe belgeler", sub: "Yönlendirmeli form → anında belge. Önizleme ücretsiz.", open: "Formu aç →", view: "Ayrıntılar" },
+  pl: { title: "Szablony dokumentów po polsku", desc: "Wypowiedzenie, umowa, wezwanie — formularz prowadzący.", h1: "Dokumenty po polsku", sub: "Formularz prowadzący → natychmiastowy dokument. Podgląd bezpłatny.", open: "Otwórz →", view: "Szczegóły" },
+  nl: { title: "Nederlandse documentsjablonen", desc: "Opzeggingsbrief, contract, aanmaning — begeleid formulier.", h1: "Nederlandse documenten", sub: "Begeleid formulier → direct document. Preview gratis.", open: "Openen →", view: "Details" },
+  vi: { title: "Mẫu tài liệu tiếng Việt", desc: "Đơn xin nghỉ việc, thư yêu cầu, hợp đồng — biểu mẫu có hướng dẫn.", h1: "Tài liệu tiếng Việt", sub: "Biểu mẫu hướng dẫn → tài liệu ngay. Xem trước miễn phí.", open: "Mở →", view: "Chi tiết" },
+  th: { title: "แม่แบบเอกสารภาษาไทย", desc: "หนังสือลาออก หนังสือแจ้งเตือน สัญญา — แบบฟอร์มนำทาง", h1: "เอกสารภาษาไทย", sub: "แบบฟอร์มนำทาง → เอกสารทันที ดูตัวอย่างฟรี", open: "เปิดแบบฟอร์ม →", view: "รายละเอียด" },
 };
 
 
@@ -78,7 +78,7 @@ for (const lang of LANGUAGES) {
         <h3>${escHtml(d.name)}</h3>
         <div class="price">₩${(STUDIO.prices && STUDIO.prices[d.id] || d.price || STUDIO.priceKrw).toLocaleString()}</div>
         <a href="studio.html?doc=${d.id}&lang=${lang.id}">${escHtml(meta.open)}</a>
-        <a href="docs/${lang.id}/${d.id}.html" style="font-size:0.8rem;opacity:0.75">${escHtml(meta.open)} ▸</a>
+        <a href="docs/${lang.id}/${d.id}.html" style="font-size:0.8rem;opacity:0.75">${escHtml(meta.view || meta.open)} ▸</a>
       </article>`).join("");
   const html = `<!DOCTYPE html>
 <html lang="${lang.id}" dir="${dir}">

@@ -48,6 +48,7 @@ const BASE = "https://daeryundf2-prog.github.io/omni-store";
 const run = `
 const escH = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
 for (const d of DOC_TYPES) {
+  activeDoc = d;
   Object.keys(formState).forEach(k => delete formState[k]);
   Object.assign(formState, SAMPLES[d.id] || {});
   for (const f of d.fields) if (f.key && !(f.key in formState)) {
@@ -70,7 +71,7 @@ for (const d of DOC_TYPES) {
       }
       nativeTitle = (res + run).trim();
     }
-    const text = html.replace(/<br\\s*\\/?>/g, "\\n").replace(/<\\/(p|tr|h[12]|li|div)>/g, "\\n").replace(/<[^>]+>/g, " ").replace(/[ \\t]+/g, " ").replace(/\\n\\s+/g, "\\n").replace(/\\n{3,}/g, "\\n\\n").trim();
+    const text = html.replace(/<br\\s*\\/?>/g, "\\n").replace(/<\\/(p|tr|h[12]|li|div)>/g, "\\n").replace(/<[^>]+>/g, " ").replace(/&#39;/g, "'").replace(/&quot;/g, '"').replace(/&amp;/g, "&").replace(/[ \\t]+/g, " ").replace(/\\n\\s+/g, "\\n").replace(/\\n{3,}/g, "\\n\\n").trim();
     const fieldLabels = d.fields.filter(f => f.key).map(f => f.label.replace(/\\s*\\*\\s*$/, "").replace(/\\s*\\(.*$/, ""));
     __OUT.pages.push({ id: d.id, cat: d.cat, koName: d.name, lang: l, nativeTitle, text: text.slice(0, 3500), fieldLabels, usage: d.usageNote || "", price: docPrice(d), free: (STUDIO.freeDocs || []).includes(d.id) });
   }
@@ -107,10 +108,10 @@ const css = `
 const CAT_GUIDE_EN = {
   contract: { when: ["When parties need to fix rights and obligations in writing"], tips: ["Make key terms (amount, deadline, scope) measurable", "Review all clauses with the counterparty before signing"], caution: "Changes after signing require mutual consent — review thoroughly at drafting." },
   notice: { when: ["When you need a documented formal demand or notice"], tips: ["Send by a method that preserves proof of delivery", "State demands and deadlines specifically"], caution: "Notice documents become key evidence in later disputes — keep statements factual." },
-  legal: { when: ["When you need documents for official proceedings"], tips: ["Confirm the competent authority before filing", "State facts chronologically and objectively"], caution: "False statements in official filings can have consequences — consider professional review for significant matters." },
+  litigation: { when: ["When you need documents for official proceedings"], tips: ["Confirm the competent authority before filing", "State facts chronologically and objectively"], caution: "False statements in official filings can have consequences — consider professional review for significant matters." },
   realestate: { when: ["When fixing rights in a property transaction or lease"], tips: ["Check the title register before signing", "Be explicit about amounts, payment dates and handover date"], caution: "For high-value deals, use the official standard contract and get professional review." },
-  work: { when: ["When you need written documents in an employment relationship"], tips: ["Don't omit statutorily required items", "Each party keeps a signed counterpart"], caution: "Mandatory labor law overrides contract terms that fall below legal minimums." },
-  personal: { when: ["When recording personal rights and obligations in writing"], tips: ["Record party details and dates accurately", "Keep signed originals safe"], caution: "For sensitive family or inheritance matters, professional advice is recommended." },
+  labor: { when: ["When you need written documents in an employment relationship"], tips: ["Don't omit statutorily required items", "Each party keeps a signed counterpart"], caution: "Mandatory labor law overrides contract terms that fall below legal minimums." },
+  family: { when: ["When recording personal rights and obligations in writing"], tips: ["Record party details and dates accurately", "Keep signed originals safe"], caution: "For sensitive family or inheritance matters, professional advice is recommended." },
   business: { when: ["When issuing business, accounting or trade documents"], tips: ["Double-check amounts and quantities", "Record issue date and party details correctly"], caution: "Documents used for tax or accounting must meet statutory requirements." }
 };
 
