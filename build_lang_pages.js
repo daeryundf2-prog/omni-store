@@ -78,6 +78,7 @@ for (const lang of LANGUAGES) {
         <h3>${escHtml(d.name)}</h3>
         <div class="price">₩${(STUDIO.prices && STUDIO.prices[d.id] || d.price || STUDIO.priceKrw).toLocaleString()}</div>
         <a href="studio.html?doc=${d.id}&lang=${lang.id}">${escHtml(meta.open)}</a>
+        <a href="docs/${lang.id}/${d.id}.html" style="font-size:0.8rem;opacity:0.75">${escHtml(meta.open)} ▸</a>
       </article>`).join("");
   const html = `<!DOCTYPE html>
 <html lang="${lang.id}" dir="${dir}">

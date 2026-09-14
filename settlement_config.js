@@ -70,7 +70,24 @@ window.OMNI_SETTLEMENT = {
     unlockDigests: [
       // 전 문서 패스 코드 (OmniStudio.mintCode("주문-이메일")로 발급)
       "s907ct", "1h1c9aa", "1wdkqwz", "80g21f",
-      "otmwjw", "zhm412", "1st1syp", "4kv1yh"
+      "otmwjw", "zhm412", "1st1syp", "4kv1yh",
+      /* pass-batch-02 사전발급 40개 — 순서대로 발급 후 사용 표시:
+       * OMNI-1TB5Z2H OMNI-17CL8GA OMNI-LE0HU3 OMNI-1YGJT70 OMNI-1CHZ2KT
+       * OMNI-QJEBYM OMNI-4KTLCF OMNI-1HNCWPC OMNI-VOS635 OMNI-9Q7FGY
+       * OMNI-KU9Y8Q OMNI-1XWT9LN OMNI-1BY8IZG OMNI-PZNSD9 OMNI-4131R2
+       * OMNI-1H3MD3Z OMNI-V51MHS OMNI-96GVVL OMNI-1M9078I OMNI-10AFGMB
+       * OMNI-6GE3NF OMNI-1JIXF0C OMNI-XKCOE5 OMNI-BLRXRY OMNI-1OOB94V
+       * OMNI-12PQIIO OMNI-GR5RWH OMNI-1TTP39E OMNI-17V4CN7 OMNI-LWJM10
+       * OMNI-1R3MB18 OMNI-1551KF1 OMNI-J6GTSU OMNI-1W9055R OMNI-1AAFEJK
+       * OMNI-OBUNXD OMNI-2D9XB6 OMNI-1FFT8O3 OMNI-TH8I1W OMNI-7INRFP */
+      "4b1w2d","1klmw0s","s2a4qe","7nj22j","1sh2bd8",
+      "verar1","co32rx","1vtc0hl","yr2wij","g075e4",
+      "rqhbsw","7bq164","1s51z9v","v2yhzh","c505rm",
+      "1vagyen","y80dzd","fhhk6r","1ymkv50","1g104ub",
+      "dvivzi","1x0uaii","zyj46s","lqyjqg","1bzjdl",
+      "1hmfjii","p32mck","4obba7","1kyjm4f","sfjs3k",
+      "2qcxar","1j0l29f","qhl8i0","62gu1e","1r13t5k",
+      "tyuxud","b7z0kk","1udff68","xaz07e","ekg6l7"
     ],
     /* 문서별 단건 코드 — 특정 문서만 해제.
      * 발급: OmniStudio.mintCode("주문-이메일", "lease") → digest를 아래 해당 문서 키에 추가
