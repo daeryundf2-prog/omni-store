@@ -68,15 +68,23 @@ window.OMNI_SETTLEMENT = {
     //   OMNI-LNAR7T, OMNI-12350IY, OMNI-1IIZ9U3, OMNI-1YYTJ58,
     //   OMNI-GDJQH9, OMNI-WTDZSE, OMNI-1D9893J, OMNI-1TP2IEO
     unlockDigests: [
+      // 전 문서 패스 코드 (OmniStudio.mintCode("주문-이메일")로 발급)
       "s907ct", "1h1c9aa", "1wdkqwz", "80g21f",
       "otmwjw", "zhm412", "1st1syp", "4kv1yh"
     ],
+    /* 문서별 단건 코드 — 특정 문서만 해제.
+     * 발급: OmniStudio.mintCode("주문-이메일", "lease") → digest를 아래 해당 문서 키에 추가
+     *   docDigests: { "lease": ["digest1", "digest2"], "nda": ["..."] } */
+    docDigests: {},
     /* Gumroad 자동 발급 (선택):
      * Gumroad에 "문서 스튜디오 원본 해제" 상품을 만들고 License key를 켜면
      * 결제 즉시 키가 발급되고 스튜디오에서 무인 검증된다 (수동 코드 발급 불필요).
      *   gumroadUrl        — 상품 구매 링크 (주문 모달에 표시)
      *   gumroadProductId  — 상품의 product_id (라이선스 검증 API용) */
-    gumroadProductId: "",
-    gumroadUrl: ""
+    gumroadProductId: "",   // 무제한 패스 상품 → 해제 시 전 문서 적용
+    gumroadUrl: "",
+    /* 문서별 Gumroad 상품 (선택): 해당 문서만 해제
+     *   gumroadDocProductIds: { "lease": "prod_id_lease", "nda": "prod_id_nda" } */
+    gumroadDocProductIds: {}
   }
 };

@@ -1126,6 +1126,8 @@ const STUDIO_DEFAULTS = {
   contactEmail: "daeryundf2@gmail.com",
   unlockSalt: "omnistudio-v1",
   unlockDigests: [],
+  docDigests: {},
+  gumroadDocProductIds: {},
   gumroadProductId: "",
   gumroadUrl: "",
   prices: {}
@@ -3775,7 +3777,9 @@ const DOC_TYPES = [
 const BLANK = '<span class="blank">＿＿＿＿</span>';
 let activeDoc = DOC_TYPES[0];
 let curLang = "ko";
-let unlocked = localStorage.getItem("omni_studio_unlocked") === "1";
+let unlockedAll = localStorage.getItem("omni_studio_unlocked_all") === "1" || localStorage.getItem("omni_studio_unlocked") === "1";
+let unlockedDocs = new Set(JSON.parse(localStorage.getItem("omni_studio_unlocked_docs") || "[]"));
+function isUnlocked() { return unlockedAll || unlockedDocs.has(activeDoc.id); }
 let currentOrderId = "";
 const formState = {};
 
@@ -3828,9 +3832,10 @@ function djb2(str) {
  * code를 고객에게 보내기 전에 digest를 settlement_config.js의
  * studio.unlockDigests에 추가하고 배포해야 검증이 통과한다.
  * (unlockDigests에 없는 digest의 코드는 모두 거부된다) */
-function mintCode(seed) {
-  const code = "OMNI-" + djb2(String(seed) + (STUDIO.unlockSalt || "")).toString(36).toUpperCase();
-  return { code, digest: djb2(code).toString(36) };
+function mintCode(seed, docId) {
+  const scope = docId ? ":" + docId : ":all";
+  const code = "OMNI-" + djb2(String(seed) + (STUDIO.unlockSalt || "") + scope).toString(36).toUpperCase();
+  return { code, digest: djb2(code).toString(36), scope: docId || "all" };
 }
 /* 임의 코드 문자열의 digest — 코드 수기 발급 후 등록용. */
 function digestFor(code) {
@@ -3839,19 +3844,22 @@ function digestFor(code) {
 function verifyCode(code) {
   const normalized = code.trim().toUpperCase();
   if (!/^OMNI-[0-9A-Z]{4,8}$/.test(normalized)) return false;
-  return (STUDIO.unlockDigests || []).includes(djb2(normalized).toString(36));
+  if ((STUDIO.unlockDigests || []).includes(djb2(normalized).toString(36))) return "all";
+  const dd = (STUDIO.docDigests || {})[activeDoc.id] || [];
+  return dd.includes(djb2(normalized).toString(36)) ? "doc" : false;
 }
 
 /* Gumroad 라이선스 자동 검증 — studio.gumroadProductId가 설정되면
  * 구매 즉시 발급되는 라이선스 키로 무인 잠금해제가 된다.
  * (Gumroad의 licenses/verify 엔드포인트는 CORS 허용) */
-async function verifyGumroadLicense(key) {
-  if (!STUDIO.gumroadProductId) return false;
+async function verifyGumroadLicense(key, productId) {
+  const pid = productId || STUDIO.gumroadProductId;
+  if (!pid) return false;
   const res = await fetch("https://api.gumroad.com/v2/licenses/verify", {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body: new URLSearchParams({
-      product_id: STUDIO.gumroadProductId,
+      product_id: pid,
       license_key: key.trim(),
       increment_uses_count: "false"
     })
@@ -8700,7 +8708,7 @@ function render() {
   stampDocHash();
   markMissing();
   updateProgress();
-  if (!unlocked) buildWatermark();
+  if (!isUnlocked()) buildWatermark();
 }
 /* 필수 항목 미입력 표시 — 빈 필드를 붉게 표시하고 상태바에 개수 노출 */
 function missingRequired() {
@@ -8839,8 +8847,9 @@ function updateStatus() {
   const langTag = ` · 출력 언어: ${LANG_NAME[curLang]}`;
   const missing = missingRequired();
   const missTag = missing > 0 ? ` · <span class="miss-badge">⚠️ 필수 ${missing}항목 미입력</span>` : "";
-  document.body.classList.toggle("locked", !unlocked);
-  if (unlocked) {
+  const unl = isUnlocked();
+  document.body.classList.toggle("locked", !unl);
+  if (unl) {
     status.innerHTML = `<span class="unlock-badge">✓ 원본 잠금 해제됨</span>${langTag}${missTag}`;
     btn.textContent = "⬇ 원본 다운로드";
     btn.classList.add("unlocked");
@@ -9570,7 +9579,7 @@ function fillSample() {
   showToast("예시 데이터로 채웠습니다 — 실제 정보로 바꿔치기하세요.");
 }
 function printPreview() {
-  if (!unlocked) {
+  if (!isUnlocked()) {
     showToast("무료 미리보기는 화면에서만 제공됩니다. 인쇄·다운로드는 원본 잠금 해제 후 이용해 주세요.");
     return;
   }
@@ -9582,7 +9591,7 @@ function onOriginalClick() {
   if (missing > 0) {
     showToast(`⚠️ 필수 항목 ${missing}개가 비어 있습니다 — 문서에 공란이 표시됩니다.`);
   }
-  if (unlocked) { downloadOriginal(); return; }
+  if (isUnlocked()) { downloadOriginal(); return; }
   track("original_click", activeDoc.id);
   if (!STUDIO.salesEnabled) { alert("현재 결제 채널 준비 중입니다. 문의: " + (STUDIO.contactEmail || "")); return; }
   openOrderModal();
@@ -9637,7 +9646,7 @@ function openOrderModal() {
     passEl.innerHTML = `💡 <b>전 문서 무제한 패스 ${krw(STUDIO.passPriceKrw)}</b> — 이 문서만 ${krw(docPrice(activeDoc))}에 살 수도 있지만, 패스 하나로 모든 문서(신규 추가 포함)를 무제한 출력합니다. 주문 시 "패스 구매"라고만 적어주세요.`;
   }
   document.getElementById("pay-instructions").textContent =
-    "결제 확인 후 해제 코드가 발급됩니다. 코드는 이 브라우저에 저장되어 이후 동일 문서 출력에 계속 적용됩니다.";
+    "결제 확인 후 해제 코드가 발급됩니다. 단건 코드는 이 문서에만, 패스 코드는 전 문서에 적용되며 이 브라우저에 저장됩니다.";
   document.getElementById("order-modal").classList.add("open");
 }
 function closeOrderModal() { document.getElementById("order-modal").classList.remove("open"); }
@@ -9647,13 +9656,22 @@ document.addEventListener("keydown", e => {
 async function tryUnlock() {
   const input = document.getElementById("unlock-code");
   const code = input.value;
-  if (verifyCode(code) || await tryGumroad(code)) {
+  const scope = verifyCode(code) || await tryGumroad(code);
+  if (scope) {
     track("unlock_ok", activeDoc.id);
-    unlocked = true;
-    localStorage.setItem("omni_studio_unlocked", "1");
+    if (scope === "all") {
+      unlockedAll = true;
+      localStorage.setItem("omni_studio_unlocked_all", "1");
+    } else {
+      unlockedDocs.add(activeDoc.id);
+      localStorage.setItem("omni_studio_unlocked_docs", JSON.stringify([...unlockedDocs]));
+    }
     closeOrderModal();
     updateStatus();
-    showToast("✓ 잠금이 해제되었습니다. 원본을 인쇄·다운로드할 수 있습니다.");
+    render();
+    showToast(scope === "all"
+      ? "✓ 전 문서 잠금이 해제되었습니다. 원본을 인쇄·다운로드할 수 있습니다."
+      : `✓ 「${activeDoc.name}」 잠금이 해제되었습니다. 원본을 인쇄·다운로드할 수 있습니다.`);
   } else {
     track("unlock_fail", activeDoc.id);
     showToast("⚠️ 유효하지 않은 해제 코드·라이선스 키입니다. 주문번호를 확인해 주세요.");
@@ -9661,9 +9679,12 @@ async function tryUnlock() {
   }
 }
 async function tryGumroad(code) {
-  if (!STUDIO.gumroadProductId || !code.trim()) return false;
+  if (!code.trim()) return false;
   try {
-    return await verifyGumroadLicense(code);
+    const docPid = (STUDIO.gumroadDocProductIds || {})[activeDoc.id];
+    if (docPid && await verifyGumroadLicense(code, docPid)) return "doc";
+    if (STUDIO.gumroadProductId && await verifyGumroadLicense(code)) return "all";
+    return false;
   } catch (_) {
     return false; // 네트워크 오류 시 로컬 코드만 유효
   }
@@ -9682,9 +9703,9 @@ function showToast(msg) {
 }
 
 /* 운영자용: 콘솔에서
- *   OmniStudio.mintCode("주문번호-이메일")  → {code, digest}
- * digest를 settlement_config.js의 studio.unlockDigests에 추가·배포 후
- * code를 고객에게 발급한다. 임의 코드의 digest는 OmniStudio.digestFor(code). */
+ *   패스 코드: OmniStudio.mintCode("주문번호-이메일")        → digest를 studio.unlockDigests에 추가
+ *   단건 코드: OmniStudio.mintCode("주문번호-이메일", "문서id") → digest를 studio.docDigests["문서id"]에 추가
+ * 추가·배포 후 code를 고객에게 발급한다. 임의 코드의 digest는 OmniStudio.digestFor(code). */
 function checkConfig() {
   const issues = [];
   if (!STUDIO.salesEnabled) issues.push("salesEnabled: false — 판매 비활성");

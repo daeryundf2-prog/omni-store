@@ -79,12 +79,16 @@ professional review for consequential matters.
    스튜디오가 Gumroad API로 그 키를 검증할 수 있습니다.
 
 두 상품을 따로 만들었다면 **둘 다** 라이선스 키를 켜야 합니다.
-(패스 키로 해제하면 모든 문서가 열리는 현재 로직상,
-단건 상품과 패스 상품을 product_id 하나로 묶으려면
-패스 상품만 연결하고 단건은 "수량 1"로 운영하는 방법도 있습니다.
-가장 단순한 운영: **패스 상품 1개만 만들어서 연결** → 모든 결제가 패스.
-단건 판매를 유지하려면 `studio.html`의 `verifyGumroadLicense`가
-호출되는 `gumroadProductId`를 단건 상품 것으로 넣으세요.)
+
+해제 스코프 (2026-09-14 변경):
+- **패스 상품 키** → `gumroadProductId`로 검증 → **전 문서 해제**
+- **단건 상품 키** → `gumroadDocProductIds[문서id]`로 검증 → **해당 문서만 해제**
+
+운영 옵션:
+- **가장 단순**: 패스 상품 1개만 연결 → 모든 결제가 전 문서 해제
+- **단건+패스 병행**: 패스는 `gumroadProductId`, 단건 상품은
+  `gumroadDocProductIds`에 문서 id별 product_id를 등록
+  (예: `{ "nda": "단건상품ID" }` — 그 문서 화면에서 키 입력 시 그 문서만 해제)
 
 ## 3단계: 설정 파일에 값 넣기
 
