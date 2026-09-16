@@ -238,6 +238,7 @@
   <url><loc>https://daeryundf2-prog.github.io/omni-store/docs/ko/inheritance-split.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://daeryundf2-prog.github.io/omni-store/docs/ko/defect-claim.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://daeryundf2-prog.github.io/omni-store/docs/ko/eviction-notice.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://daeryundf2-prog.github.io/omni-store/docs/en/eviction-notice.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://daeryundf2-prog.github.io/omni-store/docs/ko/deposit-return.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://daeryundf2-prog.github.io/omni-store/docs/ko/privacy-consent.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://daeryundf2-prog.github.io/omni-store/docs/ko/partnership.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
@@ -302,6 +303,7 @@
   <url><loc>https://daeryundf2-prog.github.io/omni-store/docs/ko/payslip.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://daeryundf2-prog.github.io/omni-store/docs/en/payslip.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://daeryundf2-prog.github.io/omni-store/docs/ko/lease-termination.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://daeryundf2-prog.github.io/omni-store/docs/en/lease-termination.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://daeryundf2-prog.github.io/omni-store/docs/ko/consumer-claim.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://daeryundf2-prog.github.io/omni-store/docs/ko/apology-letter.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://daeryundf2-prog.github.io/omni-store/docs/en/apology-letter.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
@@ -359,4 +361,13 @@
   <url><loc>https://daeryundf2-prog.github.io/omni-store/docs/en/copyright-assignment.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://daeryundf2-prog.github.io/omni-store/docs/ko/pet-care.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://daeryundf2-prog.github.io/omni-store/docs/ko/board-minutes.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://daeryundf2-prog.github.io/omni-store/docs/ko/shareholder-proxy.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://daeryundf2-prog.github.io/omni-store/docs/ko/debt-assignment.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://daeryundf2-prog.github.io/omni-store/docs/ko/statement-apology.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://daeryundf2-prog.github.io/omni-store/docs/ko/purchase-request.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://daeryundf2-prog.github.io/omni-store/docs/ko/business-plan.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://daeryundf2-prog.github.io/omni-store/docs/en/affidavit-en.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://daeryundf2-prog.github.io/omni-store/docs/en/liability-waiver-en.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://daeryundf2-prog.github.io/omni-store/docs/en/roommate-agreement-en.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://daeryundf2-prog.github.io/omni-store/docs/en/offer-letter-en.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 </urlset>

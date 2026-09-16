@@ -71,7 +71,7 @@ for (const d of DOC_TYPES) {
       }
       nativeTitle = (res + run).trim();
     }
-    const text = html.replace(/<br\\s*\\/?>/g, "\\n").replace(/<\\/(p|tr|h[12]|li|div)>/g, "\\n").replace(/<[^>]+>/g, " ").replace(/&#39;/g, "'").replace(/&quot;/g, '"').replace(/&amp;/g, "&").replace(/[ \\t]+/g, " ").replace(/\\n\\s+/g, "\\n").replace(/\\n{3,}/g, "\\n\\n").trim();
+    const text = html.replace(/<br\\s*\\/?>/g, "\\n").replace(/<\\/(p|tr|h[12]|li|div)>/g, "\\n").replace(/<[^>]+>/g, " ").replace(/&#39;/g, "'").replace(/&quot;/g, '"').replace(/&nbsp;/g, " ").replace(/&amp;/g, "&").replace(/[ \\t]+/g, " ").replace(/\\n\\s+/g, "\\n").replace(/\\n{3,}/g, "\\n\\n").trim();
     const fieldLabels = d.fields.filter(f => f.key).map(f => f.label.replace(/\\s*\\*\\s*$/, "").replace(/\\s*\\(.*$/, ""));
     __OUT.pages.push({ id: d.id, cat: d.cat, koName: d.name, lang: l, nativeTitle, text: text.slice(0, 3500), fieldLabels, usage: d.usageNote || "", price: docPrice(d), free: (STUDIO.freeDocs || []).includes(d.id) });
   }

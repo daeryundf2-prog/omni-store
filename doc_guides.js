@@ -281,7 +281,67 @@ module.exports = {
       caution: "의사록은 등기 신청 등 공적 절차의 첨부 문서로도 쓰이므로 결의 문구를 정관·상법 요건에 맞게 정확히 기재하세요.",
       faq: [["의사록 없이 결의하면?", "결의 자체가 무효가 되진 않지만 등기·감사 시 입증이 안 됩니다."]]
     }
-  }
+  },
+  "shareholder-proxy": {
+    ko: {
+      when: ["주주총회에 직접 출석하지 못해 대리인에게 의결권을 위임할 때"],
+      tips: ["정관에 대리인 자격 제한(주주·친족 등)이 있는지 먼저 확인", "안건별 찬반을 지정하지 않으면 대리인 재량에 맡겨집니다", "총회 당일 대리인이 원본 또는 사본을 지참해야 하는 경우가 대부분"],
+      caution: "의결권 대리행사의 범위를 넘어선 행위는 위임인에게 효력이 없을 수 있습니다.",
+      law: "상법 제368조의4 — 주주는 대리인으로 하여금 의결권을 행사하게 할 수 있음.",
+      faq: [["위임장 없이 대리 출석이 되나요?", "서면 위임장 없는 대리 출석은 인정되지 않습니다."]]
+    }
+  },
+  "debt-assignment": {
+    ko: {
+      when: ["보유 채권을 제3자에게 양도하고 채무자에게 알릴 때"],
+      tips: ["채권을 특정할 수 있게 기재 — 계약 일자·원금·이자 등", "반드시 내용증명으로 발송 — 통지 도달이 대항요건", "확정일자 있는 양도 통지는 제3자에 대한 대항요건이 됩니다"],
+      caution: "통지 전에 채무자가 원채권자에게 변제하면 유효하게 소멸합니다 — 양도 즉시 통지하세요.",
+      law: "민법 제450조 — 채권양도는 양도인이 채무자에게 통지하거나 채무자가 승낙해야 대항 가능.",
+      faq: [["통지를 안내면?", "채권양도 자체는 유효하지만 채무자·제3자에게 대항할 수 없습니다."]]
+    }
+  },
+  "business-plan": {
+    ko: {
+      when: ["정부 지원사업 지원, 투자유치, 금융기관 대출, 내부 승인이 필요할 때"],
+      tips: ["개요는 3~5문장으로 — 읽는 사람이 1분 안에 사업을 이해해야 합니다", "수치는 보수적으로 — 과장된 매출 전망은 신뢰를 깎습니다", "지원사업별 지정 양식이 있으면 반드시 그 양식을 사용"],
+      caution: "사업계획서에 기재한 실적·전망이 지원사업 심사에서 허위로 판단되면 선정 취소·환수 대상이 됩니다.",
+      faq: [["몇 페이지가 적당한가요?", "요약 1장 + 본문 5~10장이 일반적입니다 — 심사위원은 짧고 명확한 계획서를 선호합니다."]]
+    }
+  },
+  "affidavit-en": {
+    en: {
+      when: ["Verifying identity, residency, or facts under oath — name discrepancies, lost documents, address proof"],
+      tips: ["Write one fact per line — the generator numbers them automatically", "Most recipients require notarization — sign only in front of the notary", "Keep statements strictly factual; speculation weakens the affidavit"],
+      caution: "A false statement in a sworn affidavit can constitute perjury. Never sign before a notary is present.",
+      law: "Requirements vary by state and by the receiving institution — many accept a standard notarized affidavit.",
+      faq: [["Is notarization always required?", "Almost always — the affidavit's legal force comes from the sworn oath administered by the notary."]]
+    }
+  },
+  "liability-waiver-en": {
+    en: {
+      when: ["Before activities with inherent risk — gyms, events, rentals, services performed on-site"],
+      tips: ["List specific known risks — generic 'all risks' language is weaker", "Minors always need a parent/guardian signature", "Keep the release conspicuous — bold text and clear placement improve enforceability"],
+      caution: "Waivers cannot release liability for gross negligence or intentional harm in any state. Some states (e.g., for certain activities) restrict waivers entirely.",
+      faq: [["Is a waiver always enforceable?", "No — enforceability varies by state and activity. It is a strong deterrent but not a guarantee."]]
+    }
+  },
+  "roommate-agreement-en": {
+    en: {
+      when: ["Sharing a rental with roommates who may or may not all be on the lease"],
+      tips: ["Everyone named should sign — verbal splits cause the most disputes", "Specify who is on the lease vs. who is a subtenant", "Write the move-out notice period explicitly"],
+      caution: "This agreement binds only the roommates. The landlord can still hold all leaseholders jointly liable regardless of internal splits.",
+      faq: [["Does this override the lease?", "No — it is an internal agreement between roommates. The lease controls the relationship with the landlord."]]
+    }
+  },
+  "offer-letter-en": {
+    en: {
+      when: ["Extending a formal written offer before the full employment agreement"],
+      tips: ["State salary, start date and contingencies clearly — ambiguity here causes rescinded-offer disputes", "Include at-will language for US employment", "Set an expiration so the offer does not stay open indefinitely"],
+      caution: "In most states an offer letter can create enforceable obligations — do not promise terms you may not honor.",
+      faq: [["Offer letter vs employment contract?", "The offer letter summarizes key terms; the full contract governs details. They should not contradict each other."]]
+    }
+  },
+
 
 };
 

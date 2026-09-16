@@ -1104,6 +1104,60 @@
         <div class="cat-price" data-doc="board-minutes"></div>
         <button class="btn btn-ghost" onclick="selectDoc('board-minutes');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
       </article>
+      <article class="catalog-card" id="cat-shareholder-proxy" data-cat="business">
+        <h3>주주총회 위임장</h3>
+        <p>대리 출석·의결권 위임. 안건별 찬반 지정 옵션.</p>
+        <div class="cat-price" data-doc="shareholder-proxy"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('shareholder-proxy');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-debt-assignment" data-cat="notice">
+        <h3>채권양도 통지서</h3>
+        <p>민법 §450 대항요건 통지. 양도 채권 표시·변제 계좌 안내.</p>
+        <div class="cat-price" data-doc="debt-assignment"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('debt-assignment');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-statement-apology" data-cat="labor">
+        <h3>시말서</h3>
+        <p>징계·문책 절차 경위 소명. 사실·소명 분리 구조.</p>
+        <div class="cat-price" data-doc="statement-apology"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('statement-apology');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-purchase-request" data-cat="business">
+        <h3>품의서</h3>
+        <p>내부 결재용 지출·구매 승인 요청. 내역 표 자동.</p>
+        <div class="cat-price" data-doc="purchase-request"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('purchase-request');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-business-plan" data-cat="business">
+        <h3>사업계획서</h3>
+        <p>지원사업·투자유치용 표준 구조. 일정·자금 표 자동.</p>
+        <div class="cat-price" data-doc="business-plan"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('business-plan');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-affidavit-en" data-cat="family">
+        <h3>General Affidavit — 미국 진술서</h3>
+        <p>공증 블록 포함 선서 진술서. 사실 항목 자동 번호.</p>
+        <div class="cat-price" data-doc="affidavit-en"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('affidavit-en');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-liability-waiver-en" data-cat="contract">
+        <h3>Liability Waiver — 미국 책임면제 동의</h3>
+        <p>활동 위험 인수·청구 포기·미성년자 보호자 조항.</p>
+        <div class="cat-price" data-doc="liability-waiver-en"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('liability-waiver-en');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-roommate-agreement-en" data-cat="realestate">
+        <h3>Roommate Agreement — 미국 룸메이트</h3>
+        <p>임대료·공과금 분담·하우스 룰·퇴거 통지.</p>
+        <div class="cat-price" data-doc="roommate-agreement-en"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('roommate-agreement-en');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
+      <article class="catalog-card" id="cat-offer-letter-en" data-cat="labor">
+        <h3>Offer Letter — 미국 채용 제안</h3>
+        <p>직위·급여·at-will 조항·조건부 조항 포함.</p>
+        <div class="cat-price" data-doc="offer-letter-en"></div>
+        <button class="btn btn-ghost" onclick="selectDoc('offer-letter-en');document.getElementById('doc-tabs').scrollIntoView({behavior:'smooth'})">작성하기 →</button>
+      </article>
     </div>
   </section>
 
@@ -1873,8 +1927,8 @@ const DOC_TYPES = [
   {
     id: "eviction-notice",
     cat: "realestate",
-    name: "명도·퇴거 통지서",
-    langs: ["ko"],
+    name: "명도·퇴거 통지서 · Notice to Vacate",
+    langs: ["ko", "en"],
     price: STUDIO.priceKrw,
     usageNote: "차임 연체 시 먼저 '연체 차임 지급 최고'를 내용증명으로 보내고, 그래도 불이행하면 계약 해지 + 명도 청구 순서가 안전합니다.",
     fields: [
@@ -1888,15 +1942,15 @@ const DOC_TYPES = [
       { section: "통지 내용" },
       { key: "prop_addr", label: "목적물 소재지", type: "text", required: true },
       { key: "reason", label: "퇴거 사유", type: "select", options: [
-        { v: "expire", label: { ko: "임대차 기간 만료" } },
-        { v: "rent", label: { ko: "차임 연체로 인한 해지" } },
-        { v: "breach", label: { ko: "기타 계약 위반으로 인한 해지" } }
+        { v: "expire", label: { ko: "임대차 기간 만료", en: "expiration of the lease term" } },
+        { v: "rent", label: { ko: "차임 연체로 인한 해지", en: "termination for unpaid rent" } },
+        { v: "breach", label: { ko: "기타 계약 위반으로 인한 해지", en: "termination for breach of the lease" } }
       ]},
       { key: "unpaid", label: "미납 차임 (있으면)", type: "text", hint: "예: 3개월분 1,500,000원" },
       { key: "deadline", label: "명도 기한", type: "text", hint: "예: 본 통지 수령 후 30일 이내" },
       { key: "doc_date", label: "작성 일자", type: "date" }
     ],
-    render: { ko: renderEvictionKo }
+    render: { ko: renderEvictionKo, en: renderEvictionEn }
   },
   {
     id: "deposit-return",
@@ -2888,8 +2942,8 @@ const DOC_TYPES = [
   {
     id: "lease-termination",
     cat: "realestate",
-    name: "임대차 합의해지서",
-    langs: ["ko"],
+    name: "임대차 합의해지서 · Lease Termination",
+    langs: ["ko", "en"],
     price: STUDIO.priceKrw,
     fields: [
       { section: "당사자" },
@@ -2908,7 +2962,7 @@ const DOC_TYPES = [
       { key: "settlement_note", label: "정산 특약", type: "textarea", hint: "예: 공과금 정산 후 보증금 반환" },
       { key: "doc_date", label: "작성일", type: "date" }
     ],
-    render: { ko: renderLeaseTermKo }
+    render: { ko: renderLeaseTermKo, en: renderLeaseTermEn }
   },
   {
     id: "consumer-claim",
@@ -4124,6 +4178,227 @@ const DOC_TYPES = [
     ],
     signers: [{ key: "sig_a", label: "의장 서명" }],
     render: { ko: renderBoardMinutesKo }
+  },
+  {
+    id: "shareholder-proxy",
+    cat: "business",
+    name: "주주총회 위임장 · Shareholder Proxy",
+    langs: ["ko"],
+    price: STUDIO.priceKrw,
+    usageNote: "주주총회 대리 출석용 — 회사 정관·상법상 대리인 자격(주주·친족 제한 등)을 확인하세요. 위임장 원본 또는 사본 제출을 요구하는 경우가 많습니다.",
+    fields: [
+      { section: "주주 (위임인)" },
+      { key: "p_name", label: "주주 성명 *", type: "text", required: true },
+      { key: "p_addr", label: "주소", type: "text" },
+      { key: "shares", label: "보유 주식 수", type: "text", hint: "예: 보통주 1,000주" },
+      { section: "대리인" },
+      { key: "g_name", label: "대리인 성명 *", type: "text", required: true },
+      { key: "g_id", label: "대리인 생년월일·식별정보", type: "text" },
+      { section: "총회 정보" },
+      { key: "co_name", label: "회사명 *", type: "text", required: true },
+      { key: "meet_date", label: "총회 일시·명칭 *", type: "text", required: true, hint: "예: 제○기 정기주주총회 (2026. 3. 27.)" },
+      { key: "scope", label: "위임 범위", type: "select", options: [
+        { v: "all", label: { ko: "모든 안건의 의결권 행사 일임" } },
+        { v: "agenda", label: { ko: "각 안건별 찬반 지정 (아래에 기재)" } }
+      ]},
+      { key: "votes", label: "안건별 찬반 (선택 시)", type: "textarea", hint: "한 줄에 하나씩: 제1호 의안 — 찬성" },
+      { key: "doc_date", label: "작성 일자", type: "date" }
+    ],
+    signers: [{ key: "sig_p", label: "주주 서명" }],
+    render: { ko: renderShareholderProxyKo }
+  },
+  {
+    id: "debt-assignment",
+    cat: "notice",
+    name: "채권양도 통지서 · Notice of Assignment",
+    langs: ["ko"],
+    price: STUDIO.priceKrw,
+    usageNote: "채권을 타인에게 양도한 후 채무자에게 통지하는 문서 — 민법상 채무자에 대한 대항요건입니다. 내용증명으로 보내 도달 사실을 입증 가능하게 하세요.",
+    fields: [
+      { key: "a_name", label: "양도인 (통지인) *", type: "text", required: true },
+      { key: "a_addr", label: "양도인 주소", type: "text" },
+      { key: "b_name", label: "양수인 *", type: "text", required: true },
+      { key: "b_addr", label: "양수인 주소", type: "text" },
+      { key: "debtor", label: "채무자 (수신인) *", type: "text", required: true },
+      { key: "claim_desc", label: "양도 채권의 표시 *", type: "textarea", required: true, hint: "예: 2024. 1. 1.자 금전소비대차계약에 기한 대여금 채권 원금 10,000,000원 및 이자" },
+      { key: "assign_date", label: "양도일", type: "text" },
+      { key: "pay_to", label: "변제 계좌·방법", type: "text", hint: "예: 양수인 명의 ○○은행 계좌 123-45-678901" },
+      { key: "doc_date", label: "작성 일자", type: "date" }
+    ],
+    signers: [{ key: "sig_a", label: "양도인 서명" }],
+    render: { ko: renderDebtAssignKo }
+  },
+  {
+    id: "statement-apology",
+    cat: "labor",
+    name: "시말서 · Explanatory Statement",
+    langs: ["ko"],
+    price: STUDIO.priceKrw,
+    usageNote: "징계·문책 절차에서 경위를 소명하는 문서 — 사실 관계를 객관적으로, 인정하는 범위와 개선 다짐을 구분해 기재하세요. 회사 양식이 있으면 우선 사용합니다.",
+    fields: [
+      { key: "name", label: "성명 *", type: "text", required: true },
+      { key: "dept", label: "부서·직위", type: "text" },
+      { key: "emp_id", label: "사번", type: "text" },
+      { key: "incident", label: "사안 제목 *", type: "text", required: true, hint: "예: 2026. 9. 10.자 지각 및 무단조퇴 건" },
+      { key: "facts", label: "경위 (사실 관계) *", type: "textarea", required: true, hint: "일시·장소·행위를 시간 순서로 객관적으로" },
+      { key: "stance", label: "소명·반성 내용", type: "textarea", hint: "인정하는 부분과 사유, 재발 방지 다짐" },
+      { key: "a_name", label: "수신 (회사·상사) *", type: "text", required: true, hint: "예: ○○부 부장님 귀중" },
+      { key: "doc_date", label: "작성 일자", type: "date" }
+    ],
+    signers: [{ key: "sig_b", label: "작성자 서명" }],
+    render: { ko: renderStatementApologyKo }
+  },
+  {
+    id: "purchase-request",
+    cat: "business",
+    name: "품의서 · Internal Approval Request",
+    langs: ["ko"],
+    price: STUDIO.priceKrw,
+    usageNote: "내부 결재용 지출·구매·진행 승인 요청 문서. 금액·근거·대안 비교를 붙이면 승인이 빨라집니다.",
+    fields: [
+      { key: "title", label: "품의 제목 *", type: "text", required: true, hint: "예: 개발팀 모니터 4대 구매의 건" },
+      { key: "dept", label: "기안 부서", type: "text" },
+      { key: "name", label: "기안자 *", type: "text", required: true },
+      { key: "amount", label: "소요 금액 (숫자)", type: "text", hint: "비우면 금액 없는 품의" },
+      { key: "purpose", label: "목적·필요성 *", type: "textarea", required: true },
+      { key: "details", label: "내역 (한 줄에 하나씩)", type: "textarea", hint: "품목 | 수량 | 단가" },
+      { key: "deadline", label: "희망 처리 기한", type: "text" },
+      { key: "doc_date", label: "기안일", type: "date" }
+    ],
+    signers: [
+      { key: "sig_b", label: "기안자" },
+      { key: "sig_a", label: "결재자" }
+    ],
+    render: { ko: renderPurchaseRequestKo }
+  },
+  {
+    id: "business-plan",
+    cat: "business",
+    name: "사업계획서 · Business Plan",
+    langs: ["ko"],
+    price: STUDIO.priceKrw,
+    usageNote: "지원사업·투자유치·내부 승인용 표준 사업계획서 구조. 공모 사업별 지정 양식이 있으면 그 양식을 우선 사용하세요.",
+    fields: [
+      { key: "co_name", label: "회사·사업자명 *", type: "text", required: true },
+      { key: "founder", label: "대표자", type: "text" },
+      { key: "biz_name", label: "사업·제품명 *", type: "text", required: true },
+      { key: "summary", label: "사업 개요 *", type: "textarea", required: true, hint: "무엇을, 누구에게, 왜 — 3~5문장" },
+      { key: "market", label: "시장·고객 분석", type: "textarea", hint: "목표 시장 규모, 고객의 문제" },
+      { key: "offering", label: "제품·서비스 내용", type: "textarea", hint: "핵심 기능·차별점" },
+      { key: "revenue_model", label: "수익 모델", type: "textarea", hint: "가격·판매 채널·기대 매출 구조" },
+      { key: "marketing", label: "마케팅·판매 계획", type: "textarea" },
+      { key: "schedule", label: "추진 일정", type: "textarea", hint: "한 줄에 하나씩: 기간 | 내용" },
+      { key: "funding", label: "소요 자금·조달 계획", type: "textarea", hint: "항목 | 금액" },
+      { key: "doc_date", label: "작성 일자", type: "date" }
+    ],
+    signers: [{ key: "sig_a", label: "대표자 서명" }],
+    render: { ko: renderBusinessPlanKo }
+  },
+  {
+    id: "affidavit-en",
+    cat: "family",
+    name: "General Affidavit · 진술서",
+    langs: ["en"],
+    price: STUDIO.priceKrw,
+    usageNote: "A sworn written statement of facts — used for name verification, residency, loss of documents and more. Most uses require notarization; check the receiving party's requirements.",
+    fields: [
+      { key: "state", label: "State *", type: "text", required: true },
+      { key: "county", label: "County *", type: "text", required: true },
+      { key: "a_name", label: "Affiant name *", type: "text", required: true },
+      { key: "a_addr", label: "Affiant address", type: "text" },
+      { key: "a_id", label: "Date of birth / ID", type: "text" },
+      { key: "facts", label: "Sworn statement of facts *", type: "textarea", required: true, hint: "One fact per line — numbered automatically" },
+      { key: "doc_date", label: "Date", type: "date" }
+    ],
+    signers: [
+      { key: "sig_a", label: "Affiant signature", enLabel: "Affiant signature" }
+    ],
+    render: { en: renderAffidavitEn }
+  },
+  {
+    id: "liability-waiver-en",
+    cat: "contract",
+    name: "Release of Liability / Waiver",
+    langs: ["en"],
+    price: STUDIO.priceKrw,
+    usageNote: "Activity waiver and release — for events, sports, property use and services. Enforceability varies by state and cannot cover gross negligence; have a professional review for high-risk activities.",
+    fields: [
+      { key: "b_name", label: "Releasor (participant) *", type: "text", required: true },
+      { key: "b_id", label: "Releasor DOB / ID", type: "text" },
+      { key: "a_name", label: "Releasee (business/organizer) *", type: "text", required: true },
+      { key: "activity", label: "Activity covered *", type: "textarea", required: true, hint: "e.g. Participation in the 2026 Seoul marathon training program including all related events" },
+      { key: "act_date", label: "Activity date / period", type: "text" },
+      { key: "risks", label: "Known risks", type: "textarea", hint: "One per line — physical injury, property damage..." },
+      { key: "minor", label: "Participant is a minor", type: "select", options: [
+        { v: "no", label: { en: "No — adult participant" } },
+        { v: "yes", label: { en: "Yes — parent/guardian signs" } }
+      ]},
+      { key: "parent", label: "Parent/guardian name (if minor)", type: "text" },
+      { key: "law", label: "Governing law (state)", type: "text" },
+      { key: "doc_date", label: "Date", type: "date" }
+    ],
+    signers: [
+      { key: "sig_b", label: "Releasor signature", enLabel: "Releasor signature" }
+    ],
+    render: { en: renderWaiverEn }
+  },
+  {
+    id: "roommate-agreement-en",
+    cat: "realestate",
+    name: "Roommate Agreement",
+    langs: ["en"],
+    price: STUDIO.priceKrw,
+    usageNote: "House rules and cost-sharing between roommates — this binds the roommates, not the landlord. Pair it with the underlying lease; it does not replace it.",
+    fields: [
+      { key: "roommates", label: "Roommates (one per line) *", type: "textarea", required: true, hint: "Full names, one per line" },
+      { key: "property", label: "Rental property address *", type: "text", required: true },
+      { key: "rent", label: "Total monthly rent *", type: "text", required: true },
+      { key: "split", label: "Rent split", type: "textarea", hint: "One per line: Name | amount or %" },
+      { key: "utilities", label: "Utilities split", type: "text", hint: "e.g. Split equally / Internet paid by..." },
+      { key: "deposit", label: "Security deposit arrangement", type: "text" },
+      { key: "chores", label: "Chores / house rules", type: "textarea", hint: "One per line" },
+      { key: "notice_days", label: "Move-out notice (days)", type: "text", hint: "e.g. 30" },
+      { key: "doc_date", label: "Date", type: "date" }
+    ],
+    signers: [{ key: "sig_a", label: "Roommate signatures", enLabel: "Signatures" }],
+    render: { en: renderRoommateEn }
+  },
+  {
+    id: "offer-letter-en",
+    cat: "labor",
+    name: "Employment Offer Letter",
+    langs: ["en"],
+    price: STUDIO.priceKrw,
+    usageNote: "Written job offer before the formal contract — at-will language included for US use. This letter supplements, and does not replace, the employment agreement.",
+    fields: [
+      { key: "a_name", label: "Company *", type: "text", required: true },
+      { key: "a_addr", label: "Company address", type: "text" },
+      { key: "b_name", label: "Candidate name *", type: "text", required: true },
+      { key: "b_addr", label: "Candidate address", type: "text" },
+      { key: "title", label: "Position title *", type: "text", required: true },
+      { key: "dept", label: "Department / reporting to", type: "text" },
+      { key: "start_date", label: "Start date *", type: "date", required: true },
+      { key: "salary", label: "Salary *", type: "text", required: true, hint: "e.g. $85,000 per year" },
+      { key: "pay_freq", label: "Pay frequency", type: "select", options: [
+        { v: "biweekly", label: { en: "bi-weekly" } },
+        { v: "monthly", label: { en: "monthly" } },
+        { v: "semi", label: { en: "semi-monthly" } }
+      ]},
+      { key: "emp_type", label: "Employment type", type: "select", options: [
+        { v: "full", label: { en: "full-time" } },
+        { v: "part", label: { en: "part-time" } },
+        { v: "contract", label: { en: "fixed-term contract" } }
+      ]},
+      { key: "benefits", label: "Benefits summary", type: "textarea", hint: "Health insurance, 401(k), PTO days..." },
+      { key: "contingency", label: "Contingencies", type: "textarea", hint: "e.g. Background check, work authorization" },
+      { key: "expiry", label: "Offer expires", type: "text", hint: "e.g. 5 business days from the date above" },
+      { key: "doc_date", label: "Date", type: "date" }
+    ],
+    signers: [
+      { key: "sig_a", label: "Employer signature", enLabel: "Employer signature" },
+      { key: "sig_b", label: "Candidate signature", enLabel: "Candidate signature" }
+    ],
+    render: { en: renderOfferLetterEn }
   },
 
 ];
@@ -9588,7 +9863,308 @@ function renderBoardMinutesKo() {
     </div>`;
 }
 
+/* --- 주주총회 위임장 --- */
+function renderShareholderProxyKo() {
+  const votes = lines("votes");
+  return `
+    <h1 class="doc-title">주 주 총 회 위 임 장</h1>
+    <table class="parties">
+      <tr><td class="lbl">위임인 (주주)</td><td>${valOr("p_name")}<br/>${valOr("p_addr")}</td></tr>
+      <tr><td class="lbl">보유 주식</td><td>${valOr("shares")}</td></tr>
+      <tr><td class="lbl">대리인</td><td>${valOr("g_name")}${val("g_id") ? " (" + esc(val("g_id")) + ")" : ""}</td></tr>
+      <tr><td class="lbl">총회</td><td>${valOr("co_name")} — ${valOr("meet_date")}</td></tr>
+    </table>
+    <p class="body">본인은 위 총회에 부득이 출석하지 못하여, 위 대리인에게 본인의 의결권 및 이에 부수하는 일체의 권한을 위임합니다.</p>
+    <h2>위임 범위</h2>
+    <p class="body">${esc(optText("scope", "ko"))}</p>
+    ${votes.length ? `<table class="parties">${votes.map(v => { const r = v.split(/[-|]/).map(x => x.trim()); return `<tr><td>${esc(r[0] || "")}</td><td class="lbl" style="width:25%">${esc(r[1] || "")}</td></tr>`; }).join("")}</table>` : ""}
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">위임인 ${valOr("p_name")} ${sig("sig_p")}</div>
+    </div>`;
+}
+/* --- 채권양도 통지서 --- */
+function renderDebtAssignKo() {
+  return `
+    <h1 class="doc-title">채 권 양 도 통 지 서</h1>
+    <table class="parties">
+      <tr><td class="lbl">양도인 (통지인)</td><td>${valOr("a_name")}<br/>${valOr("a_addr")}</td></tr>
+      <tr><td class="lbl">양수인</td><td>${valOr("b_name")}<br/>${valOr("b_addr")}</td></tr>
+      <tr><td class="lbl">채무자 (수신인)</td><td>${valOr("debtor")}</td></tr>
+    </table>
+    <p class="body">통지인은 귀하에 대하여 가지고 있는 아래 채권을 위 양수인에게 ${val("assign_date") ? esc(val("assign_date")) + "자로 " : ""}양도하였음을 민법 제450조에 따라 통지합니다.</p>
+    <h2>양도 채권의 표시</h2>
+    <p class="body">${lines("claim_desc").map(t => esc(t)).join("<br/>")}</p>
+    ${val("pay_to") ? `<h2>변제 방법</h2><p class="body">이후 위 채권에 관한 변제는 다음으로 하여 주시기 바랍니다: ${valOr("pay_to")}</p>` : ""}
+    <p class="body" style="font-size:0.85em;color:#555;">※ 본 통지는 채무자에 대한 대항요건입니다. 내용증명 우편 등 발송·도달 기록이 남는 방법으로 보내십시오.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">양도인 ${valOr("a_name")} ${sig("sig_a")}</div>
+      <div class="recipient">${valOr("debtor")} 귀중</div>
+    </div>`;
+}
+/* --- 시말서 --- */
+function renderStatementApologyKo() {
+  return `
+    <h1 class="doc-title">시 말 서</h1>
+    <table class="parties">
+      <tr><td class="lbl">성명</td><td>${valOr("name")}</td><td class="lbl">부서·직위</td><td>${valOr("dept")}</td></tr>
+      <tr><td class="lbl">사번</td><td>${valOr("emp_id")}</td><td class="lbl">사안</td><td>${valOr("incident")}</td></tr>
+    </table>
+    <h2>1. 경위</h2>
+    <p class="body">${lines("facts").map(t => esc(t)).join("<br/>")}</p>
+    ${val("stance") ? `<h2>2. 소명 및 반성</h2><p class="body">${lines("stance").map(t => esc(t)).join("<br/>")}</p>` : ""}
+    <p class="body">상기 내용은 사실에 근거하여 기재하였으며, 향후 동일한 사안이 재발하지 않도록 각별히 유의하겠습니다.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">작성자 ${valOr("name")} ${sig("sig_b")}</div>
+      <div class="recipient">${valOr("a_name")}</div>
+    </div>`;
+}
+/* --- 품의서 --- */
+function renderPurchaseRequestKo() {
+  const rows = lines("details").map(l => l.split("|").map(x => x.trim()));
+  return `
+    <h1 class="doc-title">품 의 서</h1>
+    <table class="parties">
+      <tr><td class="lbl">제목</td><td colspan="3">${valOr("title")}</td></tr>
+      <tr><td class="lbl">기안 부서</td><td>${valOr("dept")}</td><td class="lbl">기안자</td><td>${valOr("name")}</td></tr>
+      ${val("amount") ? `<tr><td class="lbl">소요 금액</td><td colspan="3">금 ${esc(val("amount"))}원</td></tr>` : ""}
+      ${val("deadline") ? `<tr><td class="lbl">처리 기한</td><td colspan="3">${valOr("deadline")}</td></tr>` : ""}
+    </table>
+    <h2>1. 목적 및 필요성</h2>
+    <p class="body">${lines("purpose").map(t => esc(t)).join("<br/>")}</p>
+    ${rows.length ? `<h2>2. 내역</h2><table class="parties">${rows.map(r => `<tr>${r.map(c => `<td>${esc(c)}</td>`).join("")}</tr>`).join("")}</table>` : ""}
+    <p class="body">위와 같이 품의하오니 검토 후 승인하여 주시기 바랍니다.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">기안 ${valOr("name")} ${sig("sig_b")}</div>
+      <div class="signer">결재 ${sig("sig_a")}</div>
+    </div>`;
+}
+/* --- 사업계획서 --- */
+function renderBusinessPlanKo() {
+  const sched = lines("schedule").map(l => l.split("|").map(x => x.trim()));
+  const fund = lines("funding").map(l => l.split("|").map(x => x.trim()));
+  return `
+    <h1 class="doc-title">사 업 계 획 서</h1>
+    <table class="parties">
+      <tr><td class="lbl">회사·사업자</td><td>${valOr("co_name")}</td><td class="lbl">대표자</td><td>${valOr("founder")}</td></tr>
+      <tr><td class="lbl">사업·제품명</td><td colspan="3">${valOr("biz_name")}</td></tr>
+    </table>
+    <h2>1. 사업 개요</h2>
+    <p class="body">${lines("summary").map(t => esc(t)).join("<br/>")}</p>
+    ${val("market") ? `<h2>2. 시장 및 고객 분석</h2><p class="body">${lines("market").map(t => esc(t)).join("<br/>")}</p>` : ""}
+    ${val("offering") ? `<h2>3. 제품·서비스</h2><p class="body">${lines("offering").map(t => esc(t)).join("<br/>")}</p>` : ""}
+    ${val("revenue_model") ? `<h2>4. 수익 모델</h2><p class="body">${lines("revenue_model").map(t => esc(t)).join("<br/>")}</p>` : ""}
+    ${val("marketing") ? `<h2>5. 마케팅·판매 계획</h2><p class="body">${lines("marketing").map(t => esc(t)).join("<br/>")}</p>` : ""}
+    ${sched.length ? `<h2>6. 추진 일정</h2><table class="parties">${sched.map(r => `<tr>${r.map(c => `<td>${esc(c)}</td>`).join("")}</tr>`).join("")}</table>` : ""}
+    ${fund.length ? `<h2>7. 소요 자금 및 조달 계획</h2><table class="parties">${fund.map(r => `<tr>${r.map(c => `<td>${esc(c)}</td>`).join("")}</tr>`).join("")}</table>` : ""}
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
+      <div class="signer">${valOr("co_name")} 대표 ${valOr("founder")} ${sig("sig_a")}</div>
+    </div>`;
+}
+/* --- General Affidavit (EN) --- */
+function renderAffidavitEn() {
+  const facts = lines("facts");
+  return `
+    <h1 class="doc-title">AFFIDAVIT</h1>
+    <p class="body">STATE OF ${esc((val("state") || "＿＿＿＿").toUpperCase())}<br/>COUNTY OF ${esc((val("county") || "＿＿＿＿").toUpperCase())}</p>
+    <p class="body">I, ${valOr("a_name")}${val("a_addr") ? ", residing at " + esc(val("a_addr")) : ""}${val("a_id") ? ", DOB/ID: " + esc(val("a_id")) : ""}, being duly sworn, depose and state as follows:</p>
+    <ol class="evidence">${facts.map(f => `<li>${esc(f)}</li>`).join("") || `<li>${BLANK}</li>`}</ol>
+    <p class="body">I declare under penalty of perjury that the foregoing is true and correct to the best of my knowledge and belief.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "en"))}</div>
+      <div class="signer">Affiant: ${valOr("a_name")} ${sig("sig_a", "________________")}</div>
+      <div class="body" style="text-indent:0;margin-top:16px;border-top:1px solid #999;padding-top:10px;font-size:0.9em;">Subscribed and sworn to before me this ____ day of ____________, 20____, by ${valOr("a_name")}.<br/><br/>Notary Public: ____________________ &nbsp;&nbsp; My commission expires: ____________</div>
+    </div>`;
+}
+/* --- Release of Liability / Waiver (EN) --- */
+function renderWaiverEn() {
+  const risks = lines("risks");
+  const minor = val("minor") === "yes";
+  return `
+    <h1 class="doc-title">RELEASE OF LIABILITY AND WAIVER</h1>
+    <table class="parties">
+      <tr><td class="lbl">RELEASOR</td><td>${valOr("b_name")}${val("b_id") ? "<br/>DOB/ID: " + esc(val("b_id")) : ""}</td></tr>
+      <tr><td class="lbl">RELEASEE</td><td>${valOr("a_name")}</td></tr>
+      <tr><td class="lbl">ACTIVITY</td><td>${valOr("activity")}${val("act_date") ? "<br/>Date/period: " + esc(val("act_date")) : ""}</td></tr>
+    </table>
+    <p class="body">In consideration of being permitted to participate in the Activity described above, the Releasor agrees as follows:</p>
+    <h2>1. Assumption of Risk</h2>
+    <p class="body">The Releasor understands and acknowledges that the Activity involves inherent risks${risks.length ? ", including: " + risks.map(esc).join("; ") : ""}. The Releasor voluntarily assumes all such risks, known and unknown.</p>
+    <h2>2. Release and Waiver</h2>
+    <p class="body">The Releasor releases and forever discharges the Releasee, its officers, employees and agents from any and all claims, demands, damages and causes of action arising out of or relating to the Activity, to the fullest extent permitted by law. This release does not apply to gross negligence or intentional misconduct.</p>
+    ${minor ? `<h2>3. Minor Participant</h2><p class="body">The undersigned parent or legal guardian, ${valOr("parent")}, executes this release on behalf of the minor Releasor and agrees to its terms.</p>` : ""}
+    <h2>${minor ? 4 : 3}. Governing Law</h2>
+    <p class="body">This Release is governed by the laws of the State of ${valOr("law")}.</p>
+    <p class="body">THE RELEASOR HAS READ THIS DOCUMENT, UNDERSTANDS IT, AND SIGNS IT VOLUNTARILY.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "en"))}</div>
+      <div class="signer">Releasor: ${valOr("b_name")} ${sig("sig_b", "________________")}</div>
+      ${minor ? `<div class="signer">Parent/Guardian: ${valOr("parent")} ________________</div>` : ""}
+    </div>`;
+}
+/* --- Roommate Agreement (EN) --- */
+function renderRoommateEn() {
+  const names = lines("roommates");
+  const split = lines("split").map(l => l.split("|").map(x => x.trim()));
+  const chores = lines("chores");
+  return `
+    <h1 class="doc-title">ROOMMATE AGREEMENT</h1>
+    <table class="parties">
+      <tr><td class="lbl">PROPERTY</td><td>${valOr("property")}</td></tr>
+      <tr><td class="lbl">ROOMMATES</td><td>${names.map(n => esc(n)).join("<br/>") || BLANK}</td></tr>
+      <tr><td class="lbl">MONTHLY RENT</td><td>$${valOr("rent")}</td></tr>
+    </table>
+    <p class="body">The roommates named above agree to share the rental property described above on the following terms. This agreement binds the roommates only and does not modify the underlying lease.</p>
+    <h2>1. Rent and Costs</h2>
+    ${split.length ? `<table class="parties">${split.map(r => `<tr><td>${esc(r[0] || "")}</td><td>${esc(r[1] || "")}</td></tr>`).join("")}</table>` : `<p class="body">Rent is split equally among the roommates.</p>`}
+    <p class="body">Utilities: ${valOr("utilities")}<br/>Security deposit: ${valOr("deposit")}</p>
+    ${chores.length ? `<h2>2. House Rules</h2><ol class="evidence">${chores.map(c => `<li>${esc(c)}</li>`).join("")}</ol>` : ""}
+    <h2>${chores.length ? 3 : 2}. Move-out</h2>
+    <p class="body">A roommate intending to move out will give the other roommates at least ${valOr("notice_days")} days' written notice. The departing roommate remains responsible for their share of costs until a replacement is found or the notice period ends, whichever the roommates agree in writing.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "en"))}</div>
+      <div class="signer">Signatures: ${sig("sig_a", "________________")}</div>
+    </div>`;
+}
+/* --- Employment Offer Letter (EN) --- */
+function renderOfferLetterEn() {
+  return `
+    <p class="body" style="text-align:right;">${esc(fmtDate(val("doc_date"), "en"))}</p>
+    <p class="body">${valOr("b_name")}<br/>${valOr("b_addr")}</p>
+    <p class="body">Dear ${valOr("b_name")},</p>
+    <p class="body">We are pleased to offer you the position of <strong>${valOr("title")}</strong>${val("dept") ? " (" + esc(val("dept")) + ")" : ""} at ${valOr("a_name")}, on the following terms:</p>
+    <table class="parties">
+      <tr><td class="lbl">Start date</td><td>${esc(fmtDate(val("start_date"), "en"))}</td></tr>
+      <tr><td class="lbl">Compensation</td><td>${valOr("salary")}, paid ${esc(optText("pay_freq", "en") || "bi-weekly")}</td></tr>
+      <tr><td class="lbl">Employment type</td><td>${esc(optText("emp_type", "en") || "full-time")}</td></tr>
+      ${val("benefits") ? `<tr><td class="lbl">Benefits</td><td>${lines("benefits").map(t => esc(t)).join("<br/>")}</td></tr>` : ""}
+    </table>
+    ${val("contingency") ? `<p class="body">This offer is contingent upon: ${lines("contingency").map(t => esc(t)).join("; ")}.</p>` : ""}
+    <p class="body">Your employment with ${valOr("a_name")} will be at-will, meaning either you or the company may terminate the employment relationship at any time, with or without cause or notice, except as otherwise provided by law. This letter is not a contract guaranteeing employment for any specific duration.</p>
+    <p class="body">Please sign and return this letter${val("expiry") ? " by " + esc(val("expiry")) : ""} to accept this offer. We look forward to welcoming you to the team.</p>
+    <div class="doc-foot">
+      <div class="signer">Sincerely,<br/>${valOr("a_name")} ${sig("sig_a", "________________")}</div>
+      <div class="signer" style="margin-top:18px;">Accepted: ${valOr("b_name")} ${sig("sig_b", "________________")} &nbsp; Date: ____________</div>
+    </div>`;
+}
+/* --- Eviction notice (EN) --- */
+function renderEvictionEn() {
+  const reason = optText("reason", "en");
+  return `
+    <h1 class="doc-title">NOTICE TO VACATE</h1>
+    <table class="parties">
+      <tr><td class="lbl">TO (Tenant)</td><td>${valOr("t_name")}<br/>${valOr("t_addr")}</td></tr>
+      <tr><td class="lbl">FROM (Landlord)</td><td>${valOr("l_name")}<br/>${valOr("l_addr")}${val("l_phone") ? "<br/>" + esc(val("l_phone")) : ""}</td></tr>
+      <tr><td class="lbl">PROPERTY</td><td>${valOr("prop_addr")}</td></tr>
+    </table>
+    <p class="body">You are hereby notified as follows:</p>
+    <p class="body">1. The undersigned is the landlord of the property at ${valOr("prop_addr")}.</p>
+    <p class="body">2. Due to ${esc(reason) || "the reason stated"}, you must vacate and surrender the premises by <strong>${valOr("deadline")}</strong>.</p>
+    ${val("unpaid") ? `<p class="body">3. In addition, you must pay the outstanding rent of ${esc(val("unpaid"))}.</p>` : ""}
+    <p class="body">If the premises are not vacated by the deadline, legal action including eviction proceedings and claims for damages may be taken.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "en"))}</div>
+      <div class="signer">Landlord: ${valOr("l_name")} ________________</div>
+    </div>`;
+}
+/* --- Lease termination agreement (EN) --- */
+function renderLeaseTermEn() {
+  return `
+    <h1 class="doc-title">MUTUAL LEASE TERMINATION AGREEMENT</h1>
+    <table class="parties">
+      <tr><td class="lbl">LANDLORD</td><td>${valOr("l_name")}<br/>${valOr("l_addr")}${val("l_phone") ? "<br/>" + esc(val("l_phone")) : ""}</td></tr>
+      <tr><td class="lbl">TENANT</td><td>${valOr("t_name")}<br/>${valOr("t_addr")}${val("t_phone") ? "<br/>" + esc(val("t_phone")) : ""}</td></tr>
+    </table>
+    <p class="body">The Landlord and Tenant agree to terminate ${valOr("contract_info")} for the property at ${valOr("prop_addr")} as follows:</p>
+    <h2>1. Termination</h2>
+    <p class="body">The lease is terminated by mutual agreement effective ${valOr("eff_date")}. The Tenant will vacate and surrender the premises on or before that date.</p>
+    <h2>2. Security Deposit</h2>
+    <p class="body">The Landlord will return the security deposit of ${valOr("deposit")} to the Tenant after confirming the premises have been vacated.${val("repay_account") ? " Return to: " + esc(val("repay_account")) : ""}</p>
+    ${val("settlement_note") ? `<h2>3. Settlement</h2><p class="body">${valOr("settlement_note")}</p>` : ""}
+    <p class="body" style="margin-top:24px;">This agreement is executed in two counterparts, one for each party.</p>
+    <div class="doc-foot">
+      <div class="date">${esc(fmtDate(val("doc_date"), "en"))}</div>
+      <div class="signer">Landlord: ${valOr("l_name")} ________________</div>
+      <div class="signer">Tenant: ${valOr("t_name")} ________________</div>
+    </div>`;
+}
+
 const SAMPLES = {
+  "shareholder-proxy": {
+    p_name: "김주주", p_addr: "서울특별시 강남구 ○○로 10",
+    shares: "보통주 1,000주",
+    g_name: "이대리", g_id: "1988.01.20",
+    co_name: "주식회사 ○○테크", meet_date: "제5기 정기주주총회 (2026. 3. 27. 오전 10시)",
+    scope: "all", votes: ""
+  },
+  "debt-assignment": {
+    a_name: "김양도", a_addr: "서울특별시 ○○구 ○○로 1",
+    b_name: "박양수", b_addr: "서울특별시 ○○구 ○○동 2",
+    debtor: "이채무",
+    claim_desc: "2024. 1. 1.자 금전소비대차계약에 기한 대여금 채권\n원금 10,000,000원 및 약정 이자",
+    assign_date: "2026. 9. 1.",
+    pay_to: "양수인 명의 ○○은행 계좌 123-45-678901"
+  },
+  "statement-apology": {
+    name: "이직원", dept: "영업팀 주임", emp_id: "EMP-2048",
+    incident: "2026. 9. 10.자 고객 응대 부적절 건",
+    facts: "2026년 9월 10일 15시경, 본인은 A사 담당자와의 통화에서 불만 표출 과정에서 부적절한 언행을 사용하였습니다.\n동일 자리에서 팀장의 주의를 받은 후 즉시 사과하였습니다.",
+    stance: "당시 개인 사정으로 감정 조절이 되지 않았으나, 변명의 여지 없이 본인의 잘못임을 인정합니다.\n향후 고객 응대 매뉴얼을 숙지하고 동일 사안이 재발하지 않도록 하겠습니다.",
+    a_name: "영업팀 부장님 귀중"
+  },
+  "purchase-request": {
+    title: "개발팀 모니터 4대 구매의 건", dept: "개발팀", name: "김기안",
+    amount: "1,200,000",
+    purpose: "신규 입사자 4명의 업무용 모니터가 부족하여 구매가 필요합니다.\n현재 재고 모니터는 노후화되어 업무 효율이 저하되고 있습니다.",
+    details: "27인치 QHD 모니터 | 4대 | 300,000",
+    deadline: "2026. 9. 30."
+  },
+  "business-plan": {
+    co_name: "주식회사 ○○테크", founder: "김대표", biz_name: "다국어 법률문서 생성 SaaS",
+    summary: "개인·소상공인이 폼 입력만으로 표준 법률 문서를 생성하는 웹 서비스\n17개 언어 출력으로 국경간 소액 분쟁 문서 시장을 겨냥합니다",
+    market: "국내 서식 시장: 예스폼 회원 980만 규모\n글로벌: Wonder.Legal 등 건당 판매 모델 검증",
+    offering: "102종 양식 라이브러리\n워터마크 무료 미리보기 → 건당 유료 다운로드",
+    revenue_model: "건당 ₩9,900 / 무제한 패스 ₩29,900",
+    marketing: "문서별 SEO 랜딩 페이지 209개 운영",
+    schedule: "2026 Q4 | 한국어 시장 검증\n2027 Q1 | 영어권 결제 채널 확대",
+    funding: "초기 운영비 | 자기자본\n마케팅 | 월 500,000"
+  },
+  "affidavit-en": {
+    state: "New York", county: "Kings",
+    a_name: "Jane Smith", a_addr: "123 Main St, Brooklyn, NY 11201", a_id: "1985-04-12",
+    facts: "I am the same person identified as Jane A. Smith on the attached account records.\nI have resided at the above address continuously since March 2020.\nMy original certificate of title for the vehicle described below was lost in July 2026."
+  },
+  "liability-waiver-en": {
+    b_name: "John Doe", b_id: "1990-06-15",
+    a_name: "Seoul Climbing Gym LLC",
+    activity: "Participation in indoor rock climbing, bouldering and related training at the Releasee's facilities",
+    act_date: "September 2026 membership period",
+    risks: "falls from height\nequipment failure\ncollisions with other participants\noverexertion and muscle injury",
+    minor: "no", law: "New York"
+  },
+  "roommate-agreement-en": {
+    roommates: "Alice Kim\nBrian Lee\nCarol Park",
+    property: "456 Maple Ave, Apt 7B, Queens, NY 11101",
+    rent: "3,000", split: "Alice Kim | $1,200\nBrian Lee | $1,000\nCarol Park | $800",
+    utilities: "Split equally; internet paid by Alice, reimbursed monthly",
+    deposit: "Each roommate paid $1,000; deductions shared pro-rata",
+    chores: "Kitchen cleaned weekly by rotation\nTrash taken out daily\nQuiet hours 11pm-7am",
+    notice_days: "30"
+  },
+  "offer-letter-en": {
+    a_name: "Omni Legal Inc.", a_addr: "1 Broadway, New York, NY",
+    b_name: "Chris Johnson", b_addr: "88 Pine St, Jersey City, NJ",
+    title: "Senior Product Manager", dept: "Product — reporting to the CEO",
+    start_date: "2026-10-05", salary: "$135,000 per year",
+    pay_freq: "biweekly", emp_type: "full",
+    benefits: "Health, dental and vision insurance\n401(k) with 4% match\n20 days PTO",
+    contingency: "Satisfactory background check\nVerification of work authorization",
+    expiry: "5 business days from the date above"
+  },
   "traffic-settlement": {
     a_name: "김가해", a_phone: "010-1111-2222", a_vehicle: "쏘나타 12가 3456",
     b_name: "박피해", b_phone: "010-3333-4444", b_vehicle: "아반떼 56나 7890",
