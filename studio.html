@@ -3035,17 +3035,17 @@ const DOC_TYPES = [
       { key: "r_addr", label: "주소", type: "text" },
       { section: "Kündigung" },
       { key: "contract_type", label: "계약 유형", type: "select", options: [
-        { v: "work", label: { de: "Arbeitsvertrag (근로계약)" } },
-        { v: "rent", label: { de: "Mietvertrag (임대차)" } },
-        { v: "subscription", label: { de: "Abo / Vertrag (구독·계약)" } },
-        { v: "insurance", label: { de: "Versicherung (보험)" } },
+        { v: "work", label: { de: "Arbeitsvertrag" } },
+        { v: "rent", label: { de: "Mietvertrag" } },
+        { v: "subscription", label: { de: "Abo / Vertrag" } },
+        { v: "insurance", label: { de: "Versicherung" } },
         { v: "other", label: { de: "Sonstiges" } }
       ]},
       { key: "contract_no", label: "계약·고객 번호", type: "text" },
       { key: "eff_date", label: "해지일", type: "text", hint: "예: zum nächstmöglichen Zeitpunkt / 31.12.2026" },
       { key: "frist", label: "기한 준수 문구", type: "select", options: [
-        { v: "fristgerecht", label: { de: "fristgerecht (정해지 기한 내)" } },
-        { v: "fristlos", label: { de: "fristlos aus wichtigem Grund (중대한 사유로 즉시)" } }
+        { v: "fristgerecht", label: { de: "fristgerecht" } },
+        { v: "fristlos", label: { de: "fristlos aus wichtigem Grund" } }
       ]},
       { key: "reason", label: "사유 (선택)", type: "textarea", hint: "fristlos 해지 시 사유 기재" },
       { key: "doc_date", label: "날짜", type: "date" }
@@ -3115,8 +3115,8 @@ const DOC_TYPES = [
       { key: "r_addr", label: "주소", type: "text" },
       { section: "Résiliation (해지)" },
       { key: "contract_type", label: "계약 유형", type: "select", options: [
-        { v: "subscription", label: { fr: "Abonnement (구독)" } },
-        { v: "insurance", label: { fr: "Assurance (보험)" } },
+        { v: "subscription", label: { fr: "Abonnement" } },
+        { v: "insurance", label: { fr: "Assurance" } },
         { v: "telecom", label: { fr: "Téléphonie / Internet" } },
         { v: "gym", label: { fr: "Salle de sport" } },
         { v: "other", label: { fr: "Autre" } }
@@ -3145,8 +3145,8 @@ const DOC_TYPES = [
       { section: "Démission" },
       { key: "eff_date", label: "퇴직 예정일 *", type: "text", required: true, hint: "통상 préavis(예고기간) 고려" },
       { key: "notice", label: "예고기간 이행 여부", type: "select", options: [
-        { v: "full", label: { fr: "Préavis complet (예고기간 전부 이행)" } },
-        { v: "dispense", label: { fr: "Dispense de préavis demandée (예고기간 면제 요청)" } }
+        { v: "full", label: { fr: "Préavis complet" } },
+        { v: "dispense", label: { fr: "Dispense de préavis demandée" } }
       ]},
       { key: "reason", label: "사유 (선택)", type: "textarea" },
       { key: "doc_date", label: "날짜", type: "date" }
@@ -3168,10 +3168,10 @@ const DOC_TYPES = [
       { section: "退職" },
       { key: "end_date", label: "退職希望日 *", type: "date", required: true },
       { key: "reason", label: "退職理由", type: "select", options: [
-        { v: "private", label: { ja: "一身上の都合 (일신상 사정)" } },
-        { v: "career", label: { ja: "キャリアアップのため (커리어)" } },
-        { v: "health", label: { ja: "健康上の理由 (건강)" } },
-        { v: "family", label: { ja: "家庭の事情 (가정 사정)" } }
+        { v: "private", label: { ja: "一身上の都合" } },
+        { v: "career", label: { ja: "キャリアアップのため" } },
+        { v: "health", label: { ja: "健康上の理由" } },
+        { v: "family", label: { ja: "家庭の事情" } }
       ]},
       { key: "a_name", label: "회사명·제출처 *", type: "text", required: true },
       { key: "doc_date", label: "작성일", type: "date" }
@@ -3193,8 +3193,8 @@ const DOC_TYPES = [
       { section: "内容" },
       { key: "pledge", label: "확약 사항 *", type: "textarea", required: true, hint: "줄마다 하나씩" },
       { key: "penalty", label: "위반 시 책임", type: "select", options: [
-        { v: "general", label: { ja: "いかなる処分にも服する (일체 처분 감수)" } },
-        { v: "civil", label: { ja: "損害賠償責任を負う (손해배상)" } },
+        { v: "general", label: { ja: "いかなる処分にも服する" } },
+        { v: "civil", label: { ja: "損害賠償責任を負う" } },
         { v: "none", label: { ja: "記載しない" } }
       ]},
       { key: "doc_date", label: "작성일", type: "date" }
@@ -3218,7 +3218,7 @@ const DOC_TYPES = [
       { key: "incident", label: "사건 개요 *", type: "textarea", required: true, hint: "일시·장소·사고 내용" },
       { key: "amount", label: "示談金 (합의금) *", type: "text", required: true },
       { key: "pay_terms", label: "지급 방법", type: "text", hint: "예: 本書締結時現金手渡し / 振込" },
-      { key: "settlement", label: "청구 포기 조항", type: "checkbox", options: [{ v: "yes", label: { ja: "本件に関し今後一切請求しない (향후 일체 청구 포기)" } }] },
+      { key: "settlement", label: "청구 포기 조항", type: "checkbox", options: [{ v: "yes", label: { ja: "本件に関し今後一切請求しない" } }] },
       { key: "doc_date", label: "작성일", type: "date" }
     ],
     render: { ja: renderJidanshoJa }
@@ -4422,7 +4422,11 @@ function esc(s) {
 }
 function val(key) { const el = document.getElementById("f_" + key); return el ? el.value.trim() : (formState[key] || ""); }
 function valOr(key) { const v = val(key); return v ? esc(v) : BLANK; }
-function ro(t) { const c = t.charCodeAt(t.length - 1); return t + ((c >= 0xAC00 && c <= 0xD7A3 && (c - 0xAC00) % 28 !== 0) ? "으로" : "로"); }
+function lastBatchim(t) { const m = String(t || "").match(/[가-힣](?!.*[가-힣])/s); return m ? (m[0].charCodeAt(0) - 0xAC00) % 28 !== 0 : false; }
+function ro(t) { return t + (lastBatchim(t) ? "으로" : "로"); }
+function eun(t) { return t + (lastBatchim(t) ? "은" : "는"); }
+function iga(t) { return t + (lastBatchim(t) ? "이" : "가"); }
+function eul(t) { return t + (lastBatchim(t) ? "을" : "를"); }
 function krw(n) { return "₩" + Number(n).toLocaleString("ko-KR"); }
 
 const MONTHS_EN = ["January","February","March","April","May","June","July","August","September","October","November","December"];
@@ -5916,7 +5920,7 @@ function renderPetitionKo() {
     <h2>2. 진정의 내용</h2>
     <p class="body">${valOr("facts")}</p>
     ${evidence.length ? `<h2>3. 첨부·참고자료</h2><ol class="evidence">${evidence.map(e => `<li>${esc(e)}</li>`).join("")}</ol>` : ""}
-    <p class="body" style="margin-top:24px;">이상과 같이 진정서를 제출하오니 선처하여 주시기 바랍니다.</p>
+    <p class="body" style="margin-top:24px;">이상과 같이 진정서를 제출하오니 조사·처리하여 주시기 바랍니다.</p>
     <div class="doc-foot">
       <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
       <div class="signer">진정인 ${valOr("c_name")} &nbsp;(인)</div>
@@ -5950,7 +5954,7 @@ function renderPledgeKo() {
   const terms = lines("terms");
   return `
     <h1 class="doc-title">각 서</h1>
-    <p class="body">나 ${valOr("p_name")}(주민등록번호: ${valOr("p_id")}, 주소: ${valOr("p_addr")})은(는) ${valOr("r_name")}에게 아래 사항을 확약한다.</p>
+    <p class="body">나 ${valOr("p_name")}(주민등록번호: ${valOr("p_id")}, 주소: ${valOr("p_addr")})${lastBatchim(val("p_name")) ? "은" : "는"} ${valOr("r_name")}에게 아래 사항을 확약한다.</p>
     <h2>확약 사항</h2>
     <ol class="evidence">${(terms.length ? terms : ["＿＿＿＿"]).map(t => `<li>${esc(t)}</li>`).join("")}</ol>
     ${val("breach") === "legal" ? `<p class="body">위 확약을 위반할 경우 기재인은 민·형사상 일체의 책임을 진다.</p>`
@@ -6553,7 +6557,7 @@ function renderDefectKo() {
     <p class="body">1. 발신인은 ${valOr("prop_addr")} 소재 건물에 관하여 수신인과 공사·분양 계약을 체결하였습니다.${val("contract_info") ? " (" + esc(val("contract_info")) + ")" : ""}</p>
     <p class="body">2. 그런데 위 건물에는 다음과 같은 하자가 발견되었습니다.</p>
     <ol class="evidence">${defects.map(d => `<li>${esc(d)}</li>`).join("")}</ol>
-    <p class="body">3. 이에 발신인은 수신인에게 ${valOr("deadline")} 내에 위 하자를 보수하여 줄 것을 요구합니다. 기한 내 보수가 이루어지지 않을 경우 잔금 지급 거절 및 손해배상 청구 등 법적 조치를 취할 수 있음을 알려드립니다.</p>
+    <p class="body">3. 이에 발신인은 수신인에게 ${esc((val("deadline") || "본 서신 수령 후 14일").replace(/\s*(이내에?|내에?)\s*$/, ""))} 내에 위 하자를 보수하여 줄 것을 요구합니다. 기한 내 보수가 이루어지지 않을 경우 잔금 지급 거절 및 손해배상 청구 등 법적 조치를 취할 수 있음을 알려드립니다.</p>
     <div class="doc-foot">
       <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
       <div class="signer">발신인 ${valOr("s_name")} &nbsp;(인)</div>
@@ -6571,7 +6575,7 @@ function renderEvictionKo() {
     </table>
     <p class="body">발신인은 수신인에게 다음과 같이 통지합니다.</p>
     <p class="body">1. 발신인은 ${valOr("prop_addr")} 소재 부동산의 임대인입니다.</p>
-    <p class="body">2. ${esc(reason)}으로 인하여, 수신인은 ${valOr("deadline")}까지 위 부동산을 명도(퇴거)하여 주시기 바랍니다.</p>
+    <p class="body">2. ${esc(ro(reason))} 인하여, 수신인은 ${valOr("deadline")}까지 위 부동산을 명도(퇴거)하여 주시기 바랍니다.</p>
     ${val("unpaid") ? `<p class="body">3. 아울러 미납 차임 ${esc(val("unpaid"))}을 지급하여 주시기 바랍니다.</p>` : ""}
     <p class="body">기한 내에 명도가 이루어지지 않을 경우 명도소송 및 손해배상 청구 등 법적 조치를 취할 수 있음을 알려드립니다.</p>
     <div class="doc-foot">
@@ -6715,7 +6719,7 @@ function renderTermKo() {
       <tr><td class="lbl">수신인</td><td>성명·상호: ${valOr("r_name")}<br/>주소: ${valOr("r_addr")}</td></tr>
       <tr><td class="lbl">발신인</td><td>성명·상호: ${valOr("s_name")}<br/>주소: ${valOr("s_addr")}<br/>연락처: ${valOr("s_phone")}</td></tr>
     </table>
-    <p class="body">1. 발신인과 수신인은 ${valOr("contract_name")}을(를) 체결한 바 있습니다.</p>
+    <p class="body">1. 발신인과 수신인은 ${eul(valOr("contract_name"))} 체결한 바 있습니다.</p>
     <p class="body">2. ${esc(optText("reason_type", "ko"))}의 사유로 인하여 발신인은 위 계약을 ${valOr("eff_date")}자로 해지·해제함을 통보합니다.</p>
     <p class="body">3. 사유의 구체적 내용: ${valOr("facts")}</p>
     ${demands.length ? `<p class="body">4. 아울러 다음 사항의 이행을 요구합니다.</p><ol class="evidence">${demands.map(d => `<li>${esc(d)}</li>`).join("")}</ol>` : ""}
@@ -6962,7 +6966,7 @@ function renderVehicleKo() {
     <h2>제1조 (목적물 — 차량의 표시)</h2>
     <p class="body">차종·모델: ${valOr("car_model")}<br/>차량 번호: ${valOr("car_no")}<br/>차대번호(VIN): ${valOr("vin")}<br/>연식: ${valOr("car_year")}<br/>주행거리: ${valOr("mileage")} km</p>
     <h2>제2조 (매매 대금 및 지급)</h2>
-    <p class="body">매매 대금은 금 ${valOr("amount")}원으로 하며, ${valOr("pay_method")}로 지급한다.</p>
+    <p class="body">매매 대금은 금 ${valOr("amount")}원으로 하며, 다음과 같이 지급한다. ${valOr("pay_method")}</p>
     <h2>제3조 (인도 및 이전등록)</h2>
     <p class="body">인도 예정일: ${valOr("delivery_date")}<br/>이전등록: ${esc(optText("transfer", "ko"))}</p>
     <h2>제4조 (차량 상태)</h2>
@@ -7440,7 +7444,7 @@ function renderNonCompeteKo() {
     <h2>1. 금지 대상</h2>
     <p class="body">금지 업무·직종: ${valOr("scope")}<br/>금지 지역: ${valOr("region")}<br/>금지 기간: ${esc(optText("period", "ko") || "퇴직 후 1년")}</p>
     <h2>2. 대가</h2>
-    <p class="body">${val("compensation") ? "회사는 본 서약의 대가로 " + esc(val("compensation")) + "을(를) 지급한다." : "본 서약은 근로관계의 부수 의무로서 별도 대가 없이 체결된다."}</p>
+    <p class="body">${val("compensation") ? "회사는 본 서약의 대가로 " + esc(eul(val("compensation"))) + " 지급한다." : "본 서약은 근로관계의 부수 의무로서 별도 대가 없이 체결된다."}</p>
     <h2>3. 위반 시 책임</h2>
     <p class="body">${esc(pen)}</p>
     <div class="doc-foot">
@@ -7458,7 +7462,7 @@ function renderGuaranteeKo() {
       <tr><td class="lbl">피보증인</td><td>성명: ${valOr("b_name")}<br/>주민등록번호: ${valOr("b_id")}<br/>주소: ${valOr("b_addr")}</td></tr>
       <tr><td class="lbl">보증인</td><td>성명: ${valOr("g_name")}<br/>주민등록번호: ${valOr("g_id")}<br/>주소: ${valOr("g_addr")}<br/>연락처: ${valOr("g_phone")}<br/>관계: ${valOr("g_rel")}</td></tr>
     </table>
-    <p class="body">보증인은 피보증인 ${valOr("b_name")}이(가) ${valOr("a_name")}에 재직하는 동안 또는 그와 관련하여 귀사에 끼친 일체의 손해에 대하여 연대하여 보증한다.</p>
+    <p class="body">보증인은 피보증인 ${iga(valOr("b_name"))} ${valOr("a_name")}에 재직하는 동안 또는 그와 관련하여 귀사에 끼친 일체의 손해에 대하여 연대하여 보증한다.</p>
     <p class="body">보증 기간: ${valOr("term")}<br/>보증 한도: 금 ${valOr("limit")}원</p>
     <div class="doc-foot">
       <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
@@ -7495,7 +7499,7 @@ function renderNoiseKo() {
       <tr><td class="lbl">발신인</td><td>${valOr("s_name")}<br/>${valOr("s_phone")}</td></tr>
     </table>
     <p class="body">안녕하세요. 아래층 거주자입니다.</p>
-    <p class="body">최근 귀 세대에서 발생하는 ${types.length ? types.map(t=>esc(t)).join(", ") : "소음"}이 지속되어 일상생활에 큰 불편을 겪고 있습니다. 주요 발생 시간대: ${valOr("times")}.</p>
+    <p class="body">최근 귀 세대에서 발생하는 ${types.length ? types.map(t=>esc(t)).join(", ") : "소음"} 문제가 지속되어 일상생활에 큰 불편을 겪고 있습니다. 주요 발생 시간대: ${valOr("times")}.</p>
     ${val("facts") ? `<p class="body">피해 경위: ${valOr("facts")}</p>` : ""}
     <p class="body">부탁드립니다: ${esc(optText("demand", "ko") || "소음 저감 조치 요청")}. 공동주택에서의 층간소음은 공동주택관리법상 이웃 간 배려 의무가 있습니다. 지속될 경우 관리사무소 중재·층간소음 이웃사이센터 상담 등 정식 절차를 밟을 수밖에 없음을 양해 바랍니다.</p>
     <div class="doc-foot">
@@ -7604,7 +7608,7 @@ function renderLeaseTermKo() {
       <tr><td class="lbl">임대인</td><td>성명: ${valOr("l_name")}<br/>주소: ${valOr("l_addr")}<br/>연락처: ${valOr("l_phone")}</td></tr>
       <tr><td class="lbl">임차인</td><td>성명: ${valOr("t_name")}<br/>주소: ${valOr("t_addr")}<br/>연락처: ${valOr("t_phone")}</td></tr>
     </table>
-    <p class="body">임대인과 임차인은 ${valOr("prop_addr")} 소재 부동산에 관한 ${valOr("contract_info")}을(를) 다음과 같이 합의 해지한다.</p>
+    <p class="body">임대인과 임차인은 ${valOr("prop_addr")} 소재 부동산에 관한 ${esc(eul(val("contract_info")))} 다음과 같이 합의 해지한다.</p>
     <h2>제1조 (합의 해지)</h2>
     <p class="body">위 임대차계약은 ${valOr("eff_date")}자로 합의 해지하고, 임차인은 같은 날까지 목적물을 명도한다.</p>
     <h2>제2조 (보증금 반환)</h2>
@@ -8243,7 +8247,7 @@ function renderResiliationFr() {
     <p class="body" style="text-align:right;">Fait le ${esc(fmtDate(val("doc_date"), "fr"))}</p>
     <h1 class="doc-title" style="font-size:19px;">Lettre de résiliation — ${esc(optText("contract_type", "fr") || "contrat")}</h1>
     <p class="body">Madame, Monsieur,</p>
-    <p class="body">Par la présente, je vous informe de ma décision de résilier le contrat${val("contract_no") ? " n° " + esc(val("contract_no")) : ""} me liant à votre organisme${val("eff_date") ? ", avec effet au " + esc(val("eff_date")) : ""}.</p>
+    <p class="body">Par la présente, je vous informe de ma décision de résilier le contrat${val("contract_no") ? " n° " + esc(val("contract_no")) : ""} me liant à votre organisme${val("eff_date") ? ", avec effet " + esc(val("eff_date")) : ""}.</p>
     ${val("reason") ? `<p class="body">Motif : ${valOr("reason")}</p>` : ""}
     <p class="body">Je vous prie de bien vouloir me confirmer par écrit la prise en compte de cette résiliation et la date d'effet.</p>
     <p class="body">Veuillez agréer, Madame, Monsieur, l'expression de mes salutations distinguées.</p>
@@ -8523,7 +8527,7 @@ function renderContractRu() {
     <h2>1. Предмет услуг</h2>
     <p class="body">${valOr("scope")}</p>
     <h2>2. Срок</h2>
-    <p class="body">С ${esc(fmtDate(val("start_date"), "ru"))} по ${esc(fmtDate(val("end_date"), "ru"))}.</p>
+    <p class="body">С ${esc(fmtDate(val("start_date"), "ru"))} по ${esc(fmtDate(val("end_date"), "ru"))}</p>
     <h2>3. Вознаграждение и оплата</h2>
     <p class="body">Вознаграждение составляет ${esc(val("currency"))} ${esc(val("amount")) || "＿＿＿＿"}, порядок оплаты: ${esc(optText("pay_terms", "ru"))}.${checkedLabels("wht", "ru").length ? " Применимый налог удерживается у источника." : ""}</p>
     <h2>4. Приёмка и доработки</h2>
@@ -9112,7 +9116,7 @@ function renderPayoffKo() {
       <tr><td class="lbl">채권자</td><td>성명·상호: ${valOr("l_name")}<br/>주소: ${valOr("l_addr")}</td></tr>
       <tr><td class="lbl">채무자</td><td>성명: ${valOr("b_name")}</td></tr>
     </table>
-    <p class="body">채무자 ${valOr("b_name")}은 ${valOr("origin")}에 의하여 채권자에게 부담하던 채무 금 ${valOr("principal")}원 및 이에 따른 일체의 채무를 <strong>${valOr("payoff_date")}</strong>에 전부 변제하였음을 증명합니다.</p>
+    <p class="body">채무자 ${eun(valOr("b_name"))} ${valOr("origin")}에 의하여 채권자에게 부담하던 채무 금 ${valOr("principal")}원 및 이에 따른 일체의 채무를 <strong>${valOr("payoff_date")}</strong>에 전부 변제하였음을 증명합니다.</p>
     <p class="body">이에 채권자는 위 채무에 관한 일체의 권리를 포기하며, 향후 채무자에게 어떠한 청구도 하지 아니할 것을 확인합니다.</p>
     <div class="doc-foot">
       <div class="date">${esc(fmtDate(val("doc_date"), "ko"))}</div>
@@ -10098,7 +10102,7 @@ const SAMPLES = {
     p_name: "김주주", p_addr: "서울특별시 강남구 ○○로 10",
     shares: "보통주 1,000주",
     g_name: "이대리", g_id: "1988.01.20",
-    co_name: "주식회사 ○○테크", meet_date: "제5기 정기주주총회 (2026. 3. 27. 오전 10시)",
+    co_name: "주식회사 ○○테크", meet_date: "2026년 임시주주총회 (2026. 10. 15. 오전 10시)",
     scope: "all", votes: ""
   },
   "debt-assignment": {
@@ -10246,16 +10250,16 @@ const SAMPLES = {
     c_id: "900101-1******", c_job: "회사원", charges: ["itm70", "crim311"], related_case: "none"
   },
   "demand-notice": {
-    s_name: "Kim Cheolsu", s_addr: "12-3 Gangnam-daero, Seoul, Korea", s_phone: "+82-10-1234-5678", s_email: "kim@example.com",
+    s_name: "김철수", s_addr: "서울특별시 강남구 강남대로 12-3", s_phone: "010-1234-5678", s_email: "kim@example.com",
     r_name: "Acme Trading Co.", r_addr: "100 Market St, San Francisco, CA",
-    purpose: "payment", title: "", facts: "On 2026-08-15 the Respondent received goods under Invoice #2026-081, but the payment of USD 4,200 remains outstanding despite two reminders.",
-    demands: "Pay USD 4,200 in full\nConfirm payment in writing", deadline: "within 14 days of receipt of this letter", doc_date: ""
+    purpose: "payment", title: "", facts: "2026년 8월 15일 수신인은 Invoice #2026-081에 따라 물품을 인도받았으나, 두 차례의 독촉에도 불구하고 USD 4,200의 대금이 미지급 상태입니다.",
+    demands: "USD 4,200 전액 지급\n지급 사실을 서면으로 확인", deadline: "본 서신 수령 후 14일 이내", doc_date: ""
   },
   "cease-desist": {
-    s_name: "Shin Yoohak", s_addr: "Seoul, Korea", s_email: "shin@example.com",
+    s_name: "신유학", s_addr: "서울특별시 ○○구 ○○로 1", s_email: "shin@example.com",
     r_name: "account_handle_x", r_addr: "X (Twitter) user @account_handle_x",
-    subject: "", violation: "The Recipient has repeatedly published false and defamatory statements about the Sender on the platform identified below since August 2026.",
-    platform_url: "https://x.com/account_handle_x/status/0000", demands: "Immediately delete the identified posts\nCease all further publication of similar statements\nPreserve all related records", deadline: "within 7 days of receipt"
+    subject: "", violation: "수신인은 2026년 8월경부터 아래 플랫폼에서 발신인에 관한 허위 사실을 반복적으로 게시하여 발신인의 명예를 훼손하고 있습니다.",
+    platform_url: "https://x.com/account_handle_x/status/0000", demands: "해당 게시물의 즉시 삭제\n동일한 내용의 추가 게시 중단\n관련 기록의 보존", deadline: "본 서신 수령 후 7일 이내"
   },
   "loan-agreement": {
     l_name: "김채권", l_addr: "서울특별시 마포구 ○○로 45",
@@ -10275,7 +10279,7 @@ const SAMPLES = {
     a_name: "김갑", a_addr: "서울특별시 ○○구 ○○로 1",
     b_name: "박을", b_addr: "인천광역시 ○○구 ○○동 2",
     incident: "을은 2026년 8월경 온라인 커뮤니티에 갑에 대한 허위 사실을 게시하여 갑의 명예를 훼손하였고, 갑은 이에 대해 법적 조치를 준비 중이었다.",
-    amount: "3,000,000", currency: "KRW", payer: "b_to_a", pay_deadline: "2026년 10월 15일까지",
+    amount: "3,000,000", currency: "KRW", payer: "b_to_a", pay_deadline: "2026-10-15",
     terms: "을은 해당 게시물을 즉시 삭제한다\n을은 동일한 내용의 게시를 반복하지 않는다", confidential: ["yes"]
   },
   "power-of-attorney": {
@@ -10319,7 +10323,7 @@ const SAMPLES = {
     start_date: "2026-10-01", workplace: "본사 (서울특별시 서초구 ○○로 100)",
     scope: "웹 프론트엔드 개발 업무",
     work_hours: "주 5일 (월~금), 09:00~18:00 / 휴게시간 12:00~13:00",
-    probation: "3개월", wage: "3,500,000", wage_extra: "식대 월 100,000원", wage_type: "monthly", pay_day: "매월 25일", pay_method: "bank"
+    probation: "3개월", end_date: "2028-09-30", wage: "3,500,000", wage_extra: "식대 월 100,000원", wage_type: "monthly", pay_day: "매월 25일", pay_method: "bank"
   },
   "severance": {
     a_name: "주식회사 ○○테크", a_addr: "서울특별시 서초구 ○○로 100",
@@ -10393,7 +10397,7 @@ const SAMPLES = {
     s_name: "박임차", s_addr: "경기도 ○○시 ○○동 11", s_phone: "010-5555-6666",
     r_name: "김임대", r_addr: "서울특별시 ○○구 ○○로 5",
     prop_addr: "서울특별시 송파구 ○○로 77, 101동 505호", deposit: "100,000,000",
-    end_date: "2028-09-30", move_out: "2028. 10. 5.",
+    end_date: "2026-08-31", move_out: "2026. 9. 5.",
     deadline: "본 서신 수령 후 14일 이내", repay_account: "카카오뱅크 000-00-000000 박임차"
   },
   "privacy-consent": {
@@ -10407,7 +10411,7 @@ const SAMPLES = {
     a_name: "홍길동", a_addr: "서울특별시 ○○구 ○○로 1", a_capital: "30,000,000",
     b_name: "김동업", b_addr: "경기도 ○○시 ○○동 2", b_capital: "20,000,000",
     biz_name: "○○카페 공동운영", scope: "카페 운영 및 관련 부수 사업",
-    profit_ratio: "출자 비율에 따름 (갑 60% / 을 40%)", manage: "joint",
+    profit_ratio: "출자 비율(갑 60% / 을 40%)에 따라", manage: "joint",
     special: "일방이 탈퇴하고자 할 때는 60일 전 서면 통보한다\n청산은 출자 비율에 따라 잔여재산을 분배한다"
   },
   "incident-report": {
@@ -10485,7 +10489,7 @@ const SAMPLES = {
     b_name: "박매수", b_id: "900909-1******", b_addr: "서울특별시 ○○구 ○○로 3", b_phone: "010-4444-5555",
     car_model: "현대 아반떼 CN7", car_no: "12가3456", vin: "KMHDH41ABLU123456",
     car_year: "2021", mileage: "48,000",
-    amount: "12,500,000", pay_method: "계약금 1,000,000원 계좌이체 + 인도 시 잔금",
+    amount: "12,500,000", pay_method: "계약금 1,000,000원은 계좌이체로 즉시 지급하고, 잔금 11,500,000원은 차량 인도 시 지급한다.",
     delivery_date: "2026. 9. 20.", transfer: "days15", as_is: "as_is"
   },
   "quotation": {
@@ -10528,7 +10532,7 @@ const SAMPLES = {
     a_name: "김매도", a_id: "600101-1******", a_addr: "서울특별시 ○○구 ○○로 1", a_phone: "010-1111-2222",
     b_name: "박매수", b_id: "880808-1******", b_addr: "경기도 ○○시 ○○동 3", b_phone: "010-3333-4444",
     prop_addr: "서울특별시 송파구 ○○로 77, 101동 505호", prop_desc: "대지권 및 전유부분 84.5㎡, 철근콘크리트조 아파트",
-    price: "700,000,000", contract_fee: "70,000,000", interim_fee: "210,000,000 / 2026. 11. 30.",
+    price: "700,000,000", contract_fee: "70,000,000", interim_fee: "금 210,000,000원 — 2026. 11. 30. 지급",
     pay_method: "계좌이체", delivery_date: "2026. 12. 31.", reg_duty: "buyer",
     special: "매도인은 잔금일까지 근저당권을 말소한다\n첨부 시설물(붙박이장·시스템에어컨)은 매매 대금에 포함한다"
   },
@@ -10589,7 +10593,7 @@ const SAMPLES = {
     notice_no: "2026-서울○○-12345", violation: "도로교통법 위반 (불법 주정차)", violation_date: "2026. 8. 15. 14:20 / ○○로 인도",
     opinion_type: "excuse",
     facts: "당시 차량 고장으로 비상등을 켜고 갓길에 정차한 상태였으며, 견인차 호출 기록과 수리 영수증으로 확인 가능합니다.",
-    evidence: "견인차 호출 내역 1부\\n정비소 수리 영수증 1부", police: "서울○○경찰서"
+    evidence: "견인차 호출 내역 1부\n정비소 수리 영수증 1부", police: "서울○○경찰서"
   },
   "official-letter": {
     a_name: "주식회사 ○○테크 경영지원팀", a_addr: "서울특별시 서초구 ○○로 100", a_contact: "김대리 02-1234-5678",
@@ -10597,13 +10601,13 @@ const SAMPLES = {
     r_name: "○○세무서 법인납세과", ref: "김○○ 조사관",
     title: "법인세 신고 관련 자료 제출 협조 요청",
     facts: "귀 기관의 자료 제출 요청(○○ 제2026-○호)과 관련하여 첨부 서류를 제출하오니 확인하여 주시기 바랍니다.",
-    deadline: "2026. 9. 30.", attachments: "법인등기부등본 1부\\n재무제표 1부"
+    deadline: "2026. 9. 30.", attachments: "법인등기부등본 1부\n재무제표 1부"
   },
   "payslip": {
     a_name: "주식회사 ○○테크", b_name: "박근로", dept: "개발팀 대리", b_id: "EMP-1024",
     pay_month: "2026년 9월",
-    pay_items: "기본급 | 2,500,000\\n직책수당 | 200,000\\n식대 | 100,000",
-    deduct_items: "국민연금 | 126,000\\n건강보험 | 99,400\\n고용보험 | 25,200\\n소득세 등 | 68,000",
+    pay_items: "기본급 | 2,500,000\n직책수당 | 200,000\n식대 | 100,000",
+    deduct_items: "국민연금 | 126,000\n건강보험 | 99,400\n고용보험 | 25,200\n소득세 등 | 68,000",
     pay_day: "매월 25일", pay_method: "bank"
   },
   "lease-termination": {
@@ -10618,7 +10622,7 @@ const SAMPLES = {
     d_name: "○○전자 온라인몰", d_addr: "경기도 ○○시 ○○로 100", d_phone: "1588-0000",
     purchase: "2026. 8. 1. ○○몰에서 노트북 '○○ Pro 14' 구매, 결제금액 1,200,000원",
     facts: "수령 후 3일 만에 화면에 멍이 나타났으나 판매자는 초기불량이 아니라며 교환·환불을 거부하고 있습니다.",
-    demand: "refund", evidence: "주문 내역 캡처 1부\\n제품 사진 2부\\n판매자 상담 내역 1부"
+    demand: "refund", evidence: "주문 내역 캡처 1부\n제품 사진 2부\n판매자 상담 내역 1부"
   },
   "apology-letter": {
     s_name: "주식회사 ○○테크 고객서비스팀",
@@ -10650,7 +10654,7 @@ const SAMPLES = {
   "resiliation-fr": {
     s_name: "Jean Dupont", s_addr: "12 rue de la Paix, 75002 Paris",
     r_name: "Opérateur S.A.", r_addr: "Service résiliation, 75000 Paris",
-    contract_type: "telecom", contract_no: "Contrat n° 789456",
+    contract_type: "telecom", contract_no: "789456",
     eff_date: "à l'échéance du contrat"
 , reason: "Changement de fournisseur"
   },
@@ -10820,7 +10824,7 @@ const SAMPLES = {
   "website-terms": {
     co_name: "OmniLegal", co_addr: "Seoul, Korea", site_url: "https://example.com",
     service_desc: "브라우저 기반 문서 자동 생성 도구 및 관련 콘텐츠 제공",
-    paid: "yes", gov_law: "대한민국", contact: "daeryundf2@gmail.com", doc_date: "2026-09-14"
+    paid: "yes", gov_law: "대한민국 법령", contact: "daeryundf2@gmail.com", doc_date: "2026-09-14"
   },
   "privacy-policy": {
     co_name: "OmniLegal", co_addr: "Seoul, Korea",
@@ -10836,9 +10840,212 @@ const SAMPLES = {
     pets: "no", doc_date: "2026-09-14"
   }
 };
+
+/* 언어별 샘플 오버라이드 — 외국어 렌더 페이지가 한국어 샘플로 채워지는 것을 방지.
+   구조: SAMPLES_L10N[docId][lang] = { field: value } — 기본 SAMPLES 위에 병합 */
+const SAMPLES_L10N = {
+  "demand-notice": { en: {
+    s_name: "Kim Cheolsu", s_addr: "12-3 Gangnam-daero, Seoul, Korea", s_phone: "+82-10-1234-5678",
+    facts: "On 2026-08-15 the Respondent received goods under Invoice #2026-081, but the payment of USD 4,200 remains outstanding despite two reminders.",
+    demands: "Pay USD 4,200 in full\nConfirm payment in writing", deadline: "within 14 days of receipt of this letter"
+  }},
+  "cease-desist": { en: {
+    s_name: "Shin Yoohak", s_addr: "Seoul, Korea",
+    violation: "The Recipient has repeatedly published false and defamatory statements about the Sender on the platform identified below since August 2026.",
+    demands: "Immediately delete the identified posts\nCease all further publication of similar statements\nPreserve all related records", deadline: "within 7 days of receipt"
+  }},
+  "loan-agreement": { en: {
+    l_name: "Kim Cheolsu", l_addr: "45 Mapo-ro, Mapo-gu, Seoul, Korea",
+    b_name: "Lee Chaemu", b_addr: "67-8 Bundang-dong, Seongnam, Korea", b_id: "DOB 1990-01-01",
+    repay_account: "Kookmin Bank 000-000-000000 (Kim Cheolsu)"
+  }},
+  "freelance-contract": { en: {
+    a_name: "Acme Tech Co., Ltd.", a_addr: "100 Seocho-ro, Seocho-gu, Seoul, Korea", a_contact: "contact@acmetech.kr",
+    b_name: "Park Gaeseul", b_addr: "12 Songpa-gil, Songpa-gu, Seoul, Korea", b_contact: "dev@example.com",
+    scope: "Backend API development for a mobile app (auth, payment integration, admin console) and delivery of source code"
+  }},
+  "settlement": { en: {
+    a_name: "Kim Gap", a_addr: "1 Gangnam-ro, Seoul, Korea",
+    b_name: "Park Eul", b_addr: "2 Yeonsu-dong, Incheon, Korea",
+    incident: "In August 2026, Party B posted false statements about Party A in an online community, damaging Party A's reputation; Party A was preparing legal action.",
+    terms: "Party B shall immediately delete the posts\nParty B shall not repeat publication of similar statements",
+    pay_deadline: "2026-10-15"
+  }},
+  "power-of-attorney": { en: {
+    p_name: "Hong Gildong", p_addr: "123 Gangnam-ro, Gangnam-gu, Seoul, Korea", p_phone: "+82-10-1234-5678",
+    g_name: "Kim Daeri", g_addr: "45 Seocho-gil, Seocho-gu, Seoul, Korea",
+    g_rel: "Spouse",
+    scope: "Execution of a residential lease and receipt of the security deposit for the apartment located at 123-4 Gangnam-dong, Seoul",
+    poa_term: "until December 31, 2026"
+  }},
+  "written-pledge": { en: {
+    p_name: "Lee Yaksok", p_id: "920303-1******", p_addr: "22 Ooo-ro, Ooo-si, Gyeonggi-do, Korea",
+    r_name: "Kim Chaegwon",
+    terms: "I shall repay KRW 5,000,000 borrowed from Kim Chaegwon on September 12, 2026, no later than December 31, 2026\nIn case of delay, I shall pay additional default interest of 1% per month"
+  }},
+  "employment-cert": { en: {
+    a_name: "Acme Tech Co., Ltd.", a_addr: "100 Seocho-ro, Seocho-gu, Seoul, Korea", ceo_name: "Hong Gildong",
+    b_name: "Park Geunro", dept: "Development Team, Senior Engineer",
+    purpose: "for visa application"
+  }},
+  "eviction-notice": { en: {
+    l_name: "Kim Landlord", l_addr: "5 Gangnam-ro, Seoul, Korea", l_phone: "+82-10-3333-4444",
+    t_name: "Park Tenant", t_addr: "Unit 505, Bldg 101, 77 Songpa-ro, Songpa-gu, Seoul, Korea",
+    prop_addr: "Unit 505, Bldg 101, 77 Songpa-ro, Songpa-gu, Seoul, Korea",
+    unpaid: "3 months' rent, KRW 1,500,000", deadline: "within 30 days of receipt of this notice"
+  }},
+  "fact-statement": { en: {
+    p_name: "Kim Mokgyeok", p_addr: "7 Ooo-dong, Seoul, Korea", p_phone: "+82-10-2222-3333",
+    c_rel: "Witness", incident_date: "around 10 p.m. on September 1, 2026 / a crosswalk on Ooo-ro, Gangnam-gu",
+    facts: "At the time stated above, I witnessed a black sedan run a red light, strike a pedestrian crossing the crosswalk, and flee the scene without stopping.",
+    police: "Seoul Gangnam Police Station"
+  }},
+  "meeting-minutes": { en: {
+    meeting_name: "Q3 2026 Operations Meeting", place: "3F Conference Room, HQ",
+    attendees: "Hong Gildong | CEO\nKim Bujang | Operations\nLee Daeri | Development",
+    agenda: "New service launch schedule | Confirmed launch in November 2026\nQ4 marketing budget | KRW 30,000,000 approved",
+    notes: "Next meeting set for the first week of October", recorder: "Lee Daeri"
+  }},
+  "recommendation": { en: {
+    p_name: "Prof. Kim", p_title: "Professor, Dept. of Computer Science, Ooo University", p_contact: "prof.kim@univ.ac.kr",
+    r_name: "Park Haksaeng", c_rel: "Undergraduate research advisor for 2 years",
+    purpose: "Admission to the PhD program at Ooo University",
+    facts: "As an undergraduate researcher, Mr./Ms. Park demonstrated outstanding analytical skills and diligence, achieving research results (one paper at a domestic conference) beyond the undergraduate level."
+  }},
+  "invitation-letter": { en: {
+    p_name: "Hong Gildong", p_addr: "123 Gangnam-ro, Gangnam-gu, Seoul, Korea", p_phone: "+82-10-1234-5678",
+    p_job: "Employed at Acme Tech", v_name: "Hong Gilsoon", v_id: "1965-03-15", v_passport: "M12345678 / Republic of Korea",
+    c_rel: "Mother", purpose: "Family visit (grandchild's first birthday)",
+    visit_period: "October 1 – October 14, 2026 (2 weeks)", stay_addr: "Same as the inviter's address",
+    expense: "All expenses covered by the inviter"
+  }},
+  "child-travel-consent": { en: {
+    v_name: "Hong Minsu", p_name: "Hong Gildong", p_rel: "Father", p_phone: "+82-10-1234-5678", p2_name: "Kim Younghee",
+    dest: "Japan (Tokyo, Osaka)", visit_period: "October 5 – October 12, 2026",
+    companion: "Kim Yeohaeng (grandmother, passport M11223344)"
+  }},
+  "vehicle-sale": { en: {
+    a_name: "Kim Maedo", a_addr: "1 Ooo-dong, Gyeonggi-do, Korea", a_phone: "+82-10-1111-2222",
+    b_name: "Park Maesu", b_addr: "3 Ooo-ro, Seoul, Korea", b_phone: "+82-10-4444-5555",
+    pay_method: "bank transfer (deposit KRW 1,000,000, balance on delivery)",
+    car_model: "Hyundai Avante CN7", car_no: "12-GA-3456"
+  }},
+  "quotation": { en: {
+    s_name: "Acme Tech Co., Ltd.", s_addr: "100 Seocho-ro, Seocho-gu, Seoul, Korea", s_email: "sales@example.com",
+    r_name: "Acme Trading Co.", r_addr: "88 Gangnam-ro, Gangnam-gu, Seoul, Korea",
+    items: "Website renewal | 1 | 5,000,000\nLogo design | 2 | 500,000\nAnnual maintenance | 12 | 300,000",
+    valid_until: "30 days from issue", notes: "30% down payment upon contract confirmation"
+  }},
+  "purchase-order": { en: {
+    s_name: "Acme Trading Co.", s_addr: "88 Gangnam-ro, Gangnam-gu, Seoul, Korea", s_email: "order@example.com",
+    r_name: "Acme Manufacturing Co.", r_addr: "12 Ooo-ro, Gyeonggi-do, Korea",
+    items: "Part A-100 | 500 | 2,000\nPart B-200 | 200 | 5,500",
+    delivery_addr: "Ooo Logistics Center, Gyeonggi-do", pay_terms: "Bank transfer within 30 days after delivery and inspection"
+  }},
+  "receipt": { en: {
+    s_name: "Kim Jigeup", s_addr: "1 Ooo-ro, Seoul, Korea", r_name: "Hong Gildong",
+    items: "Lecture fee | 1 | 500,000", purpose: "September lecture fee"
+  }},
+  "mou": { en: {
+    a_name: "Acme Tech Co., Ltd.", a_addr: "100 Seocho-ro, Seocho-gu, Seoul, Korea",
+    b_name: "Ooo University Industry-Academic Cooperation Foundation", b_addr: "1 Ooo-ro, Seoul, Korea",
+    purpose: "Joint AI research and personnel exchange",
+    scope: "Execution of joint research projects\nMutual use of research facilities and equipment\nInternship program operation",
+    term: "2 years from the date of execution"
+  }},
+  "nda": { en: {
+    a_name: "Acme Tech Co., Ltd.", a_addr: "100 Seocho-ro, Seocho-gu, Seoul, Korea",
+    b_name: "Acme Trading Co.", b_addr: "100 Market St, San Francisco, CA",
+    purpose: "evaluation of overseas distribution collaboration for a mobile app"
+  }},
+  "goods-sale": { en: {
+    a_name: "Acme Manufacturing Co.", a_addr: "12 Ooo-ro, Gyeonggi-do, Korea",
+    b_name: "Acme Trading Co.", b_addr: "88 Gangnam-ro, Gangnam-gu, Seoul, Korea",
+    items: "Part A-100 | 500 | 2,000\nPart B-200 | 200 | 5,500",
+    pay_terms: "Bank transfer within 30 days after inspection", delivery_addr: "Ooo Logistics Center, Gyeonggi-do",
+    special: "If inspection fails, the Seller shall deliver replacement goods within 14 days"
+  }},
+  "model-release": { en: {
+    b_name: "Kim Model", a_name: "Acme Studio Co.", a_contact: "photo@studio.example",
+    work_desc: "Photos and video from the September 1, 2026 lookbook shoot for the Ooo brand",
+    usage: "Brand website, SNS promotion and online advertising", term: "2 years from the date of agreement"
+  }},
+  "ip-license": { en: {
+    a_name: "Lee Jakga", a_addr: "5 Ooo-dong, Seoul, Korea / lee@art.example",
+    b_name: "Acme Media Co.", b_addr: "9 Mapo-ro, Mapo-gu, Seoul, Korea",
+    work_desc: "The 'Moonlight Whale' illustration series (5 works)", usage: "Posting on company website and marketing materials",
+    term: "1 year from the date of execution", territory: "Republic of Korea", amount: "KRW 500,000"
+  }},
+  "payslip": { en: {
+    a_name: "Acme Tech Co., Ltd.", b_name: "Park Geunro", dept: "Development Team, Senior Engineer",
+    pay_month: "September 2026",
+    pay_items: "Base salary | 2,500,000\nPosition allowance | 200,000\nMeal allowance | 100,000",
+    deduct_items: "National pension | 126,000\nHealth insurance | 99,400\nEmployment insurance | 25,200\nIncome tax etc. | 68,000",
+    pay_day: "25th of each month"
+  }},
+  "lease-termination": { en: {
+    l_name: "Kim Landlord", l_addr: "5 Gangnam-ro, Seoul, Korea", l_phone: "+82-10-3333-4444",
+    t_name: "Park Tenant", t_addr: "Unit 505, Bldg 101, 77 Songpa-ro, Songpa-gu, Seoul, Korea", t_phone: "+82-10-5555-6666",
+    prop_addr: "Unit 505, Bldg 101, 77 Songpa-ro, Songpa-gu, Seoul, Korea",
+    contract_info: "the residential lease executed on January 1, 2025 (security deposit KRW 100,000,000)",
+    eff_date: "October 31, 2026",
+    repay_account: "Kookmin Bank 000-000-000000 (Park Tenant)",
+    settlement_note: "Deposit to be returned within 3 business days after utility settlement is completed"
+  }},
+  "apology-letter": { en: {
+    s_name: "Acme Tech Customer Service", r_name: "Dear customers",
+    subject: "Apology for the service outage",
+    facts: "On September 10, 2026, from 2 p.m. for approximately three hours, our service experienced an outage that caused significant inconvenience. This resulted from an operational error during server maintenance, and we sincerely apologize.",
+    plan: "To prevent recurrence, we will implement a double-verification deployment process and strengthen monitoring alerts."
+  }},
+  "resume": { en: {
+    name: "Kim Minjun", birth: "1995-03-12", phone: "+82-10-5555-1234", email: "mj.kim@example.com",
+    addr: "Seocho-gu, Seoul, Korea", position: "Backend Developer",
+    summary: "Backend developer with 5 years of experience designing and operating commerce payment systems.",
+    experience: "ABC Tech | Backend Developer | 2021.03-present | Payment API design and operation\nXYZ Soft | Developer | 2019.01-2021.02 | In-house ERP development",
+    education: "Hanguk University | Computer Science | 2014-2019",
+    skills: "Engineer Information Processing (Korea)\nAWS SAA\nJava, Kotlin, MySQL"
+  }},
+  "transaction-statement": { en: {
+    s_name: "Acme Supply Co.", s_addr: "10 Jung-gu Ooo-ro, Seoul, Korea", s_reg: "123-45-67890",
+    r_name: "Acme Purchasing Co.", items: "Office chair | 10 | 85,000\nDesk | 5 | 120,000"
+  }},
+  "expense-report": { en: {
+    req_name: "Lee Younghee", dept: "Marketing Team, Senior Associate", purpose: "September ad creative production cost",
+    items: "Design outsourcing | 1 | 500,000\nImage licenses | 3 | 90,000",
+    account: "KakaoBank 3333-00-1234567"
+  }},
+  "payoff-cert": { en: {
+    l_name: "Kim Creditor", l_addr: "Mapo-gu, Seoul, Korea", b_name: "Lee Debtor",
+    origin: "the loan agreement dated March 1, 2025", payoff_date: "September 10, 2026"
+  }},
+  "leave-request": { en: {
+    name: "Park Sawon", dept: "Development Team, Senior Associate",
+    reason: "Family trip", handover: "Choi Daeri"
+  }},
+  "website-terms": { en: {
+    service_desc: "Browser-based document generation tools and related content",
+    gov_law: "the Republic of Korea"
+  }},
+  "privacy-policy": { en: {
+    items: "Email | Order inquiries and license-code delivery | 3 months after inquiry resolution\nPayment records | Refunds and settlement | Period required by applicable law",
+    officer: "Yoohak Shin · CEO · daeryundf2@gmail.com"
+  }},
+  "inspection-cert": { en: {
+    a_name: "Acme Tech Co., Ltd.", b_name: "Ooo Systems Development",
+    items: "Backend API deliverables for the mobile app\nAdmin console source code\nAPI specification, 1 copy",
+    defects: "Search filter error on the admin console — requires correction", fix_until: "September 30, 2026"
+  }},
+  "copyright-assignment": { en: {
+    a_name: "Choi Jakga", b_name: "Acme Games Co.",
+    work: "10 character illustrations for the mobile game 'Ooo' (produced August 2026)", price: "KRW 5,000,000"
+  }}
+};
 function fillSample() {
   track("sample_fill", activeDoc.id);
   Object.assign(formState, SAMPLES[activeDoc.id] || {});
+  const l10n = SAMPLES_L10N[activeDoc.id] || {};
+  Object.assign(formState, l10n[curLang] || (curLang === "ko" ? {} : l10n.en || {}));
   if (activeDoc.fields.some(f => f.key === "doc_date") && !formState.doc_date)
     formState.doc_date = new Date().toISOString().slice(0, 10);
   buildForm(activeDoc);

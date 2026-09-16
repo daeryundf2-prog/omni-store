@@ -49,14 +49,17 @@ const run = `
 const escH = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
 for (const d of DOC_TYPES) {
   activeDoc = d;
-  Object.keys(formState).forEach(k => delete formState[k]);
-  Object.assign(formState, SAMPLES[d.id] || {});
-  for (const f of d.fields) if (f.key && !(f.key in formState)) {
-    if (f.type === "checks") formState[f.key] = f.options ? [f.options[0].v] : ["yes"];
-    else if (f.type === "select" && f.options) formState[f.key] = f.options[0].v;
-    else if (f.type === "date") formState[f.key] = "2026-09-14";
-  }
   for (const l of d.langs) {
+    Object.keys(formState).forEach(k => delete formState[k]);
+    Object.assign(formState, SAMPLES[d.id] || {});
+    const l10n = SAMPLES_L10N[d.id] || {};
+    Object.assign(formState, l10n[l] || (l === "ko" ? {} : l10n.en || {}));
+    for (const f of d.fields) if (f.key && !(f.key in formState)) {
+      if (f.type === "checks") formState[f.key] = f.options ? [f.options[0].v] : ["yes"];
+      else if (f.type === "select" && f.options) formState[f.key] = f.options[0].v;
+      else if (f.type === "date") formState[f.key] = "2026-09-14";
+    }
+    if (d.fields.some(f => f.key === "doc_date") && !formState.doc_date) formState.doc_date = "2026-09-14";
     const fn = d.render[l] || d.render[d.langs[0]];
     const html = fn();
     const titleM = html.match(/doc-title[^>]*>([^<]+)/);
