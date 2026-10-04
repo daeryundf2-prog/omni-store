@@ -64,22 +64,14 @@ window.OMNI_SETTLEMENT = {
     contactEmail: "daeryundf2@gmail.com",
     unlockSalt: "omnistudio-v1",
     // 검증: djb2("OMNI-XXXX").toString(36) ∈ unlockDigests
-    // 아래 8개는 launch-batch-01 예비 코드 (각 1회 발급용):
-    //   OMNI-LNAR7T, OMNI-12350IY, OMNI-1IIZ9U3, OMNI-1YYTJ58,
-    //   OMNI-GDJQH9, OMNI-WTDZSE, OMNI-1D9893J, OMNI-1TP2IEO
+    // 발급 코드 평문은 private ops 문서에 보관한다 — 이 파일에는 digest만 등록.
+    // 아래는 launch-batch-01 예비 8개분의 digest (각 1회 발급용).
     unlockDigests: [
       // 전 문서 패스 코드 (OmniStudio.mintCode("주문-이메일")로 발급)
       "s907ct", "1h1c9aa", "1wdkqwz", "80g21f",
       "otmwjw", "zhm412", "1st1syp", "4kv1yh",
-      /* pass-batch-02 사전발급 40개 — 순서대로 발급 후 사용 표시:
-       * OMNI-1TB5Z2H OMNI-17CL8GA OMNI-LE0HU3 OMNI-1YGJT70 OMNI-1CHZ2KT
-       * OMNI-QJEBYM OMNI-4KTLCF OMNI-1HNCWPC OMNI-VOS635 OMNI-9Q7FGY
-       * OMNI-KU9Y8Q OMNI-1XWT9LN OMNI-1BY8IZG OMNI-PZNSD9 OMNI-4131R2
-       * OMNI-1H3MD3Z OMNI-V51MHS OMNI-96GVVL OMNI-1M9078I OMNI-10AFGMB
-       * OMNI-6GE3NF OMNI-1JIXF0C OMNI-XKCOE5 OMNI-BLRXRY OMNI-1OOB94V
-       * OMNI-12PQIIO OMNI-GR5RWH OMNI-1TTP39E OMNI-17V4CN7 OMNI-LWJM10
-       * OMNI-1R3MB18 OMNI-1551KF1 OMNI-J6GTSU OMNI-1W9055R OMNI-1AAFEJK
-       * OMNI-OBUNXD OMNI-2D9XB6 OMNI-1FFT8O3 OMNI-TH8I1W OMNI-7INRFP */
+      // pass-batch-02 사전발급 40개 — 순서대로 발급 후 사용 표시
+      // (코드 평문은 private ops 문서 보관, 여기에는 digest만 등록)
       "4b1w2d","1klmw0s","s2a4qe","7nj22j","1sh2bd8",
       "verar1","co32rx","1vtc0hl","yr2wij","g075e4",
       "rqhbsw","7bq164","1s51z9v","v2yhzh","c505rm",

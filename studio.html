@@ -168,7 +168,6 @@
     .paper[lang="ar"] h2 { letter-spacing: 0; }
     .paper[lang="ar"] p.body { text-indent: 0; }
     .paper[lang="ar"] ol.evidence { margin: 8px 28px 10px 0; }
-    }
     .paper[lang="th"] { font-family: 'Noto Serif Thai', Georgia, serif; }
     .paper h1.doc-title { text-align: center; font-size: 26px; font-weight: 800; letter-spacing: 0.35em; margin-bottom: 6px; }
     .paper[lang="en"] h1.doc-title { letter-spacing: 0.18em; font-size: 22px; }
@@ -9393,7 +9392,7 @@ async function stampDocHash() {
   const live = document.getElementById("doc-hash"); // 재렌더로 스탬프가 교체됐을 수 있음
   const target = (live === stamp) ? stamp : live;
   if (!target) return;
-  target.textContent = `${LBL[curLang] || LBL.ko}: ${hex.slice(0, 16)}…${hex.slice(-8)} — ${NOTE[curLang] || NOTE.ko}`;
+  target.textContent = `${LBL[curLang] || LBL.en}: ${hex.slice(0, 16)}…${hex.slice(-8)} — ${NOTE[curLang] || NOTE.en}`;
 }
 
 /* ---------- 전자서명 패널 ---------- */

@@ -1,0 +1,13 @@
+{
+  "name": "omni-store",
+  "private": true,
+  "version": "0.0.0",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test",
+    "build:pages": "node build_lang_pages.js && node build_doc_pages.js"
+  }
+}
